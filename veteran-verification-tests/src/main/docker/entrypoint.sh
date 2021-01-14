@@ -5,7 +5,7 @@ ENVIRONMENT="$K8S_ENVIRONMENT"
 BASE_PATH="$BASE_PATH"
 
 #Put Health endpoints here if you got them, all that's here is a WAG
-PATHS=("/actuator/health" "/actuator/info" "/hello-world")
+PATHS=("/actuator/health" "/actuator/info" "/v0/status")
 
 SUCCESS=0
 

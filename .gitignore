@@ -35,3 +35,5 @@ secrets.conf
 ### VS Code ###
 .vscode/
 /bin/
+
+application-*.properties

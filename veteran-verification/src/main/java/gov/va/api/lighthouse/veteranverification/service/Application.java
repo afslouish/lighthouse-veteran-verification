@@ -1,4 +1,4 @@
-package gov.va.api.lighthouse.veteranverification;
+package gov.va.api.lighthouse.veteranverification.service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
