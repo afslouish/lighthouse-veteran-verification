@@ -3,9 +3,10 @@ package gov.va.api.lighthouse.veteranverification.service.controller;
 import gov.va.api.lighthouse.mpi.Mpi1305RequestAttributes;
 import gov.va.api.lighthouse.mpi.MpiConfig;
 import gov.va.api.lighthouse.mpi.SoapMasterPatientIndexClient;
-import gov.va.api.lighthouse.veteranverification.api.VeteranStatusRequestAttributes;
+import gov.va.api.lighthouse.veteranverification.api.VeteranStatusConfirmation;
+import gov.va.api.lighthouse.veteranverification.api.VeteranStatusRequest;
 import java.util.function.Function;
-import javax.ws.rs.NotFoundException;
+import javax.validation.Valid;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -19,35 +20,33 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(produces = {"application/json"})
 @Slf4j
-public class VeteranConfirmationStatusController {
+public class VeteranStatusConfirmationController {
   @Getter private final MpiConfig mpiConfig;
 
   @Setter private Function<Mpi1305RequestAttributes, PRPAIN201306UV02> veteranStatusRequest;
 
-  public VeteranConfirmationStatusController(@Autowired MpiConfig mpiConfig) {
+  public VeteranStatusConfirmationController(@Autowired MpiConfig mpiConfig) {
     this.mpiConfig = mpiConfig;
     log.info("Accessing MPI at {}", mpiConfig.getUrl());
   }
 
   /** Get response from MPI 1305 request. */
   @PostMapping({"/v0/status"})
-  public PRPAIN201306UV02 veteranConfirmationStatusResponse(
-      @RequestBody VeteranStatusRequestAttributes attributes) {
+  public VeteranStatusConfirmation veteranStatusConfirmationResponse(
+      @Valid @RequestBody VeteranStatusRequest attributes) {
     PRPAIN201306UV02 response =
         veteranStatusRequest().apply(attributes.toMpi1305RequestAttributes());
-    return response;
+    return VeteranStatusConfirmationTransformer.builder()
+        .response(response)
+        .build()
+        .toVeteranStatus();
   }
 
   /** Lazy Getter. */
   public Function<Mpi1305RequestAttributes, PRPAIN201306UV02> veteranStatusRequest() {
     if (veteranStatusRequest == null) {
-      return (attributes) -> {
-        try {
-          return SoapMasterPatientIndexClient.of(mpiConfig).request1305ByAttributes(attributes);
-        } catch (Exception e) {
-          throw new NotFoundException(e);
-        }
-      };
+      return (attributes) ->
+          SoapMasterPatientIndexClient.of(mpiConfig).request1305ByAttributes(attributes);
     }
     return veteranStatusRequest;
   }

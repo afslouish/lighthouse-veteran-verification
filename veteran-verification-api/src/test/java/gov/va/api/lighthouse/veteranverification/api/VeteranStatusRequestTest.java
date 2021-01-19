@@ -7,9 +7,9 @@ import gov.va.api.lighthouse.mpi.Mpi1305RequestAttributes;
 import java.time.LocalDate;
 import org.junit.Test;
 
-public class VeteranStatusRequestAttributesTest {
-  VeteranStatusRequestAttributes attributes =
-      VeteranStatusRequestAttributes.builder()
+public class VeteranStatusRequestTest {
+  VeteranStatusRequest attributes =
+      VeteranStatusRequest.builder()
           .firstName("John")
           .lastName("Doe")
           .middleName("J")

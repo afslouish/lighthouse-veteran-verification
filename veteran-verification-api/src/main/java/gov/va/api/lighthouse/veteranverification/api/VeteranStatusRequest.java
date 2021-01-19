@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import gov.va.api.lighthouse.mpi.Mpi1305RequestAttributes;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import javax.validation.constraints.Pattern;
 import lombok.Builder;
 import lombok.NonNull;
 import lombok.Value;
@@ -12,8 +13,12 @@ import lombok.experimental.Accessors;
 @Value
 @Builder
 @Accessors(fluent = false)
-public class VeteranStatusRequestAttributes {
-  @NonNull String ssn;
+public class VeteranStatusRequest {
+  @Pattern(regexp = "^[0-9]{9}|^\\d{3}-\\d{2}-\\d{4}$")
+  @NonNull
+  String ssn;
+
+  @Pattern(regexp = "^(?:M|F)$")
   String gender;
 
   @JsonProperty(value = "first_name")
@@ -28,6 +33,7 @@ public class VeteranStatusRequestAttributes {
   String lastName;
 
   @JsonProperty(value = "birth_date")
+  @Pattern(regexp = "^\\d{4}\\-(0[1-9]|1[012])\\-(0[1-9]|[12][0-9]|3[01])$")
   @NonNull
   String birthDate;
 
@@ -36,7 +42,7 @@ public class VeteranStatusRequestAttributes {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     LocalDate birthTime = LocalDate.parse(birthDate, formatter);
     return Mpi1305RequestAttributes.builder()
-        .ssn(ssn)
+        .ssn(ssn.replaceAll("-", ""))
         .gender(gender)
         .firstName(firstName)
         .middleName(middleName)
