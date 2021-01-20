@@ -28,3 +28,10 @@ curl --location --request POST 'http://localhost:8080/v0/status' \
   "gender": "M"
 }'
 ```
+
+### Veteran Verification Documentation
+Veteran Confirmation API
+```
+curl --location --request GET 'http://localhost:8080/v0/veteran_confirmation/openapi.json'
+curl --location --request GET 'http://localhost:8080/v0/veteran_confirmation/'
+```

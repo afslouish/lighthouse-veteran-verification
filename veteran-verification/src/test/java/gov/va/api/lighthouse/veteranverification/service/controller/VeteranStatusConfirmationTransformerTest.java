@@ -23,7 +23,7 @@ public class VeteranStatusConfirmationTransformerTest {
                 .response(response)
                 .build()
                 .toVeteranStatus())
-        .isEqualTo(VeteranStatusConfirmation.builder().status("confirmed").build());
+        .isEqualTo(VeteranStatusConfirmation.builder().veteranStatus("confirmed").build());
   }
 
   @Test
@@ -33,6 +33,6 @@ public class VeteranStatusConfirmationTransformerTest {
                 .response(PRPAIN201306UV02.pRPAIN201306UV02Builder().build())
                 .build()
                 .toVeteranStatus())
-        .isEqualTo(VeteranStatusConfirmation.builder().status("not confirmed").build());
+        .isEqualTo(VeteranStatusConfirmation.builder().veteranStatus("not confirmed").build());
   }
 }

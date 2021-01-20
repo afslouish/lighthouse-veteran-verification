@@ -20,6 +20,11 @@
       <artifactId>master-patient-index-client</artifactId>
       <version>${master-patient-index-client.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-beans</artifactId>
+      <scope>compile</scope>
+    </dependency>
   </dependencies>
   <distributionManagement>
     <repository>

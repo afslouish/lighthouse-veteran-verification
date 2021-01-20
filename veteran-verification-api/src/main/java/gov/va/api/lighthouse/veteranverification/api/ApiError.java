@@ -3,6 +3,8 @@ package gov.va.api.lighthouse.veteranverification.api;
 import static java.util.Collections.singletonList;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -17,9 +19,11 @@ import lombok.NoArgsConstructor;
 @JsonAutoDetect(
     fieldVisibility = JsonAutoDetect.Visibility.ANY,
     isGetterVisibility = JsonAutoDetect.Visibility.NONE)
+@Schema(description = "API invocation or processing error", type = "object", name = "APIError")
 public abstract class ApiError {
   private static final String BAD_REQUEST_ERROR_CODE = "400";
 
+  @ArraySchema(schema = @Schema(implementation = ApiErrorDetails.class))
   List<ApiErrorDetails> errors;
 
   private static String toSnakeCase(String field) {

@@ -14,6 +14,8 @@
   <properties>
     <jacoco.coverage>0.92</jacoco.coverage>
     <master-patient-index-client.version>1.0.3</master-patient-index-client.version>
+    <swagger-examples-plugin.version>1.0.1</swagger-examples-plugin.version>
+    <swagger-maven-plugin.version>2.1.1</swagger-maven-plugin.version>
     <jersey-common.version>2.33</jersey-common.version>
   </properties>
   <dependencies>
@@ -37,6 +39,47 @@
       <version>${jersey-common.version}</version>
     </dependency>
   </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>io.swagger.core.v3</groupId>
+        <artifactId>swagger-maven-plugin</artifactId>
+        <version>${swagger-maven-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>vc-swagger</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>resolve</goal>
+            </goals>
+            <configuration>
+              <contextId>vc-openapi</contextId>
+              <resourceClasses>
+                <resourceClass>gov.va.api.lighthouse.veteranverification.api.VeteranConfirmationService</resourceClass>
+              </resourceClasses>
+              <outputFileName>veteran-confirmation-openapi</outputFileName>
+              <outputPath>${project.build.outputDirectory}</outputPath>
+              <outputFormat>JSON</outputFormat>
+              <prettyPrint>true</prettyPrint>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>gov.va.plugin.maven</groupId>
+        <artifactId>swagger-examples-maven-plugin</artifactId>
+        <version>${swagger-examples-plugin.version}</version>
+        <dependencies>
+          <dependency>
+            <groupId>gov.va.api.lighthouse</groupId>
+            <artifactId>veteran-verification-api</artifactId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
+          </dependency>
+        </dependencies>
+      </plugin>
+    </plugins>
+  </build>
   <distributionManagement>
     <repository>
       <id>health-apis-releases</id>

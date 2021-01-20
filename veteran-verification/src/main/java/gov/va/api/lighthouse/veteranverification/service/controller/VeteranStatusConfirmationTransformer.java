@@ -21,9 +21,9 @@ public class VeteranStatusConfirmationTransformer {
             .orElse(null);
     if (responseCode != null && StringUtils.isNotBlank(responseCode)) {
       if (responseCode.equalsIgnoreCase("OK")) {
-        return VeteranStatusConfirmation.builder().status("confirmed").build();
+        return VeteranStatusConfirmation.builder().veteranStatus("confirmed").build();
       }
     }
-    return VeteranStatusConfirmation.builder().status("not confirmed").build();
+    return VeteranStatusConfirmation.builder().veteranStatus("not confirmed").build();
   }
 }
