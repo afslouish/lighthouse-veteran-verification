@@ -17,6 +17,8 @@
     <swagger-examples-plugin.version>1.0.1</swagger-examples-plugin.version>
     <swagger-maven-plugin.version>2.1.1</swagger-maven-plugin.version>
     <jersey-common.version>2.33</jersey-common.version>
+    <emis-client-v1.version>1.0.3</emis-client-v1.version>
+    <emis-model.version>1.0.3</emis-model.version>
   </properties>
   <dependencies>
     <dependency>
@@ -27,6 +29,16 @@
       <groupId>gov.va.api.lighthouse</groupId>
       <artifactId>master-patient-index-client</artifactId>
       <version>${master-patient-index-client.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>gov.va.api.lighthouse</groupId>
+      <artifactId>emis-client-v1</artifactId>
+      <version>${emis-client-v1.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>gov.va.api.lighthouse</groupId>
+      <artifactId>emis-model</artifactId>
+      <version>${emis-model.version}</version>
     </dependency>
     <dependency>
       <groupId>gov.va.api.lighthouse</groupId>
