@@ -11,9 +11,7 @@
   <artifactId>veteran-verification-tests</artifactId>
   <version>1.0.7-SNAPSHOT</version>
   <properties>
-    <docker-maven-plugin.version>0.24.0</docker-maven-plugin.version>
-    <docker.organization>vasdvp</docker.organization>
-    <docker.tag>latest</docker.tag>
+    <docker.imageName>lighthouse-${project.artifactId}</docker.imageName>
   </properties>
   <profiles>
     <profile>
@@ -23,45 +21,9 @@
           <plugin>
             <groupId>io.fabric8</groupId>
             <artifactId>docker-maven-plugin</artifactId>
-            <version>${docker-maven-plugin.version}</version>
             <executions>
               <execution>
-                <id>build-test</id>
-                <configuration>
-                  <images>
-                    <image>
-                      <name>${docker.organization}/lighthouse-${project.artifactId}</name>
-                      <build>
-                        <dockerFile>Dockerfile</dockerFile>
-                        <tags>
-                          <tag>${project.version}</tag>
-                          <tag>${docker.tag}</tag>
-                        </tags>
-                      </build>
-                    </image>
-                  </images>
-                </configuration>
-                <phase>package</phase>
-                <goals>
-                  <goal>build</goal>
-                </goals>
-              </execution>
-              <execution>
-                <id>deploy-test</id>
-                <configuration>
-                  <images>
-                    <image>
-                      <name>${docker.organization}/lighthouse-${project.artifactId}</name>
-                      <build>
-                        <dockerFile>Dockerfile</dockerFile>
-                        <tags>
-                          <tag>${project.version}</tag>
-                          <tag>${docker.tag}</tag>
-                        </tags>
-                      </build>
-                    </image>
-                  </images>
-                </configuration>
+                <id>push</id>
                 <phase>deploy</phase>
                 <goals>
                   <goal>push</goal>
