@@ -12,7 +12,7 @@
   <version>1.0.7-SNAPSHOT</version>
   <packaging>jar</packaging>
   <properties>
-    <docker.imageName>lighthouse-veteran-verification</docker.imageName>
+    <docker.imageName>lighthouse-${project.artifactId}</docker.imageName>
     <jacoco.coverage>0.92</jacoco.coverage>
     <master-patient-index-client.version>1.0.3</master-patient-index-client.version>
     <swagger-examples-plugin.version>1.0.1</swagger-examples-plugin.version>
