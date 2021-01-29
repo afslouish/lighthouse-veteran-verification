@@ -9,8 +9,8 @@
   </parent>
   <groupId>gov.va.api.lighthouse</groupId>
   <artifactId>veteran-verification-tests</artifactId>
-  <version>1.0.8-SNAPSHOT</version>
-   <properties>
+  <version>1.0.8</version>
+  <properties>
     <docker-maven-plugin.version>0.24.0</docker-maven-plugin.version>
     <docker.organization>vasdvp</docker.organization>
     <docker.tag>latest</docker.tag>
