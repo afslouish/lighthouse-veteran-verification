@@ -15,6 +15,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class VeteranStatusConfirmationControllerTest {
   final VeteranStatusRequest attributes =
@@ -27,7 +28,8 @@ public class VeteranStatusConfirmationControllerTest {
           .middleName("test")
           .build();
 
-  @Mock MpiConfig mpiConfig;
+  @Autowired
+  MpiConfig mpiConfig;
 
   @Mock PRPAIN201306UV02 mpiMockResponse;
 
@@ -93,5 +95,12 @@ public class VeteranStatusConfirmationControllerTest {
   void EmisResponseError() {
     var controller = new VeteranStatusConfirmationController(mpiConfig, emisConfig);
     throw new UnsupportedOperationException();
+  }
+
+  private MpiConfig makeMpiConfig() {
+    return MpiConfig.builder().userId("ID").integrationProcessId("ID").asAgentId("ID")
+            .keyAlias("fake").url("").wsdlLocation("")
+            .keystorePath("").keystorePassword("secret")
+            .truststorePath("").truststorePassword("secret").build();
   }
 }
