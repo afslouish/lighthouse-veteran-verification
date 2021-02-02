@@ -3,7 +3,9 @@ package gov.va.api.lighthouse.veteranverification.service.controller;
 import static gov.va.api.lighthouse.veteranverification.service.MpiLookupUtils.getInputEdipiOrIcn;
 
 import gov.va.api.lighthouse.emis.EmisConfigV1;
+import gov.va.api.lighthouse.emis.EmisVeteranStatusServiceClient;
 import gov.va.api.lighthouse.emis.SoapEmisVeteranStatusServiceClient;
+import gov.va.api.lighthouse.mpi.MasterPatientIndexClient;
 import gov.va.api.lighthouse.mpi.Mpi1305RequestAttributes;
 import gov.va.api.lighthouse.mpi.MpiConfig;
 import gov.va.api.lighthouse.mpi.SoapMasterPatientIndexClient;
@@ -27,9 +29,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(produces = {"application/json"})
 @Slf4j
 public class VeteranStatusConfirmationController {
-  @Getter private final MpiConfig mpiConfig;
+  @Getter private final MasterPatientIndexClient mpiClient;
 
-  @Getter private final EmisConfigV1 emisConfig;
+  @Getter private final EmisVeteranStatusServiceClient emisClient;
 
   @Setter private Function<Mpi1305RequestAttributes, PRPAIN201306UV02> mpi1305Request;
 
@@ -37,41 +39,22 @@ public class VeteranStatusConfirmationController {
 
   /** Controller constructor. */
   public VeteranStatusConfirmationController(
-      @Autowired MpiConfig mpiConfig, @Autowired EmisConfigV1 emisConfig) {
-    this.mpiConfig = mpiConfig;
-    this.emisConfig = emisConfig;
-    log.info("Accessing MPI at {}", mpiConfig.getUrl());
-  }
-
-  /** Lazy Getter. */
-  public Function<InputEdiPiOrIcn, EMISveteranStatusResponseType> emisVeteranStatusRequest() {
-    if (emisVeteranStatusRequest == null) {
-      return (inputEdiPiOrIcn) ->
-          SoapEmisVeteranStatusServiceClient.of(emisConfig).veteranStatusRequest(inputEdiPiOrIcn);
-    }
-    return emisVeteranStatusRequest;
-  }
-
-  /** Lazy Getter. */
-  public Function<Mpi1305RequestAttributes, PRPAIN201306UV02> mpi1305Request() {
-    if (mpi1305Request == null) {
-      return (attributes) ->
-          SoapMasterPatientIndexClient.of(mpiConfig).request1305ByAttributes(attributes);
-    }
-    return mpi1305Request;
+          @Autowired MasterPatientIndexClient mpiClient, @Autowired EmisVeteranStatusServiceClient emisClient) {
+    this.mpiClient = mpiClient;
+    this.emisClient = emisClient;
   }
 
   /** Get response from MPI 1305 request. */
   @PostMapping({"/v0/status"})
   public VeteranStatusConfirmation veteranStatusConfirmationResponse(
       @Valid @RequestBody VeteranStatusRequest attributes) {
-    PRPAIN201306UV02 mpiResponse = mpi1305Request().apply(attributes.toMpi1305RequestAttributes());
+    PRPAIN201306UV02 mpiResponse = mpiClient.request1305ByAttributes(attributes.toMpi1305RequestAttributes());
     InputEdiPiOrIcn ediPiOrIcn = getInputEdipiOrIcn(mpiResponse);
     if (ediPiOrIcn == null) {
       return VeteranStatusConfirmation.builder().veteranStatus("not confirmed").build();
     }
     EMISveteranStatusResponseType emisResponse =
-        emisVeteranStatusRequest().apply(ediPiOrIcn);
+            emisClient.veteranStatusRequest(ediPiOrIcn);
     return VeteranStatusConfirmationTransformer.builder()
         .response(emisResponse)
         .build()
