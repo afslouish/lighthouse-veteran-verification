@@ -19,6 +19,7 @@
     <jersey-common.version>2.33</jersey-common.version>
     <emis-client-v1.version>1.0.3</emis-client-v1.version>
     <emis-model.version>1.0.3</emis-model.version>
+    <mock-server.version>5.11.2</mock-server.version>
   </properties>
   <dependencies>
     <dependency>
@@ -49,6 +50,12 @@
       <groupId>org.glassfish.jersey.core</groupId>
       <artifactId>jersey-common</artifactId>
       <version>${jersey-common.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.mock-server</groupId>
+      <artifactId>mockserver-netty</artifactId>
+      <version>${mock-server.version}</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
   <build>

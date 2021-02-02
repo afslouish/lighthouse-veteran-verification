@@ -1,0 +1,137 @@
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP-ENV:Header/>
+    <SOAP-ENV:Body>
+        <PRPA_IN201306UV02 xmlns="http://vaww.oed.oit.va.gov" xmlns:ns2="urn:hl7-org:v3" ITSVersion="XML_1.0">
+            <ns2:id extension="WSDOC1609131753362231779394902" root="2.16.840.1.113883.4.349"/>
+            <ns2:creationTime value="20160913175336"/>
+            <ns2:versionCode code="3.0"/>
+            <ns2:interactionId extension="PRPA_IN201306UV02" root="2.16.840.1.113883.1.6"/>
+            <ns2:processingCode code="T"/>
+            <ns2:processingModeCode code="T"/>
+            <ns2:acceptAckCode code="NE"/>
+            <ns2:receiver typeCode="RCV">
+                <ns2:device classCode="DEV" determinerCode="INSTANCE">
+                    <ns2:id extension="200VGOV" root="2.16.840.1.113883.4.349"/>
+                </ns2:device>
+            </ns2:receiver>
+            <ns2:sender typeCode="SND">
+                <ns2:device classCode="DEV" determinerCode="INSTANCE">
+                    <ns2:id extension="200M" root="2.16.840.1.113883.4.349"/>
+                </ns2:device>
+            </ns2:sender>
+            <ns2:acknowledgement>
+                <ns2:typeCode code="AA"/>
+                <ns2:targetMessage>
+                    <ns2:id extension="MCID-12345" root="1.2.840.114350.1.13.0.1.7.1.1"/>
+                </ns2:targetMessage>
+                <ns2:acknowledgementDetail>
+                    <ns2:code code="132" codeSystemName="MVI" displayName="IMT"/>
+                    <ns2:text>Identity Match Threshold</ns2:text>
+                </ns2:acknowledgementDetail>
+                <ns2:acknowledgementDetail>
+                    <ns2:code code="120" codeSystemName="MVI" displayName="PDT"/>
+                    <ns2:text>Potential Duplicate Threshold</ns2:text>
+                </ns2:acknowledgementDetail>
+            </ns2:acknowledgement>
+            <ns2:controlActProcess classCode="CACT" moodCode="EVN">
+                <ns2:code code="PRPA_TE201306UV02" codeSystem="2.16.840.1.113883.1.6"/>
+                <ns2:subject typeCode="SUBJ">
+                    <ns2:registrationEvent classCode="REG" moodCode="EVN">
+                        <ns2:id nullFlavor="NA"/>
+                        <ns2:statusCode code="active"/>
+                        <ns2:subject1 typeCode="SBJ">
+                            <ns2:patient classCode="PAT">
+                                <ns2:id extension="1012667145V762142^NI^200M^USVHA^P" root="2.16.840.1.113883.4.349"/>
+                                <ns2:id extension="1005490754^NI^200DOD^USDOD^A" root="2.16.840.1.113883.3.42.10001.100001.12"/>
+                                <ns2:id extension="600043201^PI^200CORP^USVBA^A" root="2.16.840.1.113883.4.349"/>
+                                <ns2:id extension="123456^PI^200ESR^USVHA^A" root="2.16.840.1.113883.4.349"/>
+                                <ns2:id extension="123456^PI^648^USVHA^A" root="2.16.840.1.113883.4.349"/>
+                                <ns2:statusCode code="active"/>
+                                <ns2:patientPerson>
+                                    <ns2:name use="L">
+                                        <ns2:given>Tamara</ns2:given>
+                                        <ns2:given>Null</ns2:given>
+                                        <ns2:family>Ellis</ns2:family>
+                                        <ns2:prefix/>
+                                        <ns2:suffix/>
+                                    </ns2:name>
+                                    <ns2:name use="P">
+                                        <ns2:delimiter>101</ns2:delimiter>
+                                        <ns2:family>Ellis</ns2:family>
+                                    </ns2:name>
+                                    <ns2:name use="C">
+                                        <ns2:family>Ellis</ns2:family>
+                                    </ns2:name>
+                                    <ns2:telecom use="HP" value="1112223333"/>
+                                    <ns2:administrativeGenderCode code="F"/>
+                                    <ns2:birthTime value="19670619"/>
+                                    <ns2:multipleBirthInd value="true"/>
+                                    <ns2:addr use="PHYS">
+                                        <ns2:streetAddressLine>BEHIND TAHINI RIVER</ns2:streetAddressLine>
+                                        <ns2:city>AUSTIN</ns2:city>
+                                        <ns2:state>TX</ns2:state>
+                                        <ns2:postalCode>78741</ns2:postalCode>
+                                        <ns2:country>USA</ns2:country>
+                                    </ns2:addr>
+                                    <ns2:asOtherIDs classCode="SSN">
+                                        <ns2:id extension="796130115" root="2.16.840.1.113883.4.1"/>
+                                        <ns2:scopingOrganization classCode="ORG" determinerCode="INSTANCE">
+                                            <ns2:id root="1.2.840.114350.1.13.99997.2.3412"/>
+                                        </ns2:scopingOrganization>
+                                    </ns2:asOtherIDs>
+                                    <ns2:birthPlace>
+                                        <ns2:addr>
+                                            <ns2:city>JOHNSON CITY</ns2:city>
+                                            <ns2:state>MS</ns2:state>
+                                            <ns2:country>USA</ns2:country>
+                                        </ns2:addr>
+                                    </ns2:birthPlace>
+                                </ns2:patientPerson>
+                                <ns2:subjectOf1>
+                                    <ns2:queryMatchObservation classCode="COND" moodCode="EVN">
+                                        <ns2:code code="IHE_PDQ"/>
+                                        <ns2:value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" value="162" xsi:type="ns2:INT"/>
+                                    </ns2:queryMatchObservation>
+                                </ns2:subjectOf1>
+                            </ns2:patient>
+                        </ns2:subject1>
+                        <ns2:custodian typeCode="CST">
+                            <ns2:assignedEntity classCode="ASSIGNED">
+                                <ns2:id root="2.16.840.1.113883.4.349"/>
+                            </ns2:assignedEntity>
+                        </ns2:custodian>
+                    </ns2:registrationEvent>
+                </ns2:subject>
+                <ns2:queryAck>
+                    <ns2:queryId extension="18204" root="2.16.840.1.113883.3.933"/>
+                    <ns2:queryResponseCode code="OK"/>
+                    <ns2:resultCurrentQuantity value="1"/>
+                </ns2:queryAck>
+                <ns2:queryByParameter>
+                    <ns2:queryId extension="18204" root="2.16.840.1.113883.3.933"/>
+                    <ns2:statusCode code="new"/>
+                    <ns2:modifyCode code="MVI.COMP1"/>
+                    <ns2:initialQuantity value="1"/>
+                    <ns2:parameterList>
+                        <ns2:livingSubjectBirthTime>
+                            <ns2:value value="19670619"/>
+                            <ns2:semanticsText>LivingSubject..birthTime</ns2:semanticsText>
+                        </ns2:livingSubjectBirthTime>
+                        <ns2:livingSubjectId>
+                            <ns2:value extension="796130115" root="2.16.840.1.113883.4.1"/>
+                            <ns2:semanticsText>SSN</ns2:semanticsText>
+                        </ns2:livingSubjectId>
+                        <ns2:livingSubjectName>
+                            <ns2:value use="L">
+                                <ns2:given>Tamara</ns2:given>
+                                <ns2:given>Null</ns2:given>
+                                <ns2:family>Ellis</ns2:family>
+                            </ns2:value>
+                            <ns2:semanticsText>LivingSubject.name</ns2:semanticsText>
+                        </ns2:livingSubjectName>
+                    </ns2:parameterList>
+                </ns2:queryByParameter>
+            </ns2:controlActProcess>
+        </PRPA_IN201306UV02>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
