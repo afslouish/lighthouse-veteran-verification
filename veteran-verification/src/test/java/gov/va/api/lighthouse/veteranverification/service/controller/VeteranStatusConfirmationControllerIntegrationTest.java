@@ -3,7 +3,7 @@ package gov.va.api.lighthouse.veteranverification.service.controller;
 import gov.va.api.lighthouse.emis.EmisConfigV1;
 import gov.va.api.lighthouse.mpi.MpiConfig;
 import gov.va.api.lighthouse.veteranverification.api.VeteranStatusConfirmation;
-import gov.va.api.lighthouse.veteranverification.api.VeteranStatusRequest;\
+import gov.va.api.lighthouse.veteranverification.api.VeteranStatusRequest;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
