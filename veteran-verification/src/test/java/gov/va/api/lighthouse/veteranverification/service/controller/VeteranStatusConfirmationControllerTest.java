@@ -27,7 +27,7 @@ public class VeteranStatusConfirmationControllerTest {
           .middleName("test")
           .build();
 
-  @Mock MpiConfig mockConfig;
+  @Mock MpiConfig mpiConfig;
 
   @Mock PRPAIN201306UV02 mpiMockResponse;
 
@@ -42,26 +42,56 @@ public class VeteranStatusConfirmationControllerTest {
 
   @Test
   void emisVeteranStatusRequestTest() {
-    var controller = new VeteranStatusConfirmationController(mockConfig, emisConfig);
+    var controller = new VeteranStatusConfirmationController(mpiConfig, emisConfig);
     assertThat(controller.emisVeteranStatusRequest()).isInstanceOf(Function.class);
     Function<InputEdiPiOrIcn, EMISveteranStatusResponseType> emisMockFunction =
         (m) -> emisMockResponse;
     var controllerFunctionOverride =
-        new VeteranStatusConfirmationController(mockConfig, emisConfig);
+        new VeteranStatusConfirmationController(mpiConfig, emisConfig);
     controllerFunctionOverride.emisVeteranStatusRequest(emisMockFunction);
     assertThat(controllerFunctionOverride.emisVeteranStatusRequest()).isEqualTo(emisMockFunction);
   }
 
   @Test
   void mpi1305RequestTest() {
-    var controller = new VeteranStatusConfirmationController(mockConfig, emisConfig);
+    var controller = new VeteranStatusConfirmationController(mpiConfig, emisConfig);
     assertThat(controller.mpi1305Request()).isInstanceOf(Function.class);
     Function<Mpi1305RequestAttributes, PRPAIN201306UV02> mpiMockFunction = (s) -> mpiMockResponse;
     var controllerFunctionOverride =
-        new VeteranStatusConfirmationController(mockConfig, emisConfig);
+        new VeteranStatusConfirmationController(mpiConfig, emisConfig);
     controllerFunctionOverride.mpi1305Request(mpiMockFunction);
     assertThat(controllerFunctionOverride.mpi1305Request()).isEqualTo(mpiMockFunction);
     assertThat(controllerFunctionOverride.veteranStatusConfirmationResponse(attributes))
         .isInstanceOf(VeteranStatusConfirmation.class);
+  }
+
+  @Test
+  void happyPathRetrieveByEDIPITest() {
+    var controller = new VeteranStatusConfirmationController(mpiConfig, emisConfig);
+    throw new UnsupportedOperationException();
+  }
+
+  @Test
+  void happyPathRetrieveByICNTest() {
+    var controller = new VeteranStatusConfirmationController(mpiConfig, emisConfig);
+    throw new UnsupportedOperationException();
+  }
+
+  @Test
+  void NoMpiResponse() {
+    var controller = new VeteranStatusConfirmationController(mpiConfig, emisConfig);
+    throw new UnsupportedOperationException();
+  }
+
+  @Test
+  void MpiResponseError() {
+    var controller = new VeteranStatusConfirmationController(mpiConfig, emisConfig);
+    throw new UnsupportedOperationException();
+  }
+
+  @Test
+  void EmisResponseError() {
+    var controller = new VeteranStatusConfirmationController(mpiConfig, emisConfig);
+    throw new UnsupportedOperationException();
   }
 }
