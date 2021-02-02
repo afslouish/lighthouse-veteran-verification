@@ -66,11 +66,12 @@ public class VeteranStatusConfirmationController {
   public VeteranStatusConfirmation veteranStatusConfirmationResponse(
       @Valid @RequestBody VeteranStatusRequest attributes) {
     PRPAIN201306UV02 mpiResponse = mpi1305Request().apply(attributes.toMpi1305RequestAttributes());
-    if (getInputEdipiOrIcn(mpiResponse) == null) {
+    InputEdiPiOrIcn ediPiOrIcn = getInputEdipiOrIcn(mpiResponse);
+    if (ediPiOrIcn == null) {
       return VeteranStatusConfirmation.builder().veteranStatus("not confirmed").build();
     }
     EMISveteranStatusResponseType emisResponse =
-        emisVeteranStatusRequest().apply(getInputEdipiOrIcn(mpiResponse));
+        emisVeteranStatusRequest().apply(ediPiOrIcn);
     return VeteranStatusConfirmationTransformer.builder()
         .response(emisResponse)
         .build()
