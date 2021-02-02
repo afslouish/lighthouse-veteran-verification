@@ -1,5 +1,6 @@
 package gov.va.api.lighthouse.veteranverification.service.controller;
 
+import static org.apache.tomcat.util.http.fileupload.util.Streams.asString;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import gov.va.api.lighthouse.emis.EmisConfigV1;
@@ -10,12 +11,20 @@ import gov.va.api.lighthouse.veteranverification.api.VeteranStatusRequest;
 import gov.va.viers.cdi.emis.requestresponse.v1.EMISveteranStatusResponseType;
 import gov.va.viers.cdi.emis.requestresponse.v1.InputEdiPiOrIcn;
 import java.util.function.Function;
+
+import lombok.SneakyThrows;
 import org.hl7.v3.PRPAIN201306UV02;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockserver.integration.ClientAndServer;
+import org.mockserver.model.HttpRequest;
+import org.mockserver.model.HttpResponse;
+import org.mockserver.model.HttpStatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 
 public class VeteranStatusConfirmationControllerTest {
   final VeteranStatusRequest attributes =
@@ -28,7 +37,6 @@ public class VeteranStatusConfirmationControllerTest {
           .middleName("test")
           .build();
 
-  @Autowired
   MpiConfig mpiConfig;
 
   @Mock PRPAIN201306UV02 mpiMockResponse;
@@ -37,9 +45,15 @@ public class VeteranStatusConfirmationControllerTest {
 
   @Mock EMISveteranStatusResponseType emisMockResponse;
 
+  ClientAndServer mpiClientServer;
   @BeforeEach
   void _init() {
     MockitoAnnotations.initMocks(this);
+    mpiConfig = makeMpiConfig();
+  }
+  @BeforeEach
+  void startMPIServer() {
+    startMPI();
   }
 
   @Test
@@ -65,6 +79,18 @@ public class VeteranStatusConfirmationControllerTest {
     assertThat(controllerFunctionOverride.mpi1305Request()).isEqualTo(mpiMockFunction);
     assertThat(controllerFunctionOverride.veteranStatusConfirmationResponse(attributes))
         .isInstanceOf(VeteranStatusConfirmation.class);
+  }
+  @Test @SneakyThrows
+  void harness() {
+    mpiClientServer.when(new HttpRequest().withMethod("POST"))
+            .respond(new HttpResponse().withStatusCode(HttpStatusCode.OK_200.code())
+                    .withBody(asString(getClass().getClassLoader().getResourceAsStream("mpi_profile_response.xml"))));
+    var controller = new VeteranStatusConfirmationController(mpiConfig, emisConfig);
+    try {
+      controller.veteranStatusConfirmationResponse(attributes);
+    }catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
   }
 
   @Test
@@ -97,6 +123,16 @@ public class VeteranStatusConfirmationControllerTest {
     throw new UnsupportedOperationException();
   }
 
+  @SneakyThrows
+  private void startMPI() {
+    mpiClientServer = ClientAndServer.startClientAndServer(2018);
+    String xml = asString(new ClassPathResource("META-INF/wsdl/IdMHL7v3.WSDL").getInputStream());
+    mpiClientServer.when(new HttpRequest().withMethod("GET"))
+            .respond(new HttpResponse().withStatusCode(HttpStatusCode.OK_200.code())
+                    .withBody(xml));
+
+  }
+
   private MpiConfig makeMpiConfig() {
     return MpiConfig.builder()
             .userId("ID")
@@ -105,9 +141,9 @@ public class VeteranStatusConfirmationControllerTest {
             .keyAlias("fake")
             .url("http://localhost:2018")
             .wsdlLocation("http://localhost:2018")
-            .keystorePath("veteran-verification/src/test/resources/fakekeystore.jks")
+            .keystorePath("src/test/resources/fakekeystore.jks")
             .keystorePassword("secret")
-            .truststorePath("veteran-verification/src/test/resources/trustkeystore.jks")
+            .truststorePath("src/test/resources/faketruststore.jks")
             .truststorePassword("secret")
             .build();
   }
