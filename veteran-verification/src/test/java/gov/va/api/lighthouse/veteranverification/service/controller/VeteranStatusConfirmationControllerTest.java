@@ -98,9 +98,17 @@ public class VeteranStatusConfirmationControllerTest {
   }
 
   private MpiConfig makeMpiConfig() {
-    return MpiConfig.builder().userId("ID").integrationProcessId("ID").asAgentId("ID")
-            .keyAlias("fake").url("").wsdlLocation("")
-            .keystorePath("").keystorePassword("secret")
-            .truststorePath("").truststorePassword("secret").build();
+    return MpiConfig.builder()
+            .userId("ID")
+            .integrationProcessId("ID")
+            .asAgentId("ID")
+            .keyAlias("fake")
+            .url("http://localhost:2018")
+            .wsdlLocation("http://localhost:2018")
+            .keystorePath("veteran-verification/src/test/resources/fakekeystore.jks")
+            .keystorePassword("secret")
+            .truststorePath("veteran-verification/src/test/resources/trustkeystore.jks")
+            .truststorePassword("secret")
+            .build();
   }
 }
