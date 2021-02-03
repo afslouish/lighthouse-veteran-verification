@@ -1,7 +1,11 @@
 package gov.va.api.lighthouse.veteranverification.service.controller;
 
 import gov.va.api.lighthouse.emis.EmisConfigV1;
+import gov.va.api.lighthouse.emis.EmisVeteranStatusServiceClient;
+import gov.va.api.lighthouse.emis.SoapEmisVeteranStatusServiceClient;
+import gov.va.api.lighthouse.mpi.MasterPatientIndexClient;
 import gov.va.api.lighthouse.mpi.MpiConfig;
+import gov.va.api.lighthouse.mpi.SoapMasterPatientIndexClient;
 import gov.va.api.lighthouse.veteranverification.api.VeteranStatusConfirmation;
 import gov.va.api.lighthouse.veteranverification.api.VeteranStatusRequest;
 import lombok.SneakyThrows;
@@ -29,8 +33,8 @@ public class VeteranStatusConfirmationControllerIntegrationTest {
                     .build();
     private ClientAndServer mpiClientServer;
     private ClientAndServer emisClientServer;
-    private EmisConfigV1 emisConfig;
-    private MpiConfig mpiConfig;
+    private EmisVeteranStatusServiceClient emisClient;
+    private MasterPatientIndexClient mpiClient;
 
     @BeforeEach
     void startMPIServer() {
@@ -45,8 +49,8 @@ public class VeteranStatusConfirmationControllerIntegrationTest {
     @BeforeEach
     void _init() {
         MockitoAnnotations.initMocks(this);
-        mpiConfig = makeMpiConfig();
-        emisConfig = makeEmisConfig();
+        mpiClient = SoapMasterPatientIndexClient.of(makeMpiConfig());
+        emisClient = SoapEmisVeteranStatusServiceClient.of(makeEmisConfig());
     }
 
     @Test @SneakyThrows
@@ -58,7 +62,7 @@ public class VeteranStatusConfirmationControllerIntegrationTest {
         emisClientServer.when(new HttpRequest().withMethod("POST"))
                 .respond(new HttpResponse().withStatusCode(HttpStatusCode.OK_200.code())
                         .withBody(asString(getClass().getClassLoader().getResourceAsStream("emis_edipi_response.xml"))));
-        var controller = new VeteranStatusConfirmationController(mpiConfig, emisConfig);
+        var controller = new VeteranStatusConfirmationController(mpiClient, emisClient);
         VeteranStatusConfirmation veteranStatusConfirmation = controller.veteranStatusConfirmationResponse(attributes);
 
         assertThat(veteranStatusConfirmation.getVeteranStatus()).isEqualTo("confirmed");
