@@ -1,16 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <env:Envelope xmlns:env="http://www.w3.org/2003/05/soap-envelope">
-    <env:Header>
-        <NS2:essResponseCode xmlns:NS2="http://va.gov/ess/message/v1">Success</NS2:essResponseCode>
-    </env:Header>
-    <env:Body>
-        <eMISveteranStatusResponse xmlns="http://viers.va.gov/cdi/eMIS/RequestResponse/VetStatus/v1" xmlns:ns2="http://viers.va.gov/cdi/eMIS/commonService/v1" xmlns:ns3="http://viers.va.gov/cdi/eMIS/RequestResponse/v1" xmlns:ns4="http://viers.va.gov/cdi/CDI/commonService/v1">
-            <ns3:veteranStatus>
-                <ns2:edipi>1005396162</ns2:edipi>
-                <ns2:title38StatusCode>V1</ns2:title38StatusCode>
-                <ns2:post911DeploymentIndicator>Y</ns2:post911DeploymentIndicator>
-                <ns2:post911CombatIndicator>N</ns2:post911CombatIndicator>
-                <ns2:pre911DeploymentIndicator>N</ns2:pre911DeploymentIndicator>
-            </ns3:veteranStatus>
-        </eMISveteranStatusResponse>
-    </env:Body>
+  <env:Header>
+    <NS2:essResponseCode xmlns:NS2="http://va.gov/ess/message/v1">Success</NS2:essResponseCode>
+  </env:Header>
+  <env:Body>
+    <eMISveteranStatusResponse xmlns="http://viers.va.gov/cdi/eMIS/RequestResponse/VetStatus/v1" xmlns:ns2="http://viers.va.gov/cdi/eMIS/commonService/v1" xmlns:ns3="http://viers.va.gov/cdi/eMIS/RequestResponse/v1" xmlns:ns4="http://viers.va.gov/cdi/CDI/commonService/v1">
+      <ns3:veteranStatus>
+        <ns2:edipi>1005396162</ns2:edipi>
+        <ns2:title38StatusCode>V1</ns2:title38StatusCode>
+        <ns2:post911DeploymentIndicator>Y</ns2:post911DeploymentIndicator>
+        <ns2:post911CombatIndicator>N</ns2:post911CombatIndicator>
+        <ns2:pre911DeploymentIndicator>N</ns2:pre911DeploymentIndicator>
+      </ns3:veteranStatus>
+    </eMISveteranStatusResponse>
+  </env:Body>
 </env:Envelope>

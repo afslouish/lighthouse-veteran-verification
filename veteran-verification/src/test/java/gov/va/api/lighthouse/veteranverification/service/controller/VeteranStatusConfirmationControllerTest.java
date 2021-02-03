@@ -16,6 +16,21 @@ public class VeteranStatusConfirmationControllerTest {
           .middleName("test")
           .build();
 
+  @Test
+  void EmisResponseError() {
+    throw new UnsupportedOperationException();
+  }
+
+  @Test
+  void MpiResponseError() {
+    throw new UnsupportedOperationException();
+  }
+
+  @Test
+  void NoMpiResponse() {
+    throw new UnsupportedOperationException();
+  }
+
   @BeforeEach
   void _init() {
     MockitoAnnotations.initMocks(this);
@@ -28,21 +43,6 @@ public class VeteranStatusConfirmationControllerTest {
 
   @Test
   void happyPathRetrieveByICNTest() {
-    throw new UnsupportedOperationException();
-  }
-
-  @Test
-  void NoMpiResponse() {
-    throw new UnsupportedOperationException();
-  }
-
-  @Test
-  void MpiResponseError() {
-    throw new UnsupportedOperationException();
-  }
-
-  @Test
-  void EmisResponseError() {
     throw new UnsupportedOperationException();
   }
 }
