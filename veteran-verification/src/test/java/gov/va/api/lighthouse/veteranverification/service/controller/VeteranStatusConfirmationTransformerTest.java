@@ -18,7 +18,7 @@ public class VeteranStatusConfirmationTransformerTest {
                     .post911CombatIndicator("N")
                     .edipi("1111111111")
                     .post911DeploymentIndicator("N")
-                    .title38StatusCode("N")
+                    .title38StatusCode("V1")
                     .build())
             .build();
     assertThat(

@@ -3,15 +3,15 @@ package gov.va.api.lighthouse.veteranverification.service.controller;
 import static org.apache.tomcat.util.http.fileupload.util.Streams.asString;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import gov.va.api.lighthouse.emis.EmisConfigV1;
 import gov.va.api.lighthouse.emis.EmisVeteranStatusServiceClient;
 import gov.va.api.lighthouse.emis.SoapEmisVeteranStatusServiceClient;
 import gov.va.api.lighthouse.mpi.MasterPatientIndexClient;
-import gov.va.api.lighthouse.mpi.MpiConfig;
 import gov.va.api.lighthouse.mpi.SoapMasterPatientIndexClient;
 import gov.va.api.lighthouse.veteranverification.api.VeteranStatusConfirmation;
 import gov.va.api.lighthouse.veteranverification.api.VeteranStatusRequest;
 import lombok.SneakyThrows;
+import org.junit.Ignore;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -72,39 +72,16 @@ public class VeteranStatusConfirmationControllerIntegrationTest {
   @BeforeEach
   void _init() {
     MockitoAnnotations.initMocks(this);
-    mpiClient = SoapMasterPatientIndexClient.of(makeMpiConfig());
-    emisClient = SoapEmisVeteranStatusServiceClient.of(makeEmisConfig());
-  }
-
-  private EmisConfigV1 makeEmisConfig() {
-    return EmisConfigV1.builder()
-        .keyAlias("fake")
-        .keystorePath("src/test/resources/fakekeystore.jks")
-        .keystorePassword("secret")
-        .truststorePath("src/test/resources/faketruststore.jks")
-        .truststorePassword("secret")
-        .url("http://localhost:2020")
-        .wsdlLocation("http://localhost:2020")
-        .build();
-  }
-
-  private MpiConfig makeMpiConfig() {
-    return MpiConfig.builder()
-        .userId("ID")
-        .integrationProcessId("ID")
-        .asAgentId("ID")
-        .keyAlias("fake")
-        .url("http://localhost:2018")
-        .wsdlLocation("http://localhost:2018")
-        .keystorePath("src/test/resources/fakekeystore.jks")
-        .keystorePassword("secret")
-        .truststorePath("src/test/resources/faketruststore.jks")
-        .truststorePassword("secret")
-        .build();
+    mpiClient =
+        SoapMasterPatientIndexClient.of(
+            VeteranStatusConfirmationControllerTestUtils.makeMpiConfig());
+    emisClient =
+        SoapEmisVeteranStatusServiceClient.of(
+            VeteranStatusConfirmationControllerTestUtils.makeEmisConfig());
   }
 
   @SneakyThrows
-  private void startEMIS() {
+  private void _startEMIS() {
     emisClientServer = ClientAndServer.startClientAndServer(2020);
     String xml =
         asString(
@@ -115,13 +92,8 @@ public class VeteranStatusConfirmationControllerIntegrationTest {
         .respond(new HttpResponse().withStatusCode(HttpStatusCode.OK_200.code()).withBody(xml));
   }
 
-  @BeforeEach
-  void startEMISServer() {
-    startEMIS();
-  }
-
   @SneakyThrows
-  private void startMPI() {
+  private void _startMPI() {
     mpiClientServer = ClientAndServer.startClientAndServer(2018);
     String xml = asString(new ClassPathResource("META-INF/wsdl/IdMHL7v3.WSDL").getInputStream());
     mpiClientServer
@@ -130,7 +102,14 @@ public class VeteranStatusConfirmationControllerIntegrationTest {
   }
 
   @BeforeEach
-  void startMPIServer() {
-    startMPI();
+  void _startServers() {
+    _startEMIS();
+    _startMPI();
+  }
+
+  @AfterEach
+  void _stopServers() {
+    mpiClientServer.stop();
+    emisClientServer.stop();
   }
 }

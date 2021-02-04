@@ -12,9 +12,9 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class VeteranVerificationConfig {
-  MpiConfig mpiConfig;
 
-  EmisConfigV1 emisConfigV1;
+  private MpiConfig mpiConfig;
+  private EmisConfigV1 emisConfigV1;
 
   VeteranVerificationConfig(@Autowired MpiConfig mpiConfig, @Autowired EmisConfigV1 emisConfigV1) {
     this.mpiConfig = mpiConfig;

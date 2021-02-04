@@ -11,19 +11,6 @@ import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
 
 public class Transformers {
-  /**
-   * Return false if at least one value in the given list is a non-blank string, or a non-null
-   * object.
-   */
-  public static boolean allBlank(Object... values) {
-    for (Object v : values) {
-      if (!isBlank(v)) {
-        return false;
-      }
-    }
-    return true;
-  }
-
   /** Filter null items and return null if the result is null or empty. */
   public static <T> List<T> emptyToNull(List<T> items) {
     if (isEmpty(items)) {
