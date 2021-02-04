@@ -1,4 +1,4 @@
-package gov.va.api.lighthouse.veteranverification.service.controller;
+package gov.va.api.lighthouse.veteranverification.service;
 
 import static org.apache.tomcat.util.http.fileupload.util.Streams.asString;
 import static org.mockito.BDDMockito.given;
@@ -20,18 +20,14 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 
 @UtilityClass
-public class VeteranStatusConfirmationControllerTestUtils {
+public class TestUtils {
   private EMISveteranStatusResponseType createEmisResponse(VeteranStatus veteranStatus) {
     return EMISveteranStatusResponseType.builder().veteranStatus(veteranStatus).build();
   }
 
   @SneakyThrows
   private PRPAIN201306UV02 createMpiResponse(String filename) {
-    String profile =
-        asString(
-            VeteranStatusConfirmationControllerTestUtils.class
-                .getClassLoader()
-                .getResourceAsStream(filename));
+    String profile = asString(TestUtils.class.getClassLoader().getResourceAsStream(filename));
     return JAXBContext.newInstance(PRPAIN201306UV02.class)
         .createUnmarshaller()
         .unmarshal(new StreamSource(new StringReader(profile)), PRPAIN201306UV02.class)
@@ -65,12 +61,14 @@ public class VeteranStatusConfirmationControllerTestUtils {
         .build();
   }
 
-  void setEmisMockResponse(@Mock EmisVeteranStatusServiceClient emisClient, VeteranStatus status) {
+  public void setEmisMockResponse(
+      @Mock EmisVeteranStatusServiceClient emisClient, VeteranStatus status) {
     EMISveteranStatusResponseType response = createEmisResponse(status);
     Mockito.when(emisClient.veteranStatusRequest(ArgumentMatchers.any())).thenReturn(response);
   }
 
-  void setEmisResponseException(@Mock EmisVeteranStatusServiceClient emisClient, Exception e) {
+  public void setEmisResponseException(
+      @Mock EmisVeteranStatusServiceClient emisClient, Exception e) {
     given(emisClient.veteranStatusRequest(ArgumentMatchers.any()))
         .willAnswer(
             invocation -> {
@@ -79,12 +77,12 @@ public class VeteranStatusConfirmationControllerTestUtils {
   }
 
   @SneakyThrows
-  void setMpiMockResponse(@Mock MasterPatientIndexClient mpiClient, String filename) {
+  public void setMpiMockResponse(@Mock MasterPatientIndexClient mpiClient, String filename) {
     PRPAIN201306UV02 response = createMpiResponse(filename);
     Mockito.when(mpiClient.request1305ByAttributes(ArgumentMatchers.any())).thenReturn(response);
   }
 
-  void setMpiResponseException(@Mock MasterPatientIndexClient mpiClient, Exception e) {
+  public void setMpiResponseException(@Mock MasterPatientIndexClient mpiClient, Exception e) {
     given(mpiClient.request1305ByAttributes(ArgumentMatchers.any()))
         .willAnswer(
             invocation -> {
@@ -93,7 +91,7 @@ public class VeteranStatusConfirmationControllerTestUtils {
   }
 
   @SneakyThrows
-  void setNullMpiMockResponse(@Mock MasterPatientIndexClient mpiClient) {
+  public void setNullMpiMockResponse(@Mock MasterPatientIndexClient mpiClient) {
     Mockito.when(mpiClient.request1305ByAttributes(ArgumentMatchers.any())).thenReturn(null);
   }
 }

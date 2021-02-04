@@ -9,8 +9,8 @@ import gov.va.api.lighthouse.mpi.MasterPatientIndexClient;
 import gov.va.api.lighthouse.mpi.SoapMasterPatientIndexClient;
 import gov.va.api.lighthouse.veteranverification.api.VeteranStatusConfirmation;
 import gov.va.api.lighthouse.veteranverification.api.VeteranStatusRequest;
+import gov.va.api.lighthouse.veteranverification.service.TestUtils;
 import lombok.SneakyThrows;
-import org.junit.Ignore;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,7 +21,7 @@ import org.mockserver.model.HttpResponse;
 import org.mockserver.model.HttpStatusCode;
 import org.springframework.core.io.ClassPathResource;
 
-public class VeteranStatusConfirmationControllerIntegrationTest {
+public class VeteranStatusConfirmationControllerMockedEndpointsTest {
   private final VeteranStatusRequest attributes =
       VeteranStatusRequest.builder()
           .birthDate("1111-11-11")
@@ -72,12 +72,8 @@ public class VeteranStatusConfirmationControllerIntegrationTest {
   @BeforeEach
   void _init() {
     MockitoAnnotations.initMocks(this);
-    mpiClient =
-        SoapMasterPatientIndexClient.of(
-            VeteranStatusConfirmationControllerTestUtils.makeMpiConfig());
-    emisClient =
-        SoapEmisVeteranStatusServiceClient.of(
-            VeteranStatusConfirmationControllerTestUtils.makeEmisConfig());
+    mpiClient = SoapMasterPatientIndexClient.of(TestUtils.makeMpiConfig());
+    emisClient = SoapEmisVeteranStatusServiceClient.of(TestUtils.makeEmisConfig());
   }
 
   @SneakyThrows
