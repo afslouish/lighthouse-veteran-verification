@@ -78,11 +78,16 @@ curl --location --request POST 'http://localhost:8080/v0/status' \
 **Expected Results**
 
 ```
-{"timestamp":"2021-02-04T19:07:21.470+0000",
-"status":500,
-"error":"Internal Server Error",
-"message": {Error Message},
-"path":"/v0/status"}
+{
+"errors":[
+        {
+            "title":"Internal server error",
+            "detail":"Internal server error",
+            "code":"500",
+            "status":"500"
+        }
+    ]
+}
 ```
 
 ### Bad Request

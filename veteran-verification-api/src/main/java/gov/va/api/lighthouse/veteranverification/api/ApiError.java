@@ -61,4 +61,19 @@ public abstract class ApiError {
                   .build()));
     }
   }
+
+  public static class SoapResponseApiError extends ApiError {
+    /** Build API Error for General Soap Response Error. */
+    @Builder
+    public SoapResponseApiError() {
+      super(
+          singletonList(
+              ApiErrorDetails.builder()
+                  .title("Internal server error")
+                  .detail("Internal server error")
+                  .code("500")
+                  .status("500")
+                  .build()));
+    }
+  }
 }
