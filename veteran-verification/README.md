@@ -1,7 +1,5 @@
 # Veteran Confirmation Endpoints
 
-## Status Expected Functionality
-
 ### Happy Path retrieve by EDIPI
 
 ```
