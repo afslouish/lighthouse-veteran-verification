@@ -1,6 +1,6 @@
 # Veteran Confirmation Endpoints
 
-### Happy Path retrieve by EDIPI
+## Happy Path retrieve by EDIPI
 
 ```
 curl --location --request POST 'http://localhost:8080/v0/status' \
@@ -19,7 +19,7 @@ curl --location --request POST 'http://localhost:8080/v0/status' \
 
 `{ "veteran_status": "confirmed" }`
 
-### Happy Path retrieve by ICN
+## Happy Path retrieve by ICN
 
 ```
 curl --location --request POST 'http://localhost:8080/v0/status' \
@@ -38,7 +38,7 @@ curl --location --request POST 'http://localhost:8080/v0/status' \
 
 `{ "veteran_status": "confirmed" }`
 
-### Not Confirmed User
+## Not Confirmed User
 
 
 ```
@@ -58,7 +58,7 @@ curl --location --request POST 'http://localhost:8080/v0/status' \
 
 `{ "veteran_status": "not confirmed"}`
 
-### No Emis User
+## No Emis User
 
 ```
 curl --location --request POST 'http://localhost:8080/v0/status' \
@@ -83,7 +83,7 @@ curl --location --request POST 'http://localhost:8080/v0/status' \
 "path":"/v0/status"}
 ```
 
-### Bad Request
+## Bad Request
 
 ```
 curl --location --request POST 'http://localhost:8080/v0/status' \
@@ -105,7 +105,7 @@ curl --location --request POST 'http://localhost:8080/v0/status' \
 }
 ```
 
-### No User
+## No User
 
 ```
 curl --location --request POST 'http://localhost:8080/v0/status' \
