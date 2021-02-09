@@ -1,10 +1,10 @@
 package gov.va.api.lighthouse.veteranverification.service;
 
 import com.fasterxml.jackson.databind.exc.ValueInstantiationException;
-import com.sun.xml.ws.fault.ServerSOAPFaultException;
+import com.sun.xml.ws.wsdl.parser.InaccessibleWSDLException;
+import gov.va.api.lighthouse.veteranverification.api.ApiError.InaccessibleWsdlErrorApiError;
 import gov.va.api.lighthouse.veteranverification.api.ApiError.InvalidParameterApiError;
 import gov.va.api.lighthouse.veteranverification.api.ApiError.MissingParameterApiError;
-import gov.va.api.lighthouse.veteranverification.api.ApiError.SoapResponseApiError;
 import java.util.Optional;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -56,10 +56,10 @@ public class WebExceptionHandler {
     return new MissingParameterApiError(missingField);
   }
 
-  /** Return error for general soap server error. */
-  @ExceptionHandler({ServerSOAPFaultException.class})
-  @ResponseStatus(HttpStatus.BAD_REQUEST)
-  public SoapResponseApiError handleServerSoapFaultException() {
-    return new SoapResponseApiError();
+  /** Return error for inaccessible wsdl exception. */
+  @ExceptionHandler({InaccessibleWSDLException.class})
+  @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
+  public InaccessibleWsdlErrorApiError handleServerSoapFaultException() {
+    return new InaccessibleWsdlErrorApiError();
   }
 }

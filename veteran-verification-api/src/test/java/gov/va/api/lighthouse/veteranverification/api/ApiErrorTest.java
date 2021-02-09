@@ -2,16 +2,17 @@ package gov.va.api.lighthouse.veteranverification.api;
 
 import static gov.va.api.lighthouse.veteranverification.api.RoundTrip.assertRoundTrip;
 
+import gov.va.api.lighthouse.veteranverification.api.ApiError.InaccessibleWsdlErrorApiError;
 import gov.va.api.lighthouse.veteranverification.api.ApiError.InvalidParameterApiError;
 import gov.va.api.lighthouse.veteranverification.api.ApiError.MissingParameterApiError;
-import gov.va.api.lighthouse.veteranverification.api.ApiError.SoapResponseApiError;
 import org.junit.jupiter.api.Test;
 
 public class ApiErrorTest {
   @Test
-  void SoapResponseApiError() {
-    SoapResponseApiError soapResponseApiError = SoapResponseApiError.builder().build();
-    assertRoundTrip(soapResponseApiError);
+  void InaccessibleWsdlErrorApiError() {
+    InaccessibleWsdlErrorApiError inaccessibleWsdlErrorApiError =
+        InaccessibleWsdlErrorApiError.builder().build();
+    assertRoundTrip(inaccessibleWsdlErrorApiError);
   }
 
   @Test
