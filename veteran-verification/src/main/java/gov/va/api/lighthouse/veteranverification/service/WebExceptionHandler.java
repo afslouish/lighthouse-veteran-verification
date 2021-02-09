@@ -59,7 +59,7 @@ public class WebExceptionHandler {
   /** Return error for inaccessible wsdl exception. */
   @ExceptionHandler({InaccessibleWSDLException.class})
   @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
-  public InaccessibleWsdlErrorApiError handleServerSoapFaultException() {
+  public InaccessibleWsdlErrorApiError handleInaccessibleWSDLException() {
     return new InaccessibleWsdlErrorApiError();
   }
 }
