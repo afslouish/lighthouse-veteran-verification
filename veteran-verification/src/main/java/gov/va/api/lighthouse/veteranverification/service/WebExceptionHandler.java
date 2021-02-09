@@ -38,6 +38,13 @@ public class WebExceptionHandler {
     return fieldValue;
   }
 
+  /** Return error for inaccessible wsdl exception. */
+  @ExceptionHandler({InaccessibleWSDLException.class})
+  @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
+  public InaccessibleWsdlErrorApiError handleInaccessibleWsdlException() {
+    return new InaccessibleWsdlErrorApiError();
+  }
+
   /** Return error for invalid format on parameter (ssn, gender, or birth_date). */
   @ExceptionHandler({MethodArgumentNotValidException.class})
   @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -54,12 +61,5 @@ public class WebExceptionHandler {
             .getMessage()
             .substring(0, e.getCause().getMessage().indexOf(" is marked non-null but is null"));
     return new MissingParameterApiError(missingField);
-  }
-
-  /** Return error for inaccessible wsdl exception. */
-  @ExceptionHandler({InaccessibleWSDLException.class})
-  @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
-  public InaccessibleWsdlErrorApiError handleInaccessibleWSDLException() {
-    return new InaccessibleWsdlErrorApiError();
   }
 }
