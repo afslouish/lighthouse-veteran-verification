@@ -2,10 +2,12 @@ package gov.va.api.lighthouse.veteranverification.service.controller;
 
 import static gov.va.api.lighthouse.veteranverification.service.MpiLookupUtils.getInputEdipiOrIcn;
 
+import com.sun.xml.ws.fault.ServerSOAPFaultException;
 import gov.va.api.lighthouse.emis.EmisVeteranStatusServiceClient;
 import gov.va.api.lighthouse.mpi.MasterPatientIndexClient;
 import gov.va.api.lighthouse.veteranverification.api.VeteranStatusConfirmation;
 import gov.va.api.lighthouse.veteranverification.api.VeteranStatusRequest;
+import gov.va.viers.cdi.emis.requestresponse.v1.EMISveteranStatusResponseType;
 import gov.va.viers.cdi.emis.requestresponse.v1.InputEdiPiOrIcn;
 import javax.validation.Valid;
 import org.hl7.v3.PRPAIN201306UV02;
@@ -42,8 +44,16 @@ public class VeteranStatusConfirmationController {
       return VeteranStatusConfirmation.builder().veteranStatus("not confirmed").build();
     }
 
+    EMISveteranStatusResponseType status = null;
+
+    try {
+      status = emisClient.veteranStatusRequest(ediPiOrIcn);
+    } catch (ServerSOAPFaultException exception) {
+      return VeteranStatusConfirmation.builder().veteranStatus("not confirmed").build();
+    }
+
     return VeteranStatusConfirmationTransformer.builder()
-        .response(emisClient.veteranStatusRequest(ediPiOrIcn))
+        .response(status)
         .build()
         .toVeteranStatus();
   }

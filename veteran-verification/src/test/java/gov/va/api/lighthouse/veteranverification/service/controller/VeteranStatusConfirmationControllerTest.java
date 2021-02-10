@@ -2,12 +2,16 @@ package gov.va.api.lighthouse.veteranverification.service.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.sun.xml.ws.fault.ServerSOAPFaultException;
+import com.sun.xml.ws.wsdl.parser.InaccessibleWSDLException;
 import gov.va.api.lighthouse.emis.EmisVeteranStatusServiceClient;
 import gov.va.api.lighthouse.mpi.MasterPatientIndexClient;
 import gov.va.api.lighthouse.veteranverification.api.VeteranStatusConfirmation;
 import gov.va.api.lighthouse.veteranverification.api.VeteranStatusRequest;
 import gov.va.api.lighthouse.veteranverification.service.TestUtils;
 import gov.va.viers.cdi.emis.commonservice.v1.VeteranStatus;
+import java.util.Arrays;
+import javax.xml.soap.SOAPFault;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,18 +32,31 @@ public class VeteranStatusConfirmationControllerTest {
   @Mock private MasterPatientIndexClient mpiClient;
 
   @Mock private EmisVeteranStatusServiceClient emisClient;
+  @Mock private SOAPFault soapFault;
 
   @Test
-  void EmisResponseError() {
+  void EmisInaccessibleWSDLException() {
     VeteranStatusConfirmationController controller =
         new VeteranStatusConfirmationController(mpiClient, emisClient);
     TestUtils.setMpiMockResponse(mpiClient, "mpi_profile_response_body.xml");
-    TestUtils.setEmisResponseException(emisClient, new Exception("Test Exception"));
+    TestUtils.setEmisResponseException(
+        emisClient, new InaccessibleWSDLException(Arrays.asList(new Error(""))));
     Assertions.assertThrows(
-        Exception.class,
+        InaccessibleWSDLException.class,
         () -> {
           controller.veteranStatusConfirmationResponse(attributes);
         });
+  }
+
+  @Test
+  void EmisSoapFaultException() {
+    VeteranStatusConfirmationController controller =
+        new VeteranStatusConfirmationController(mpiClient, emisClient);
+    TestUtils.setMpiMockResponse(mpiClient, "mpi_profile_response_body.xml");
+    TestUtils.setEmisResponseException(emisClient, new ServerSOAPFaultException(soapFault));
+    VeteranStatusConfirmation confirmation =
+        controller.veteranStatusConfirmationResponse(attributes);
+    assertThat(confirmation.getVeteranStatus()).isEqualTo("not confirmed");
   }
 
   @Test

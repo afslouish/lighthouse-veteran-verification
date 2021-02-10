@@ -2,7 +2,7 @@
 
 ## Happy Path retrieve by EDIPI
 
-```
+```bash
 curl --location --request POST 'http://localhost:8080/v0/status' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -17,11 +17,13 @@ curl --location --request POST 'http://localhost:8080/v0/status' \
 
 **Expected Results**
 
-`{ "veteran_status": "confirmed" }`
+```json
+{ "veteran_status": "confirmed" }
+```
 
 ## Happy Path retrieve by ICN
 
-```
+```bash
 curl --location --request POST 'http://localhost:8080/v0/status' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -36,12 +38,14 @@ curl --location --request POST 'http://localhost:8080/v0/status' \
 
 **Expected Results**
 
-`{ "veteran_status": "confirmed" }`
+```json
+{ "veteran_status": "confirmed" }
+```
 
 ## Not Confirmed User
 
 
-```
+```bash
 curl --location --request POST 'http://localhost:8080/v0/status' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -56,11 +60,13 @@ curl --location --request POST 'http://localhost:8080/v0/status' \
 
 **Expected Results**
 
-`{ "veteran_status": "not confirmed"}`
+```json
+{ "veteran_status": "not confirmed"}
+```
 
 ## No Emis User
 
-```
+```bash
 curl --location --request POST 'http://localhost:8080/v0/status' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -75,22 +81,13 @@ curl --location --request POST 'http://localhost:8080/v0/status' \
 
 **Expected Results**
 
-```
-{
-"errors":[
-        {
-            "title":"Internal server error",
-            "detail":"Internal server error",
-            "code":"500",
-            "status":"500"
-        }
-    ]
-}
+```json
+{ "veteran_status": "not confirmed"}
 ```
 
 ## Bad Request
 
-```
+```bash
 curl --location --request POST 'http://localhost:8080/v0/status' \
 --header 'Content-Type: application/json' \
 --data-raw '{}'
@@ -98,7 +95,7 @@ curl --location --request POST 'http://localhost:8080/v0/status' \
 
 **Expected Results**
 
-```
+```json
 {"errors": [
     {
         "title":"Missing parameter",
@@ -112,7 +109,7 @@ curl --location --request POST 'http://localhost:8080/v0/status' \
 
 ## No User
 
-```
+```bash
 curl --location --request POST 'http://localhost:8080/v0/status' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -127,4 +124,20 @@ curl --location --request POST 'http://localhost:8080/v0/status' \
 
 **Expected Results**
 
-`{ "veteran_status": "not confirmed"}`
+```json
+{ "veteran_status": "not confirmed"}
+```
+
+## Emis or MPI Outage
+
+```json
+{
+  "errors":[
+    {"title":"Service unavailable",
+      "detail":"An external service is unavailable.",
+      "code":"503",
+      "status":"503"
+    }
+  ]
+}
+```

@@ -62,17 +62,17 @@ public abstract class ApiError {
     }
   }
 
-  public static class SoapResponseApiError extends ApiError {
+  public static class InaccessibleWsdlErrorApiError extends ApiError {
     /** Build API Error for General Soap Response Error. */
     @Builder
-    public SoapResponseApiError() {
+    public InaccessibleWsdlErrorApiError() {
       super(
           singletonList(
               ApiErrorDetails.builder()
-                  .title("Internal server error")
-                  .detail("Internal server error")
-                  .code("500")
-                  .status("500")
+                  .title("Service unavailable")
+                  .detail("An external service is unavailable.")
+                  .code("503")
+                  .status("503")
                   .build()));
     }
   }
