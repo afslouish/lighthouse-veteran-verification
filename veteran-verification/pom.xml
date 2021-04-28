@@ -17,7 +17,7 @@
     <master-patient-index-client.version>1.0.3</master-patient-index-client.version>
     <swagger-examples-plugin.version>1.0.1</swagger-examples-plugin.version>
     <swagger-maven-plugin.version>2.1.1</swagger-maven-plugin.version>
-    <jersey-common.version>2.33</jersey-common.version>
+    <jersey-common.version>2.34</jersey-common.version>
     <emis-client-v1.version>1.0.3</emis-client-v1.version>
     <emis-model.version>1.0.3</emis-model.version>
     <mock-server.version>5.11.2</mock-server.version>
