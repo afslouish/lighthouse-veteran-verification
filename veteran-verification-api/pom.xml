@@ -4,15 +4,15 @@
   <parent>
     <groupId>gov.va.api.health</groupId>
     <artifactId>api-starter</artifactId>
-    <version>7.0.20</version>
+    <version>7.0.24</version>
     <relativePath/>
   </parent>
   <groupId>gov.va.api.lighthouse</groupId>
   <artifactId>veteran-verification-api</artifactId>
-  <version>1.0.11-SNAPSHOT</version>
+  <version>1.0.11</version>
   <packaging>jar</packaging>
   <properties>
-    <master-patient-index-client.version>1.0.3</master-patient-index-client.version>
+    <master-patient-index-client.version>1.0.6</master-patient-index-client.version>
   </properties>
   <dependencies>
     <dependency>
