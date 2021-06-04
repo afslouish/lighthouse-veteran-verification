@@ -9,7 +9,7 @@
   <groupId>gov.va.api.lighthouse</groupId>
   <artifactId>lighthouse-veteran-verification-parent</artifactId>
   <packaging>pom</packaging>
-  <version>1.0.13</version>
+  <version>1.0.14-SNAPSHOT</version>
   <modules>
     <module>veteran-verification-api</module>
     <module>veteran-verification</module>
