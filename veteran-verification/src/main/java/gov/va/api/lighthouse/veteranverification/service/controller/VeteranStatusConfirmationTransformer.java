@@ -5,6 +5,7 @@ import gov.va.viers.cdi.emis.requestresponse.v1.EMISveteranStatusResponseType;
 import lombok.Builder;
 import lombok.NonNull;
 
+/** Transformer for Veteran Status Confirmation response. */
 @Builder
 public class VeteranStatusConfirmationTransformer {
   @NonNull private final EMISveteranStatusResponseType response;

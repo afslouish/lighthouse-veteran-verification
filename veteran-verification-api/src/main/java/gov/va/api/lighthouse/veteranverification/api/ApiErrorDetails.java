@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Value;
 import lombok.experimental.Accessors;
 
+/** Schema for Api Error Details. */
 @Value
 @Builder
 @Accessors(fluent = false)

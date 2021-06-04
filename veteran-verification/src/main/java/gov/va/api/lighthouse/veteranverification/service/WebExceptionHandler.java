@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+/** Handler for all web exceptions that returns a meaningful error response object. */
 @RestControllerAdvice
 @RequestMapping(produces = "application/json")
 public class WebExceptionHandler {

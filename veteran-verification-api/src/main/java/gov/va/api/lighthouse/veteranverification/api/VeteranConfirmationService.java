@@ -19,6 +19,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
+/** Open API information for Veteran Confirmation Service. */
 @OpenAPIDefinition(
     info =
         @Info(

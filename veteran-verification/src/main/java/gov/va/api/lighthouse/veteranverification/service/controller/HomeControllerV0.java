@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+/** V0 Home Controller class for open api. */
 @RestController
 @RequestMapping(value = "/v0/", produces = "application/json")
 public class HomeControllerV0 {

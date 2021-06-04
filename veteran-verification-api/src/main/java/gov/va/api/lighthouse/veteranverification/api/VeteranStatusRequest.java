@@ -10,6 +10,7 @@ import lombok.NonNull;
 import lombok.Value;
 import lombok.experimental.Accessors;
 
+/** Veteran Confirmation Status request body model. */
 @Value
 @Builder
 @Accessors(fluent = false)

@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import gov.va.api.lighthouse.veteranverification.api.VeteranStatusConfirmation;
 import gov.va.viers.cdi.emis.commonservice.v1.VeteranStatus;
 import gov.va.viers.cdi.emis.requestresponse.v1.EMISveteranStatusResponseType;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class VeteranStatusConfirmationTransformerTest {
   @Test

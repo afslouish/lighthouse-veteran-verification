@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import gov.va.api.lighthouse.mpi.Mpi1305RequestAttributes;
 import java.time.LocalDate;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class VeteranStatusRequestTest {
   VeteranStatusRequest attributes =

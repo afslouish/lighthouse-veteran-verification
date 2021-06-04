@@ -10,6 +10,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
 
+/** Utility class for common transformer methods. */
 public class Transformers {
   /** Filter null items and return null if the result is null or empty. */
   public static <T> List<T> emptyToNull(List<T> items) {

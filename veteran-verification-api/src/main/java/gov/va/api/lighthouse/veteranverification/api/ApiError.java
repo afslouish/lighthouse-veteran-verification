@@ -30,6 +30,7 @@ public abstract class ApiError {
     return field.replaceAll("([a-z])([A-Z]+)", "$1_$2").toLowerCase();
   }
 
+  /** Error class for a missing parameter. */
   @NoArgsConstructor
   public static class MissingParameterApiError extends ApiError {
     /** Build Api Error for missing parameter with error message parameter. */
@@ -46,6 +47,7 @@ public abstract class ApiError {
     }
   }
 
+  /** Error class for an invalid parameter. */
   @NoArgsConstructor
   public static class InvalidParameterApiError extends ApiError {
     /** Build Api Error for invalid parameter error using value and field name parameters. */
@@ -62,6 +64,7 @@ public abstract class ApiError {
     }
   }
 
+  /** Error class for inaccessible WSDL. */
   public static class InaccessibleWsdlErrorApiError extends ApiError {
     /** Build API Error for General Soap Response Error. */
     @Builder

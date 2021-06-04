@@ -10,6 +10,7 @@ import org.hl7.v3.II;
 import org.hl7.v3.PRPAIN201306UV02;
 import org.hl7.v3.PRPAMT201310UV02Patient;
 
+/** Utility class for common MPI lookup methods. */
 public class MpiLookupUtils {
   private static final String ICN_LOOKUP_VALUE = "^NI^200M^USVHA^P";
 

@@ -7,6 +7,7 @@ import lombok.NonNull;
 import lombok.Value;
 import lombok.experimental.Accessors;
 
+/** Veteran Status Confirmation response object model. */
 @Value
 @Builder
 @Accessors(fluent = false)
