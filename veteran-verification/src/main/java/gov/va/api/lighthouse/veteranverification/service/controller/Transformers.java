@@ -8,10 +8,12 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import lombok.experimental.UtilityClass;
 import org.apache.commons.lang3.StringUtils;
 
 /** Utility class for common transformer methods. */
-public class Transformers {
+@UtilityClass
+public final class Transformers {
   /** Filter null items and return null if the result is null or empty. */
   public static <T> List<T> emptyToNull(List<T> items) {
     if (isEmpty(items)) {

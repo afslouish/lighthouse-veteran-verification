@@ -1,4 +1,4 @@
-package gov.va.api.lighthouse.veteranverification.service.controller;
+package gov.va.api.lighthouse.veteranverification.service.controller.veteranconfirmation;
 
 import gov.va.api.lighthouse.veteranverification.api.VeteranStatusConfirmation;
 import gov.va.viers.cdi.emis.requestresponse.v1.EMISveteranStatusResponseType;

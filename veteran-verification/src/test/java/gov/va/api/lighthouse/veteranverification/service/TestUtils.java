@@ -80,10 +80,16 @@ public class TestUtils {
   public void setMpiMockResponse(@Mock MasterPatientIndexClient mpiClient, String filename) {
     PRPAIN201306UV02 response = createMpiResponse(filename);
     Mockito.when(mpiClient.request1305ByAttributes(ArgumentMatchers.any())).thenReturn(response);
+    Mockito.when(mpiClient.request1305ByIcn(ArgumentMatchers.any())).thenReturn(response);
   }
 
   public void setMpiResponseException(@Mock MasterPatientIndexClient mpiClient, Exception e) {
     given(mpiClient.request1305ByAttributes(ArgumentMatchers.any()))
+        .willAnswer(
+            invocation -> {
+              throw e;
+            });
+    given(mpiClient.request1305ByIcn(ArgumentMatchers.any()))
         .willAnswer(
             invocation -> {
               throw e;
@@ -93,5 +99,6 @@ public class TestUtils {
   @SneakyThrows
   public void setNullMpiMockResponse(@Mock MasterPatientIndexClient mpiClient) {
     Mockito.when(mpiClient.request1305ByAttributes(ArgumentMatchers.any())).thenReturn(null);
+    Mockito.when(mpiClient.request1305ByIcn(ArgumentMatchers.any())).thenReturn(null);
   }
 }

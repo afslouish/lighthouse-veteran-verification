@@ -1,4 +1,4 @@
-package gov.va.api.lighthouse.veteranverification.service.controller;
+package gov.va.api.lighthouse.veteranverification.service.controller.veteranconfirmation;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

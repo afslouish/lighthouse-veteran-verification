@@ -141,3 +141,24 @@ curl --location --request POST 'http://localhost:8080/v0/status' \
   ]
 }
 ```
+
+# Veteran Verification Endpoints
+
+## Confirmed user
+```
+curl http://localhost:8080/v0/status/1012666182V203559
+```
+**Expected Results**
+```
+confirmed
+```
+
+## Not confirmed user
+```
+curl http://localhost:8080/v0/status/1012666182V203777
+```
+
+**Expected Results**
+```
+not confirmed
+```
