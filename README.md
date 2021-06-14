@@ -2,7 +2,7 @@
 
 ## Veteran Confirmation
 ### Veteran Status Endpoint
-Currently, this enpoint makes a 1305 request (receiving 1306 response) to MPI in order to determine a veteran's status.
+Currently, this endpoint makes a 1305 request (receiving 1306 response) to MPI in order to determine a veteran's status.
 The search is performed using a POST to `/v0/status` including a body of attributes.
 An example of these attributes is:
 ```
@@ -28,6 +28,16 @@ curl --location --request POST 'http://localhost:8080/v0/status' \
   "gender": "M"
 }'
 ```
+
+## Veteran Confirmation
+### Veteran Status Endpoint
+This endpoint takes in an ICN as a path variable and makes a 1305 request to MPI. An ICN or EDIPI is pulled from the 
+MPI 1306 response and used to make an EMIS Veteran Status request to determine a veteran's status.
+Example request:
+```
+curl --location --request GET 'http://localhost:8080/v0/status/1012667145V762142'
+```
+
 
 ### Veteran Verification Documentation
 Veteran Confirmation API

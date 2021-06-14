@@ -2,9 +2,11 @@ package gov.va.api.lighthouse.veteranverification.service;
 
 import com.fasterxml.jackson.databind.exc.ValueInstantiationException;
 import com.sun.xml.ws.wsdl.parser.InaccessibleWSDLException;
+import gov.va.api.lighthouse.veteranverification.api.ApiError.EmisInaccessibleWsdlErrorApiError;
 import gov.va.api.lighthouse.veteranverification.api.ApiError.InaccessibleWsdlErrorApiError;
 import gov.va.api.lighthouse.veteranverification.api.ApiError.InvalidParameterApiError;
 import gov.va.api.lighthouse.veteranverification.api.ApiError.MissingParameterApiError;
+import gov.va.api.lighthouse.veteranverification.service.Exceptions.EmisInaccesibleWsdlException;
 import java.util.Optional;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -37,6 +39,13 @@ public class WebExceptionHandler {
             .map(field -> field.getRejectedValue().toString())
             .orElse("");
     return fieldValue;
+  }
+
+  /** Return error for EMIS inaccessible wsdl exception. */
+  @ExceptionHandler({EmisInaccesibleWsdlException.class})
+  @ResponseStatus(HttpStatus.BAD_GATEWAY)
+  public EmisInaccessibleWsdlErrorApiError handleEmisInaccessibleWsdlException() {
+    return new EmisInaccessibleWsdlErrorApiError();
   }
 
   /** Return error for inaccessible wsdl exception. */

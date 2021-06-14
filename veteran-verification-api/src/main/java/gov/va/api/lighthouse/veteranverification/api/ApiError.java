@@ -79,4 +79,22 @@ public abstract class ApiError {
                   .build()));
     }
   }
+
+  /** Error class for inaccessible eMIS WSDL. */
+  public static class EmisInaccessibleWsdlErrorApiError extends ApiError {
+    /** Build API Error for inaccessible eMIS WSDL. */
+    @Builder
+    public EmisInaccessibleWsdlErrorApiError() {
+      super(
+          singletonList(
+              ApiErrorDetails.builder()
+                  .title("Unexpected response body")
+                  .detail(
+                      "EMIS service responded with something other than veteran "
+                          + "status information.")
+                  .code("EMIS_STATUS502")
+                  .status("502")
+                  .build()));
+    }
+  }
 }

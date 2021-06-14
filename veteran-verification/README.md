@@ -146,11 +146,19 @@ curl --location --request POST 'http://localhost:8080/v0/status' \
 
 ## Confirmed user
 ```
-curl http://localhost:8080/v0/status/1012666182V203559
+curl http://localhost:8080/v0/status/1012667145V762142
 ```
 **Expected Results**
-```
-confirmed
+```json
+{
+  "data": {
+    "id": "1012667145V762142",
+    "type": "veteran_status_confirmations",
+    "attributes": {
+      "veteran_status": "confirmed"
+    }
+  }
+}
 ```
 
 ## Not confirmed user
@@ -159,6 +167,29 @@ curl http://localhost:8080/v0/status/1012666182V203777
 ```
 
 **Expected Results**
+```json
+{
+  "data": {
+    "id": "1012666182V203777",
+    "type": "veteran_status_confirmations",
+    "attributes": {
+      "veteran_status": "not confirmed"
+    }
+  }
+}
 ```
-not confirmed
+
+## Emis outage
+**Expected Results**
+```json
+{
+    "errors": [
+        {
+            "title": "Unexpected response body",
+            "detail": "EMIS service responded with something other than veteran status information.",
+            "code": "EMIS_STATUS502",
+            "status": "502"
+        }
+    ]
+}
 ```

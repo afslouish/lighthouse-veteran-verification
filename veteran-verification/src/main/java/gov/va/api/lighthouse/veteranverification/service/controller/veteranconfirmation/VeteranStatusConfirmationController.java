@@ -34,7 +34,7 @@ public class VeteranStatusConfirmationController {
   }
 
   /**
-   * Get veteran confirmation status from eMIS using an EDIPI or ICN from MPI lookup. POST takes
+   * Get veteran confirmation status from EMIS using an EDIPI or ICN from MPI lookup. POST takes
    * VeteranStatusRequest attributes as body object.
    */
   @PostMapping({"/v0/status"})
