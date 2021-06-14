@@ -33,7 +33,7 @@ public class VeteranStatusVerificationTransformerTest {
                     VeteranStatusVerificationDetails.builder()
                         .id("1111")
                         .attributes(
-                            VeteranStatusVerification.Attributes.builder()
+                            VeteranStatusVerification.VeteranStatusAttributes.builder()
                                 .veteranStatus("confirmed")
                                 .build())
                         .build())
@@ -53,7 +53,7 @@ public class VeteranStatusVerificationTransformerTest {
                     VeteranStatusVerificationDetails.builder()
                         .id("1111")
                         .attributes(
-                            VeteranStatusVerification.Attributes.builder()
+                            VeteranStatusVerification.VeteranStatusAttributes.builder()
                                 .veteranStatus("not confirmed")
                                 .build())
                         .build())
@@ -69,7 +69,7 @@ public class VeteranStatusVerificationTransformerTest {
                     VeteranStatusVerificationDetails.builder()
                         .id(null)
                         .attributes(
-                            VeteranStatusVerification.Attributes.builder()
+                            VeteranStatusVerification.VeteranStatusAttributes.builder()
                                 .veteranStatus("not confirmed")
                                 .build())
                         .build())

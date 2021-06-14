@@ -1,4 +1,4 @@
-package gov.va.api.lighthouse.veteranverification.service;
+package gov.va.api.lighthouse.veteranverification.service.controller.veteranconfirmation;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -7,6 +7,7 @@ import static org.mockito.Mockito.when;
 import com.fasterxml.jackson.databind.exc.ValueInstantiationException;
 import gov.va.api.lighthouse.veteranverification.api.ApiError.InvalidParameterApiError;
 import gov.va.api.lighthouse.veteranverification.api.ApiError.MissingParameterApiError;
+import gov.va.api.lighthouse.veteranverification.service.WebExceptionHandler;
 import org.junit.jupiter.api.Test;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;

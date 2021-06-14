@@ -1,7 +1,7 @@
 package gov.va.api.lighthouse.veteranverification.service.controller.veteranverification;
 
 import gov.va.api.lighthouse.veteranverification.api.VeteranStatusVerification;
-import gov.va.api.lighthouse.veteranverification.api.VeteranStatusVerification.Attributes;
+import gov.va.api.lighthouse.veteranverification.api.VeteranStatusVerification.VeteranStatusAttributes;
 import gov.va.api.lighthouse.veteranverification.api.VeteranStatusVerification.VeteranStatusVerificationDetails;
 import gov.va.viers.cdi.emis.requestresponse.v1.EMISveteranStatusResponseType;
 import lombok.Builder;
@@ -22,7 +22,7 @@ public class VeteranStatusVerificationTransformer {
         .data(
             VeteranStatusVerificationDetails.builder()
                 .id(icn)
-                .attributes(Attributes.builder().veteranStatus(status).build())
+                .attributes(VeteranStatusAttributes.builder().veteranStatus(status).build())
                 .build())
         .build();
   }

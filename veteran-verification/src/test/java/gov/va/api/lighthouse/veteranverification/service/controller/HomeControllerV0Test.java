@@ -23,13 +23,16 @@ import org.springframework.test.web.servlet.MockMvc;
 public class HomeControllerV0Test {
   @Mock Resource veteranConfirmationOpenapi;
 
+  @Mock Resource veteranVerificationOpenapi;
+
   HomeControllerV0 connerCaseController;
 
   @Autowired private MockMvc mvc;
 
   @BeforeEach
   void _init() {
-    connerCaseController = new HomeControllerV0(veteranConfirmationOpenapi);
+    connerCaseController =
+        new HomeControllerV0(veteranConfirmationOpenapi, veteranVerificationOpenapi);
   }
 
   @Test
@@ -51,6 +54,14 @@ public class HomeControllerV0Test {
   @SneakyThrows
   public void testVeteranConfirmationOpenapiPath() {
     mvc.perform(get("/v0/veteran_confirmation/openapi.json"))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.openapi", equalTo("3.0.1")));
+  }
+
+  @Test
+  @SneakyThrows
+  public void testVeteranVerificationOpenapiPath() {
+    mvc.perform(get("/v0/veteran_verification/openapi.json"))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.openapi", equalTo("3.0.1")));
   }

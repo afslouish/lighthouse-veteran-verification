@@ -41,7 +41,7 @@ public class VeteranStatusVerificationController {
             VeteranStatusVerificationDetails.builder()
                 .id(icn)
                 .attributes(
-                    VeteranStatusVerification.Attributes.builder()
+                    VeteranStatusVerification.VeteranStatusAttributes.builder()
                         .veteranStatus("not confirmed")
                         .build())
                 .build())

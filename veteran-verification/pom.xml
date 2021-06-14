@@ -83,6 +83,23 @@
               <prettyPrint>true</prettyPrint>
             </configuration>
           </execution>
+          <execution>
+            <id>vv-swagger</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>resolve</goal>
+            </goals>
+            <configuration>
+              <contextId>vv-openapi</contextId>
+              <resourceClasses>
+                <resourceClass>gov.va.api.lighthouse.veteranverification.api.VeteranVerificationService</resourceClass>
+              </resourceClasses>
+              <outputFileName>veteran-verification-openapi</outputFileName>
+              <outputPath>${project.build.outputDirectory}</outputPath>
+              <outputFormat>JSON</outputFormat>
+              <prettyPrint>true</prettyPrint>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
       <plugin>

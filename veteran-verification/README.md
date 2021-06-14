@@ -144,7 +144,7 @@ curl --location --request POST 'http://localhost:8080/v0/status' \
 
 # Veteran Verification Endpoints
 
-## Confirmed user
+## Veteran status confirmed user
 ```
 curl http://localhost:8080/v0/status/1012667145V762142
 ```
@@ -161,7 +161,7 @@ curl http://localhost:8080/v0/status/1012667145V762142
 }
 ```
 
-## Not confirmed user
+## Veteran status not confirmed user
 ```
 curl http://localhost:8080/v0/status/1012666182V203777
 ```
@@ -179,7 +179,7 @@ curl http://localhost:8080/v0/status/1012666182V203777
 }
 ```
 
-## Emis outage
+## Veteran Status Emis outage
 **Expected Results**
 ```json
 {

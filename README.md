@@ -29,7 +29,14 @@ curl --location --request POST 'http://localhost:8080/v0/status' \
 }'
 ```
 
-## Veteran Confirmation
+### Documentation
+```
+curl --location --request GET 'http://localhost:8080/v0/veteran_confirmation/openapi.json'
+curl --location --request GET 'http://localhost:8080/v0/veteran_confirmation/'
+```
+
+
+## Veteran Verification
 ### Veteran Status Endpoint
 This endpoint takes in an ICN as a path variable and makes a 1305 request to MPI. An ICN or EDIPI is pulled from the 
 MPI 1306 response and used to make an EMIS Veteran Status request to determine a veteran's status.
@@ -38,10 +45,8 @@ Example request:
 curl --location --request GET 'http://localhost:8080/v0/status/1012667145V762142'
 ```
 
-
-### Veteran Verification Documentation
-Veteran Confirmation API
+### Documentation
 ```
-curl --location --request GET 'http://localhost:8080/v0/veteran_confirmation/openapi.json'
-curl --location --request GET 'http://localhost:8080/v0/veteran_confirmation/'
+curl --location --request GET 'http://localhost:8080/v0/veteran_verification/openapi.json'
+curl --location --request GET 'http://localhost:8080/v0/veteran_verification/'
 ```
