@@ -50,7 +50,7 @@ import javax.ws.rs.Path;
                     + "## Reference\n\n"
                     + "### Sandbox vs. Production Data\n"
                     + "APIs accessed via the Sandbox environment are using the same underlying "
-                    + "logic as VA’s production APIs; only the underlying data store is "
+                    + "logic as VA???s production APIs; only the underlying data store is "
                     + "different.\n\n"
                     + "### Rate Limiting\n"
                     + "We implemented basic rate limiting of 60 requests per minute. If you exceed "
