@@ -9,12 +9,12 @@
   </parent>
   <groupId>gov.va.api.lighthouse</groupId>
   <artifactId>veteran-verification</artifactId>
-  <version>1.0.15-SNAPSHOT</version>
+  <version>1.0.15</version>
   <packaging>jar</packaging>
   <properties>
     <docker.imageName>lighthouse-${project.artifactId}</docker.imageName>
     <jacoco.coverage>0.92</jacoco.coverage>
-    <master-patient-index-client.version>2.0.2</master-patient-index-client.version>
+    <master-patient-index-client.version>2.0.4</master-patient-index-client.version>
     <swagger-examples-plugin.version>1.0.1</swagger-examples-plugin.version>
     <swagger-maven-plugin.version>2.1.1</swagger-maven-plugin.version>
     <jersey-common.version>2.34</jersey-common.version>

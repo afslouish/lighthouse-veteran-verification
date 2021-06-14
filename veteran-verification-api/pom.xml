@@ -9,10 +9,10 @@
   </parent>
   <groupId>gov.va.api.lighthouse</groupId>
   <artifactId>veteran-verification-api</artifactId>
-  <version>1.0.15-SNAPSHOT</version>
+  <version>1.0.15</version>
   <packaging>jar</packaging>
   <properties>
-    <master-patient-index-client.version>2.0.2</master-patient-index-client.version>
+    <master-patient-index-client.version>2.0.4</master-patient-index-client.version>
   </properties>
   <dependencies>
     <dependency>
