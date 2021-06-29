@@ -74,6 +74,24 @@ import javax.ws.rs.Path;
 @Path("/")
 public interface VeteranVerificationService {
   @GET
+  @Path("service_history")
+  @ApiResponse(
+      responseCode = "200",
+      description = "Veteran service history successfully retrieved",
+      content = {
+        @Content(
+            mediaType = "application/json",
+            schema = @Schema(implementation = VeteranVerificationResponse.class))
+      })
+  @ApiResponse(responseCode = "401", description = "Not authorized")
+  @Operation(
+      operationId = "getServiceHistory",
+      summary = "Get confirmation about an individual's Veteran status according to the VA",
+      security = {@SecurityRequirement(name = "bearer_token")})
+  @Tag(name = "Veteran Verification")
+  VeteranVerificationResponse service_history();
+
+  @GET
   @Path("status")
   @ApiResponse(
       responseCode = "200",
