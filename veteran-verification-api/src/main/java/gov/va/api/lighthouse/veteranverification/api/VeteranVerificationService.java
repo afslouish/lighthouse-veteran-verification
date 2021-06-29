@@ -84,10 +84,14 @@ public interface VeteranVerificationService {
             schema = @Schema(implementation = VeteranVerificationResponse.class))
       })
   @ApiResponse(responseCode = "401", description = "Not authorized")
-  @ApiResponse(responseCode = "500", description = "Internal error")
+  @ApiResponse(responseCode = "403", description = "Not authorized")
+  @ApiResponse(responseCode = "500", description = "Forbidden resource")
+  @ApiResponse(
+      responseCode = "502",
+      description = "eMIS failed to respond or responded in a way we cannot handle")
   @Operation(
       operationId = "getServiceHistory",
-      summary = "Get confirmation about an individual's Veteran status according to the VA",
+      summary = "Get information about an individual's military service history",
       security = {@SecurityRequirement(name = "bearer_token")})
   @Tag(name = "Veteran Verification")
   VeteranVerificationResponse service_history();
