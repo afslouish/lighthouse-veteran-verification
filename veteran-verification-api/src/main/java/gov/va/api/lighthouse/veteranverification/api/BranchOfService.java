@@ -2,6 +2,8 @@ package gov.va.api.lighthouse.veteranverification.api;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-// this object will appear as a string to the api user
-@Schema(description = "military branch of service", type = "string")
+@Schema(
+    name = "branch_of_service",
+    description = "military branch of service",
+    example = "Air Force")
 public class BranchOfService {}
