@@ -4,10 +4,10 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Date;
 import lombok.Builder;
-import lombok.Value;
+import lombok.Data;
 import lombok.experimental.Accessors;
 
-@Value
+@Data
 @Builder
 @Accessors(fluent = false)
 @Schema(type = "Object", description = "military episode deployment")

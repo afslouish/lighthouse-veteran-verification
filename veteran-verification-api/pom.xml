@@ -37,6 +37,11 @@
       <version>1.6.2</version>
       <scope>compile</scope>
     </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
   <distributionManagement>
     <repository>
