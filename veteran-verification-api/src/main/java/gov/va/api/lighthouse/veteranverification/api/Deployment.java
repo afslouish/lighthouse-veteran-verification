@@ -38,5 +38,7 @@ public class Deployment {
       nullable = true)
   Location location;
 
-  enum Location {}
+  enum Location {
+    AFG
+  }
 }
