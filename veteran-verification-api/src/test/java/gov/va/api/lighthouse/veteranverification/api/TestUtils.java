@@ -12,9 +12,9 @@ public class TestUtils {
 
   public Deployment makeDeployment() {
     Calendar startCalendar = Calendar.getInstance();
-    startCalendar.set(2000, 0, 1,0,0,0);
+    startCalendar.set(2000, 0, 1, 0, 0, 0);
     Calendar endCalendar = Calendar.getInstance();
-    endCalendar.set(2001, 0, 1,0,0,0);
+    endCalendar.set(2001, 0, 1, 0, 0, 0);
     return Deployment.builder()
         .startDate(startCalendar.getTime())
         .endDate(endCalendar.getTime())
@@ -28,9 +28,9 @@ public class TestUtils {
 
   public ServiceHistoryAttributes makeServiceHistoryAttributes() {
     Calendar startCalendar = Calendar.getInstance();
-    startCalendar.set(2000, 0, 1,0,0,0);
+    startCalendar.set(2000, 0, 1, 0, 0, 0);
     Calendar endCalendar = Calendar.getInstance();
-    endCalendar.set(2001, 0, 1,0,0,0);
+    endCalendar.set(2001, 0, 1, 0, 0, 0);
     Deployment[] deployments = {makeDeployment()};
     return ServiceHistoryAttributes.builder()
         .firstName("John")
@@ -43,5 +43,17 @@ public class TestUtils {
         .separationReason(ServiceHistoryAttributes.SeparationReason.BUFFER)
         .deployments(Arrays.stream(deployments).toList())
         .build();
+  }
+
+  public VeteranVerificationData makeVeteranVerificationData() {
+    return VeteranVerificationData.builder()
+        .id("ID")
+        .type("Mock")
+        .attributes(makeServiceHistoryAttributes())
+        .build();
+  }
+
+  public VeteranVerificationResponse makeVeteranVerificationResponse() {
+    return VeteranVerificationResponse.builder().data(makeVeteranVerificationData()).build();
   }
 }

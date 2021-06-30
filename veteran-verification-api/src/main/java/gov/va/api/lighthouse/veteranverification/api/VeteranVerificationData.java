@@ -25,6 +25,7 @@ public class VeteranVerificationData {
   @Schema(type = "string", example = "veteran_status_confirmations", required = true)
   String type;
 
+  @NonNull
   @Schema(implementation = Attributes.class, required = true)
   Attributes attributes;
 }

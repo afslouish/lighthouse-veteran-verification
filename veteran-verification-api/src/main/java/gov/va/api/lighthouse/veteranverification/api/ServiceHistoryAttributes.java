@@ -4,14 +4,12 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
-import lombok.Value;
 import lombok.experimental.Accessors;
 
 @Data
@@ -84,7 +82,7 @@ public class ServiceHistoryAttributes implements Attributes {
 
   @NonNull
   @ArraySchema(schema = @Schema(implementation = Deployment.class))
-          @Builder.Default
+  @Builder.Default
   List<Deployment> deployments = new ArrayList<>();
 
   enum DischargeStatus {
