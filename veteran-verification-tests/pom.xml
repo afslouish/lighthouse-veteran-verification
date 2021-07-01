@@ -37,11 +37,6 @@
       <artifactId>mock-mpi</artifactId>
       <version>${mock-mpi.version}</version>
     </dependency>
-    <dependency>
-      <groupId>gov.va.api.health</groupId>
-      <artifactId>sentinel</artifactId>
-      <version>${project.parent.version}</version>
-    </dependency>
   </dependencies>
   <build>
     <plugins>
