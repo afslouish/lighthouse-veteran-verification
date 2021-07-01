@@ -34,10 +34,9 @@ public class ServiceHistoryAttributes implements Attributes {
       name = "branch_of_service",
       description = "military branch of service",
       example = "Air Force",
-      required = true,
-      type = "string")
+      required = true)
   @ApiModelProperty(dataType = "java.lang.String")
-  BranchOfService branchOfService;
+  String branchOfService;
 
   @Schema(
       name = "start_date",
@@ -62,7 +61,7 @@ public class ServiceHistoryAttributes implements Attributes {
       example = "E06",
       required = true)
   @ApiModelProperty(dataType = "java.lang.String")
-  PayGrade payGrade;
+  String payGrade;
 
   @Schema(
       name = "discharge_status",

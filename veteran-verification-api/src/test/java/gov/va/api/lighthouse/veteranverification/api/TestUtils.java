@@ -6,10 +6,6 @@ import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class TestUtils {
-  public BranchOfService makeBranchOfService() {
-    return BranchOfService.builder().build();
-  }
-
   public Deployment makeDeployment() {
     Calendar startCalendar = Calendar.getInstance();
     startCalendar.set(2000, 0, 1, 0, 0, 0);
@@ -22,10 +18,6 @@ public class TestUtils {
         .build();
   }
 
-  public PayGrade makePayGrade() {
-    return PayGrade.builder().build();
-  }
-
   public ServiceHistoryAttributes makeServiceHistoryAttributes() {
     Calendar startCalendar = Calendar.getInstance();
     startCalendar.set(2000, 0, 1, 0, 0, 0);
@@ -35,10 +27,10 @@ public class TestUtils {
     return ServiceHistoryAttributes.builder()
         .firstName("John")
         .lastName("Doe")
-        .branchOfService(makeBranchOfService())
+        .branchOfService("BranchOfService")
         .startDate(startCalendar.getTime())
         .endDate(endCalendar.getTime())
-        .payGrade(makePayGrade())
+        .payGrade("PayGrade")
         .dischargeStatus(ServiceHistoryAttributes.DischargeStatus.HONORABLE)
         .separationReason(ServiceHistoryAttributes.SeparationReason.BUFFER)
         .deployments(Arrays.stream(deployments).toList())

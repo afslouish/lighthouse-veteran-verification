@@ -63,16 +63,15 @@ public class ServiceHistoryAttributesTest {
     endCalendar.set(2001, 0, 1, 0, 0, 0);
     Deployment[] deployments = {TestUtils.makeDeployment()};
     ServiceHistoryAttributes serviceHistoryAttributes = TestUtils.makeServiceHistoryAttributes();
+
     Assertions.assertEquals(serviceHistoryAttributes.firstName, "John");
     Assertions.assertEquals(serviceHistoryAttributes.lastName, "Doe");
-    assertThat(
-        serviceHistoryAttributes.branchOfService,
-        samePropertyValuesAs(TestUtils.makeBranchOfService()));
+    Assertions.assertEquals(serviceHistoryAttributes.branchOfService, "BranchOfService");
     Assertions.assertEquals(
         serviceHistoryAttributes.startDate.toString(), startCalendar.getTime().toString());
     Assertions.assertEquals(
         serviceHistoryAttributes.endDate.toString(), endCalendar.getTime().toString());
-    assertThat(serviceHistoryAttributes.payGrade, samePropertyValuesAs(TestUtils.makePayGrade()));
+    Assertions.assertEquals(serviceHistoryAttributes.payGrade, "PayGrade");
     Assertions.assertEquals(
         serviceHistoryAttributes.dischargeStatus,
         ServiceHistoryAttributes.DischargeStatus.HONORABLE);
