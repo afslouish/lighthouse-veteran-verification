@@ -1,5 +1,6 @@
 package gov.va.api.lighthouse.veteranverification.api;
 
+import gov.va.api.lighthouse.veteranverification.api.v0.ServiceHistoryResponse;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.info.Contact;
@@ -81,7 +82,7 @@ public interface VeteranVerificationService {
       content = {
         @Content(
             mediaType = "application/json",
-            schema = @Schema(implementation = VeteranVerificationResponse.class))
+            schema = @Schema(implementation = ServiceHistoryResponse.class))
       })
   @ApiResponse(responseCode = "401", description = "Not authorized")
   @ApiResponse(responseCode = "403", description = "Not authorized")
@@ -94,7 +95,7 @@ public interface VeteranVerificationService {
       summary = "Get information about an individual's military service history",
       security = {@SecurityRequirement(name = "bearer_token")})
   @Tag(name = "Veteran Verification")
-  VeteranVerificationResponse service_history();
+  ServiceHistoryResponse service_history();
 
   @GET
   @Path("status")
@@ -104,7 +105,7 @@ public interface VeteranVerificationService {
       content = {
         @Content(
             mediaType = "application/json",
-            schema = @Schema(implementation = VeteranStatusVerification.class))
+            schema = @Schema(implementation = ServiceHistoryResponse.class))
       })
   @ApiResponse(responseCode = "401", description = "Not authorized")
   @ApiResponse(

@@ -1,18 +1,23 @@
-package gov.va.api.lighthouse.veteranverification.api;
+package gov.va.api.lighthouse.veteranverification.api.v0;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Builder;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.experimental.Accessors;
+import lombok.experimental.FieldDefaults;
 
 @Data
-@Builder
-@Accessors(fluent = false)
+@AllArgsConstructor
+@NoArgsConstructor
+@Accessors(fluent = true)
 @Schema(
     name = "VeteranVerificationData",
     description = "Generic response object for veteran verification calls")
-public class VeteranVerificationData {
+@FieldDefaults(level = AccessLevel.PUBLIC)
+public class AbstractVeteranVerificationData {
   @NonNull
   @Schema(
       type = "string",
@@ -24,8 +29,4 @@ public class VeteranVerificationData {
   @NonNull
   @Schema(example = "veteran_status_confirmations", required = true)
   String type;
-
-  @NonNull
-  @Schema(implementation = Attributes.class, required = true)
-  Attributes attributes;
 }

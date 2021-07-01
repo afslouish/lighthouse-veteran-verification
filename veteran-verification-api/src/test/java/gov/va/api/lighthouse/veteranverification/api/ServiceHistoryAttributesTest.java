@@ -3,6 +3,8 @@ package gov.va.api.lighthouse.veteranverification.api;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.samePropertyValuesAs;
 
+import gov.va.api.lighthouse.veteranverification.api.v0.Deployment;
+import gov.va.api.lighthouse.veteranverification.api.v0.ServiceHistoryResponse;
 import java.util.Arrays;
 import java.util.Calendar;
 import org.junit.jupiter.api.Assertions;
@@ -14,43 +16,48 @@ import org.mockito.junit.jupiter.MockitoExtension;
 public class ServiceHistoryAttributesTest {
   @Test
   public void BranchOfServiceIsNonNullable() {
-    ServiceHistoryAttributes serviceHistoryAttributes = TestUtils.makeServiceHistoryAttributes();
+    ServiceHistoryResponse.ServiceHistoryAttributes serviceHistoryAttributes =
+        TestUtils.makeServiceHistoryAttributes();
     Assertions.assertThrows(
         NullPointerException.class,
         () -> {
-          serviceHistoryAttributes.setBranchOfService(null);
+          serviceHistoryAttributes.branchOfService(null);
         });
   }
 
   @Test
   public void DeploymentsIsNonNullable() {
-    ServiceHistoryAttributes serviceHistoryAttributes = TestUtils.makeServiceHistoryAttributes();
+    ServiceHistoryResponse.ServiceHistoryAttributes serviceHistoryAttributes =
+        TestUtils.makeServiceHistoryAttributes();
     Assertions.assertThrows(
         NullPointerException.class,
         () -> {
-          serviceHistoryAttributes.setDeployments(null);
+          serviceHistoryAttributes.deployments(null);
         });
   }
 
   @Test
   public void DischargeStatusNullable() {
-    ServiceHistoryAttributes serviceHistoryAttributes = TestUtils.makeServiceHistoryAttributes();
-    serviceHistoryAttributes.setDischargeStatus(null);
+    ServiceHistoryResponse.ServiceHistoryAttributes serviceHistoryAttributes =
+        TestUtils.makeServiceHistoryAttributes();
+    serviceHistoryAttributes.dischargeStatus(null);
   }
 
   @Test
   public void EndDateIsNullable() {
-    ServiceHistoryAttributes serviceHistoryAttributes = TestUtils.makeServiceHistoryAttributes();
-    serviceHistoryAttributes.setEndDate(null);
+    ServiceHistoryResponse.ServiceHistoryAttributes serviceHistoryAttributes =
+        TestUtils.makeServiceHistoryAttributes();
+    serviceHistoryAttributes.endDate(null);
   }
 
   @Test
   public void FirstNameIsNonNullable() {
-    ServiceHistoryAttributes serviceHistoryAttributes = TestUtils.makeServiceHistoryAttributes();
+    ServiceHistoryResponse.ServiceHistoryAttributes serviceHistoryAttributes =
+        TestUtils.makeServiceHistoryAttributes();
     Assertions.assertThrows(
         NullPointerException.class,
         () -> {
-          serviceHistoryAttributes.setFirstName(null);
+          serviceHistoryAttributes.firstName(null);
         });
   }
 
@@ -62,60 +69,65 @@ public class ServiceHistoryAttributesTest {
     Calendar endCalendar = Calendar.getInstance();
     endCalendar.set(2001, 0, 1, 0, 0, 0);
     Deployment[] deployments = {TestUtils.makeDeployment()};
-    ServiceHistoryAttributes serviceHistoryAttributes = TestUtils.makeServiceHistoryAttributes();
+    ServiceHistoryResponse.ServiceHistoryAttributes serviceHistoryAttributes =
+        TestUtils.makeServiceHistoryAttributes();
 
-    Assertions.assertEquals(serviceHistoryAttributes.firstName, "John");
-    Assertions.assertEquals(serviceHistoryAttributes.lastName, "Doe");
-    Assertions.assertEquals(serviceHistoryAttributes.branchOfService, "BranchOfService");
+    Assertions.assertEquals(serviceHistoryAttributes.firstName(), "John");
+    Assertions.assertEquals(serviceHistoryAttributes.lastName(), "Doe");
+    Assertions.assertEquals(serviceHistoryAttributes.branchOfService(), "BranchOfService");
     Assertions.assertEquals(
-        serviceHistoryAttributes.startDate.toString(), startCalendar.getTime().toString());
+        serviceHistoryAttributes.startDate().toString(), startCalendar.getTime().toString());
     Assertions.assertEquals(
-        serviceHistoryAttributes.endDate.toString(), endCalendar.getTime().toString());
-    Assertions.assertEquals(serviceHistoryAttributes.payGrade, "PayGrade");
+        serviceHistoryAttributes.endDate().toString(), endCalendar.getTime().toString());
+    Assertions.assertEquals(serviceHistoryAttributes.payGrade(), "PayGrade");
     Assertions.assertEquals(
-        serviceHistoryAttributes.dischargeStatus,
-        ServiceHistoryAttributes.DischargeStatus.HONORABLE);
+        serviceHistoryAttributes.dischargeStatus(),
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);
     Assertions.assertEquals(
-        serviceHistoryAttributes.separationReason,
-        ServiceHistoryAttributes.SeparationReason.BUFFER);
+        serviceHistoryAttributes.separationReason(),
+        ServiceHistoryResponse.ServiceHistoryAttributes.SeparationReason.BUFFER);
     assertThat(
-        serviceHistoryAttributes.deployments.stream().findFirst(),
+        serviceHistoryAttributes.deployments().stream().findFirst(),
         samePropertyValuesAs(Arrays.stream(deployments).findFirst()));
   }
 
   @Test
   public void LastNameIsNonNullable() {
-    ServiceHistoryAttributes serviceHistoryAttributes = TestUtils.makeServiceHistoryAttributes();
+    ServiceHistoryResponse.ServiceHistoryAttributes serviceHistoryAttributes =
+        TestUtils.makeServiceHistoryAttributes();
     Assertions.assertThrows(
         NullPointerException.class,
         () -> {
-          serviceHistoryAttributes.setLastName(null);
+          serviceHistoryAttributes.lastName(null);
         });
   }
 
   @Test
   public void PayGradeIsNonNullable() {
-    ServiceHistoryAttributes serviceHistoryAttributes = TestUtils.makeServiceHistoryAttributes();
+    ServiceHistoryResponse.ServiceHistoryAttributes serviceHistoryAttributes =
+        TestUtils.makeServiceHistoryAttributes();
     Assertions.assertThrows(
         NullPointerException.class,
         () -> {
-          serviceHistoryAttributes.setPayGrade(null);
+          serviceHistoryAttributes.payGrade(null);
         });
   }
 
   @Test
   public void SeparationReasonIsNonNullable() {
-    ServiceHistoryAttributes serviceHistoryAttributes = TestUtils.makeServiceHistoryAttributes();
+    ServiceHistoryResponse.ServiceHistoryAttributes serviceHistoryAttributes =
+        TestUtils.makeServiceHistoryAttributes();
     Assertions.assertThrows(
         NullPointerException.class,
         () -> {
-          serviceHistoryAttributes.setSeparationReason(null);
+          serviceHistoryAttributes.separationReason(null);
         });
   }
 
   @Test
   public void StartDateIsNullable() {
-    ServiceHistoryAttributes serviceHistoryAttributes = TestUtils.makeServiceHistoryAttributes();
-    serviceHistoryAttributes.setStartDate(null);
+    ServiceHistoryResponse.ServiceHistoryAttributes serviceHistoryAttributes =
+        TestUtils.makeServiceHistoryAttributes();
+    serviceHistoryAttributes.startDate(null);
   }
 }

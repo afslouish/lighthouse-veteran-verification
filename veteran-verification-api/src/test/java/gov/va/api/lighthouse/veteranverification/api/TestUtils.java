@@ -1,5 +1,7 @@
 package gov.va.api.lighthouse.veteranverification.api;
 
+import gov.va.api.lighthouse.veteranverification.api.v0.Deployment;
+import gov.va.api.lighthouse.veteranverification.api.v0.ServiceHistoryResponse;
 import java.util.Arrays;
 import java.util.Calendar;
 import lombok.experimental.UtilityClass;
@@ -18,34 +20,35 @@ public class TestUtils {
         .build();
   }
 
-  public ServiceHistoryAttributes makeServiceHistoryAttributes() {
+  public ServiceHistoryResponse.ServiceHistoryAttributes makeServiceHistoryAttributes() {
     Calendar startCalendar = Calendar.getInstance();
     startCalendar.set(2000, 0, 1, 0, 0, 0);
     Calendar endCalendar = Calendar.getInstance();
     endCalendar.set(2001, 0, 1, 0, 0, 0);
     Deployment[] deployments = {makeDeployment()};
-    return ServiceHistoryAttributes.builder()
+    return ServiceHistoryResponse.ServiceHistoryAttributes.builder()
         .firstName("John")
         .lastName("Doe")
         .branchOfService("BranchOfService")
         .startDate(startCalendar.getTime())
         .endDate(endCalendar.getTime())
         .payGrade("PayGrade")
-        .dischargeStatus(ServiceHistoryAttributes.DischargeStatus.HONORABLE)
-        .separationReason(ServiceHistoryAttributes.SeparationReason.BUFFER)
+        .dischargeStatus(ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE)
+        .separationReason(ServiceHistoryResponse.ServiceHistoryAttributes.SeparationReason.BUFFER)
         .deployments(Arrays.stream(deployments).toList())
         .build();
   }
 
-  public VeteranVerificationData makeVeteranVerificationData() {
-    return VeteranVerificationData.builder()
-        .id("ID")
-        .type("Mock")
+  public ServiceHistoryResponse.ServiceHistoryData makeServiceHistoryData() {
+    return ServiceHistoryResponse.ServiceHistoryData.builder()
+        .id("id")
+        .type("mock")
         .attributes(makeServiceHistoryAttributes())
         .build();
   }
 
-  public VeteranVerificationResponse makeVeteranVerificationResponse() {
-    return VeteranVerificationResponse.builder().data(makeVeteranVerificationData()).build();
+  public ServiceHistoryResponse makeServiceHistoryResponse() {
+    ServiceHistoryResponse.ServiceHistoryData[] data = {makeServiceHistoryData()};
+    return ServiceHistoryResponse.builder().data(Arrays.stream(data).toList()).build();
   }
 }

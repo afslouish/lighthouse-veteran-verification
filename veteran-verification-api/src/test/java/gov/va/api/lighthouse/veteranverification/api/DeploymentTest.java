@@ -2,6 +2,7 @@ package gov.va.api.lighthouse.veteranverification.api;
 
 import static gov.va.api.lighthouse.veteranverification.api.RoundTrip.assertRoundTrip;
 
+import gov.va.api.lighthouse.veteranverification.api.v0.Deployment;
 import org.junit.jupiter.api.Test;
 
 public class DeploymentTest {

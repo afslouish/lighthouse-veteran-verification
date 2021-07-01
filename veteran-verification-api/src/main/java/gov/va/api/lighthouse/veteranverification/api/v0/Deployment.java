@@ -1,4 +1,4 @@
-package gov.va.api.lighthouse.veteranverification.api;
+package gov.va.api.lighthouse.veteranverification.api.v0;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -38,7 +38,7 @@ public class Deployment {
       nullable = true)
   Location location;
 
-  enum Location {
+  public enum Location {
     AFG
   }
 }
