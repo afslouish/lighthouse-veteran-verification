@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /** V0 Home Controller class for open api. */
 @RestController
-@RequestMapping(value = "/v0/", produces = "application/json")
+@RequestMapping(produces = "application/json")
 public class HomeControllerV0 {
   private final Resource veteranConfirmationOpenapi;
 
@@ -31,7 +31,7 @@ public class HomeControllerV0 {
   /** REST endpoint for OpenAPI JSON + redirect. */
   @SneakyThrows
   @GetMapping(
-      value = {"veteran_confirmation/", "veteran_confirmation/openapi.json"},
+      value = {"v0/docs/veteran_confirmation"},
       produces = "application/json")
   @ResponseBody
   public Object veteranConfirmationOpenApiJson() {
@@ -43,7 +43,7 @@ public class HomeControllerV0 {
   /** REST endpoint for OpenAPI JSON + redirect. */
   @SneakyThrows
   @GetMapping(
-      value = {"veteran_verification/", "veteran_verification/openapi.json"},
+      value = {"v0/docs/veteran_verification"},
       produces = "application/json")
   @ResponseBody
   public Object veteranVerificationOpenApiJson() {

@@ -53,7 +53,7 @@ public class HomeControllerV0Test {
   @Test
   @SneakyThrows
   public void testVeteranConfirmationOpenapiPath() {
-    mvc.perform(get("/v0/veteran_confirmation/openapi.json"))
+    mvc.perform(get("/v0/docs/veteran_confirmation"))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.openapi", equalTo("3.0.1")));
   }
@@ -61,7 +61,7 @@ public class HomeControllerV0Test {
   @Test
   @SneakyThrows
   public void testVeteranVerificationOpenapiPath() {
-    mvc.perform(get("/v0/veteran_verification/openapi.json"))
+    mvc.perform(get("/v0/docs/veteran_verification"))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.openapi", equalTo("3.0.1")));
   }
