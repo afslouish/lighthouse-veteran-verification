@@ -22,17 +22,17 @@ import lombok.experimental.Accessors;
 @SuppressFBWarnings({"EI_EXPOSE_REP2", "EI_EXPOSE_REP"})
 public class ServiceHistoryAttributes implements Attributes {
   @NonNull
-  @Schema(name = "first_name", description = "first name", example = "John", required = true)
+  @Schema(name = "first_name", description = "Veteran first name", example = "Abraham", required = true)
   String firstName;
 
   @NonNull
-  @Schema(name = "last_name", description = "last name", example = "Doe", required = true)
+  @Schema(name = "last_name", description = "Veteran last name", example = "Lincoln", required = true)
   String lastName;
 
   @NonNull
   @Schema(
       name = "branch_of_service",
-      description = "military branch of service",
+      description = "Branch of military including National Guard or Reserve status",
       example = "Air Force",
       required = true)
   @ApiModelProperty(dataType = "java.lang.String")
@@ -40,8 +40,9 @@ public class ServiceHistoryAttributes implements Attributes {
 
   @Schema(
       name = "start_date",
-      description = "military episode start date",
-      example = "2000-01-20",
+      description = "start date of a service history episode (YYYY-mm-dd)",
+      example = "1948-04-08",
+      format = "Date",
       required = true,
       nullable = true)
   Date startDate;
@@ -49,7 +50,8 @@ public class ServiceHistoryAttributes implements Attributes {
   @Schema(
       name = "end_date",
       description = "military episode end date",
-      example = "2001-01-20",
+      example = "end date of a service history episode (YYYY-mm-dd)",
+      format = "Date",
       required = true,
       nullable = true)
   Date endDate;
@@ -57,16 +59,31 @@ public class ServiceHistoryAttributes implements Attributes {
   @NonNull
   @Schema(
       type = "string",
-      description = "pay grade for military service episode",
-      example = "E06",
+      description = "Defines the level of compensation for a position, normalized across military branches\n" +
+              "\n" +
+              "Possible values include the concatenation of Pay Plan Code and Pay Grade Code.\n" +
+              "Pay Plan Code is represented as a two-character code, and can be one of five values:\n" +
+              "  - CC (Commissioned Corps)\n" +
+              "  - MC (Cadet)\n" +
+              "  - ME (Enlisted)\n" +
+              "  - MO (Officer)\n" +
+              "  - MW (Warrant Officer)\n" +
+              "\n" +
+              "Pay Grade Code is a value between 01 and 10.\n" +
+              "Pay Plan Code is concatenated with Pay Grade Code to determine the full Pay Grade value, with the leading character (M or C) stripped from Pay Plan Code.",
+      example = "W01",
       required = true)
   @ApiModelProperty(dataType = "java.lang.String")
   String payGrade;
 
   @Schema(
       name = "discharge_status",
-      description = "discharge status for military episode",
+      description = "Character of discharge from service episode. Possible values are:\n" +
+              "\n" +
+              "Both \"honorable-for-va-purposes\" and \"dishonorable-for-va-purposes\" represent a change in character of discharge based on an administrative decision, for purposes of VA benefits administration. The original character of discharge for other purposes was either \"bad-conduct\" or \"other-than-honorable\". \"honorable-absence-of-negative-report\" represents an unreported character of service that DoD classifies as honorable.",
       example = "honorable",
+      allowableValues = {"honorable", "general", "bad-conduct", "other-than-honorable",
+      "dishonorable", "honorable-absence-of-negative-report", "honorable-for-va-purposes", "dishonorable-for-va-purposes", "uncharacterized", "unknown"},
       nullable = true,
       required = true)
   DischargeStatus dischargeStatus;
@@ -74,7 +91,7 @@ public class ServiceHistoryAttributes implements Attributes {
   @NonNull
   @Schema(
       name = "separation_reason",
-      description = "separation reason for military episode",
+      description = "Additional text description for separation reason beyond discharge_status value",
       example = "SUFFICIENT SERVICE FOR RETIREMENT",
       required = true)
   SeparationReason separationReason;
