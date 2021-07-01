@@ -22,7 +22,7 @@ public class VeteranVerificationData {
   String id;
 
   @NonNull
-  @Schema(type = "string", example = "veteran_status_confirmations", required = true)
+  @Schema(example = "veteran_status_confirmations", required = true)
   String type;
 
   @NonNull
