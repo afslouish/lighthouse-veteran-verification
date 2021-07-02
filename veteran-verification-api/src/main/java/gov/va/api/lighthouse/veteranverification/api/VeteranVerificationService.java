@@ -1,6 +1,7 @@
 package gov.va.api.lighthouse.veteranverification.api;
 
 import gov.va.api.lighthouse.veteranverification.api.v0.ServiceHistoryResponse;
+import gov.va.api.lighthouse.veteranverification.api.v0.ServiceHistoryTokenResponse;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.info.Contact;
@@ -82,17 +83,16 @@ public interface VeteranVerificationService {
       content = {
         @Content(
             mediaType = "application/json",
-            schema = @Schema(implementation = ServiceHistoryResponse.class))
+            schema = @Schema(implementation = ServiceHistoryResponse.class)),
+        @Content(
+            mediaType = "application/json",
+            schema = @Schema(implementation = ServiceHistoryTokenResponse.class))
       })
   @ApiResponse(responseCode = "401", description = "Not authorized")
-  @ApiResponse(responseCode = "403", description = "Not authorized")
-  @ApiResponse(responseCode = "500", description = "Forbidden resource")
-  @ApiResponse(
-      responseCode = "502",
-      description = "eMIS failed to respond or responded in a way we cannot handle")
+  @ApiResponse(responseCode = "404", description = "No service history found")
   @Operation(
       operationId = "getServiceHistory",
-      summary = "Get information about an individual's military service history",
+      summary = "Retrieve service history of authorized Veteran",
       security = {@SecurityRequirement(name = "bearer_token")})
   @Tag(name = "Veteran Verification")
   ServiceHistoryResponse service_history();
