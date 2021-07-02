@@ -2,8 +2,10 @@ package gov.va.api.lighthouse.veteranverification.api;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.experimental.Accessors;
 
@@ -11,6 +13,8 @@ import lombok.experimental.Accessors;
 @Data
 @Builder
 @Accessors(fluent = false)
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(requiredProperties = "data")
 public class VeteranStatusVerification {
 
@@ -20,6 +24,8 @@ public class VeteranStatusVerification {
   @Data
   @Builder
   @Accessors(fluent = false)
+  @AllArgsConstructor
+  @NoArgsConstructor
   public static class VeteranStatusAttributes {
     @NonNull
     @JsonProperty("veteran_status")
@@ -35,6 +41,8 @@ public class VeteranStatusVerification {
   @Data
   @Builder
   @Accessors(fluent = false)
+  @AllArgsConstructor
+  @NoArgsConstructor
   @Schema(
       name = "VeteranStatusConfirmation",
       description = "Veteran status confirmation for an individual",

@@ -3,18 +3,150 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>gov.va.api.health</groupId>
-    <artifactId>health-apis-parent</artifactId>
-    <version>8.0.20</version>
+    <artifactId>test-starter</artifactId>
+    <version>8.0.22</version>
     <relativePath/>
   </parent>
   <groupId>gov.va.api.lighthouse</groupId>
   <artifactId>veteran-verification-tests</artifactId>
-  <version>1.0.17-SNAPSHOT</version>
+  <version>2.0.2-SNAPSHOT</version>
+  <packaging>jar</packaging>
   <properties>
-    <docker-maven-plugin.version>0.24.0</docker-maven-plugin.version>
-    <docker.organization>vasdvp</docker.organization>
-    <docker.tag>latest</docker.tag>
+    <docker.imageName>lighthouse-${project.artifactId}</docker.imageName>
+    <mock-emis.version>2.0.0</mock-emis.version>
+    <mock-mpi.version>2.0.1</mock-mpi.version>
   </properties>
+  <dependencies>
+    <dependency>
+      <groupId>gov.va.api.health</groupId>
+      <artifactId>sentinel</artifactId>
+      <version>${project.parent.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>gov.va.api.lighthouse</groupId>
+      <artifactId>veteran-verification</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>gov.va.api.health</groupId>
+      <artifactId>mock-emis</artifactId>
+      <version>${mock-emis.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>gov.va.api.lighthouse</groupId>
+      <artifactId>mock-mpi</artifactId>
+      <version>${mock-mpi.version}</version>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy-applications</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}</outputDirectory>
+              <includeArtifactIds>junit-platform-console-standalone,mock-emis,mock-mpi,veteran-verification</includeArtifactIds>
+              <stripVersion>true</stripVersion>
+              <silent>true</silent>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- Launch mock-mpi, mock-emis, and veteran-verification for ITs -->
+      <plugin>
+        <groupId>com.bazaarvoice.maven.plugins</groupId>
+        <artifactId>process-exec-maven-plugin</artifactId>
+        <version>${process-exec-maven-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>mock-mpi-process</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>start</goal>
+            </goals>
+            <configuration>
+              <name>mock-mpi</name>
+              <healthcheckUrl>http://localhost:9090/actuator/health</healthcheckUrl>
+              <skip>${sentinel.skipLaunch}</skip>
+              <processLogFile>${project.build.directory}/mock-mpi.log</processLogFile>
+              <waitForInterrupt>false</waitForInterrupt>
+              <arguments>
+                <argument>java</argument>
+                <argument>-Xms256m</argument>
+                <argument>-Xmx512m</argument>
+                <argument>-Dpatient.vista-site.details=${project.basedir}/src/test/resources/vista-sites.json</argument>
+                <argument>-jar</argument>
+                <argument>mock-mpi.jar</argument>
+              </arguments>
+            </configuration>
+          </execution>
+          <execution>
+            <id>mock-emis-process</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>start</goal>
+            </goals>
+            <configuration>
+              <name>mock-emis</name>
+              <healthcheckUrl>http://localhost:9000/actuator/health</healthcheckUrl>
+              <skip>${sentinel.skipLaunch}</skip>
+              <processLogFile>${project.build.directory}/mock-emis.log</processLogFile>
+              <waitForInterrupt>false</waitForInterrupt>
+              <arguments>
+                <argument>java</argument>
+                <argument>-jar</argument>
+                <argument>mock-emis.jar</argument>
+              </arguments>
+            </configuration>
+          </execution>
+          <execution>
+            <id>veteran-verification-process</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>start</goal>
+            </goals>
+            <configuration>
+              <name>veteran-verification</name>
+              <healthcheckUrl>http://localhost:8080/actuator/health</healthcheckUrl>
+              <skip>${sentinel.skipLaunch}</skip>
+              <arguments>
+                <argument>java</argument>
+                <argument>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5085</argument>
+                <argument>-cp</argument>
+                <argument>veteran-verification.jar</argument>
+                <argument>-Demis.v1.ssl-enabled=false</argument>
+                <argument>-Demis.v2.ssl-enabled=false</argument>
+                <argument>-Dmpi.ssl-enabled=false</argument>
+                <argument>-Dmpi.url=http://localhost:9090/psim_webservice/IdMWebService</argument>
+                <argument>-Dmpi.wsdl-location=http://localhost:9090/psim_webservice/IdMWebService/idmWebService.wsdl</argument>
+                <argument>-Demis.v2.url=http://localhost:9000/VIERSService/eMIS/v2/MilitaryInformationService</argument>
+                <argument>-Demis.v2.wsdl-location=http://localhost:9000/VIERSService/eMIS/v2/MilitaryInformationService/eMISMilitaryInformationService.wsdl</argument>
+                <argument>-Demis.v1.url=http://localhost:9000/VIERSService/eMIS/v1/VeteranStatusService</argument>
+                <argument>-Demis.v1.wsdl-location=http://localhost:9000/VIERSService/eMIS/v1/VeteranStatusService/eMISVeteranStatusService.wsdl</argument>
+                <argument>-Dloader=gov.va.api.lighthouse.veteranverification.service.Application</argument>
+                <argument>-Dlogging.level.root=INFO</argument>
+                <argument>-Dspring.config.additional-location=classpath:/application.properties,optional:file:${project.basedir}/config/secrets.properties</argument>
+                <argument>org.springframework.boot.loader.PropertiesLauncher</argument>
+              </arguments>
+            </configuration>
+          </execution>
+          <execution>
+            <id>stop-all</id>
+            <phase>post-integration-test</phase>
+            <goals>
+              <goal>stop-all</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
   <profiles>
     <profile>
       <id>release</id>
@@ -23,45 +155,9 @@
           <plugin>
             <groupId>io.fabric8</groupId>
             <artifactId>docker-maven-plugin</artifactId>
-            <version>${docker-maven-plugin.version}</version>
             <executions>
               <execution>
-                <id>build-test</id>
-                <configuration>
-                  <images>
-                    <image>
-                      <name>${docker.organization}/lighthouse-${project.artifactId}</name>
-                      <build>
-                        <dockerFile>Dockerfile</dockerFile>
-                        <tags>
-                          <tag>${project.version}</tag>
-                          <tag>${docker.tag}</tag>
-                        </tags>
-                      </build>
-                    </image>
-                  </images>
-                </configuration>
-                <phase>package</phase>
-                <goals>
-                  <goal>build</goal>
-                </goals>
-              </execution>
-              <execution>
-                <id>deploy-test</id>
-                <configuration>
-                  <images>
-                    <image>
-                      <name>${docker.organization}/lighthouse-${project.artifactId}</name>
-                      <build>
-                        <dockerFile>Dockerfile</dockerFile>
-                        <tags>
-                          <tag>${project.version}</tag>
-                          <tag>${docker.tag}</tag>
-                        </tags>
-                      </build>
-                    </image>
-                  </images>
-                </configuration>
+                <id>push</id>
                 <phase>deploy</phase>
                 <goals>
                   <goal>push</goal>

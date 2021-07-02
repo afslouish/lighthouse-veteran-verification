@@ -1,0 +1,92 @@
+#!/usr/bin/env bash
+
+
+
+usage() {
+cat<<EOF
+$0 <build|run|run-config> [run-args]
+
+Build or run the integration test docker image.
+
+EOF
+}
+
+build() {
+  mvn clean deploy \
+    -DskipTests \
+    -Dexec.skip=true \
+    -Dsentinel.skipLaunch=true \
+    -P'!standard' \
+    -Prelease \
+    -Ddocker.skip.push=true \
+    -Dmaven.deploy.skip=true \
+    -Ddocker.username=$DOCKER_USERNAME \
+    -Ddocker.password="$DOCKER_PASSWORD"
+}
+
+
+run() {
+  case $(uname) in
+    Darwin) THIS_MACHINE="docker.for.mac.localhost";;
+    Linux) THIS_MACHINE="localhost";;
+    *) echo "Add support for your operating system: $(uname)"; exit 1;;
+  esac
+  docker run \
+    --rm \
+    --network="host" \
+    -e VV_URL=http://$THIS_MACHINE \
+    -e K8S_ENVIRONMENT=${ENV:-local} \
+    -e SENTINEL_ENV=${ENV:-local} \
+    -e EDIPI_CONFIRMED_FIRST_NAME="ALFREDO" \
+    -e EDIPI_CONFIRMED_LAST_NAME="ARMSTRONG" \
+    -e EDIPI_CONFIRMED_BIRTH_DATE="1993-06-08" \
+    -e EDIPI_CONFIRMED_SSN="796012476" \
+    -e ICN_CONFIRMED_FIRST_NAME="ARTHUR" \
+    -e ICN_CONFIRMED_LAST_NAME="ROSE" \
+    -e ICN_CONFIRMED_BIRTH_DATE="1954-05-26" \
+    -e ICN_CONFIRMED_SSN="796220828" \
+    -e V5_STATUS_FIRST_NAME="GREG" \
+    -e V5_STATUS_LAST_NAME="ANDERSON" \
+    -e V5_STATUS_BIRTH_DATE="1933-04-05" \
+    -e V5_STATUS_SSN="796121200" \
+    -e NO_EMIS_USER_FIRST_NAME="WILLARD" \
+    -e NO_EMIS_USER_LAST_NAME="RILEY" \
+    -e NO_EMIS_USER_BIRTH_DATE="1959-02-25" \
+    -e NO_EMIS_USER_SSN="796013145" \
+    -e CONFIRMED_STATUS_ICN="1012667145V762142" \
+    -e V5_STATUS_ICN="1012666182V203559" \
+    -e NO_EMIS_USER_STATUS_ICN="1012830453V141481" \
+    vasdvp/lighthouse-veteran-verification-tests:latest $@
+}
+
+runConfig() {
+  if [ -z "$VV_DU_PATH" ]; then echo "Variable VV_DU_PATH must be specified."; exit 1; fi
+  case $(uname) in
+    Darwin) THIS_MACHINE="docker.for.mac.localhost";;
+    Linux) THIS_MACHINE="localhost";;
+    *) echo "Add support for your operating system: $(uname)"; exit 1;;
+  esac
+  docker run \
+    --rm \
+    --network="host" \
+    -e VV_URL=http://$THIS_MACHINE \
+    -e K8S_ENVIRONMENT=${ENV:-local} \
+    -e SENTINEL_ENV=${ENV:-local} \
+    --env-file ${VV_DU_PATH}/qa.testvars \
+    vasdvp/lighthouse-veteran-verification-tests:latest $@
+}
+
+main() {
+  local cmd=$1
+  shift
+  case "$cmd" in
+    r|run) run $@;;
+    rc|run-config) runConfig $@;;
+    b|build) build;;
+    br) build && run $@;;
+    *) usage "Unknown command $cmd"
+  esac
+}
+
+
+main $@
