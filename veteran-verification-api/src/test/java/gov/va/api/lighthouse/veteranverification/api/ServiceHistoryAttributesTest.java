@@ -5,8 +5,8 @@ import static org.hamcrest.Matchers.samePropertyValuesAs;
 
 import gov.va.api.lighthouse.veteranverification.api.v0.Deployment;
 import gov.va.api.lighthouse.veteranverification.api.v0.ServiceHistoryResponse;
+import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.Calendar;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -63,11 +63,6 @@ public class ServiceHistoryAttributesTest {
 
   @Test
   public void HappyPath() {
-    // Round trip does not work on objects who have objects as fields
-    Calendar startCalendar = Calendar.getInstance();
-    startCalendar.set(2000, 0, 1, 0, 0, 0);
-    Calendar endCalendar = Calendar.getInstance();
-    endCalendar.set(2001, 0, 1, 0, 0, 0);
     Deployment[] deployments = {TestUtils.makeDeployment()};
     ServiceHistoryResponse.ServiceHistoryAttributes serviceHistoryAttributes =
         TestUtils.makeServiceHistoryAttributes();
@@ -76,16 +71,14 @@ public class ServiceHistoryAttributesTest {
     Assertions.assertEquals(serviceHistoryAttributes.lastName(), "Doe");
     Assertions.assertEquals(serviceHistoryAttributes.branchOfService(), "BranchOfService");
     Assertions.assertEquals(
-        serviceHistoryAttributes.startDate().toString(), startCalendar.getTime().toString());
+        serviceHistoryAttributes.startDate().toString(), LocalDate.of(2000, 1, 1).toString());
     Assertions.assertEquals(
-        serviceHistoryAttributes.endDate().toString(), endCalendar.getTime().toString());
+        serviceHistoryAttributes.endDate().toString(), LocalDate.of(2001, 1, 1).toString());
     Assertions.assertEquals(serviceHistoryAttributes.payGrade(), "PayGrade");
     Assertions.assertEquals(
         serviceHistoryAttributes.dischargeStatus(),
-        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);
-    Assertions.assertEquals(
-        serviceHistoryAttributes.separationReason(),
-        ServiceHistoryResponse.ServiceHistoryAttributes.SeparationReason.BUFFER);
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.ThisWillBeRemoved);
+    Assertions.assertEquals(serviceHistoryAttributes.separationReason(), "SeparationReason");
     assertThat(
         serviceHistoryAttributes.deployments().stream().findFirst(),
         samePropertyValuesAs(Arrays.stream(deployments).findFirst()));

@@ -4,8 +4,8 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -22,8 +22,8 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PUBLIC)
 public class ServiceHistoryResponse {
   @NonNull
-  @ArraySchema(schema = @Schema(implementation = ServiceHistoryData.class))
-  public List<ServiceHistoryData> data;
+  @ArraySchema(schema = @Schema(implementation = ServiceHistoryEpisode.class))
+  public List<ServiceHistoryEpisode> data;
 
   @Data
   @Builder
@@ -56,26 +56,23 @@ public class ServiceHistoryResponse {
         description = "Branch of military including National Guard or Reserve status",
         example = "Air Force",
         required = true)
-    @ApiModelProperty(dataType = "java.lang.String")
     String branchOfService;
 
     @Schema(
         name = "start_date",
         description = "start date of a service history episode (YYYY-mm-dd)",
         example = "1948-04-08",
-        format = "Date",
         required = true,
         nullable = true)
-    Date startDate;
+    LocalDate startDate;
 
     @Schema(
         name = "end_date",
-        description = "military episode end date",
-        example = "end date of a service history episode (YYYY-mm-dd)",
-        format = "Date",
+        description = "end date of a service history episode (YYYY-mm-dd)",
+        example = "1950-05-10",
         required = true,
         nullable = true)
-    Date endDate;
+    LocalDate endDate;
 
     @NonNull
     @Schema(
@@ -134,7 +131,7 @@ public class ServiceHistoryResponse {
             "Additional text description for separation reason beyond discharge_status value",
         example = "SUFFICIENT SERVICE FOR RETIREMENT",
         required = true)
-    SeparationReason separationReason;
+    String separationReason;
 
     @NonNull
     @ArraySchema(schema = @Schema(implementation = Deployment.class))
@@ -142,26 +139,22 @@ public class ServiceHistoryResponse {
     List<Deployment> deployments = new ArrayList<>();
 
     public enum DischargeStatus {
-      HONORABLE
-    }
-
-    public enum SeparationReason {
-      BUFFER
+      ThisWillBeRemoved
     }
   }
 
   @Accessors(fluent = true)
-  @Schema(description = "Generic response object for veteran verification calls")
+  @Schema(description = "Service History for authorized Veteran")
   @Data
   @EqualsAndHashCode(callSuper = true)
   @FieldDefaults(level = AccessLevel.PUBLIC)
-  public static class ServiceHistoryData extends AbstractVeteranVerificationData {
+  public static class ServiceHistoryEpisode extends AbstractVeteranVerificationData {
     @Schema(implementation = ServiceHistoryAttributes.class, required = true)
     ServiceHistoryAttributes attributes;
 
     @Builder
-    public ServiceHistoryData(String id, String type, ServiceHistoryAttributes attributes) {
-      super(id, type);
+    public ServiceHistoryEpisode(ServiceHistoryAttributes attributes, String id) {
+      super(id, "service-history-episodes");
       this.attributes = attributes;
     }
   }

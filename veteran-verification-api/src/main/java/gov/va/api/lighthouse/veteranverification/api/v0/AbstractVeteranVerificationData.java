@@ -21,12 +21,11 @@ public class AbstractVeteranVerificationData {
   @NonNull
   @Schema(
       type = "string",
-      description = "Confirmation ICN",
-      example = "1012667145V762142",
+      description = "Service History Episode ID",
+      example = "12312AASDf",
       required = true)
   String id;
 
-  @NonNull
-  @Schema(example = "veteran_status_confirmations", required = true)
+  @Schema(example = "example-endpoint", required = true)
   String type;
 }

@@ -2,7 +2,7 @@ package gov.va.api.lighthouse.veteranverification.api.v0;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.util.Date;
+import java.time.LocalDate;
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -16,29 +16,25 @@ public class Deployment {
 
   @Schema(
       name = "start_date",
-      description = "deployment start date",
-      example = "2000-01-20",
+      description = "beginning of deployment (YYYY-mm-dd)",
+      example = "1948-10-10",
       required = true,
       nullable = true)
-  Date startDate;
+  LocalDate startDate;
 
   @Schema(
       name = "end_date",
-      description = "deployment end date",
-      example = "2001-01-20",
+      description = "end of deployment (YYYY-mm-dd)",
+      example = "1949-10-09",
       required = true,
       nullable = true)
-  Date endDate;
+  LocalDate endDate;
 
   @Schema(
       name = "location",
-      description = "deployment location",
-      example = "AFG",
+      description = "Three letter ISO country code of deployment location",
+      example = "KOR",
       required = true,
       nullable = true)
-  Location location;
-
-  public enum Location {
-    AFG
-  }
+  String location;
 }
