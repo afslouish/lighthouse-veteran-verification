@@ -31,8 +31,7 @@ curl --location --request POST 'http://localhost:8080/v0/status' \
 
 ### Documentation
 ```
-curl --location --request GET 'http://localhost:8080/v0/veteran_confirmation/openapi.json'
-curl --location --request GET 'http://localhost:8080/v0/veteran_confirmation/'
+curl --location --request GET 'http://localhost:8080/v0/docs/veteran_confirmation'
 ```
 
 
@@ -47,6 +46,5 @@ curl --location --request GET 'http://localhost:8080/v0/status/1012667145V762142
 
 ### Documentation
 ```
-curl --location --request GET 'http://localhost:8080/v0/veteran_verification/openapi.json'
-curl --location --request GET 'http://localhost:8080/v0/veteran_verification/'
+curl --location --request GET 'http://localhost:8080/v0/docs/veteran_verification'
 ```
