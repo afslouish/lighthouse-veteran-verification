@@ -24,6 +24,11 @@
   </properties>
   <dependencies>
     <dependency>
+      <groupId>com.github.f4b6a3</groupId>
+      <artifactId>uuid-creator</artifactId>
+      <version>3.7.3</version>
+    </dependency>
+    <dependency>
       <groupId>gov.va.api.health</groupId>
       <artifactId>service-auto-config</artifactId>
     </dependency>
@@ -57,6 +62,18 @@
       <artifactId>mockserver-netty</artifactId>
       <version>${mock-server.version}</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.findbugs</groupId>
+      <artifactId>annotations</artifactId>
+      <version>3.0.1</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.findbugs</groupId>
+      <artifactId>annotations</artifactId>
+      <version>3.0.1</version>
+      <scope>compile</scope>
     </dependency>
   </dependencies>
   <build>
