@@ -1,5 +1,6 @@
 package gov.va.api.lighthouse.veteranverification.service.utils;
 
+import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 import org.apache.commons.lang3.StringUtils;
 
@@ -9,22 +10,38 @@ public class BranchOfServiceStringBuilder {
    * Converts hcaServiceBranch and personnellCategory from emis call into appropriate
    * BranchOfService String.
    *
-   * @param hcaServiceBranch hca_branch_of_service from emis response.
+   * @param branchOfService hca_branch_of_service from emis response.
    * @param personnelCategory personnel_category_type_code from emis response.
    * @return String BranchOfService
    */
-  public String buildBranchOfServiceString(String hcaServiceBranch, String personnelCategory) {
-    String branch;
+  @SneakyThrows
+  public String buildBranchOfServiceString(String branchOfService, String personnelCategory) {
+    String branch = null;
 
-    switch (StringUtils.normalizeSpace(hcaServiceBranch)) {
-      case "noaa":
-        branch = hcaServiceBranch.toUpperCase();
+    switch (StringUtils.normalizeSpace(branchOfService.toUpperCase())) {
+      case "O":
+        branch = "NOAA";
         break;
-      case "usphs":
+      case "H":
         branch = "Public Health Service";
         break;
+      case "A":
+        branch = "Army";
+        break;
+      case "C":
+        branch = "Coast Guard";
+        break;
+      case "F":
+        branch = "Air Force";
+        break;
+      case "M":
+        branch = "Marine Corps";
+        break;
+      case "N":
+        branch = "Navy";
+        break;
       default:
-        branch = toTitleCase(hcaServiceBranch.toLowerCase());
+        throw new Exception("Invalid Branch Of Service");
     }
 
     String category;
