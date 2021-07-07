@@ -34,7 +34,7 @@ public class VeteranStatusVerificationControllerTest {
   void emisInaccessibleWSDLException() {
     VeteranStatusVerificationController controller =
         new VeteranStatusVerificationController(mpiClient, emisClient);
-    TestUtils.setMpiMockResponse(mpiClient, "mpi_profile_response_body.xml");
+    TestUtils.setMpiMockResponse(mpiClient, "mpi/mpi_profile_response_body.xml");
     TestUtils.setEmisResponseException(
         emisClient, new InaccessibleWSDLException(Arrays.asList(new Error(""))));
     Assertions.assertThrows(
@@ -48,7 +48,7 @@ public class VeteranStatusVerificationControllerTest {
   void emisSoapFaultException() {
     VeteranStatusVerificationController controller =
         new VeteranStatusVerificationController(mpiClient, emisClient);
-    TestUtils.setMpiMockResponse(mpiClient, "mpi_profile_response_body.xml");
+    TestUtils.setMpiMockResponse(mpiClient, "mpi/mpi_profile_response_body.xml");
     TestUtils.setEmisResponseException(emisClient, new ServerSOAPFaultException(soapFault));
     VeteranStatusVerification confirmation = controller.veteranStatusVerificationResponse("1111");
     assertThat(confirmation.getData().getAttributes().getVeteranStatus())
@@ -59,7 +59,7 @@ public class VeteranStatusVerificationControllerTest {
   void happyPathConfirmed() {
     VeteranStatusVerificationController controller =
         new VeteranStatusVerificationController(mpiClient, emisClient);
-    TestUtils.setMpiMockResponse(mpiClient, "mpi_profile_icn_response_body.xml");
+    TestUtils.setMpiMockResponse(mpiClient, "mpi/mpi_profile_icn_response_body.xml");
     TestUtils.setEmisMockResponse(
         emisClient,
         VeteranStatus.builder()
@@ -78,7 +78,7 @@ public class VeteranStatusVerificationControllerTest {
   void happyPathRetrieveByEDIPITest() {
     VeteranStatusVerificationController controller =
         new VeteranStatusVerificationController(mpiClient, emisClient);
-    TestUtils.setMpiMockResponse(mpiClient, "mpi_profile_response_body.xml");
+    TestUtils.setMpiMockResponse(mpiClient, "mpi/mpi_profile_response_body.xml");
     TestUtils.setEmisMockResponse(
         emisClient,
         VeteranStatus.builder()
@@ -96,7 +96,7 @@ public class VeteranStatusVerificationControllerTest {
   void happyPathRetrieveByICNTest() {
     VeteranStatusVerificationController controller =
         new VeteranStatusVerificationController(mpiClient, emisClient);
-    TestUtils.setMpiMockResponse(mpiClient, "mpi_profile_icn_response_body.xml");
+    TestUtils.setMpiMockResponse(mpiClient, "mpi/mpi_profile_icn_response_body.xml");
     TestUtils.setEmisMockResponse(
         emisClient,
         VeteranStatus.builder()
@@ -115,7 +115,7 @@ public class VeteranStatusVerificationControllerTest {
   void happyPathRetrieveByICNTestNotConfirmed() {
     VeteranStatusVerificationController controller =
         new VeteranStatusVerificationController(mpiClient, emisClient);
-    TestUtils.setMpiMockResponse(mpiClient, "mpi_profile_response_body.xml");
+    TestUtils.setMpiMockResponse(mpiClient, "mpi/mpi_profile_response_body.xml");
     TestUtils.setEmisMockResponse(
         emisClient,
         VeteranStatus.builder()
@@ -133,7 +133,7 @@ public class VeteranStatusVerificationControllerTest {
   void mpiInvalidRequest() {
     VeteranStatusVerificationController controller =
         new VeteranStatusVerificationController(mpiClient, emisClient);
-    TestUtils.setMpiMockResponse(mpiClient, "mpi_profile_invalid_request_response.xml");
+    TestUtils.setMpiMockResponse(mpiClient, "mpi/mpi_profile_invalid_request_response.xml");
     VeteranStatusVerification status = controller.veteranStatusVerificationResponse("invalid");
     assertThat(status.getData().getAttributes().getVeteranStatus()).isEqualTo("not confirmed");
   }
@@ -151,7 +151,7 @@ public class VeteranStatusVerificationControllerTest {
   void mpiProfileNotFound() {
     VeteranStatusVerificationController controller =
         new VeteranStatusVerificationController(mpiClient, emisClient);
-    TestUtils.setMpiMockResponse(mpiClient, "mpi_profile_not_found_response.xml");
+    TestUtils.setMpiMockResponse(mpiClient, "mpi/mpi_profile_not_found_response.xml");
     VeteranStatusVerification status = controller.veteranStatusVerificationResponse("not_found");
     assertThat(status.getData().getAttributes().getVeteranStatus()).isEqualTo("not confirmed");
   }
@@ -172,7 +172,7 @@ public class VeteranStatusVerificationControllerTest {
   void nullEmisResponse() {
     VeteranStatusVerificationController controller =
         new VeteranStatusVerificationController(mpiClient, emisClient);
-    TestUtils.setMpiMockResponse(mpiClient, "mpi_profile_response_body.xml");
+    TestUtils.setMpiMockResponse(mpiClient, "mpi/mpi_profile_response_body.xml");
     TestUtils.setEmisMockResponse(emisClient, null);
     VeteranStatusVerification status = controller.veteranStatusVerificationResponse("1111");
     assertThat(status.getData().getAttributes().getVeteranStatus()).isEqualTo("not confirmed");

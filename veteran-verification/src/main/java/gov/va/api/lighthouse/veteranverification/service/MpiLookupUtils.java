@@ -16,6 +16,11 @@ public class MpiLookupUtils {
 
   private static final String EDIPI_LOOKUP_VALUE = "^NI^200DOD^USDOD^A";
 
+  public static String getFirstName(PRPAIN201306UV02 mpiResponse) {
+    // TODO implement
+    return "John";
+  }
+
   /** Loop through list of patient's IDs in search of one that matches lookup pattern. */
   public static String getId(PRPAMT201310UV02Patient patient, String lookup) {
     if (patient == null || patient.getId().isEmpty() || patient.getId() == null) {
@@ -62,5 +67,10 @@ public class MpiLookupUtils {
           .build();
     }
     return null;
+  }
+
+  public static String getLastName(PRPAIN201306UV02 mpiResponse) {
+    // TODO implement
+    return "Doe";
   }
 }
