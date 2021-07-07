@@ -8,7 +8,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
-
 import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 import org.hl7.v3.PRPAIN201306UV02;
@@ -35,9 +34,14 @@ public class MilitaryServiceEpisodeAttributeBuilder {
             serviceEpisode.getMilitaryServiceEpisodeData().getServiceEpisodeStartDate().toString(),
             dateTimeFormatter);
     LocalDate endDate =
-        LocalDate.parse(
-            serviceEpisode.getMilitaryServiceEpisodeData().getServiceEpisodeEndDate().toString(),
-            dateTimeFormatter);
+        serviceEpisode.getMilitaryServiceEpisodeData().getServiceEpisodeEndDate() == null
+            ? null
+            : LocalDate.parse(
+                serviceEpisode
+                    .getMilitaryServiceEpisodeData()
+                    .getServiceEpisodeEndDate()
+                    .toString(),
+                dateTimeFormatter);
 
     return ServiceHistoryResponse.ServiceHistoryAttributes.builder()
         .firstName(MpiLookupUtils.getFirstName(mpiResponse))

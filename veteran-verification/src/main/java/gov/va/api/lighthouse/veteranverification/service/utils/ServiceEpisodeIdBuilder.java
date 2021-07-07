@@ -4,7 +4,6 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.time.LocalDate;
 import java.util.Objects;
 import java.util.UUID;
 import lombok.experimental.UtilityClass;
@@ -20,16 +19,15 @@ public class ServiceEpisodeIdBuilder {
    * @param endDate Service episode end date.
    * @return Service episode uuid5 id.
    */
-  public String buildServiceEpisodeId(String uuid, LocalDate beginDate, LocalDate endDate) {
-    String beginDateStr = beginDate.toString().trim();
-    return uuidv5(
-        "gov.vets.service-history-episodes",
-        String.format("%s-%s-%s", uuid.trim(), beginDateStr, endDate.toString().trim()));
+  public String buildServiceEpisodeId(String uuid, String beginDate, String endDate) {
+    return uuidv5(String.format("%s-%s-%s", uuid.trim(), beginDate, endDate));
   }
 
-  private String uuidv5(String nameSpace, String str) {
-    String sha1 = org.apache.commons.codec.digest.DigestUtils.sha1Hex(nameSpace);
-    return UuidType5.nameUuidFromNamespaceAndString(UUID.fromString(sha1), str).toString();
+  private String uuidv5(String str) {
+    // String sha1 = org.apache.commons.codec.digest.DigestUtils.sha1Hex(nameSpace);
+    return UuidType5.nameUuidFromNamespaceAndString(
+            UUID.fromString("6ba7b810-9dad-11d1-80b4-00c04fd430c8"), str)
+        .toString();
   }
 
   public static class UuidType5 {

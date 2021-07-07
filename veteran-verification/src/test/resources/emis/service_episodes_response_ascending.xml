@@ -8,8 +8,8 @@
       <NS7:personnelSegmentIdentifier>1</NS7:personnelSegmentIdentifier>
     </NS7:keyData>
     <NS8:militaryServiceEpisodeData xmlns:NS8="http://viers.va.gov/cdi/eMIS/commonService/v2">
-      <NS8:serviceEpisodeStartDate>2000-12-05</NS8:serviceEpisodeStartDate>
-      <NS8:serviceEpisodeEndDate>2004-04-05</NS8:serviceEpisodeEndDate>
+      <NS8:serviceEpisodeStartDate>2000-01-01</NS8:serviceEpisodeStartDate>
+      <NS8:serviceEpisodeEndDate>2001-02-01</NS8:serviceEpisodeEndDate>
       <NS8:serviceEpisodeTerminationReason>S</NS8:serviceEpisodeTerminationReason>
       <NS8:branchOfServiceCode>A</NS8:branchOfServiceCode>
       <NS8:retirementTypeCode>B</NS8:retirementTypeCode>
@@ -25,8 +25,8 @@
       <NS8:payGradeCode>05</NS8:payGradeCode>
       <NS8:mgadLossCategoryCode>08</NS8:mgadLossCategoryCode>
       <NS8:activeDutyServiceAgreementQuantity>5</NS8:activeDutyServiceAgreementQuantity>
-      <NS8:initialEntryTrainingEndDate>2000-05-30</NS8:initialEntryTrainingEndDate>
-      <NS8:uniformServiceInitialEntryDate>2001-07-01</NS8:uniformServiceInitialEntryDate>
+      <NS8:initialEntryTrainingEndDate>2000-01-01</NS8:initialEntryTrainingEndDate>
+      <NS8:uniformServiceInitialEntryDate>2001-02-01</NS8:uniformServiceInitialEntryDate>
       <NS8:militaryAccessionSourceCode>00</NS8:militaryAccessionSourceCode>
       <NS8:personnelBeginDateSource>7</NS8:personnelBeginDateSource>
       <NS8:personnelTerminationDateSourceCode>8</NS8:personnelTerminationDateSourceCode>
@@ -44,8 +44,8 @@
       <NS11:personnelSegmentIdentifier>1</NS11:personnelSegmentIdentifier>
     </NS11:keyData>
     <NS12:militaryServiceEpisodeData xmlns:NS12="http://viers.va.gov/cdi/eMIS/commonService/v2">
-      <NS12:serviceEpisodeStartDate>2000-02-01</NS12:serviceEpisodeStartDate>
-      <NS12:serviceEpisodeEndDate>2004-06-14</NS12:serviceEpisodeEndDate>
+      <NS12:serviceEpisodeStartDate>2002-01-01</NS12:serviceEpisodeStartDate>
+      <NS12:serviceEpisodeEndDate>2003-02-01</NS12:serviceEpisodeEndDate>
       <NS12:serviceEpisodeTerminationReason>S</NS12:serviceEpisodeTerminationReason>
       <NS12:branchOfServiceCode>F</NS12:branchOfServiceCode>
       <NS12:retirementTypeCode>B</NS12:retirementTypeCode>
@@ -61,8 +61,8 @@
       <NS12:payGradeCode>05</NS12:payGradeCode>
       <NS12:mgadLossCategoryCode>08</NS12:mgadLossCategoryCode>
       <NS12:activeDutyServiceAgreementQuantity>3</NS12:activeDutyServiceAgreementQuantity>
-      <NS12:initialEntryTrainingEndDate>1985-05-30</NS12:initialEntryTrainingEndDate>
-      <NS12:uniformServiceInitialEntryDate>1984-07-01</NS12:uniformServiceInitialEntryDate>
+      <NS12:initialEntryTrainingEndDate>2002-01-01</NS12:initialEntryTrainingEndDate>
+      <NS12:uniformServiceInitialEntryDate>2003-02-01</NS12:uniformServiceInitialEntryDate>
       <NS12:militaryAccessionSourceCode>00</NS12:militaryAccessionSourceCode>
       <NS12:personnelBeginDateSource>7</NS12:personnelBeginDateSource>
       <NS12:personnelTerminationDateSourceCode>8</NS12:personnelTerminationDateSourceCode>
