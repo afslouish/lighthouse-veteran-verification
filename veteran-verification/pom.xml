@@ -21,11 +21,17 @@
     <emis-client-v1.version>2.0.0</emis-client-v1.version>
     <emis-model.version>2.0.0</emis-model.version>
     <mock-server.version>5.11.2</mock-server.version>
+    <bgs-client.version>2.0.0-SNAPSHOT</bgs-client.version>
   </properties>
   <dependencies>
     <dependency>
       <groupId>gov.va.api.health</groupId>
       <artifactId>service-auto-config</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>gov.va.api.lighthouse</groupId>
+      <artifactId>bgs-client</artifactId>
+      <version>${bgs-client.version}</version>
     </dependency>
     <dependency>
       <groupId>gov.va.api.lighthouse</groupId>

@@ -3,10 +3,14 @@ package gov.va.api.lighthouse.veteranverification.service;
 import static org.apache.tomcat.util.http.fileupload.util.Streams.asString;
 import static org.mockito.BDDMockito.given;
 
+import gov.va.api.lighthouse.bgs.BenefitsGatewayServicesClient;
+import gov.va.api.lighthouse.bgs.BgsConfig;
 import gov.va.api.lighthouse.emis.EmisConfigV1;
 import gov.va.api.lighthouse.emis.EmisVeteranStatusServiceClient;
 import gov.va.api.lighthouse.mpi.MasterPatientIndexClient;
 import gov.va.api.lighthouse.mpi.MpiConfig;
+import gov.va.vba.benefits.share.services.FindRatingDataResponse;
+import gov.va.vba.benefits.share.services.RatingRecord;
 import gov.va.viers.cdi.emis.commonservice.v1.VeteranStatus;
 import gov.va.viers.cdi.emis.requestresponse.v1.EMISveteranStatusResponseType;
 import java.io.StringReader;
@@ -21,6 +25,10 @@ import org.mockito.Mockito;
 
 @UtilityClass
 public class TestUtils {
+  private FindRatingDataResponse createBgsResponse(RatingRecord ratingRecord) {
+    return FindRatingDataResponse.builder()._return(ratingRecord).build();
+  }
+
   private EMISveteranStatusResponseType createEmisResponse(VeteranStatus veteranStatus) {
     return EMISveteranStatusResponseType.builder().veteranStatus(veteranStatus).build();
   }
@@ -32,6 +40,18 @@ public class TestUtils {
         .createUnmarshaller()
         .unmarshal(new StreamSource(new StringReader(profile)), PRPAIN201306UV02.class)
         .getValue();
+  }
+
+  public BgsConfig makeBgsConfig() {
+    return BgsConfig.builder()
+        .keyAlias("fake")
+        .url("http://localhost:2021")
+        .wsdlLocation("http://localhost:2021")
+        .keystorePath("src/test/resources/fakekeystore.jks")
+        .keystorePassword("secret")
+        .truststorePath("src/test/resources/faketruststore.jks")
+        .truststorePassword("secret")
+        .build();
   }
 
   public EmisConfigV1 makeEmisConfig() {
@@ -59,6 +79,12 @@ public class TestUtils {
         .truststorePath("src/test/resources/faketruststore.jks")
         .truststorePassword("secret")
         .build();
+  }
+
+  public void setBgsMockResponse(
+      @Mock BenefitsGatewayServicesClient bgsClient, RatingRecord ratingRecord) {
+    FindRatingDataResponse response = createBgsResponse(ratingRecord);
+    Mockito.when(bgsClient.ratingServiceRequest(ArgumentMatchers.any())).thenReturn(response);
   }
 
   public void setEmisMockResponse(
