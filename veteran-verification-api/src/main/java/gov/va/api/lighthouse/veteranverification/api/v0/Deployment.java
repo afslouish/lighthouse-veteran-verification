@@ -9,7 +9,7 @@ import lombok.experimental.Accessors;
 
 @Data
 @Builder
-@Accessors(fluent = false)
+@Accessors(fluent = true)
 @Schema(type = "Object", description = "military episode deployment")
 @SuppressFBWarnings({"EI_EXPOSE_REP2", "EI_EXPOSE_REP"})
 public class Deployment {
