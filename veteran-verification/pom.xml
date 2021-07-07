@@ -44,6 +44,11 @@
     </dependency>
     <dependency>
       <groupId>gov.va.api.lighthouse</groupId>
+      <artifactId>emis-client-v2</artifactId>
+      <version>${emis-client-v1.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>gov.va.api.lighthouse</groupId>
       <artifactId>emis-model</artifactId>
       <version>${emis-model.version}</version>
     </dependency>
