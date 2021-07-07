@@ -152,6 +152,13 @@ public class BranchOfServiceStringBuilderTest {
   }
 
   @Test
+  public void happyPathOtherBranchOfService() {
+    String expected = "Other";
+    String actual = BranchOfServiceStringBuilder.buildBranchOfServiceString("P", "V");
+    Assertions.assertEquals(expected, actual);
+  }
+
+  @Test
   public void happyPathUsphsNationalGuard() {
     String expected = "Public Health Service National Guard";
     String actual = BranchOfServiceStringBuilder.buildBranchOfServiceString("H", "N");
@@ -177,14 +184,5 @@ public class BranchOfServiceStringBuilderTest {
     String expected = "Public Health Service Reserve";
     String actual = BranchOfServiceStringBuilder.buildBranchOfServiceString("H", "V");
     Assertions.assertEquals(expected, actual);
-  }
-
-  @Test
-  public void invalidBranchOfService() {
-    Assertions.assertThrows(
-        Exception.class,
-        () -> {
-          BranchOfServiceStringBuilder.buildBranchOfServiceString("P", "V");
-        });
   }
 }
