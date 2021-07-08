@@ -77,7 +77,7 @@ public class ServiceHistoryAttributesTest {
     Assertions.assertEquals(serviceHistoryAttributes.payGrade(), "PayGrade");
     Assertions.assertEquals(
         serviceHistoryAttributes.dischargeStatus(),
-        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.ThisWillBeRemoved);
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);
     Assertions.assertEquals(serviceHistoryAttributes.separationReason(), "SeparationReason");
     assertThat(
         serviceHistoryAttributes.deployments().stream().findFirst(),

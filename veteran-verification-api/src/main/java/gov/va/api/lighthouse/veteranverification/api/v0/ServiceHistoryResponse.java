@@ -12,6 +12,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
+import lombok.SneakyThrows;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldDefaults;
 
@@ -138,12 +139,68 @@ public class ServiceHistoryResponse {
     @Builder.Default
     List<Deployment> deployments = new ArrayList<>();
 
-    public enum DischargeStatus
-        implements gov.va.api.lighthouse.veteranverification.api.v0.DischargeStatus {
-      ThisWillBeRemoved;
+    public enum DischargeStatus {
+      HONORABLE("honorable"),
+      GENERAL("general"),
+      BAD_CONDUCT("bad-conduct"),
+      OTHER_THAN_HONORABLE("other-than-honorable"),
+      DISHONORABLE("dishonorable"),
+      HONORABLE_ABSENCE_OF_NEGATIVE_REPORT("honorable-absence-of-negative-report"),
+      HONORABLE_FOR_VA_PURPOSES("honorable-for-va-purposes"),
+      DISHONORABLE_FOR_VA_PURPOSES("dishonorable-for-va-purposes"),
+      UNCHARACTERIZED("uncharacterized"),
+      UNKNOWN("unknown");
 
+      String description;
+
+      DischargeStatus(String description) {
+        this.description = description;
+      }
+
+      @SneakyThrows
       public static DischargeStatus codeToEnum(String statusCode) {
-        return ThisWillBeRemoved;
+        DischargeStatus status;
+        switch (statusCode.toUpperCase()) {
+          case "A":
+            status = DischargeStatus.HONORABLE;
+            break;
+          case "B":
+            status = DischargeStatus.GENERAL;
+            break;
+          case "D":
+            status = DischargeStatus.BAD_CONDUCT;
+            break;
+          case "E":
+            status = DischargeStatus.OTHER_THAN_HONORABLE;
+            break;
+          case "F":
+            status = DischargeStatus.DISHONORABLE;
+            break;
+          case "H":
+            status = DischargeStatus.HONORABLE_ABSENCE_OF_NEGATIVE_REPORT;
+            break;
+          case "J":
+            status = DischargeStatus.HONORABLE_FOR_VA_PURPOSES;
+            break;
+          case "K":
+            status = DischargeStatus.DISHONORABLE_FOR_VA_PURPOSES;
+            break;
+          case "Y":
+            status = DischargeStatus.UNCHARACTERIZED;
+            break;
+          case "Z":
+            status = DischargeStatus.UNKNOWN;
+            break;
+          default:
+            // Or should this be unknown
+            throw new Exception("Invalid Discharge Status Code");
+        }
+        return status;
+      }
+
+      @Override
+      public String toString() {
+        return this.description;
       }
     }
   }

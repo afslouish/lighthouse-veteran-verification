@@ -1,0 +1,126 @@
+package gov.va.api.lighthouse.veteranverification.api;
+
+import gov.va.api.lighthouse.veteranverification.api.v0.ServiceHistoryResponse;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+public class DischargeStatusTest {
+  @Test
+  public void BadCode() {
+    Assertions.assertThrows(
+        Exception.class,
+        () -> {
+          ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.codeToEnum("R");
+        });
+  }
+
+  @Test
+  public void HappyPathBadConduct() {
+    ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus dischargeStatus =
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.codeToEnum("D");
+    Assertions.assertEquals(
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.BAD_CONDUCT,
+        dischargeStatus);
+    Assertions.assertEquals("bad-conduct", dischargeStatus.toString());
+  }
+
+  @Test
+  public void HappyPathDishonorable() {
+    ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus dischargeStatus =
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.codeToEnum("F");
+    Assertions.assertEquals(
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.DISHONORABLE,
+        dischargeStatus);
+    Assertions.assertEquals("dishonorable", dischargeStatus.toString());
+  }
+
+  @Test
+  public void HappyPathDishonorableForVaPurposes() {
+    ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus dischargeStatus =
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.codeToEnum("K");
+    Assertions.assertEquals(
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus
+            .DISHONORABLE_FOR_VA_PURPOSES,
+        dischargeStatus);
+    Assertions.assertEquals("dishonorable-for-va-purposes", dischargeStatus.toString());
+  }
+
+  @Test
+  public void HappyPathGeneral() {
+    ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus dischargeStatus =
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.codeToEnum("B");
+    Assertions.assertEquals(
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.GENERAL, dischargeStatus);
+    Assertions.assertEquals("general", dischargeStatus.toString());
+  }
+
+  @Test
+  public void HappyPathHonorable() {
+    ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus dischargeStatus =
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.codeToEnum("A");
+    Assertions.assertEquals(
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE, dischargeStatus);
+    Assertions.assertEquals("honorable", dischargeStatus.toString());
+  }
+
+  @Test
+  public void HappyPathHonorableAbsenceOfNegativeReport() {
+    ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus dischargeStatus =
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.codeToEnum("H");
+    Assertions.assertEquals(
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus
+            .HONORABLE_ABSENCE_OF_NEGATIVE_REPORT,
+        dischargeStatus);
+    Assertions.assertEquals("honorable-absence-of-negative-report", dischargeStatus.toString());
+  }
+
+  @Test
+  public void HappyPathHonorableForVaPurposes() {
+    ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus dischargeStatus =
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.codeToEnum("J");
+    Assertions.assertEquals(
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE_FOR_VA_PURPOSES,
+        dischargeStatus);
+    Assertions.assertEquals("honorable-for-va-purposes", dischargeStatus.toString());
+  }
+
+  @Test
+  public void HappyPathLowerCaseCode() {
+    ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus dischargeStatus =
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.codeToEnum("k");
+    Assertions.assertEquals(
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus
+            .DISHONORABLE_FOR_VA_PURPOSES,
+        dischargeStatus);
+    Assertions.assertEquals("dishonorable-for-va-purposes", dischargeStatus.toString());
+  }
+
+  @Test
+  public void HappyPathOtherThanHonorable() {
+    ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus dischargeStatus =
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.codeToEnum("E");
+    Assertions.assertEquals(
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.OTHER_THAN_HONORABLE,
+        dischargeStatus);
+    Assertions.assertEquals("other-than-honorable", dischargeStatus.toString());
+  }
+
+  @Test
+  public void HappyPathUncharacterized() {
+    ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus dischargeStatus =
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.codeToEnum("Y");
+    Assertions.assertEquals(
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.UNCHARACTERIZED,
+        dischargeStatus);
+    Assertions.assertEquals("uncharacterized", dischargeStatus.toString());
+  }
+
+  @Test
+  public void HappyPathUnknown() {
+    ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus dischargeStatus =
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.codeToEnum("Z");
+    Assertions.assertEquals(
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.UNKNOWN, dischargeStatus);
+    Assertions.assertEquals("unknown", dischargeStatus.toString());
+  }
+}

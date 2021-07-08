@@ -30,7 +30,7 @@ public class MilitaryServiceEpisodeAttributeBuilderTest {
     Assertions.assertEquals(attribute.payGrade(), "05");
     Assertions.assertEquals(
         attribute.dischargeStatus(),
-        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.ThisWillBeRemoved);
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);
     Assertions.assertEquals(attribute.separationReason(), "SUFFICIENT SERVICE FOR RETIREMENT");
     Assertions.assertEquals(attribute.deployments().size(), 1);
     Assertions.assertSame(attribute.deployments.get(0), deployments.get(1));
@@ -54,7 +54,7 @@ public class MilitaryServiceEpisodeAttributeBuilderTest {
     Assertions.assertEquals(attribute.payGrade(), "05");
     Assertions.assertEquals(
         attribute.dischargeStatus(),
-        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.ThisWillBeRemoved);
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);
     Assertions.assertEquals(attribute.separationReason(), "SUFFICIENT SERVICE FOR RETIREMENT");
     Assertions.assertEquals(attribute.deployments().size(), 0);
   }

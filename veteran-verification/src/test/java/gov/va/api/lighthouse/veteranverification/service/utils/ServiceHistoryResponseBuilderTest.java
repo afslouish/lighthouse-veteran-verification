@@ -36,7 +36,7 @@ public class ServiceHistoryResponseBuilderTest {
     Assertions.assertEquals(attributesOne.payGrade(), "05");
     Assertions.assertEquals(
         attributesOne.dischargeStatus(),
-        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.ThisWillBeRemoved);
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);
     Assertions.assertEquals(attributesOne.separationReason(), "SUFFICIENT SERVICE FOR RETIREMENT");
     Assertions.assertEquals(attributesOne.deployments().stream().count(), 1);
     Assertions.assertEquals(
@@ -51,7 +51,7 @@ public class ServiceHistoryResponseBuilderTest {
     Assertions.assertEquals(attributesTwo.payGrade(), "05");
     Assertions.assertEquals(
         attributesTwo.dischargeStatus(),
-        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.ThisWillBeRemoved);
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);
     Assertions.assertEquals(attributesTwo.separationReason(), "SUFFICIENT SERVICE FOR RETIREMENT");
     Assertions.assertEquals(attributesTwo.deployments().stream().count(), 1);
     Assertions.assertEquals(
@@ -87,7 +87,7 @@ public class ServiceHistoryResponseBuilderTest {
     Assertions.assertEquals(attributesOne.payGrade(), "05");
     Assertions.assertEquals(
         attributesOne.dischargeStatus(),
-        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.ThisWillBeRemoved);
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);
     Assertions.assertEquals(attributesOne.separationReason(), "SUFFICIENT SERVICE FOR RETIREMENT");
     Assertions.assertEquals(attributesOne.deployments().stream().count(), 1);
     Assertions.assertEquals(
@@ -102,7 +102,7 @@ public class ServiceHistoryResponseBuilderTest {
     Assertions.assertEquals(attributesTwo.payGrade(), "05");
     Assertions.assertEquals(
         attributesTwo.dischargeStatus(),
-        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.ThisWillBeRemoved);
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);
     Assertions.assertEquals(attributesTwo.separationReason(), "SUFFICIENT SERVICE FOR RETIREMENT");
     Assertions.assertEquals(attributesTwo.deployments().stream().count(), 1);
     Assertions.assertEquals(
@@ -203,7 +203,7 @@ public class ServiceHistoryResponseBuilderTest {
     Assertions.assertEquals(attributesOne.payGrade(), "05");
     Assertions.assertEquals(
         attributesOne.dischargeStatus(),
-        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.ThisWillBeRemoved);
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);
     Assertions.assertEquals(attributesOne.separationReason(), "SUFFICIENT SERVICE FOR RETIREMENT");
     Assertions.assertEquals(attributesOne.deployments().stream().count(), 4);
     Assertions.assertEquals(
@@ -234,7 +234,7 @@ public class ServiceHistoryResponseBuilderTest {
     Assertions.assertEquals(attributesTwo.payGrade(), "05");
     Assertions.assertEquals(
         attributesTwo.dischargeStatus(),
-        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.ThisWillBeRemoved);
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);
     Assertions.assertEquals(attributesTwo.separationReason(), "SUFFICIENT SERVICE FOR RETIREMENT");
     Assertions.assertEquals(attributesTwo.deployments().stream().count(), 1);
     Assertions.assertEquals(
@@ -275,7 +275,7 @@ public class ServiceHistoryResponseBuilderTest {
     Assertions.assertEquals(attributesOne.payGrade(), "05");
     Assertions.assertEquals(
         attributesOne.dischargeStatus(),
-        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.ThisWillBeRemoved);
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);
     Assertions.assertEquals(attributesOne.separationReason(), "SUFFICIENT SERVICE FOR RETIREMENT");
     Assertions.assertEquals(attributesOne.deployments().stream().count(), 4);
     Assertions.assertEquals(
@@ -303,7 +303,7 @@ public class ServiceHistoryResponseBuilderTest {
     Assertions.assertEquals(attributesTwo.payGrade(), "05");
     Assertions.assertEquals(
         attributesTwo.dischargeStatus(),
-        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.ThisWillBeRemoved);
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);
     Assertions.assertEquals(attributesTwo.separationReason(), "SUFFICIENT SERVICE FOR RETIREMENT");
     Assertions.assertEquals(attributesTwo.deployments().stream().count(), 1);
     Assertions.assertEquals(

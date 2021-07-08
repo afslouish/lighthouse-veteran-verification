@@ -8,8 +8,7 @@ import org.junit.jupiter.api.Test;
 
 public class VeteranVerificationConfigTest {
   private final VeteranVerificationConfig veteranVerificationConfig =
-      new VeteranVerificationConfig(
-          TestUtils.makeMpiConfig(), TestUtils.makeEmisConfig(), TestUtils.makeEmisV2Config());
+      new VeteranVerificationConfig(TestUtils.makeMpiConfig(), TestUtils.makeEmisConfig());
 
   @Test
   void emisClient() {
