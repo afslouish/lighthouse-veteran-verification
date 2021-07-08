@@ -27,7 +27,7 @@ public class MilitaryServiceEpisodeAttributeBuilderTest {
     Assertions.assertEquals(attribute.branchOfService(), "Air Force");
     Assertions.assertTrue(attribute.startDate().equals(LocalDate.of(2002, 1, 1)));
     Assertions.assertTrue(attribute.endDate().equals(LocalDate.of(2003, 2, 1)));
-    Assertions.assertEquals(attribute.payGrade(), "05");
+    Assertions.assertEquals(attribute.payGrade(), "E05");
     Assertions.assertEquals(
         attribute.dischargeStatus(),
         ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);
@@ -51,7 +51,7 @@ public class MilitaryServiceEpisodeAttributeBuilderTest {
     Assertions.assertEquals(attribute.branchOfService(), "Air Force");
     Assertions.assertTrue(attribute.startDate().equals(LocalDate.of(2002, 1, 1)));
     Assertions.assertTrue(attribute.endDate().equals(LocalDate.of(2003, 2, 1)));
-    Assertions.assertEquals(attribute.payGrade(), "05");
+    Assertions.assertEquals(attribute.payGrade(), "E05");
     Assertions.assertEquals(
         attribute.dischargeStatus(),
         ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);

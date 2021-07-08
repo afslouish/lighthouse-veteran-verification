@@ -5,14 +5,14 @@ import lombok.experimental.UtilityClass;
 import org.apache.commons.lang3.StringUtils;
 
 @UtilityClass
-public class BranchOfServiceStringBuilder {
+public class ServiceHistoryUtils {
   /**
-   * Converts hcaServiceBranch and personnellCategory from emis call into appropriate
+   * Converts branch of service code and personnellCategory from emis call into appropriate
    * BranchOfService String.
    *
-   * @param branchOfService hca_branch_of_service from emis response.
+   * @param branchOfService branch of service code from emis response.
    * @param personnelCategory personnel_category_type_code from emis response.
-   * @return String BranchOfService
+   * @return String BranchOfService.
    */
   @SneakyThrows
   public String buildBranchOfServiceString(String branchOfService, String personnelCategory) {
@@ -58,5 +58,27 @@ public class BranchOfServiceStringBuilder {
         category = "";
     }
     return StringUtils.normalizeSpace(String.format("%s %s", branch, category));
+  }
+
+  /**
+   * Builds payGrade string from payPlanCode and payGradeCode.
+   *
+   * @param payPlanCode payPlanCode from emis response.
+   * @param payGradeCode payGradeCode from emis response.
+   * @return String payGrade
+   */
+  public String buildPayGradeString(String payPlanCode, String payGradeCode) {
+    if (payPlanCode == null
+        || payPlanCode.trim().isEmpty()
+        || payGradeCode == null
+        || payGradeCode.trim().isEmpty()) {
+      return "unknown";
+    }
+
+    return StringUtils.normalizeSpace(
+        String.format(
+            "%s%s",
+            StringUtils.normalizeSpace(payPlanCode).charAt(1),
+            StringUtils.normalizeSpace(payGradeCode)));
   }
 }

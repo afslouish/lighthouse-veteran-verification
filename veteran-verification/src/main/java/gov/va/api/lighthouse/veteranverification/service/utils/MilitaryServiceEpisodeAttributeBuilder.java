@@ -47,12 +47,15 @@ public class MilitaryServiceEpisodeAttributeBuilder {
         .firstName(MpiLookupUtils.getFirstName(mpiResponse))
         .lastName(MpiLookupUtils.getLastName(mpiResponse))
         .branchOfService(
-            BranchOfServiceStringBuilder.buildBranchOfServiceString(
+            ServiceHistoryUtils.buildBranchOfServiceString(
                 serviceEpisode.getMilitaryServiceEpisodeData().getBranchOfServiceCode(),
                 serviceEpisode.getKeyData().getPersonnelCategoryTypeCode()))
         .startDate(startDate)
         .endDate(endDate)
-        .payGrade(serviceEpisode.getMilitaryServiceEpisodeData().getPayGradeCode())
+        .payGrade(
+            ServiceHistoryUtils.buildPayGradeString(
+                serviceEpisode.getMilitaryServiceEpisodeData().getPayPlanCode(),
+                serviceEpisode.getMilitaryServiceEpisodeData().getPayGradeCode()))
         .dischargeStatus(
             ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.codeToEnum(
                 serviceEpisode
