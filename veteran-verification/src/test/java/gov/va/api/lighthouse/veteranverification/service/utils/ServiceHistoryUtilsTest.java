@@ -32,7 +32,6 @@ public class ServiceHistoryUtilsTest {
         .build()
   };
 
-  // buildBranchOfServiceString tests
   @Test
   public void buildBranchOrServiceHappyPathAirForceNationalGuard() {
     String expected = "Air Force National Guard";
