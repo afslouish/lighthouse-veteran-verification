@@ -5,13 +5,13 @@ import static org.mockito.BDDMockito.given;
 
 import gov.va.api.lighthouse.emis.EmisConfigV1;
 import gov.va.api.lighthouse.emis.EmisConfigV2;
-import gov.va.api.lighthouse.emis.EmisMilitaryInformationServiceClient;
 import gov.va.api.lighthouse.emis.EmisVeteranStatusServiceClient;
 import gov.va.api.lighthouse.mpi.MasterPatientIndexClient;
 import gov.va.api.lighthouse.mpi.MpiConfig;
 import gov.va.api.lighthouse.veteranverification.api.v0.Deployment;
 import gov.va.viers.cdi.emis.commonservice.v1.VeteranStatus;
 import gov.va.viers.cdi.emis.requestresponse.v1.EMISveteranStatusResponseType;
+import gov.va.viers.cdi.emis.requestresponse.v2.EMISdeploymentResponseType;
 import gov.va.viers.cdi.emis.requestresponse.v2.EMISserviceEpisodeResponseType;
 import java.io.StringReader;
 import java.time.LocalDate;
@@ -26,29 +26,37 @@ import org.mockito.Mockito;
 
 @UtilityClass
 public class TestUtils {
-
   public Deployment[] deploymentArray = {
     Deployment.builder()
         .location("AFG")
-        .startDate(LocalDate.of(2000, 1, 1))
+        .startDate(LocalDate.of(2000, 2, 1))
         .endDate(LocalDate.of(2001, 1, 1))
         .build(),
     Deployment.builder()
         .location("AFG")
-        .startDate(LocalDate.of(2002, 1, 1))
+        .startDate(LocalDate.of(2002, 2, 1))
         .endDate(LocalDate.of(2003, 1, 1))
         .build(),
     Deployment.builder()
         .location("AFG")
-        .startDate(LocalDate.of(2004, 1, 1))
+        .startDate(LocalDate.of(2004, 2, 1))
         .endDate(LocalDate.of(2005, 1, 1))
         .build(),
     Deployment.builder()
         .location("AFG")
-        .startDate(LocalDate.of(2006, 1, 1))
+        .startDate(LocalDate.of(2006, 2, 1))
         .endDate(LocalDate.of(2007, 1, 1))
         .build()
   };
+
+  @SneakyThrows
+  public EMISdeploymentResponseType createDeploymentResponse(String filename) {
+    String profile = asString(TestUtils.class.getClassLoader().getResourceAsStream(filename));
+    return JAXBContext.newInstance(EMISdeploymentResponseType.class)
+        .createUnmarshaller()
+        .unmarshal(new StreamSource(new StringReader(profile)), EMISdeploymentResponseType.class)
+        .getValue();
+  }
 
   private EMISveteranStatusResponseType createEmisResponse(VeteranStatus veteranStatus) {
     return EMISveteranStatusResponseType.builder().veteranStatus(veteranStatus).build();
@@ -125,12 +133,6 @@ public class TestUtils {
             invocation -> {
               throw e;
             });
-  }
-
-  public void setMockServiceHistoryResponse(
-      @Mock EmisMilitaryInformationServiceClient emisClient, String filename) {
-    EMISserviceEpisodeResponseType response = createServiceHistoryResponse(filename);
-    Mockito.when(emisClient.serviceEpisodesRequest(ArgumentMatchers.any())).thenReturn(response);
   }
 
   @SneakyThrows

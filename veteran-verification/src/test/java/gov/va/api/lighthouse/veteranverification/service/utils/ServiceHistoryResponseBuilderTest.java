@@ -215,15 +215,15 @@ public class ServiceHistoryResponseBuilderTest {
     Assertions.assertEquals(attributesOne.deployments().get(1).endDate().toString(), "2003-01-01");
     Assertions.assertEquals(attributesOne.deployments().get(1).location(), "QAT");
     Assertions.assertEquals(
-            attributesOne.deployments().get(1).startDate().toString(), "2000-03-01");
+        attributesOne.deployments().get(1).startDate().toString(), "2000-03-01");
     Assertions.assertEquals(attributesOne.deployments().get(1).endDate().toString(), "2003-01-01");
     Assertions.assertEquals(attributesOne.deployments().get(1).location(), "QAT");
     Assertions.assertEquals(
-            attributesOne.deployments().get(2).startDate().toString(), "2004-02-01");
+        attributesOne.deployments().get(2).startDate().toString(), "2004-02-01");
     Assertions.assertEquals(attributesOne.deployments().get(2).endDate().toString(), "2005-01-01");
     Assertions.assertEquals(attributesOne.deployments().get(2).location(), "AX1");
     Assertions.assertEquals(
-            attributesOne.deployments().get(3).startDate().toString(), "2006-02-01");
+        attributesOne.deployments().get(3).startDate().toString(), "2006-02-01");
     Assertions.assertEquals(attributesOne.deployments().get(3).endDate().toString(), "2007-01-01");
     Assertions.assertEquals(attributesOne.deployments().get(3).location(), "AX1");
     Assertions.assertEquals(attributesTwo.firstName(), "John");
@@ -287,11 +287,11 @@ public class ServiceHistoryResponseBuilderTest {
     Assertions.assertEquals(attributesOne.deployments().get(1).endDate().toString(), "2003-01-01");
     Assertions.assertEquals(attributesOne.deployments().get(1).location(), "QAT");
     Assertions.assertEquals(
-            attributesOne.deployments().get(2).startDate().toString(), "2004-02-01");
+        attributesOne.deployments().get(2).startDate().toString(), "2004-02-01");
     Assertions.assertEquals(attributesOne.deployments().get(2).endDate().toString(), "2005-01-01");
     Assertions.assertEquals(attributesOne.deployments().get(2).location(), "AX1");
     Assertions.assertEquals(
-            attributesOne.deployments().get(3).startDate().toString(), "2006-02-01");
+        attributesOne.deployments().get(3).startDate().toString(), "2006-02-01");
     Assertions.assertEquals(attributesOne.deployments().get(3).endDate().toString(), "2007-01-01");
     Assertions.assertEquals(attributesOne.deployments().get(3).location(), "AX1");
 

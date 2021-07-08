@@ -7,14 +7,11 @@ import gov.va.viers.cdi.emis.requestresponse.v2.EMISdeploymentResponseType;
 import gov.va.viers.cdi.emis.requestresponse.v2.EMISserviceEpisodeResponseType;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
-import java.util.stream.Collectors;
-
 import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 import org.hl7.v3.PRPAIN201306UV02;
@@ -38,10 +35,15 @@ public class ServiceHistoryResponseBuilder {
       @NonNull EMISserviceEpisodeResponseType serviceEpisodeResponseType,
       @NonNull PRPAIN201306UV02 mpiResponse) {
 
-    LinkedList<ServiceHistoryResponse.ServiceHistoryEpisode> episodes = new LinkedList<>();
+    ArrayDeque<ServiceHistoryResponse.ServiceHistoryEpisode> episodes = new ArrayDeque<>();
     ArrayList<Deployment> unusedDeployments = makeDeploymentList(deploymentResponse);
-    Collections.sort(serviceEpisodeResponseType.getMilitaryServiceEpisode(), (episodeOne, episodeTwo) ->
-            episodeTwo.getMilitaryServiceEpisodeData().getServiceEpisodeStartDate().compare(episodeOne.getMilitaryServiceEpisodeData().getServiceEpisodeStartDate()));
+    Collections.sort(
+        serviceEpisodeResponseType.getMilitaryServiceEpisode(),
+        (episodeOne, episodeTwo) ->
+            episodeTwo
+                .getMilitaryServiceEpisodeData()
+                .getServiceEpisodeStartDate()
+                .compare(episodeOne.getMilitaryServiceEpisodeData().getServiceEpisodeStartDate()));
     for (MilitaryServiceEpisode militaryServiceEpisode :
         serviceEpisodeResponseType.getMilitaryServiceEpisode()) {
       ServiceHistoryResponse.ServiceHistoryAttributes attributes =
@@ -69,7 +71,7 @@ public class ServiceHistoryResponseBuilder {
                               .toString()))
               .build());
     }
-    return ServiceHistoryResponse.builder().data(episodes).build();
+    return ServiceHistoryResponse.builder().data(episodes.stream().toList()).build();
   }
 
   private ArrayList<Deployment> makeDeploymentList(EMISdeploymentResponseType deploymentResponse) {

@@ -138,8 +138,13 @@ public class ServiceHistoryResponse {
     @Builder.Default
     List<Deployment> deployments = new ArrayList<>();
 
-    public enum DischargeStatus {
-      ThisWillBeRemoved
+    public enum DischargeStatus
+        implements gov.va.api.lighthouse.veteranverification.api.v0.DischargeStatus {
+      ThisWillBeRemoved;
+
+      public static DischargeStatus codeToEnum(String statusCode) {
+        return ThisWillBeRemoved;
+      }
     }
   }
 
