@@ -153,9 +153,11 @@ public class BranchOfServiceStringBuilderTest {
 
   @Test
   public void happyPathOtherBranchOfService() {
-    String expected = "Other";
-    String actual = BranchOfServiceStringBuilder.buildBranchOfServiceString("P", "V");
-    Assertions.assertEquals(expected, actual);
+    Assertions.assertThrows(
+        Exception.class,
+        () -> {
+          BranchOfServiceStringBuilder.buildBranchOfServiceString("P", "V");
+        });
   }
 
   @Test
