@@ -151,12 +151,18 @@ public class ServiceHistoryResponse {
       UNCHARACTERIZED("uncharacterized"),
       UNKNOWN("unknown");
 
-      String description;
+      private final String description;
 
       DischargeStatus(String description) {
         this.description = description;
       }
 
+      /**
+       * Will return enum based on single letter code.
+       *
+       * @param statusCode Single letter code.
+       * @return DischargeStatus Enum.
+       */
       @SneakyThrows
       public static DischargeStatus codeToEnum(String statusCode) {
         DischargeStatus status;
