@@ -7,15 +7,13 @@ import gov.va.viers.cdi.emis.commonservice.v2.MilitaryServiceEpisode;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Locale;
 import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 import org.hl7.v3.PRPAIN201306UV02;
 
 @UtilityClass
 public class MilitaryServiceEpisodeAttributeBuilder {
-  DateTimeFormatter dateTimeFormatter =
-      DateTimeFormatter.ofPattern("yyyy-MM-dd").withLocale(Locale.US);
+  DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
   /**
    * Creates militaryServiceEpisodeAttribute object.
