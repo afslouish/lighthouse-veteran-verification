@@ -12,7 +12,7 @@ import org.hl7.v3.PRPAIN201306UV02;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class MilitaryServiceEpisodeAttributeBuilderTest {
+public class ServiceEpisodeAttributeBuilderTest {
   @Test
   public void HappyPath() {
     EMISserviceEpisodeResponseType serviceEpisodeResponse =
@@ -20,7 +20,7 @@ public class MilitaryServiceEpisodeAttributeBuilderTest {
     PRPAIN201306UV02 mpiResponse = TestUtils.createMpiResponse("mpi/mpi_profile_response_body.xml");
     List<Deployment> deployments = Arrays.stream(TestUtils.deploymentArray).toList();
     ServiceHistoryResponse.ServiceHistoryAttributes attribute =
-        MilitaryServiceEpisodeAttributeBuilder.buildMilitaryServiceEpisode(
+        ServiceEpisodeAttributeBuilder.buildMilitaryServiceEpisode(
             serviceEpisodeResponse.getMilitaryServiceEpisode().get(1), mpiResponse, deployments);
     Assertions.assertEquals(attribute.firstName(), "Alfredo");
     Assertions.assertEquals(attribute.lastName(), "Armstrong");
@@ -44,7 +44,7 @@ public class MilitaryServiceEpisodeAttributeBuilderTest {
     List<Deployment> deployments = new ArrayList<>();
 
     ServiceHistoryResponse.ServiceHistoryAttributes attribute =
-        MilitaryServiceEpisodeAttributeBuilder.buildMilitaryServiceEpisode(
+        ServiceEpisodeAttributeBuilder.buildMilitaryServiceEpisode(
             serviceEpisodeResponse.getMilitaryServiceEpisode().get(1), mpiResponse, deployments);
     Assertions.assertEquals(attribute.firstName(), "Alfredo");
     Assertions.assertEquals(attribute.lastName(), "Armstrong");
@@ -67,7 +67,7 @@ public class MilitaryServiceEpisodeAttributeBuilderTest {
     Assertions.assertThrows(
         NullPointerException.class,
         () -> {
-          MilitaryServiceEpisodeAttributeBuilder.buildMilitaryServiceEpisode(
+          ServiceEpisodeAttributeBuilder.buildMilitaryServiceEpisode(
               serviceEpisodeResponse.getMilitaryServiceEpisode().get(0), mpiResponse, null);
         });
   }
@@ -80,7 +80,7 @@ public class MilitaryServiceEpisodeAttributeBuilderTest {
     Assertions.assertThrows(
         NullPointerException.class,
         () -> {
-          MilitaryServiceEpisodeAttributeBuilder.buildMilitaryServiceEpisode(
+          ServiceEpisodeAttributeBuilder.buildMilitaryServiceEpisode(
               serviceEpisodeResponse.getMilitaryServiceEpisode().get(0), null, deployments);
         });
   }
@@ -92,7 +92,7 @@ public class MilitaryServiceEpisodeAttributeBuilderTest {
     Assertions.assertThrows(
         NullPointerException.class,
         () -> {
-          MilitaryServiceEpisodeAttributeBuilder.buildMilitaryServiceEpisode(
+          ServiceEpisodeAttributeBuilder.buildMilitaryServiceEpisode(
               null, mpiResponse, deployments);
         });
   }

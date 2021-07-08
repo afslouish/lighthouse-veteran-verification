@@ -12,7 +12,7 @@ import lombok.experimental.UtilityClass;
 import org.hl7.v3.PRPAIN201306UV02;
 
 @UtilityClass
-public class MilitaryServiceEpisodeAttributeBuilder {
+public class ServiceEpisodeAttributeBuilder {
   DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
   /**
@@ -61,7 +61,7 @@ public class MilitaryServiceEpisodeAttributeBuilder {
                     .getDischargeCharacterOfServiceCode()))
         .separationReason(
             serviceEpisode.getMilitaryServiceEpisodeData().getNarrativeReasonForSeparationTxt())
-        .deployments(DeploymentsBuilder.buildDeployments(deployments, startDate, endDate))
+        .deployments(ServiceHistoryUtils.buildDeployments(deployments, startDate, endDate))
         .build();
   }
 }

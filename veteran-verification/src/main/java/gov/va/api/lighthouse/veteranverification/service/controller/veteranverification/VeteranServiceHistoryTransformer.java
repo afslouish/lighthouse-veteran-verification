@@ -2,7 +2,7 @@ package gov.va.api.lighthouse.veteranverification.service.controller.veteranveri
 
 import gov.va.api.lighthouse.veteranverification.api.v0.Deployment;
 import gov.va.api.lighthouse.veteranverification.api.v0.ServiceHistoryResponse;
-import gov.va.api.lighthouse.veteranverification.service.utils.MilitaryServiceEpisodeAttributeBuilder;
+import gov.va.api.lighthouse.veteranverification.service.utils.ServiceEpisodeAttributeBuilder;
 import gov.va.api.lighthouse.veteranverification.service.utils.ServiceEpisodeIdBuilder;
 import gov.va.viers.cdi.emis.commonservice.v2.MilitaryServiceEpisode;
 import gov.va.viers.cdi.emis.requestresponse.v2.EMISdeploymentResponseType;
@@ -70,7 +70,7 @@ public class VeteranServiceHistoryTransformer {
     for (MilitaryServiceEpisode militaryServiceEpisode :
         serviceEpisodeResponseType.getMilitaryServiceEpisode()) {
       ServiceHistoryResponse.ServiceHistoryAttributes attributes =
-          MilitaryServiceEpisodeAttributeBuilder.buildMilitaryServiceEpisode(
+          ServiceEpisodeAttributeBuilder.buildMilitaryServiceEpisode(
               militaryServiceEpisode, mpiResponse, unusedDeployments);
       unusedDeployments = removeUsedDeployments(unusedDeployments, attributes.deployments);
       episodes.push(
