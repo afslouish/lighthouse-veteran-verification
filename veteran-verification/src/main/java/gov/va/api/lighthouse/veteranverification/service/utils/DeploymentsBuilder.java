@@ -2,8 +2,8 @@ package gov.va.api.lighthouse.veteranverification.service.utils;
 
 import gov.va.api.lighthouse.veteranverification.api.v0.Deployment;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
@@ -18,14 +18,12 @@ public class DeploymentsBuilder {
    */
   public List<Deployment> buildDeployments(
       List<Deployment> deployments, LocalDate startDate, LocalDate endDate) {
-    ArrayList<Deployment> deploymentsInRange = new ArrayList<>();
-    for (Deployment deployment : deployments) {
-      if (isBeforeOrEqualTo(startDate, deployment.startDate())
-          && (endDate == null || isBeforeOrEqualTo(deployment.endDate(), endDate))) {
-        deploymentsInRange.add(deployment);
-      }
-    }
-    return deploymentsInRange;
+    return deployments.stream()
+        .filter(
+            deployment ->
+                isBeforeOrEqualTo(startDate, deployment.startDate())
+                    && (endDate == null || isBeforeOrEqualTo(deployment.endDate(), endDate)))
+        .collect(Collectors.toList());
   }
 
   private boolean isBeforeOrEqualTo(LocalDate dateOne, LocalDate dateTwo) {
