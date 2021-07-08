@@ -11,6 +11,54 @@ import lombok.experimental.UtilityClass;
 @SuppressFBWarnings({"WEAK_MESSAGE_DIGEST_SHA1"})
 @UtilityClass
 public class ServiceEpisodeIdBuilder {
+  private static final Charset UTF8 = Charset.forName("UTF-8");
+
+  private static UUID fromBytes(byte[] data) {
+    // Based on the private UUID(bytes[]) constructor
+    long msb = 0;
+    long lsb = 0;
+    assert data.length >= 16;
+    for (int i = 0; i < 8; i++) {
+      msb = (msb << 8) | (data[i] & 0xff);
+    }
+    for (int i = 8; i < 16; i++) {
+      lsb = (lsb << 8) | (data[i] & 0xff);
+    }
+    return new UUID(msb, lsb);
+  }
+
+  private static UUID nameUuidFromNamespaceAndBytes(byte[] namespace, byte[] name) {
+    MessageDigest md;
+    try {
+      md = MessageDigest.getInstance("SHA-1");
+    } catch (NoSuchAlgorithmException nsae) {
+      throw new InternalError("SHA-1 not supported");
+    }
+    md.update(Objects.requireNonNull(namespace, "namespace is null"));
+    md.update(Objects.requireNonNull(name, "name is null"));
+    byte[] sha1Bytes = md.digest();
+    sha1Bytes[6] = (byte) (sha1Bytes[6] & 0x0f);
+    /* clear version        */
+    sha1Bytes[6] = (byte) (sha1Bytes[6] | 0x50);
+    /* set to version 5     */
+    sha1Bytes[8] = (byte) (sha1Bytes[8] & 0x3f);
+    /* clear variant        */
+    sha1Bytes[8] = (byte) (sha1Bytes[8] | 0x80);
+    /* set to IETF variant  */
+    return fromBytes(sha1Bytes);
+  }
+
+  /**
+   * Build UUIDV5 from namespace and name.
+   *
+   * @param namespace UUID namespace.
+   * @param name UUID name.
+   * @return UUID V5 Object.
+   */
+  public static UUID nameUuidFromNamespaceAndString(String namespace, String name) {
+    return nameUuidFromNamespaceAndBytes(namespace.getBytes(UTF8), name.getBytes(UTF8));
+  }
+
   /**
    * Builds uuid5 service episode id.
    *
@@ -20,90 +68,7 @@ public class ServiceEpisodeIdBuilder {
    * @return Service episode uuid5 id.
    */
   public String buildServiceEpisodeId(String uuid, String beginDate, String endDate) {
-    return uuidv5(String.format("%s-%s-%s", uuid.trim(), beginDate, endDate));
-  }
-
-  private String uuidv5(String str) {
-    // String sha1 = org.apache.commons.codec.digest.DigestUtils.sha1Hex(nameSpace);
-    return UuidType5.nameUuidFromNamespaceAndString(
-            UUID.fromString("6ba7b810-9dad-11d1-80b4-00c04fd430c8"), str)
-        .toString();
-  }
-
-  public static class UuidType5 {
-    public static final UUID NAMESPACE_DNS =
-        UUID.fromString("6ba7b810-9dad-11d1-80b4-00c04fd430c8");
-
-    public static final UUID NAMESPACE_URL =
-        UUID.fromString("6ba7b811-9dad-11d1-80b4-00c04fd430c8");
-
-    public static final UUID NAMESPACE_OID =
-        UUID.fromString("6ba7b812-9dad-11d1-80b4-00c04fd430c8");
-
-    public static final UUID NAMESPACE_X500 =
-        UUID.fromString("6ba7b814-9dad-11d1-80b4-00c04fd430c8");
-
-    private static final Charset UTF8 = Charset.forName("UTF-8");
-
-    private static UUID fromBytes(byte[] data) {
-      // Based on the private UUID(bytes[]) constructor
-      long msb = 0;
-      long lsb = 0;
-      assert data.length >= 16;
-      for (int i = 0; i < 8; i++) {
-        msb = (msb << 8) | (data[i] & 0xff);
-      }
-      for (int i = 8; i < 16; i++) {
-        lsb = (lsb << 8) | (data[i] & 0xff);
-      }
-      return new UUID(msb, lsb);
-    }
-
-    private static UUID nameUuidFromNamespaceAndBytes(UUID namespace, byte[] name) {
-      MessageDigest md;
-      try {
-        md = MessageDigest.getInstance("SHA-1");
-      } catch (NoSuchAlgorithmException nsae) {
-        throw new InternalError("SHA-1 not supported");
-      }
-      md.update(toBytes(Objects.requireNonNull(namespace, "namespace is null")));
-      md.update(Objects.requireNonNull(name, "name is null"));
-      byte[] sha1Bytes = md.digest();
-      sha1Bytes[6] = (byte) (sha1Bytes[6] & 0x0f);
-      /* clear version        */
-      sha1Bytes[6] = (byte) (sha1Bytes[6] & 0x0f);
-      /* set to version 5     */
-      sha1Bytes[8] = (byte) (sha1Bytes[8] & 0x3f);
-      /* clear variant        */
-      sha1Bytes[8] = (byte) (sha1Bytes[8] | 0x80);
-      /* set to IETF variant  */
-      return fromBytes(sha1Bytes);
-    }
-
-    /**
-     * Creates UUID V5 from namespace and name.
-     *
-     * @param namespace Namespace for uuid.
-     * @param name Value being converted into uuid.
-     * @return A uuid created with a namespace and name.
-     */
-    public static UUID nameUuidFromNamespaceAndString(UUID namespace, String name) {
-      return nameUuidFromNamespaceAndBytes(
-          namespace, Objects.requireNonNull(name, "name == null").getBytes(UTF8));
-    }
-
-    private static byte[] toBytes(UUID uuid) {
-      // inverted logic of fromBytes()
-      byte[] out = new byte[16];
-      long msb = uuid.getMostSignificantBits();
-      long lsb = uuid.getLeastSignificantBits();
-      for (int i = 0; i < 8; i++) {
-        out[i] = (byte) ((msb >> ((7 - i) * 8)) & 0xff);
-      }
-      for (int i = 8; i < 16; i++) {
-        out[i] = (byte) ((lsb >> ((15 - i) * 8)) & 0xff);
-      }
-      return out;
-    }
+    String str = String.format("%s-%s-%s", uuid.trim(), beginDate, endDate);
+    return nameUuidFromNamespaceAndString("gov.vets.service-history-episodes", str).toString();
   }
 }

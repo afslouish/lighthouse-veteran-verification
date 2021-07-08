@@ -22,9 +22,9 @@ public class ServiceHistoryResponseBuilderTest {
     Assertions.assertEquals(response.data().size(), 2);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeOne = response.data().get(0);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeTwo = response.data().get(1);
-    Assertions.assertEquals(episodeOne.id(), "2fd20706-557d-051d-a897-207ca828bf25");
+    Assertions.assertEquals(episodeOne.id(), "90a16974-079a-563e-94dd-365a68b209d9");
     Assertions.assertEquals(episodeOne.type(), "service-history-episodes");
-    Assertions.assertEquals(episodeTwo.id(), "aa753275-1e89-09c0-aa14-d867b6aaa0df");
+    Assertions.assertEquals(episodeTwo.id(), "eee59014-6bc4-5c7a-ab24-4bd64c090948");
     Assertions.assertEquals(episodeTwo.type(), "service-history-episodes");
     ServiceHistoryResponse.ServiceHistoryAttributes attributesOne = episodeOne.attributes();
     ServiceHistoryResponse.ServiceHistoryAttributes attributesTwo = episodeTwo.attributes();
@@ -73,9 +73,9 @@ public class ServiceHistoryResponseBuilderTest {
     Assertions.assertEquals(response.data().size(), 2);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeOne = response.data().get(0);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeTwo = response.data().get(1);
-    Assertions.assertEquals(episodeOne.id(), "2fd20706-557d-051d-a897-207ca828bf25");
+    Assertions.assertEquals(episodeOne.id(), "90a16974-079a-563e-94dd-365a68b209d9");
     Assertions.assertEquals(episodeOne.type(), "service-history-episodes");
-    Assertions.assertEquals(episodeTwo.id(), "aa753275-1e89-09c0-aa14-d867b6aaa0df");
+    Assertions.assertEquals(episodeTwo.id(), "eee59014-6bc4-5c7a-ab24-4bd64c090948");
     Assertions.assertEquals(episodeTwo.type(), "service-history-episodes");
     ServiceHistoryResponse.ServiceHistoryAttributes attributesOne = episodeOne.attributes();
     ServiceHistoryResponse.ServiceHistoryAttributes attributesTwo = episodeTwo.attributes();
@@ -189,9 +189,9 @@ public class ServiceHistoryResponseBuilderTest {
     Assertions.assertEquals(response.data().size(), 2);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeOne = response.data().get(0);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeTwo = response.data().get(1);
-    Assertions.assertEquals(episodeOne.id(), "b1f0be51-00f1-0029-8251-1cb251b0fd75");
+    Assertions.assertEquals(episodeOne.id(), "639dbf29-f2d0-54a7-a1d0-b26a26e13f8a");
     Assertions.assertEquals(episodeOne.type(), "service-history-episodes");
-    Assertions.assertEquals(episodeTwo.id(), "aa753275-1e89-09c0-aa14-d867b6aaa0df");
+    Assertions.assertEquals(episodeTwo.id(), "eee59014-6bc4-5c7a-ab24-4bd64c090948");
     Assertions.assertEquals(episodeTwo.type(), "service-history-episodes");
     ServiceHistoryResponse.ServiceHistoryAttributes attributesOne = episodeOne.attributes();
     ServiceHistoryResponse.ServiceHistoryAttributes attributesTwo = episodeTwo.attributes();
@@ -261,9 +261,9 @@ public class ServiceHistoryResponseBuilderTest {
     Assertions.assertEquals(response.data().size(), 2);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeOne = response.data().get(0);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeTwo = response.data().get(1);
-    Assertions.assertEquals(episodeOne.id(), "b1f0be51-00f1-0029-8251-1cb251b0fd75");
+    Assertions.assertEquals(episodeOne.id(), "639dbf29-f2d0-54a7-a1d0-b26a26e13f8a");
     Assertions.assertEquals(episodeOne.type(), "service-history-episodes");
-    Assertions.assertEquals(episodeTwo.id(), "aa753275-1e89-09c0-aa14-d867b6aaa0df");
+    Assertions.assertEquals(episodeTwo.id(), "eee59014-6bc4-5c7a-ab24-4bd64c090948");
     Assertions.assertEquals(episodeTwo.type(), "service-history-episodes");
     ServiceHistoryResponse.ServiceHistoryAttributes attributesOne = episodeOne.attributes();
     ServiceHistoryResponse.ServiceHistoryAttributes attributesTwo = episodeTwo.attributes();
