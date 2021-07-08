@@ -22,8 +22,8 @@ public class MilitaryServiceEpisodeAttributeBuilderTest {
     ServiceHistoryResponse.ServiceHistoryAttributes attribute =
         MilitaryServiceEpisodeAttributeBuilder.buildMilitaryServiceEpisode(
             serviceEpisodeResponse.getMilitaryServiceEpisode().get(1), mpiResponse, deployments);
-    Assertions.assertEquals(attribute.firstName(), "John");
-    Assertions.assertEquals(attribute.lastName(), "Doe");
+    Assertions.assertEquals(attribute.firstName(), "Alfredo");
+    Assertions.assertEquals(attribute.lastName(), "Armstrong");
     Assertions.assertEquals(attribute.branchOfService(), "Air Force");
     Assertions.assertTrue(attribute.startDate().equals(LocalDate.of(2002, 1, 1)));
     Assertions.assertTrue(attribute.endDate().equals(LocalDate.of(2003, 2, 1)));
@@ -46,8 +46,8 @@ public class MilitaryServiceEpisodeAttributeBuilderTest {
     ServiceHistoryResponse.ServiceHistoryAttributes attribute =
         MilitaryServiceEpisodeAttributeBuilder.buildMilitaryServiceEpisode(
             serviceEpisodeResponse.getMilitaryServiceEpisode().get(1), mpiResponse, deployments);
-    Assertions.assertEquals(attribute.firstName(), "John");
-    Assertions.assertEquals(attribute.lastName(), "Doe");
+    Assertions.assertEquals(attribute.firstName(), "Alfredo");
+    Assertions.assertEquals(attribute.lastName(), "Armstrong");
     Assertions.assertEquals(attribute.branchOfService(), "Air Force");
     Assertions.assertTrue(attribute.startDate().equals(LocalDate.of(2002, 1, 1)));
     Assertions.assertTrue(attribute.endDate().equals(LocalDate.of(2003, 2, 1)));

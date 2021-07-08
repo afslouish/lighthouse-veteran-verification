@@ -28,8 +28,8 @@ public class ServiceHistoryResponseBuilderTest {
     Assertions.assertEquals(episodeTwo.type(), "service-history-episodes");
     ServiceHistoryResponse.ServiceHistoryAttributes attributesOne = episodeOne.attributes();
     ServiceHistoryResponse.ServiceHistoryAttributes attributesTwo = episodeTwo.attributes();
-    Assertions.assertEquals(attributesOne.firstName(), "John");
-    Assertions.assertEquals(attributesOne.lastName(), "Doe");
+    Assertions.assertEquals(attributesOne.firstName(), "Alfredo");
+    Assertions.assertEquals(attributesOne.lastName(), "Armstrong");
     Assertions.assertEquals(attributesOne.branchOfService(), "Army");
     Assertions.assertEquals(attributesOne.startDate().toString(), "2000-01-01");
     Assertions.assertEquals(attributesOne.endDate().toString(), "2001-02-01");
@@ -43,8 +43,8 @@ public class ServiceHistoryResponseBuilderTest {
         attributesOne.deployments().get(0).startDate().toString(), "2000-02-01");
     Assertions.assertEquals(attributesOne.deployments().get(0).endDate().toString(), "2001-01-01");
     Assertions.assertEquals(attributesOne.deployments().get(0).location(), "QAT");
-    Assertions.assertEquals(attributesTwo.firstName(), "John");
-    Assertions.assertEquals(attributesTwo.lastName(), "Doe");
+    Assertions.assertEquals(attributesTwo.firstName(), "Alfredo");
+    Assertions.assertEquals(attributesTwo.lastName(), "Armstrong");
     Assertions.assertEquals(attributesTwo.branchOfService(), "Air Force");
     Assertions.assertEquals(attributesTwo.startDate().toString(), "2002-01-01");
     Assertions.assertEquals(attributesTwo.endDate().toString(), "2003-02-01");
@@ -79,8 +79,8 @@ public class ServiceHistoryResponseBuilderTest {
     Assertions.assertEquals(episodeTwo.type(), "service-history-episodes");
     ServiceHistoryResponse.ServiceHistoryAttributes attributesOne = episodeOne.attributes();
     ServiceHistoryResponse.ServiceHistoryAttributes attributesTwo = episodeTwo.attributes();
-    Assertions.assertEquals(attributesOne.firstName(), "John");
-    Assertions.assertEquals(attributesOne.lastName(), "Doe");
+    Assertions.assertEquals(attributesOne.firstName(), "Alfredo");
+    Assertions.assertEquals(attributesOne.lastName(), "Armstrong");
     Assertions.assertEquals(attributesOne.branchOfService(), "Army");
     Assertions.assertEquals(attributesOne.startDate().toString(), "2000-01-01");
     Assertions.assertEquals(attributesOne.endDate().toString(), "2001-02-01");
@@ -94,8 +94,8 @@ public class ServiceHistoryResponseBuilderTest {
         attributesOne.deployments().get(0).startDate().toString(), "2000-02-01");
     Assertions.assertEquals(attributesOne.deployments().get(0).endDate().toString(), "2001-01-01");
     Assertions.assertEquals(attributesOne.deployments().get(0).location(), "QAT");
-    Assertions.assertEquals(attributesTwo.firstName(), "John");
-    Assertions.assertEquals(attributesTwo.lastName(), "Doe");
+    Assertions.assertEquals(attributesTwo.firstName(), "Alfredo");
+    Assertions.assertEquals(attributesTwo.lastName(), "Armstrong");
     Assertions.assertEquals(attributesTwo.branchOfService(), "Air Force");
     Assertions.assertEquals(attributesTwo.startDate().toString(), "2002-01-01");
     Assertions.assertEquals(attributesTwo.endDate().toString(), "2003-02-01");
@@ -195,8 +195,8 @@ public class ServiceHistoryResponseBuilderTest {
     Assertions.assertEquals(episodeTwo.type(), "service-history-episodes");
     ServiceHistoryResponse.ServiceHistoryAttributes attributesOne = episodeOne.attributes();
     ServiceHistoryResponse.ServiceHistoryAttributes attributesTwo = episodeTwo.attributes();
-    Assertions.assertEquals(attributesOne.firstName(), "John");
-    Assertions.assertEquals(attributesOne.lastName(), "Doe");
+    Assertions.assertEquals(attributesOne.firstName(), "Alfredo");
+    Assertions.assertEquals(attributesOne.lastName(), "Armstrong");
     Assertions.assertEquals(attributesOne.branchOfService(), "Army");
     Assertions.assertEquals(attributesOne.startDate().toString(), "2000-01-01");
     Assertions.assertNull(attributesOne.endDate());
@@ -226,8 +226,8 @@ public class ServiceHistoryResponseBuilderTest {
         attributesOne.deployments().get(3).startDate().toString(), "2006-02-01");
     Assertions.assertEquals(attributesOne.deployments().get(3).endDate().toString(), "2007-01-01");
     Assertions.assertEquals(attributesOne.deployments().get(3).location(), "AX1");
-    Assertions.assertEquals(attributesTwo.firstName(), "John");
-    Assertions.assertEquals(attributesTwo.lastName(), "Doe");
+    Assertions.assertEquals(attributesTwo.firstName(), "Alfredo");
+    Assertions.assertEquals(attributesTwo.lastName(), "Armstrong");
     Assertions.assertEquals(attributesTwo.branchOfService(), "Air Force");
     Assertions.assertEquals(attributesTwo.startDate().toString(), "2002-01-01");
     Assertions.assertEquals(attributesTwo.endDate().toString(), "2003-02-01");
@@ -267,8 +267,8 @@ public class ServiceHistoryResponseBuilderTest {
     Assertions.assertEquals(episodeTwo.type(), "service-history-episodes");
     ServiceHistoryResponse.ServiceHistoryAttributes attributesOne = episodeOne.attributes();
     ServiceHistoryResponse.ServiceHistoryAttributes attributesTwo = episodeTwo.attributes();
-    Assertions.assertEquals(attributesOne.firstName(), "John");
-    Assertions.assertEquals(attributesOne.lastName(), "Doe");
+    Assertions.assertEquals(attributesOne.firstName(), "Alfredo");
+    Assertions.assertEquals(attributesOne.lastName(), "Armstrong");
     Assertions.assertEquals(attributesOne.branchOfService(), "Army");
     Assertions.assertEquals(attributesOne.startDate().toString(), "2000-01-01");
     Assertions.assertNull(attributesOne.endDate());
@@ -295,8 +295,8 @@ public class ServiceHistoryResponseBuilderTest {
     Assertions.assertEquals(attributesOne.deployments().get(3).endDate().toString(), "2007-01-01");
     Assertions.assertEquals(attributesOne.deployments().get(3).location(), "AX1");
 
-    Assertions.assertEquals(attributesTwo.firstName(), "John");
-    Assertions.assertEquals(attributesTwo.lastName(), "Doe");
+    Assertions.assertEquals(attributesTwo.firstName(), "Alfredo");
+    Assertions.assertEquals(attributesTwo.lastName(), "Armstrong");
     Assertions.assertEquals(attributesTwo.branchOfService(), "Air Force");
     Assertions.assertEquals(attributesTwo.startDate().toString(), "2002-01-01");
     Assertions.assertEquals(attributesTwo.endDate().toString(), "2003-02-01");

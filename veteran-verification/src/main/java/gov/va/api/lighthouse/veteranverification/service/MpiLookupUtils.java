@@ -6,6 +6,10 @@ import static gov.va.api.lighthouse.veteranverification.service.controller.Trans
 import gov.va.viers.cdi.emis.commonservice.v1.InputEdipiIcn;
 import gov.va.viers.cdi.emis.requestresponse.v1.InputEdiPiOrIcn;
 import java.util.Optional;
+import javax.xml.bind.JAXBElement;
+import lombok.NonNull;
+import org.hl7.v3.EnFamily;
+import org.hl7.v3.EnGiven;
 import org.hl7.v3.II;
 import org.hl7.v3.PRPAIN201306UV02;
 import org.hl7.v3.PRPAMT201310UV02Patient;
@@ -16,9 +20,35 @@ public class MpiLookupUtils {
 
   private static final String EDIPI_LOOKUP_VALUE = "^NI^200DOD^USDOD^A";
 
-  public static String getFirstName(PRPAIN201306UV02 mpiResponse) {
-    // TODO implement
-    return "John";
+  /**
+   * Retrieves first name from MPI response.
+   *
+   * @param mpiResponse Mpi Response.
+   * @return Returns first name of veteran.
+   */
+  public static String getFirstName(@NonNull PRPAIN201306UV02 mpiResponse) {
+    return mpiResponse
+        .getControlActProcess()
+        .getSubject()
+        .get(0)
+        .getRegistrationEvent()
+        .getSubject1()
+        .getPatient()
+        .getPatientPerson()
+        .getValue()
+        .getName()
+        .get(0)
+        .getContent()
+        .stream()
+        .filter(item -> item.getClass() == JAXBElement.class)
+        .map(i -> (JAXBElement) i)
+        .filter(name -> name.getValue().getClass() == EnGiven.class)
+        .map(i -> (EnGiven) i.getValue())
+        .toList()
+        .get(0)
+        .getContent()
+        .get(0)
+        .toString();
   }
 
   /** Loop through list of patient's IDs in search of one that matches lookup pattern. */
@@ -69,8 +99,34 @@ public class MpiLookupUtils {
     return null;
   }
 
-  public static String getLastName(PRPAIN201306UV02 mpiResponse) {
-    // TODO implement
-    return "Doe";
+  /**
+   * Retrieves last name from MPI response.
+   *
+   * @param mpiResponse Mpi Response.
+   * @return Returns last name of veteran.
+   */
+  public static String getLastName(@NonNull PRPAIN201306UV02 mpiResponse) {
+    return mpiResponse
+        .getControlActProcess()
+        .getSubject()
+        .get(0)
+        .getRegistrationEvent()
+        .getSubject1()
+        .getPatient()
+        .getPatientPerson()
+        .getValue()
+        .getName()
+        .get(0)
+        .getContent()
+        .stream()
+        .filter(item -> item.getClass() == JAXBElement.class)
+        .map(i -> (JAXBElement) i)
+        .filter(name -> name.getValue().getClass() == EnFamily.class)
+        .map(i -> (EnFamily) i.getValue())
+        .toList()
+        .get(0)
+        .getContent()
+        .get(0)
+        .toString();
   }
 }
