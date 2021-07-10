@@ -1,7 +1,6 @@
 package gov.va.api.lighthouse.veteranverification.api;
 
 import gov.va.api.lighthouse.veteranverification.api.v0.ServiceHistoryResponse;
-import gov.va.api.lighthouse.veteranverification.api.v0.ServiceHistoryTokenResponse;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.info.Contact;
@@ -85,8 +84,22 @@ public interface VeteranVerificationService {
             mediaType = "application/json",
             schema = @Schema(implementation = ServiceHistoryResponse.class)),
         @Content(
-            mediaType = "application/json",
-            schema = @Schema(implementation = ServiceHistoryTokenResponse.class))
+            mediaType = "application/jwt",
+            schema =
+                @Schema(
+                    description =
+                        "A token containing signed claims about a Veteran's service history",
+                    example =
+                        "eyJhbGciOiJSUzI1NiIsImtpZCI6IjA4OGQyNDIzMmZmNmZhYTRjZDRjZmVjMTI2YWQwNDMxZ"
+                            + "GZmMWVhMDI4YWZkYjFjODZiMzcxOGQ3MDE3MWFlZDYifQ.eyJkYXRhIjp7ImlkIjoiM"
+                            + "TIzMTJBQVNEZiIsInR5cGUiOiJzZXJ2aWNlLWhpc3RvcnktZXBpc29kZXMiLCJhdHRy"
+                            + "aWJ1dGVzIjp7InN0YXJ0X2RhdGUiOiIxOTQ4LTA0LTA4IiwiZW5kX2RhdGUiOiIxOTU"
+                            + "wLTA1LTEwIiwiYnJhbmNoIjoiQWlyIEZvcmNlIiwiZGlzY2hhcmdlX3N0YXR1cyI6Im"
+                            + "hvbm9yYWJsZSIsImRlcGxveW1lbnRzIjpbeyJzdGFydF9kYXRlIjoiMTk0OC0xMC0xM"
+                            + "CIsImVuZF9kYXRlIjoiMTk0OS0xMC0wOSIsImxvY2F0aW9uIjoiS09SIn1dfX19.S39"
+                            + "hmL-5nxvdJnJ_PSHdfiP744dTcGzrUKsqcVQa1FomUU15Dr2A2gQMF7XWO2DCLrdM0b"
+                            + "CtIS8mCSwI00nqQFqXGjZVGQTIyzQJDPHxV6jnYwwaXD1vzbxlsycWF2ZQ_5Wx6TIhn"
+                            + "XiEkbn_rzW_VleVnHjLCRQwzmpwGGDsL_I"))
       })
   @ApiResponse(responseCode = "401", description = "Not authorized")
   @ApiResponse(responseCode = "404", description = "No service history found")
