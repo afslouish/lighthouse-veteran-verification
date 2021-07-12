@@ -118,7 +118,7 @@ public interface VeteranVerificationService {
       content = {
         @Content(
             mediaType = "application/json",
-            schema = @Schema(implementation = ServiceHistoryResponse.class))
+            schema = @Schema(implementation = VeteranStatusVerification.class))
       })
   @ApiResponse(responseCode = "401", description = "Not authorized")
   @ApiResponse(
