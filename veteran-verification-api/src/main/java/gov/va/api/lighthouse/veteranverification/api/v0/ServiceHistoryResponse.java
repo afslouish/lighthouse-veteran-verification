@@ -76,7 +76,7 @@ public class ServiceHistoryResponse {
 
     @NonNull
     @Schema(
-            name = "pay_grade",
+        name = "pay_grade",
         type = "string",
         description =
             "Defines the level of compensation for a position, normalized across military branches"
@@ -94,7 +94,7 @@ public class ServiceHistoryResponse {
                 + "Grade value, with the leading character (M or C) stripped from Pay Plan Code.",
         example = "W01",
         required = true)
-            @JsonProperty("pay_grade")
+    @JsonProperty("pay_grade")
     String payGrade;
 
     @Schema(
