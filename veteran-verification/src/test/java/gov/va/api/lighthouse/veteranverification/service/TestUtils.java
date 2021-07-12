@@ -34,7 +34,7 @@ public class TestUtils {
   }
 
   @SneakyThrows
-  private PRPAIN201306UV02 createMpiResponse(String filename) {
+  public PRPAIN201306UV02 createMpiResponse(String filename) {
     String profile = asString(TestUtils.class.getClassLoader().getResourceAsStream(filename));
     return JAXBContext.newInstance(PRPAIN201306UV02.class)
         .createUnmarshaller()
