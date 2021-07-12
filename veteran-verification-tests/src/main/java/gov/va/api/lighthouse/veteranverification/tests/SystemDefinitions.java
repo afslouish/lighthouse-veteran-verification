@@ -48,6 +48,8 @@ public class SystemDefinitions {
 
   public static final String NO_EMIS_USER_STATUS_ICN_DEFAULT = "1012830453V141481";
 
+  public static final String DISABILITY_RATING_ICN = "1012829620V654328";
+
   /** Class of search attributes to be used for veteran confirmation status ITs. */
   public static Attributes attributes() {
     return Attributes.builder()
@@ -94,6 +96,8 @@ public class SystemDefinitions {
         .v5StatusIcn(systemPropertyOrDefault("v5-status-icn", V5_STATUS_ICN_DEFAULT))
         .noEmisUserStatusIcn(
             systemPropertyOrDefault("no-emis-user-status-icn", NO_EMIS_USER_STATUS_ICN_DEFAULT))
+        .disabilityRatingIcn(
+            systemPropertyOrDefault("disability-rating-icn", DISABILITY_RATING_ICN))
         .build();
   }
 
@@ -244,6 +248,8 @@ public class SystemDefinitions {
     @NonNull String noEmisUserStatusIcn;
 
     @NonNull String confirmedStatusIcn;
+
+    @NonNull String disabilityRatingIcn;
   }
 
   @Data
