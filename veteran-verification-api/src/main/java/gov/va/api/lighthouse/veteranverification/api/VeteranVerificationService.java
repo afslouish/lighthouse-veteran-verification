@@ -78,7 +78,7 @@ public interface VeteranVerificationService {
   @Path("service_history")
   @ApiResponse(
       responseCode = "200",
-      description = "Veteran service history successfully retrieved",
+      description = "Service History retrieved successfully",
       content = {
         @Content(
             mediaType = "application/json",
