@@ -26,6 +26,7 @@ public class AbstractVeteranVerificationData {
       required = true)
   String id;
 
+  @NonNull
   @Schema(example = "example-endpoint", required = true)
   String type;
 }

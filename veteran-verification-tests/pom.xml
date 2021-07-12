@@ -15,6 +15,7 @@
     <docker.imageName>lighthouse-${project.artifactId}</docker.imageName>
     <mock-emis.version>2.0.0</mock-emis.version>
     <mock-mpi.version>2.0.1</mock-mpi.version>
+    <mock-bgs.version>2.0.1</mock-bgs.version>
   </properties>
   <dependencies>
     <dependency>
@@ -37,6 +38,11 @@
       <artifactId>mock-mpi</artifactId>
       <version>${mock-mpi.version}</version>
     </dependency>
+    <dependency>
+      <groupId>gov.va.api.lighthouse</groupId>
+      <artifactId>mock-bgs</artifactId>
+      <version>${mock-bgs.version}</version>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
@@ -51,7 +57,7 @@
             </goals>
             <configuration>
               <outputDirectory>${project.build.directory}</outputDirectory>
-              <includeArtifactIds>junit-platform-console-standalone,mock-emis,mock-mpi,veteran-verification</includeArtifactIds>
+              <includeArtifactIds>junit-platform-console-standalone,mock-emis,mock-mpi,mock-bgs,veteran-verification</includeArtifactIds>
               <stripVersion>true</stripVersion>
               <silent>true</silent>
             </configuration>
@@ -106,6 +112,25 @@
             </configuration>
           </execution>
           <execution>
+            <id>mock-bgs-process</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>start</goal>
+            </goals>
+            <configuration>
+              <name>mock-bgs</name>
+              <healthcheckUrl>http://localhost:8000/actuator/health</healthcheckUrl>
+              <skip>${sentinel.skipLaunch}</skip>
+              <processLogFile>${project.build.directory}/mock-bgs.log</processLogFile>
+              <waitForInterrupt>false</waitForInterrupt>
+              <arguments>
+                <argument>java</argument>
+                <argument>-jar</argument>
+                <argument>mock-bgs.jar</argument>
+              </arguments>
+            </configuration>
+          </execution>
+          <execution>
             <id>veteran-verification-process</id>
             <phase>pre-integration-test</phase>
             <goals>
@@ -123,12 +148,15 @@
                 <argument>-Demis.v1.ssl-enabled=false</argument>
                 <argument>-Demis.v2.ssl-enabled=false</argument>
                 <argument>-Dmpi.ssl-enabled=false</argument>
+                <argument>-Dbgs.ssl-enabled=false</argument>
                 <argument>-Dmpi.url=http://localhost:9090/psim_webservice/IdMWebService</argument>
                 <argument>-Dmpi.wsdl-location=http://localhost:9090/psim_webservice/IdMWebService/idmWebService.wsdl</argument>
                 <argument>-Demis.v2.url=http://localhost:9000/VIERSService/eMIS/v2/MilitaryInformationService</argument>
                 <argument>-Demis.v2.wsdl-location=http://localhost:9000/VIERSService/eMIS/v2/MilitaryInformationService/eMISMilitaryInformationService.wsdl</argument>
                 <argument>-Demis.v1.url=http://localhost:9000/VIERSService/eMIS/v1/VeteranStatusService</argument>
                 <argument>-Demis.v1.wsdl-location=http://localhost:9000/VIERSService/eMIS/v1/VeteranStatusService/eMISVeteranStatusService.wsdl</argument>
+                <argument>-Dbgs.url=http://localhost:8000/v0/RatingServiceBean/RatingService</argument>
+                <argument>-Dbgs.wsdl-location=http://localhost:8000/v0/RatingServiceBean/RatingService/ratingRecord.wsdl</argument>
                 <argument>-Dloader=gov.va.api.lighthouse.veteranverification.service.Application</argument>
                 <argument>-Dlogging.level.root=INFO</argument>
                 <argument>-Dspring.config.additional-location=classpath:/application.properties,optional:file:${project.basedir}/config/secrets.properties</argument>

@@ -78,7 +78,7 @@ public interface VeteranVerificationService {
   @Path("service_history")
   @ApiResponse(
       responseCode = "200",
-      description = "Veteran service history successfully retrieved",
+      description = "Service History retrieved successfully",
       content = {
         @Content(
             mediaType = "application/json",
@@ -118,7 +118,7 @@ public interface VeteranVerificationService {
       content = {
         @Content(
             mediaType = "application/json",
-            schema = @Schema(implementation = ServiceHistoryResponse.class))
+            schema = @Schema(implementation = VeteranStatusVerification.class))
       })
   @ApiResponse(responseCode = "401", description = "Not authorized")
   @ApiResponse(
