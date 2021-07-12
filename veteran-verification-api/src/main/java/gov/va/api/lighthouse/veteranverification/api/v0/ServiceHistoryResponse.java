@@ -1,7 +1,7 @@
 package gov.va.api.lighthouse.veteranverification.api.v0;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDate;
@@ -76,6 +76,7 @@ public class ServiceHistoryResponse {
 
     @NonNull
     @Schema(
+            name = "pay_grade",
         type = "string",
         description =
             "Defines the level of compensation for a position, normalized across military branches"
@@ -93,7 +94,7 @@ public class ServiceHistoryResponse {
                 + "Grade value, with the leading character (M or C) stripped from Pay Plan Code.",
         example = "W01",
         required = true)
-    @ApiModelProperty(dataType = "java.lang.String")
+            @JsonProperty("pay_grade")
     String payGrade;
 
     @Schema(
