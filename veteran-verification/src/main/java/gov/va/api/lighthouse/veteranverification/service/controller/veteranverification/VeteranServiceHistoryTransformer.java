@@ -75,8 +75,8 @@ public class VeteranServiceHistoryTransformer {
     return startDate;
   }
 
-  private ArrayList<Deployment> makeDeploymentList(EMISdeploymentResponseType deploymentResponse) {
-    ArrayList<Deployment> list = new ArrayList<>();
+  private List<Deployment> makeDeploymentList(EMISdeploymentResponseType deploymentResponse) {
+    List<Deployment> list = new ArrayList<>();
     for (gov.va.viers.cdi.emis.commonservice.v2.Deployment deployment :
         deploymentResponse.getDeployment()) {
       LocalDate startDate = getEmisDeploymentStartDate(deployment);
@@ -97,8 +97,8 @@ public class VeteranServiceHistoryTransformer {
     return list;
   }
 
-  private ArrayList<Deployment> removeUsedDeployments(
-      ArrayList<Deployment> fullDeploymentList, List<Deployment> usedDeploymentList) {
+  private List<Deployment> removeUsedDeployments(
+      List<Deployment> fullDeploymentList, List<Deployment> usedDeploymentList) {
     fullDeploymentList.removeAll(usedDeploymentList);
     return fullDeploymentList;
   }
@@ -110,7 +110,7 @@ public class VeteranServiceHistoryTransformer {
    */
   public ServiceHistoryResponse serviceHistoryTransformer() {
     ArrayDeque<ServiceHistoryResponse.ServiceHistoryEpisode> episodes = new ArrayDeque<>();
-    ArrayList<Deployment> unusedDeployments = makeDeploymentList(deploymentResponse);
+    List<Deployment> unusedDeployments = makeDeploymentList(deploymentResponse);
     Collections.sort(
         serviceEpisodeResponseType.getMilitaryServiceEpisode(),
         (episodeOne, episodeTwo) ->
