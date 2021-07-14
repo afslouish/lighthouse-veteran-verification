@@ -27,19 +27,8 @@ public class ServiceEpisodeAttributeBuilder {
       @NonNull MilitaryServiceEpisode serviceEpisode,
       @NonNull PRPAIN201306UV02 mpiResponse,
       @NonNull List<Deployment> deployments) {
-    LocalDate startDate =
-        LocalDate.parse(
-            serviceEpisode.getMilitaryServiceEpisodeData().getServiceEpisodeStartDate().toString(),
-            dateTimeFormatter);
-    LocalDate endDate =
-        serviceEpisode.getMilitaryServiceEpisodeData().getServiceEpisodeEndDate() == null
-            ? null
-            : LocalDate.parse(
-                serviceEpisode
-                    .getMilitaryServiceEpisodeData()
-                    .getServiceEpisodeEndDate()
-                    .toString(),
-                dateTimeFormatter);
+    LocalDate startDate = EmisUtils.getMilitaryEpisodeStartDate(serviceEpisode);
+    LocalDate endDate = EmisUtils.getMilitaryEpisodeEndDate(serviceEpisode);
 
     return ServiceHistoryResponse.ServiceHistoryAttributes.builder()
         .firstName(MpiLookupUtils.getFirstName(mpiResponse))
