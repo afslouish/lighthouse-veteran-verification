@@ -19,8 +19,11 @@ import org.hl7.v3.PRPAIN201306UV02;
 @Builder
 public class VeteranServiceHistoryTransformer {
   @NonNull String uuid;
+
   @NonNull EMISdeploymentResponseType deploymentResponse;
+
   @NonNull EMISserviceEpisodeResponseType serviceEpisodeResponseType;
+
   @NonNull PRPAIN201306UV02 mpiResponse;
 
   private String buildServiceEpisodeId(String uuid, String beginDate, String endDate) {
@@ -29,23 +32,55 @@ public class VeteranServiceHistoryTransformer {
         .toString();
   }
 
+  private LocalDate getEmisDeploymentEndDate(
+      gov.va.viers.cdi.emis.commonservice.v2.Deployment deployment) {
+    LocalDate endDate = null;
+    if (deployment.getDeploymentData() != null
+        && deployment.getDeploymentData().getDeploymentEndDate() != null) {
+      endDate = LocalDate.parse(deployment.getDeploymentData().getDeploymentEndDate().toString());
+    }
+    return endDate;
+  }
+
+  private LocalDate getEmisDeploymentStartDate(
+      gov.va.viers.cdi.emis.commonservice.v2.Deployment deployment) {
+    LocalDate startDate = null;
+    if (deployment.getDeploymentData() != null
+        && deployment.getDeploymentData().getDeploymentStartDate() != null) {
+      startDate =
+          LocalDate.parse(deployment.getDeploymentData().getDeploymentStartDate().toString());
+    }
+    return startDate;
+  }
+
+  private LocalDate getMilitaryEpisodeEndDate(MilitaryServiceEpisode episode) {
+    LocalDate endDate = null;
+    if (episode.getMilitaryServiceEpisodeData() != null
+        && episode.getMilitaryServiceEpisodeData().getServiceEpisodeEndDate() != null) {
+      endDate =
+          LocalDate.parse(
+              episode.getMilitaryServiceEpisodeData().getServiceEpisodeEndDate().toString());
+    }
+    return endDate;
+  }
+
+  private LocalDate getMilitaryEpisodeStartDate(MilitaryServiceEpisode episode) {
+    LocalDate startDate = null;
+    if (episode.getMilitaryServiceEpisodeData() != null
+        && episode.getMilitaryServiceEpisodeData().getServiceEpisodeStartDate() != null) {
+      startDate =
+          LocalDate.parse(
+              episode.getMilitaryServiceEpisodeData().getServiceEpisodeStartDate().toString());
+    }
+    return startDate;
+  }
+
   private ArrayList<Deployment> makeDeploymentList(EMISdeploymentResponseType deploymentResponse) {
     ArrayList<Deployment> list = new ArrayList<>();
     for (gov.va.viers.cdi.emis.commonservice.v2.Deployment deployment :
         deploymentResponse.getDeployment()) {
-      LocalDate startDate = null;
-      if (deployment.getDeploymentData() != null
-          && deployment.getDeploymentData().getDeploymentStartDate() != null) {
-        startDate =
-            LocalDate.parse(deployment.getDeploymentData().getDeploymentStartDate().toString());
-      }
-
-      LocalDate endDate = null;
-      if (deployment.getDeploymentData() != null
-          && deployment.getDeploymentData().getDeploymentEndDate() != null) {
-        endDate = LocalDate.parse(deployment.getDeploymentData().getDeploymentEndDate().toString());
-      }
-
+      LocalDate startDate = getEmisDeploymentStartDate(deployment);
+      LocalDate endDate = getEmisDeploymentEndDate(deployment);
       String location = null;
       if (deployment.getDeploymentData() != null
           && deployment.getDeploymentData().getDeploymentLocation().size() > 0) {
@@ -56,7 +91,6 @@ public class VeteranServiceHistoryTransformer {
                 .get(0)
                 .getDeploymentISOAlpha3Country();
       }
-
       list.add(
           Deployment.builder().endDate(endDate).startDate(startDate).location(location).build());
     }
@@ -96,19 +130,12 @@ public class VeteranServiceHistoryTransformer {
               .id(
                   buildServiceEpisodeId(
                       uuid,
-                      militaryServiceEpisode
-                          .getMilitaryServiceEpisodeData()
-                          .getServiceEpisodeStartDate()
-                          .toString(),
-                      militaryServiceEpisode
-                                  .getMilitaryServiceEpisodeData()
-                                  .getServiceEpisodeEndDate()
-                              == null
-                          ? null
-                          : militaryServiceEpisode
-                              .getMilitaryServiceEpisodeData()
-                              .getServiceEpisodeEndDate()
-                              .toString()))
+                      getMilitaryEpisodeStartDate(militaryServiceEpisode) != null
+                          ? getMilitaryEpisodeStartDate(militaryServiceEpisode).toString()
+                          : null,
+                      getMilitaryEpisodeEndDate(militaryServiceEpisode) != null
+                          ? getMilitaryEpisodeEndDate(militaryServiceEpisode).toString()
+                          : null))
               .build());
     }
     return ServiceHistoryResponse.builder().data(episodes.stream().toList()).build();
