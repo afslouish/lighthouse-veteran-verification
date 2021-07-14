@@ -23,7 +23,7 @@ public class VeteranServiceHistoryTransformerTest {
     deployments.getDeployment().get(4).setDeploymentData(null);
     VeteranServiceHistoryTransformer transformer =
         VeteranServiceHistoryTransformer.builder()
-            .uuid("uuid")
+            .icn("uuid")
             .deploymentResponse(deployments)
             .serviceEpisodeResponseType(serviceEpisodeResponse)
             .mpiResponse(mpiResponse)
@@ -106,7 +106,7 @@ public class VeteranServiceHistoryTransformerTest {
         .setDeploymentISOAlpha3Country(null);
     VeteranServiceHistoryTransformer transformer =
         VeteranServiceHistoryTransformer.builder()
-            .uuid("uuid")
+            .icn("uuid")
             .deploymentResponse(deployments)
             .serviceEpisodeResponseType(serviceEpisodeResponse)
             .mpiResponse(mpiResponse)
@@ -162,7 +162,7 @@ public class VeteranServiceHistoryTransformerTest {
         TestUtils.createDeploymentResponse("emis/deployments_response.xml");
     VeteranServiceHistoryTransformer transformer =
         VeteranServiceHistoryTransformer.builder()
-            .uuid("uuid")
+            .icn("uuid")
             .deploymentResponse(deployments)
             .serviceEpisodeResponseType(serviceEpisodeResponse)
             .mpiResponse(mpiResponse)
@@ -218,7 +218,7 @@ public class VeteranServiceHistoryTransformerTest {
         TestUtils.createDeploymentResponse("emis/deployments_response.xml");
     VeteranServiceHistoryTransformer transformer =
         VeteranServiceHistoryTransformer.builder()
-            .uuid("uuid")
+            .icn("uuid")
             .deploymentResponse(deployments)
             .serviceEpisodeResponseType(serviceEpisodeResponse)
             .mpiResponse(mpiResponse)
@@ -279,7 +279,7 @@ public class VeteranServiceHistoryTransformerTest {
         .setServiceEpisodeEndDate(null);
     VeteranServiceHistoryTransformer transformer =
         VeteranServiceHistoryTransformer.builder()
-            .uuid("uuid")
+            .icn("uuid")
             .deploymentResponse(deployments)
             .serviceEpisodeResponseType(serviceEpisodeResponse)
             .mpiResponse(mpiResponse)
@@ -356,7 +356,7 @@ public class VeteranServiceHistoryTransformerTest {
         .setServiceEpisodeEndDate(null);
     VeteranServiceHistoryTransformer transformer =
         VeteranServiceHistoryTransformer.builder()
-            .uuid("uuid")
+            .icn("uuid")
             .deploymentResponse(deployments)
             .serviceEpisodeResponseType(serviceEpisodeResponse)
             .mpiResponse(mpiResponse)
@@ -426,7 +426,7 @@ public class VeteranServiceHistoryTransformerTest {
         NullPointerException.class,
         () -> {
           VeteranServiceHistoryTransformer.builder()
-              .uuid("uuid")
+              .icn("uuid")
               .deploymentResponse(null)
               .serviceEpisodeResponseType(serviceEpisodeResponse)
               .mpiResponse(mpiResponse)
@@ -445,7 +445,7 @@ public class VeteranServiceHistoryTransformerTest {
         NullPointerException.class,
         () -> {
           VeteranServiceHistoryTransformer.builder()
-              .uuid("uuid")
+              .icn("uuid")
               .deploymentResponse(deployments)
               .serviceEpisodeResponseType(serviceEpisodeResponse)
               .mpiResponse(null)
@@ -464,7 +464,7 @@ public class VeteranServiceHistoryTransformerTest {
         NullPointerException.class,
         () -> {
           VeteranServiceHistoryTransformer.builder()
-              .uuid("uuid")
+              .icn("uuid")
               .deploymentResponse(deployments)
               .serviceEpisodeResponseType(null)
               .mpiResponse(mpiResponse)
@@ -483,7 +483,7 @@ public class VeteranServiceHistoryTransformerTest {
         NullPointerException.class,
         () -> {
           VeteranServiceHistoryTransformer.builder()
-              .uuid(null)
+              .icn(null)
               .deploymentResponse(deployments)
               .serviceEpisodeResponseType(serviceEpisodeResponse)
               .mpiResponse(mpiResponse)

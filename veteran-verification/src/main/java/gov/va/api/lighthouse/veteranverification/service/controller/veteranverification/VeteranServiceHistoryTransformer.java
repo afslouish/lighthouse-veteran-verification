@@ -23,7 +23,7 @@ import org.hl7.v3.PRPAIN201306UV02;
 
 @Builder
 public class VeteranServiceHistoryTransformer {
-  @NonNull String uuid;
+  @NonNull String icn;
 
   @NonNull EMISdeploymentResponseType deploymentResponse;
 
@@ -144,7 +144,7 @@ public class VeteranServiceHistoryTransformer {
               .attributes(attributes)
               .id(
                   buildServiceEpisodeId(
-                      uuid,
+                      icn,
                       EmisUtils.getMilitaryEpisodeStartDate(militaryServiceEpisode),
                       EmisUtils.getMilitaryEpisodeEndDate(militaryServiceEpisode)))
               .build());
