@@ -33,20 +33,32 @@ public class VeteranServiceHistoryTransformer {
     ArrayList<Deployment> list = new ArrayList<>();
     for (gov.va.viers.cdi.emis.commonservice.v2.Deployment deployment :
         deploymentResponse.getDeployment()) {
+      LocalDate startDate = null;
+      if (deployment.getDeploymentData() != null
+          && deployment.getDeploymentData().getDeploymentStartDate() != null) {
+        startDate =
+            LocalDate.parse(deployment.getDeploymentData().getDeploymentStartDate().toString());
+      }
+
+      LocalDate endDate = null;
+      if (deployment.getDeploymentData() != null
+          && deployment.getDeploymentData().getDeploymentEndDate() != null) {
+        endDate = LocalDate.parse(deployment.getDeploymentData().getDeploymentEndDate().toString());
+      }
+
+      String location = null;
+      if (deployment.getDeploymentData() != null
+          && deployment.getDeploymentData().getDeploymentLocation().size() > 0) {
+        location =
+            deployment
+                .getDeploymentData()
+                .getDeploymentLocation()
+                .get(0)
+                .getDeploymentISOAlpha3Country();
+      }
+
       list.add(
-          Deployment.builder()
-              .endDate(
-                  LocalDate.parse(deployment.getDeploymentData().getDeploymentEndDate().toString()))
-              .startDate(
-                  LocalDate.parse(
-                      deployment.getDeploymentData().getDeploymentStartDate().toString()))
-              .location(
-                  deployment
-                      .getDeploymentData()
-                      .getDeploymentLocation()
-                      .get(0)
-                      .getDeploymentISOAlpha3Country())
-              .build());
+          Deployment.builder().endDate(endDate).startDate(startDate).location(location).build());
     }
     return list;
   }

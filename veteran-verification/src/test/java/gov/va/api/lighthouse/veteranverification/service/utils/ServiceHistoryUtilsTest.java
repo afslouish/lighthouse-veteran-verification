@@ -264,30 +264,38 @@ public class ServiceHistoryUtilsTest {
   public void buildDeploymentsNullEpisodeEndDate() {
     Deployment[] deploymentsLocal = deployments.clone();
     deploymentsLocal[1].endDate(null);
-    Assertions.assertThrows(
-        NullPointerException.class,
-        () -> {
-          List<Deployment> deploymentList =
-              ServiceHistoryUtils.buildDeployments(
-                  Arrays.stream(deploymentsLocal).toList(),
-                  LocalDate.of(2001, 2, 1),
-                  LocalDate.of(2006, 2, 1));
-        });
+
+    List<Deployment> deploymentList =
+        ServiceHistoryUtils.buildDeployments(
+            Arrays.stream(deploymentsLocal).toList(), LocalDate.of(2001, 2, 1), null);
+    Assertions.assertEquals(2, deploymentList.size());
+
+    Assertions.assertEquals("2004-01-01", deploymentList.get(0).startDate().toString());
+    Assertions.assertEquals("2005-01-01", deploymentList.get(0).endDate().toString());
+    Assertions.assertEquals("AFG", deploymentList.get(0).location());
+
+    Assertions.assertEquals("2006-01-01", deploymentList.get(1).startDate().toString());
+    Assertions.assertEquals("2007-01-01", deploymentList.get(1).endDate().toString());
+    Assertions.assertEquals("AFG", deploymentList.get(1).location());
   }
 
   @Test
   public void buildDeploymentsNullEpisodeStartDate() {
     Deployment[] deploymentsLocal = deployments.clone();
     deploymentsLocal[1].startDate(null);
-    Assertions.assertThrows(
-        NullPointerException.class,
-        () -> {
-          List<Deployment> deploymentList =
-              ServiceHistoryUtils.buildDeployments(
-                  Arrays.stream(deploymentsLocal).toList(),
-                  LocalDate.of(2001, 2, 1),
-                  LocalDate.of(2006, 2, 1));
-        });
+
+    List<Deployment> deploymentList =
+        ServiceHistoryUtils.buildDeployments(
+            Arrays.stream(deploymentsLocal).toList(), LocalDate.of(2001, 2, 1), null);
+    Assertions.assertEquals(2, deploymentList.size());
+
+    Assertions.assertEquals("2004-01-01", deploymentList.get(0).startDate().toString());
+    Assertions.assertEquals("2005-01-01", deploymentList.get(0).endDate().toString());
+    Assertions.assertEquals("AFG", deploymentList.get(0).location());
+
+    Assertions.assertEquals("2006-01-01", deploymentList.get(1).startDate().toString());
+    Assertions.assertEquals("2007-01-01", deploymentList.get(1).endDate().toString());
+    Assertions.assertEquals("AFG", deploymentList.get(1).location());
   }
 
   @Test

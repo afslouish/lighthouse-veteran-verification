@@ -74,7 +74,9 @@ public class ServiceHistoryUtils {
     return deployments.stream()
         .filter(
             deployment ->
-                isBeforeOrEqualTo(startDate, deployment.startDate())
+                deployment.startDate() != null
+                    && deployment.endDate() != null
+                    && isBeforeOrEqualTo(startDate, deployment.startDate())
                     && (endDate == null || isBeforeOrEqualTo(deployment.endDate(), endDate)))
         .collect(Collectors.toList());
   }
