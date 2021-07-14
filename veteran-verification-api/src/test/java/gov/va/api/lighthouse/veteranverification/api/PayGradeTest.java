@@ -6,28 +6,28 @@ import org.junit.jupiter.api.Test;
 
 public class PayGradeTest {
   @Test
-  public void PayGradeCodeIsEmpty() {
+  public void payGradeCodeIsEmpty() {
     String expected = "unknown";
     String actual = PayGrade.builder().payPlanCode("ME").payGradeCode("").build().toString();
     Assertions.assertEquals(expected, actual);
   }
 
   @Test
-  public void PayGradeCodeIsNull() {
+  public void payGradeCodeIsNull() {
     String expected = "unknown";
     String actual = PayGrade.builder().payPlanCode("ME").payGradeCode(null).build().toString();
     Assertions.assertEquals(expected, actual);
   }
 
   @Test
-  public void PayPlanCodeIsEmpty() {
+  public void payPlanCodeIsEmpty() {
     String expected = "unknown";
     String actual = PayGrade.builder().payPlanCode("").payGradeCode("05").build().toString();
     Assertions.assertEquals(expected, actual);
   }
 
   @Test
-  public void PayPlanCodeIsNull() {
+  public void payPlanCodeIsNull() {
     String expected = "unknown";
     String actual = PayGrade.builder().payPlanCode(null).payGradeCode("05").build().toString();
     Assertions.assertEquals(expected, actual);
