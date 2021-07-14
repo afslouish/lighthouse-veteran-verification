@@ -2,8 +2,9 @@ package gov.va.api.lighthouse.veteranverification.service.controller.veteranveri
 
 import gov.va.api.lighthouse.veteranverification.api.v0.Deployment;
 import gov.va.api.lighthouse.veteranverification.api.v0.ServiceHistoryResponse;
+import gov.va.api.lighthouse.veteranverification.service.MpiLookupUtils;
 import gov.va.api.lighthouse.veteranverification.service.utils.EmisUtils;
-import gov.va.api.lighthouse.veteranverification.service.utils.ServiceEpisodeAttributeBuilder;
+import gov.va.api.lighthouse.veteranverification.service.utils.ServiceHistoryUtils;
 import gov.va.api.lighthouse.veteranverification.service.utils.UuidV5;
 import gov.va.viers.cdi.emis.commonservice.v2.MilitaryServiceEpisode;
 import gov.va.viers.cdi.emis.requestresponse.v2.EMISdeploymentResponseType;
@@ -26,6 +27,36 @@ public class VeteranServiceHistoryTransformer {
   @NonNull EMISserviceEpisodeResponseType serviceEpisodeResponseType;
 
   @NonNull PRPAIN201306UV02 mpiResponse;
+
+  private ServiceHistoryResponse.ServiceHistoryAttributes buildMilitaryServiceEpisode(
+      @NonNull MilitaryServiceEpisode serviceEpisode,
+      @NonNull PRPAIN201306UV02 mpiResponse,
+      @NonNull List<Deployment> deployments) {
+    LocalDate startDate = EmisUtils.getMilitaryEpisodeStartDate(serviceEpisode);
+    LocalDate endDate = EmisUtils.getMilitaryEpisodeEndDate(serviceEpisode);
+    return ServiceHistoryResponse.ServiceHistoryAttributes.builder()
+        .firstName(MpiLookupUtils.getFirstName(mpiResponse))
+        .lastName(MpiLookupUtils.getLastName(mpiResponse))
+        .branchOfService(
+            ServiceHistoryUtils.buildBranchOfServiceString(
+                serviceEpisode.getMilitaryServiceEpisodeData().getBranchOfServiceCode(),
+                serviceEpisode.getKeyData().getPersonnelCategoryTypeCode()))
+        .startDate(startDate)
+        .endDate(endDate)
+        .payGrade(
+            ServiceHistoryUtils.buildPayGradeString(
+                serviceEpisode.getMilitaryServiceEpisodeData().getPayPlanCode(),
+                serviceEpisode.getMilitaryServiceEpisodeData().getPayGradeCode()))
+        .dischargeStatus(
+            ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.codeToEnum(
+                serviceEpisode
+                    .getMilitaryServiceEpisodeData()
+                    .getDischargeCharacterOfServiceCode()))
+        .separationReason(
+            serviceEpisode.getMilitaryServiceEpisodeData().getNarrativeReasonForSeparationTxt())
+        .deployments(ServiceHistoryUtils.buildDeployments(deployments, startDate, endDate))
+        .build();
+  }
 
   private String buildServiceEpisodeId(String uuid, LocalDate beginDate, LocalDate endDate) {
     String str =
@@ -84,8 +115,7 @@ public class VeteranServiceHistoryTransformer {
     for (MilitaryServiceEpisode militaryServiceEpisode :
         serviceEpisodeResponseType.getMilitaryServiceEpisode()) {
       ServiceHistoryResponse.ServiceHistoryAttributes attributes =
-          ServiceEpisodeAttributeBuilder.buildMilitaryServiceEpisode(
-              militaryServiceEpisode, mpiResponse, unusedDeployments);
+          buildMilitaryServiceEpisode(militaryServiceEpisode, mpiResponse, unusedDeployments);
       unusedDeployments = removeUsedDeployments(unusedDeployments, attributes.deployments);
       episodes.push(
           ServiceHistoryResponse.ServiceHistoryEpisode.builder()
