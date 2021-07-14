@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.experimental.UtilityClass;
-import org.apache.commons.lang3.StringUtils;
 
 @UtilityClass
 public class ServiceHistoryUtils {
@@ -28,27 +27,6 @@ public class ServiceHistoryUtils {
                     && isBeforeOrEqualTo(startDate, deployment.startDate())
                     && (endDate == null || isBeforeOrEqualTo(deployment.endDate(), endDate)))
         .collect(Collectors.toList());
-  }
-
-  /**
-   * Builds payGrade string from payPlanCode and payGradeCode.
-   *
-   * @param payPlanCode payPlanCode from emis response.
-   * @param payGradeCode payGradeCode from emis response.
-   * @return String payGrade
-   */
-  public String buildPayGradeString(String payPlanCode, String payGradeCode) {
-    if (payPlanCode == null
-        || payPlanCode.trim().isEmpty()
-        || payGradeCode == null
-        || payGradeCode.trim().isEmpty()) {
-      return "unknown";
-    }
-    return StringUtils.normalizeSpace(
-        String.format(
-            "%s%s",
-            StringUtils.normalizeSpace(payPlanCode).charAt(1),
-            StringUtils.normalizeSpace(payGradeCode)));
   }
 
   private boolean isBeforeOrEqualTo(LocalDate dateOne, LocalDate dateTwo) {

@@ -74,7 +74,7 @@ public class ServiceHistoryAttributesTest {
         serviceHistoryAttributes.startDate().toString(), LocalDate.of(2000, 1, 1).toString());
     Assertions.assertEquals(
         serviceHistoryAttributes.endDate().toString(), LocalDate.of(2001, 1, 1).toString());
-    Assertions.assertEquals(serviceHistoryAttributes.payGrade(), "PayGrade");
+    Assertions.assertEquals(serviceHistoryAttributes.payGrade().toString(), "E05");
     Assertions.assertEquals(
         serviceHistoryAttributes.dischargeStatus(),
         ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);

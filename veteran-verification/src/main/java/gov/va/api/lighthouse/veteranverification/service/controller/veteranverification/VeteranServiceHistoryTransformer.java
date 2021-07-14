@@ -2,6 +2,7 @@ package gov.va.api.lighthouse.veteranverification.service.controller.veteranveri
 
 import gov.va.api.lighthouse.veteranverification.api.v0.BranchOfService;
 import gov.va.api.lighthouse.veteranverification.api.v0.Deployment;
+import gov.va.api.lighthouse.veteranverification.api.v0.PayGrade;
 import gov.va.api.lighthouse.veteranverification.api.v0.ServiceHistoryResponse;
 import gov.va.api.lighthouse.veteranverification.service.MpiLookupUtils;
 import gov.va.api.lighthouse.veteranverification.service.utils.EmisUtils;
@@ -48,9 +49,10 @@ public class VeteranServiceHistoryTransformer {
         .startDate(startDate)
         .endDate(endDate)
         .payGrade(
-            ServiceHistoryUtils.buildPayGradeString(
-                serviceEpisode.getMilitaryServiceEpisodeData().getPayPlanCode(),
-                serviceEpisode.getMilitaryServiceEpisodeData().getPayGradeCode()))
+            PayGrade.builder()
+                .payPlanCode(serviceEpisode.getMilitaryServiceEpisodeData().getPayPlanCode())
+                .payGradeCode(serviceEpisode.getMilitaryServiceEpisodeData().getPayGradeCode())
+                .build())
         .dischargeStatus(
             ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.codeToEnum(
                 serviceEpisode

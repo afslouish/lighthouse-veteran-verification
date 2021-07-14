@@ -70,9 +70,8 @@ public class ServiceHistoryUtilsTest {
     Assertions.assertThrows(
         NullPointerException.class,
         () -> {
-          List<Deployment> deploymentList =
-              ServiceHistoryUtils.buildDeployments(
-                  null, LocalDate.of(2001, 2, 1), LocalDate.of(2006, 2, 1));
+          ServiceHistoryUtils.buildDeployments(
+              null, LocalDate.of(2001, 2, 1), LocalDate.of(2006, 2, 1));
         });
   }
 
@@ -122,47 +121,5 @@ public class ServiceHistoryUtilsTest {
           ServiceHistoryUtils.buildDeployments(
               Arrays.stream(deployments).toList(), null, LocalDate.of(2006, 2, 1));
         });
-  }
-
-  @Test
-  public void buildPayGradeStingPayGradeCodeIsEmpty() {
-    String expected = "unknown";
-    String actual = ServiceHistoryUtils.buildPayGradeString("ME", "");
-    Assertions.assertEquals(expected, actual);
-  }
-
-  @Test
-  public void buildPayGradeStingPayGradeCodeIsNull() {
-    String expected = "unknown";
-    String actual = ServiceHistoryUtils.buildPayGradeString("ME", null);
-    Assertions.assertEquals(expected, actual);
-  }
-
-  @Test
-  public void buildPayGradeStingPayPlanCodeIsEmpty() {
-    String expected = "unknown";
-    String actual = ServiceHistoryUtils.buildPayGradeString("", "05");
-    Assertions.assertEquals(expected, actual);
-  }
-
-  @Test
-  public void buildPayGradeStingPayPlanCodeIsNull() {
-    String expected = "unknown";
-    String actual = ServiceHistoryUtils.buildPayGradeString(null, "05");
-    Assertions.assertEquals(expected, actual);
-  }
-
-  @Test
-  public void buildPayGradeStringHappyPath() {
-    String expected = "E05";
-    String actual = ServiceHistoryUtils.buildPayGradeString("ME", "05");
-    Assertions.assertEquals(expected, actual);
-  }
-
-  @Test
-  public void buildPayGradeStringHappyPathExtraSpace() {
-    String expected = "E05";
-    String actual = ServiceHistoryUtils.buildPayGradeString("   ME ", "  05   ");
-    Assertions.assertEquals(expected, actual);
   }
 }

@@ -43,7 +43,7 @@ public class VeteranServiceHistoryTransformerTest {
     Assertions.assertEquals(attributesOne.branchOfService().toString(), "Army");
     Assertions.assertEquals(attributesOne.startDate().toString(), "2000-01-01");
     Assertions.assertEquals(attributesOne.endDate().toString(), "2001-02-01");
-    Assertions.assertEquals(attributesOne.payGrade(), "E05");
+    Assertions.assertEquals(attributesOne.payGrade().toString(), "E05");
     Assertions.assertEquals(
         attributesOne.dischargeStatus(),
         ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);
@@ -54,7 +54,7 @@ public class VeteranServiceHistoryTransformerTest {
     Assertions.assertEquals(attributesTwo.branchOfService().toString(), "Air Force");
     Assertions.assertEquals(attributesTwo.startDate().toString(), "2002-01-01");
     Assertions.assertEquals(attributesTwo.endDate().toString(), "2003-02-01");
-    Assertions.assertEquals(attributesTwo.payGrade(), "E05");
+    Assertions.assertEquals(attributesTwo.payGrade().toString(), "E05");
     Assertions.assertEquals(
         attributesTwo.dischargeStatus(),
         ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);
@@ -126,7 +126,7 @@ public class VeteranServiceHistoryTransformerTest {
     Assertions.assertEquals(attributesOne.branchOfService().toString(), "Army");
     Assertions.assertEquals(attributesOne.startDate().toString(), "2000-01-01");
     Assertions.assertEquals(attributesOne.endDate().toString(), "2001-02-01");
-    Assertions.assertEquals(attributesOne.payGrade(), "E05");
+    Assertions.assertEquals(attributesOne.payGrade().toString(), "E05");
     Assertions.assertEquals(
         attributesOne.dischargeStatus(),
         ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);
@@ -141,7 +141,7 @@ public class VeteranServiceHistoryTransformerTest {
     Assertions.assertEquals(attributesTwo.branchOfService().toString(), "Air Force");
     Assertions.assertEquals(attributesTwo.startDate().toString(), "2002-01-01");
     Assertions.assertEquals(attributesTwo.endDate().toString(), "2003-02-01");
-    Assertions.assertEquals(attributesTwo.payGrade(), "E05");
+    Assertions.assertEquals(attributesTwo.payGrade().toString(), "E05");
     Assertions.assertEquals(
         attributesTwo.dischargeStatus(),
         ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);
@@ -182,7 +182,7 @@ public class VeteranServiceHistoryTransformerTest {
     Assertions.assertEquals(attributesOne.branchOfService().toString(), "Army");
     Assertions.assertEquals(attributesOne.startDate().toString(), "2000-01-01");
     Assertions.assertEquals(attributesOne.endDate().toString(), "2001-02-01");
-    Assertions.assertEquals(attributesOne.payGrade(), "E05");
+    Assertions.assertEquals(attributesOne.payGrade().toString(), "E05");
     Assertions.assertEquals(
         attributesOne.dischargeStatus(),
         ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);
@@ -197,7 +197,7 @@ public class VeteranServiceHistoryTransformerTest {
     Assertions.assertEquals(attributesTwo.branchOfService().toString(), "Air Force");
     Assertions.assertEquals(attributesTwo.startDate().toString(), "2002-01-01");
     Assertions.assertEquals(attributesTwo.endDate().toString(), "2003-02-01");
-    Assertions.assertEquals(attributesTwo.payGrade(), "E05");
+    Assertions.assertEquals(attributesTwo.payGrade().toString(), "E05");
     Assertions.assertEquals(
         attributesTwo.dischargeStatus(),
         ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);
@@ -238,7 +238,7 @@ public class VeteranServiceHistoryTransformerTest {
     Assertions.assertEquals(attributesOne.branchOfService().toString(), "Army");
     Assertions.assertEquals(attributesOne.startDate().toString(), "2000-01-01");
     Assertions.assertEquals(attributesOne.endDate().toString(), "2001-02-01");
-    Assertions.assertEquals(attributesOne.payGrade(), "E05");
+    Assertions.assertEquals(attributesOne.payGrade().toString(), "E05");
     Assertions.assertEquals(
         attributesOne.dischargeStatus(),
         ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);
@@ -253,7 +253,7 @@ public class VeteranServiceHistoryTransformerTest {
     Assertions.assertEquals(attributesTwo.branchOfService().toString(), "Air Force");
     Assertions.assertEquals(attributesTwo.startDate().toString(), "2002-01-01");
     Assertions.assertEquals(attributesTwo.endDate().toString(), "2003-02-01");
-    Assertions.assertEquals(attributesTwo.payGrade(), "E05");
+    Assertions.assertEquals(attributesTwo.payGrade().toString(), "E05");
     Assertions.assertEquals(
         attributesTwo.dischargeStatus(),
         ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);
@@ -299,7 +299,7 @@ public class VeteranServiceHistoryTransformerTest {
     Assertions.assertEquals(attributesOne.branchOfService().toString(), "Army");
     Assertions.assertEquals(attributesOne.startDate().toString(), "2000-01-01");
     Assertions.assertNull(attributesOne.endDate());
-    Assertions.assertEquals(attributesOne.payGrade(), "E05");
+    Assertions.assertEquals(attributesOne.payGrade().toString(), "E05");
     Assertions.assertEquals(
         attributesOne.dischargeStatus(),
         ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);
@@ -330,7 +330,7 @@ public class VeteranServiceHistoryTransformerTest {
     Assertions.assertEquals(attributesTwo.branchOfService().toString(), "Air Force");
     Assertions.assertEquals(attributesTwo.startDate().toString(), "2002-01-01");
     Assertions.assertEquals(attributesTwo.endDate().toString(), "2003-02-01");
-    Assertions.assertEquals(attributesTwo.payGrade(), "E05");
+    Assertions.assertEquals(attributesTwo.payGrade().toString(), "E05");
     Assertions.assertEquals(
         attributesTwo.dischargeStatus(),
         ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);
@@ -376,7 +376,7 @@ public class VeteranServiceHistoryTransformerTest {
     Assertions.assertEquals(attributesOne.branchOfService().toString(), "Army");
     Assertions.assertEquals(attributesOne.startDate().toString(), "2000-01-01");
     Assertions.assertNull(attributesOne.endDate());
-    Assertions.assertEquals(attributesOne.payGrade(), "E05");
+    Assertions.assertEquals(attributesOne.payGrade().toString(), "E05");
     Assertions.assertEquals(
         attributesOne.dischargeStatus(),
         ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);
@@ -403,7 +403,7 @@ public class VeteranServiceHistoryTransformerTest {
     Assertions.assertEquals(attributesTwo.branchOfService().toString(), "Air Force");
     Assertions.assertEquals(attributesTwo.startDate().toString(), "2002-01-01");
     Assertions.assertEquals(attributesTwo.endDate().toString(), "2003-02-01");
-    Assertions.assertEquals(attributesTwo.payGrade(), "E05");
+    Assertions.assertEquals(attributesTwo.payGrade().toString(), "E05");
     Assertions.assertEquals(
         attributesTwo.dischargeStatus(),
         ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);
