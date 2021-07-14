@@ -69,7 +69,7 @@ public class ServiceHistoryAttributesTest {
 
     Assertions.assertEquals(serviceHistoryAttributes.firstName(), "John");
     Assertions.assertEquals(serviceHistoryAttributes.lastName(), "Doe");
-    Assertions.assertEquals(serviceHistoryAttributes.branchOfService(), "BranchOfService");
+    Assertions.assertEquals(serviceHistoryAttributes.branchOfService().toString(), "Army");
     Assertions.assertEquals(
         serviceHistoryAttributes.startDate().toString(), LocalDate.of(2000, 1, 1).toString());
     Assertions.assertEquals(

@@ -1,5 +1,6 @@
 package gov.va.api.lighthouse.veteranverification.service.controller.veteranverification;
 
+import gov.va.api.lighthouse.veteranverification.api.v0.BranchOfService;
 import gov.va.api.lighthouse.veteranverification.api.v0.Deployment;
 import gov.va.api.lighthouse.veteranverification.api.v0.ServiceHistoryResponse;
 import gov.va.api.lighthouse.veteranverification.service.MpiLookupUtils;
@@ -39,9 +40,11 @@ public class VeteranServiceHistoryTransformer {
         .firstName(MpiLookupUtils.getFirstName(mpiResponse))
         .lastName(MpiLookupUtils.getLastName(mpiResponse))
         .branchOfService(
-            ServiceHistoryUtils.buildBranchOfServiceString(
-                serviceEpisode.getMilitaryServiceEpisodeData().getBranchOfServiceCode(),
-                serviceEpisode.getKeyData().getPersonnelCategoryTypeCode()))
+            BranchOfService.builder()
+                .branchOfService(
+                    serviceEpisode.getMilitaryServiceEpisodeData().getBranchOfServiceCode())
+                .personnelCategory(serviceEpisode.getKeyData().getPersonnelCategoryTypeCode())
+                .build())
         .startDate(startDate)
         .endDate(endDate)
         .payGrade(

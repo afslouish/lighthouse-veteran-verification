@@ -1,5 +1,6 @@
 package gov.va.api.lighthouse.veteranverification.api;
 
+import gov.va.api.lighthouse.veteranverification.api.v0.BranchOfService;
 import gov.va.api.lighthouse.veteranverification.api.v0.Deployment;
 import gov.va.api.lighthouse.veteranverification.api.v0.ServiceHistoryResponse;
 import java.time.LocalDate;
@@ -21,7 +22,8 @@ public class TestUtils {
     return ServiceHistoryResponse.ServiceHistoryAttributes.builder()
         .firstName("John")
         .lastName("Doe")
-        .branchOfService("BranchOfService")
+        .branchOfService(
+            BranchOfService.builder().branchOfService("A").personnelCategory("A").build())
         .startDate(LocalDate.of(2000, 1, 1))
         .endDate(LocalDate.of(2001, 1, 1))
         .payGrade("PayGrade")
