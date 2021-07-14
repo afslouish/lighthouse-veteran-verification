@@ -108,7 +108,7 @@ public interface VeteranVerificationService {
       summary = "Retrieve service history of authorized Veteran",
       security = {@SecurityRequirement(name = "bearer_token")})
   @Tag(name = "Veteran Verification")
-  ServiceHistoryResponse service_history();
+  ServiceHistoryResponse serviceHistory();
 
   @GET
   @Path("status")

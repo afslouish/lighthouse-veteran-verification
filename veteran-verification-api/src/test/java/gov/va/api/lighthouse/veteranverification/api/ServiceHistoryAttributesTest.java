@@ -15,7 +15,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 public class ServiceHistoryAttributesTest {
   @Test
-  public void BranchOfServiceIsNonNullable() {
+  public void branchOfServiceIsNonNullable() {
     ServiceHistoryResponse.ServiceHistoryAttributes serviceHistoryAttributes =
         TestUtils.makeServiceHistoryAttributes();
     Assertions.assertThrows(
@@ -26,7 +26,7 @@ public class ServiceHistoryAttributesTest {
   }
 
   @Test
-  public void DeploymentsIsNonNullable() {
+  public void deploymentsIsNonNullable() {
     ServiceHistoryResponse.ServiceHistoryAttributes serviceHistoryAttributes =
         TestUtils.makeServiceHistoryAttributes();
     Assertions.assertThrows(
@@ -37,21 +37,21 @@ public class ServiceHistoryAttributesTest {
   }
 
   @Test
-  public void DischargeStatusNullable() {
+  public void dischargeStatusNullable() {
     ServiceHistoryResponse.ServiceHistoryAttributes serviceHistoryAttributes =
         TestUtils.makeServiceHistoryAttributes();
     serviceHistoryAttributes.dischargeStatus(null);
   }
 
   @Test
-  public void EndDateIsNullable() {
+  public void endDateIsNullable() {
     ServiceHistoryResponse.ServiceHistoryAttributes serviceHistoryAttributes =
         TestUtils.makeServiceHistoryAttributes();
     serviceHistoryAttributes.endDate(null);
   }
 
   @Test
-  public void FirstNameIsNonNullable() {
+  public void firstNameIsNonNullable() {
     ServiceHistoryResponse.ServiceHistoryAttributes serviceHistoryAttributes =
         TestUtils.makeServiceHistoryAttributes();
     Assertions.assertThrows(
@@ -62,7 +62,7 @@ public class ServiceHistoryAttributesTest {
   }
 
   @Test
-  public void HappyPath() {
+  public void happyPath() {
     Deployment[] deployments = {TestUtils.makeDeployment()};
     ServiceHistoryResponse.ServiceHistoryAttributes serviceHistoryAttributes =
         TestUtils.makeServiceHistoryAttributes();
@@ -85,7 +85,7 @@ public class ServiceHistoryAttributesTest {
   }
 
   @Test
-  public void LastNameIsNonNullable() {
+  public void lastNameIsNonNullable() {
     ServiceHistoryResponse.ServiceHistoryAttributes serviceHistoryAttributes =
         TestUtils.makeServiceHistoryAttributes();
     Assertions.assertThrows(
@@ -96,7 +96,7 @@ public class ServiceHistoryAttributesTest {
   }
 
   @Test
-  public void PayGradeIsNonNullable() {
+  public void payGradeIsNonNullable() {
     ServiceHistoryResponse.ServiceHistoryAttributes serviceHistoryAttributes =
         TestUtils.makeServiceHistoryAttributes();
     Assertions.assertThrows(
@@ -107,7 +107,7 @@ public class ServiceHistoryAttributesTest {
   }
 
   @Test
-  public void SeparationReasonIsNonNullable() {
+  public void separationReasonIsNonNullable() {
     ServiceHistoryResponse.ServiceHistoryAttributes serviceHistoryAttributes =
         TestUtils.makeServiceHistoryAttributes();
     Assertions.assertThrows(
@@ -118,7 +118,7 @@ public class ServiceHistoryAttributesTest {
   }
 
   @Test
-  public void StartDateIsNullable() {
+  public void startDateIsNullable() {
     ServiceHistoryResponse.ServiceHistoryAttributes serviceHistoryAttributes =
         TestUtils.makeServiceHistoryAttributes();
     serviceHistoryAttributes.startDate(null);

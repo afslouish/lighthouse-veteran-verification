@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 @Data
 public class VeteranVerificationResponseTest {
   @Test
-  public void DataIsNonNullable() {
+  public void dataIsNonNullable() {
     ServiceHistoryResponse veteranVerificationResponse = TestUtils.makeServiceHistoryResponse();
     Assertions.assertThrows(
         NullPointerException.class,
@@ -18,7 +18,7 @@ public class VeteranVerificationResponseTest {
   }
 
   @Test
-  public void HappyPath() {
+  public void happyPath() {
     ServiceHistoryResponse serviceHistoryResponseResponse = TestUtils.makeServiceHistoryResponse();
     Assertions.assertNotNull(serviceHistoryResponseResponse.data());
   }

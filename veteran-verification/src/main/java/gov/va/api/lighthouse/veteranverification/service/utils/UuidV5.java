@@ -2,6 +2,7 @@ package gov.va.api.lighthouse.veteranverification.service.utils;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
@@ -9,7 +10,7 @@ import java.util.UUID;
 
 @SuppressFBWarnings({"WEAK_MESSAGE_DIGEST_SHA1"})
 public class UuidV5 {
-  private static final Charset UTF8 = Charset.forName("UTF-8");
+  private static final Charset UTF8 = StandardCharsets.UTF_8;
 
   private static UUID fromBytes(byte[] data) {
     // Based on the private UUID(bytes[]) constructor

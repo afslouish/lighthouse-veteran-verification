@@ -6,16 +6,14 @@ import org.junit.jupiter.api.Test;
 
 public class DischargeStatusTest {
   @Test
-  public void BadCode() {
+  public void badCode() {
     Assertions.assertThrows(
         Exception.class,
-        () -> {
-          ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.codeToEnum("R");
-        });
+        () -> ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.codeToEnum("R"));
   }
 
   @Test
-  public void HappyPathBadConduct() {
+  public void happyPathBadConduct() {
     ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus dischargeStatus =
         ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.codeToEnum("D");
     Assertions.assertEquals(
@@ -25,7 +23,7 @@ public class DischargeStatusTest {
   }
 
   @Test
-  public void HappyPathDishonorable() {
+  public void happyPathDishonorable() {
     ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus dischargeStatus =
         ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.codeToEnum("F");
     Assertions.assertEquals(
@@ -35,7 +33,7 @@ public class DischargeStatusTest {
   }
 
   @Test
-  public void HappyPathDishonorableForVaPurposes() {
+  public void happyPathDishonorableForVaPurposes() {
     ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus dischargeStatus =
         ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.codeToEnum("K");
     Assertions.assertEquals(
@@ -46,7 +44,7 @@ public class DischargeStatusTest {
   }
 
   @Test
-  public void HappyPathGeneral() {
+  public void happyPathGeneral() {
     ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus dischargeStatus =
         ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.codeToEnum("B");
     Assertions.assertEquals(
@@ -55,7 +53,7 @@ public class DischargeStatusTest {
   }
 
   @Test
-  public void HappyPathHonorable() {
+  public void happyPathHonorable() {
     ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus dischargeStatus =
         ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.codeToEnum("A");
     Assertions.assertEquals(
@@ -64,7 +62,7 @@ public class DischargeStatusTest {
   }
 
   @Test
-  public void HappyPathHonorableAbsenceOfNegativeReport() {
+  public void happyPathHonorableAbsenceOfNegativeReport() {
     ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus dischargeStatus =
         ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.codeToEnum("H");
     Assertions.assertEquals(
@@ -75,7 +73,7 @@ public class DischargeStatusTest {
   }
 
   @Test
-  public void HappyPathHonorableForVaPurposes() {
+  public void happyPathHonorableForVaPurposes() {
     ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus dischargeStatus =
         ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.codeToEnum("J");
     Assertions.assertEquals(
@@ -85,7 +83,7 @@ public class DischargeStatusTest {
   }
 
   @Test
-  public void HappyPathLowerCaseCode() {
+  public void happyPathLowerCaseCode() {
     ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus dischargeStatus =
         ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.codeToEnum("k");
     Assertions.assertEquals(
@@ -96,7 +94,7 @@ public class DischargeStatusTest {
   }
 
   @Test
-  public void HappyPathOtherThanHonorable() {
+  public void happyPathOtherThanHonorable() {
     ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus dischargeStatus =
         ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.codeToEnum("E");
     Assertions.assertEquals(
@@ -106,7 +104,7 @@ public class DischargeStatusTest {
   }
 
   @Test
-  public void HappyPathUncharacterized() {
+  public void happyPathUncharacterized() {
     ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus dischargeStatus =
         ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.codeToEnum("Y");
     Assertions.assertEquals(
@@ -116,7 +114,7 @@ public class DischargeStatusTest {
   }
 
   @Test
-  public void HappyPathUnknown() {
+  public void happyPathUnknown() {
     ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus dischargeStatus =
         ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.codeToEnum("Z");
     Assertions.assertEquals(

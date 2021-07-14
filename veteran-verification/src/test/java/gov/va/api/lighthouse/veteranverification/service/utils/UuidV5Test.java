@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 public class UuidV5Test {
   @Test
-  public void HappyPath() {
+  public void happyPath() {
     // These values come from test user va.api.user+idme.001@gmail.com
     String string = "ccb134182ad14a82b53083e3cb2ed211-1966-11-30-1972-03-30";
 
