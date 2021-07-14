@@ -12,18 +12,24 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import lombok.Builder;
 import lombok.NonNull;
 import org.hl7.v3.PRPAIN201306UV02;
 
+@Builder
 public class VeteranServiceHistoryTransformer {
-  private static String buildServiceEpisodeId(String uuid, String beginDate, String endDate) {
+  @NonNull String uuid;
+  @NonNull EMISdeploymentResponseType deploymentResponse;
+  @NonNull EMISserviceEpisodeResponseType serviceEpisodeResponseType;
+  @NonNull PRPAIN201306UV02 mpiResponse;
+
+  private String buildServiceEpisodeId(String uuid, String beginDate, String endDate) {
     String str = String.format("%s-%s-%s", uuid.trim(), beginDate, endDate);
     return UuidV5.nameUuidFromNamespaceAndString("gov.vets.service-history-episodes", str)
         .toString();
   }
 
-  private static ArrayList<Deployment> makeDeploymentList(
-      EMISdeploymentResponseType deploymentResponse) {
+  private ArrayList<Deployment> makeDeploymentList(EMISdeploymentResponseType deploymentResponse) {
     ArrayList<Deployment> list = new ArrayList<>();
     for (gov.va.viers.cdi.emis.commonservice.v2.Deployment deployment :
         deploymentResponse.getDeployment()) {
@@ -45,7 +51,7 @@ public class VeteranServiceHistoryTransformer {
     return list;
   }
 
-  private static ArrayList<Deployment> removeUsedDeployments(
+  private ArrayList<Deployment> removeUsedDeployments(
       ArrayList<Deployment> fullDeploymentList, List<Deployment> usedDeploymentList) {
     fullDeploymentList.removeAll(usedDeploymentList);
     return fullDeploymentList;
@@ -54,16 +60,9 @@ public class VeteranServiceHistoryTransformer {
   /**
    * Builds service history response from EMIS and MPI responses.
    *
-   * @param deploymentResponse EMIS deployment history response.
-   * @param serviceEpisodeResponseType EMIS service episode response.
-   * @param mpiResponse MPI user response.
    * @return ServiceHistoryResponse object.
    */
-  public static ServiceHistoryResponse serviceHistoryTransformer(
-      @NonNull String uuid,
-      @NonNull EMISdeploymentResponseType deploymentResponse,
-      @NonNull EMISserviceEpisodeResponseType serviceEpisodeResponseType,
-      @NonNull PRPAIN201306UV02 mpiResponse) {
+  public ServiceHistoryResponse serviceHistoryTransformer() {
     ArrayDeque<ServiceHistoryResponse.ServiceHistoryEpisode> episodes = new ArrayDeque<>();
     ArrayList<Deployment> unusedDeployments = makeDeploymentList(deploymentResponse);
     Collections.sort(

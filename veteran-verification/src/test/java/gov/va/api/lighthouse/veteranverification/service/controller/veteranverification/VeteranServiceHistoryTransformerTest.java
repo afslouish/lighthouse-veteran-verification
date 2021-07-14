@@ -16,9 +16,16 @@ public class VeteranServiceHistoryTransformerTest {
     PRPAIN201306UV02 mpiResponse = TestUtils.createMpiResponse("mpi/mpi_profile_response_body.xml");
     EMISdeploymentResponseType deployments =
         TestUtils.createDeploymentResponse("emis/deployments_response.xml");
-    ServiceHistoryResponse response =
-        VeteranServiceHistoryTransformer.serviceHistoryTransformer(
-            "uuid", deployments, serviceEpisodeResponse, mpiResponse);
+
+    VeteranServiceHistoryTransformer transformer =
+        VeteranServiceHistoryTransformer.builder()
+            .uuid("uuid")
+            .deploymentResponse(deployments)
+            .serviceEpisodeResponseType(serviceEpisodeResponse)
+            .mpiResponse(mpiResponse)
+            .build();
+    ServiceHistoryResponse response = transformer.serviceHistoryTransformer();
+
     Assertions.assertEquals(response.data().size(), 2);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeOne = response.data().get(0);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeTwo = response.data().get(1);
@@ -67,9 +74,16 @@ public class VeteranServiceHistoryTransformerTest {
     PRPAIN201306UV02 mpiResponse = TestUtils.createMpiResponse("mpi/mpi_profile_response_body.xml");
     EMISdeploymentResponseType deployments =
         TestUtils.createDeploymentResponse("emis/deployments_response.xml");
-    ServiceHistoryResponse response =
-        VeteranServiceHistoryTransformer.serviceHistoryTransformer(
-            "uuid", deployments, serviceEpisodeResponse, mpiResponse);
+
+    VeteranServiceHistoryTransformer transformer =
+        VeteranServiceHistoryTransformer.builder()
+            .uuid("uuid")
+            .deploymentResponse(deployments)
+            .serviceEpisodeResponseType(serviceEpisodeResponse)
+            .mpiResponse(mpiResponse)
+            .build();
+    ServiceHistoryResponse response = transformer.serviceHistoryTransformer();
+
     Assertions.assertEquals(response.data().size(), 2);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeOne = response.data().get(0);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeTwo = response.data().get(1);
@@ -118,11 +132,16 @@ public class VeteranServiceHistoryTransformerTest {
     PRPAIN201306UV02 mpiResponse = TestUtils.createMpiResponse("mpi/mpi_profile_response_body.xml");
     EMISdeploymentResponseType deployments =
         TestUtils.createDeploymentResponse("emis/deployments_response.xml");
+
     Assertions.assertThrows(
         NullPointerException.class,
         () -> {
-          VeteranServiceHistoryTransformer.serviceHistoryTransformer(
-              "uuid", null, serviceEpisodeResponse, mpiResponse);
+          VeteranServiceHistoryTransformer.builder()
+              .uuid("uuid")
+              .deploymentResponse(null)
+              .serviceEpisodeResponseType(serviceEpisodeResponse)
+              .mpiResponse(mpiResponse)
+              .build();
         });
   }
 
@@ -133,11 +152,16 @@ public class VeteranServiceHistoryTransformerTest {
     PRPAIN201306UV02 mpiResponse = TestUtils.createMpiResponse("mpi/mpi_profile_response_body.xml");
     EMISdeploymentResponseType deployments =
         TestUtils.createDeploymentResponse("emis/deployments_response.xml");
+
     Assertions.assertThrows(
         NullPointerException.class,
         () -> {
-          VeteranServiceHistoryTransformer.serviceHistoryTransformer(
-              "uuid", deployments, serviceEpisodeResponse, null);
+          VeteranServiceHistoryTransformer.builder()
+              .uuid("uuid")
+              .deploymentResponse(deployments)
+              .serviceEpisodeResponseType(serviceEpisodeResponse)
+              .mpiResponse(null)
+              .build();
         });
   }
 
@@ -148,11 +172,16 @@ public class VeteranServiceHistoryTransformerTest {
     PRPAIN201306UV02 mpiResponse = TestUtils.createMpiResponse("mpi/mpi_profile_response_body.xml");
     EMISdeploymentResponseType deployments =
         TestUtils.createDeploymentResponse("emis/deployments_response.xml");
+
     Assertions.assertThrows(
         NullPointerException.class,
         () -> {
-          VeteranServiceHistoryTransformer.serviceHistoryTransformer(
-              "uuid", deployments, null, mpiResponse);
+          VeteranServiceHistoryTransformer.builder()
+              .uuid("uuid")
+              .deploymentResponse(deployments)
+              .serviceEpisodeResponseType(null)
+              .mpiResponse(mpiResponse)
+              .build();
         });
   }
 
@@ -163,11 +192,16 @@ public class VeteranServiceHistoryTransformerTest {
     PRPAIN201306UV02 mpiResponse = TestUtils.createMpiResponse("mpi/mpi_profile_response_body.xml");
     EMISdeploymentResponseType deployments =
         TestUtils.createDeploymentResponse("emis/deployments_response.xml");
+
     Assertions.assertThrows(
         NullPointerException.class,
         () -> {
-          VeteranServiceHistoryTransformer.serviceHistoryTransformer(
-              null, deployments, serviceEpisodeResponse, mpiResponse);
+          VeteranServiceHistoryTransformer.builder()
+              .uuid(null)
+              .deploymentResponse(deployments)
+              .serviceEpisodeResponseType(serviceEpisodeResponse)
+              .mpiResponse(mpiResponse)
+              .build();
         });
   }
 
@@ -183,9 +217,16 @@ public class VeteranServiceHistoryTransformerTest {
         .get(0)
         .getMilitaryServiceEpisodeData()
         .setServiceEpisodeEndDate(null);
-    ServiceHistoryResponse response =
-        VeteranServiceHistoryTransformer.serviceHistoryTransformer(
-            "uuid", deployments, serviceEpisodeResponse, mpiResponse);
+
+    VeteranServiceHistoryTransformer transformer =
+        VeteranServiceHistoryTransformer.builder()
+            .uuid("uuid")
+            .deploymentResponse(deployments)
+            .serviceEpisodeResponseType(serviceEpisodeResponse)
+            .mpiResponse(mpiResponse)
+            .build();
+    ServiceHistoryResponse response = transformer.serviceHistoryTransformer();
+
     Assertions.assertEquals(response.data().size(), 2);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeOne = response.data().get(0);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeTwo = response.data().get(1);
@@ -255,9 +296,16 @@ public class VeteranServiceHistoryTransformerTest {
         .get(1)
         .getMilitaryServiceEpisodeData()
         .setServiceEpisodeEndDate(null);
-    ServiceHistoryResponse response =
-        VeteranServiceHistoryTransformer.serviceHistoryTransformer(
-            "uuid", deployments, serviceEpisodeResponse, mpiResponse);
+
+    VeteranServiceHistoryTransformer transformer =
+        VeteranServiceHistoryTransformer.builder()
+            .uuid("uuid")
+            .deploymentResponse(deployments)
+            .serviceEpisodeResponseType(serviceEpisodeResponse)
+            .mpiResponse(mpiResponse)
+            .build();
+    ServiceHistoryResponse response = transformer.serviceHistoryTransformer();
+
     Assertions.assertEquals(response.data().size(), 2);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeOne = response.data().get(0);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeTwo = response.data().get(1);
