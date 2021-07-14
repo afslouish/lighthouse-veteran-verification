@@ -6,7 +6,6 @@ import gov.va.api.lighthouse.veteranverification.api.v0.PayGrade;
 import gov.va.api.lighthouse.veteranverification.api.v0.ServiceHistoryResponse;
 import gov.va.api.lighthouse.veteranverification.service.MpiLookupUtils;
 import gov.va.api.lighthouse.veteranverification.service.utils.EmisUtils;
-import gov.va.api.lighthouse.veteranverification.service.utils.ServiceHistoryUtils;
 import gov.va.api.lighthouse.veteranverification.service.utils.UuidV5;
 import gov.va.viers.cdi.emis.commonservice.v2.MilitaryServiceEpisode;
 import gov.va.viers.cdi.emis.requestresponse.v2.EMISdeploymentResponseType;
@@ -17,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.Builder;
 import lombok.NonNull;
 import org.hl7.v3.PRPAIN201306UV02;
@@ -30,6 +30,18 @@ public class VeteranServiceHistoryTransformer {
   @NonNull EMISserviceEpisodeResponseType serviceEpisodeResponseType;
 
   @NonNull PRPAIN201306UV02 mpiResponse;
+
+  private List<Deployment> buildDeployments(
+      List<Deployment> deployments, LocalDate startDate, LocalDate endDate) {
+    return deployments.stream()
+        .filter(
+            deployment ->
+                deployment.startDate() != null
+                    && deployment.endDate() != null
+                    && isBeforeOrEqualTo(startDate, deployment.startDate())
+                    && (endDate == null || isBeforeOrEqualTo(deployment.endDate(), endDate)))
+        .collect(Collectors.toList());
+  }
 
   private ServiceHistoryResponse.ServiceHistoryAttributes buildMilitaryServiceEpisode(
       @NonNull MilitaryServiceEpisode serviceEpisode,
@@ -60,7 +72,7 @@ public class VeteranServiceHistoryTransformer {
                     .getDischargeCharacterOfServiceCode()))
         .separationReason(
             serviceEpisode.getMilitaryServiceEpisodeData().getNarrativeReasonForSeparationTxt())
-        .deployments(ServiceHistoryUtils.buildDeployments(deployments, startDate, endDate))
+        .deployments(buildDeployments(deployments, startDate, endDate))
         .build();
   }
 
@@ -73,6 +85,10 @@ public class VeteranServiceHistoryTransformer {
             endDate != null ? endDate.toString() : null);
     return UuidV5.nameUuidFromNamespaceAndString("gov.vets.service-history-episodes", str)
         .toString();
+  }
+
+  private boolean isBeforeOrEqualTo(LocalDate dateOne, LocalDate dateTwo) {
+    return dateOne.isBefore(dateTwo) || dateOne.isEqual(dateTwo);
   }
 
   private List<Deployment> makeDeploymentList(EMISdeploymentResponseType deploymentResponse) {
