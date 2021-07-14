@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Deque;
 import java.util.List;
 import lombok.Builder;
 import lombok.NonNull;
@@ -103,7 +104,7 @@ public class VeteranServiceHistoryTransformer {
    * @return ServiceHistoryResponse object.
    */
   public ServiceHistoryResponse serviceHistoryTransformer() {
-    ArrayDeque<ServiceHistoryResponse.ServiceHistoryEpisode> episodes = new ArrayDeque<>();
+    Deque<ServiceHistoryResponse.ServiceHistoryEpisode> episodes = new ArrayDeque<>();
     List<Deployment> unusedDeployments = makeDeploymentList(deploymentResponse);
     Collections.sort(
         serviceEpisodeResponseType.getMilitaryServiceEpisode(),
