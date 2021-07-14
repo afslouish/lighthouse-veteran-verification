@@ -3,7 +3,7 @@ package gov.va.api.lighthouse.veteranverification.service.controller.veteranveri
 import gov.va.api.lighthouse.veteranverification.api.v0.Deployment;
 import gov.va.api.lighthouse.veteranverification.api.v0.ServiceHistoryResponse;
 import gov.va.api.lighthouse.veteranverification.service.utils.ServiceEpisodeAttributeBuilder;
-import gov.va.api.lighthouse.veteranverification.service.utils.ServiceEpisodeIdBuilder;
+import gov.va.api.lighthouse.veteranverification.service.utils.UuidV5;
 import gov.va.viers.cdi.emis.commonservice.v2.MilitaryServiceEpisode;
 import gov.va.viers.cdi.emis.requestresponse.v2.EMISdeploymentResponseType;
 import gov.va.viers.cdi.emis.requestresponse.v2.EMISserviceEpisodeResponseType;
@@ -16,6 +16,12 @@ import lombok.NonNull;
 import org.hl7.v3.PRPAIN201306UV02;
 
 public class VeteranServiceHistoryTransformer {
+  private static String buildServiceEpisodeId(String uuid, String beginDate, String endDate) {
+    String str = String.format("%s-%s-%s", uuid.trim(), beginDate, endDate);
+    return UuidV5.nameUuidFromNamespaceAndString("gov.vets.service-history-episodes", str)
+        .toString();
+  }
+
   private static ArrayList<Deployment> makeDeploymentList(
       EMISdeploymentResponseType deploymentResponse) {
     ArrayList<Deployment> list = new ArrayList<>();
@@ -77,7 +83,7 @@ public class VeteranServiceHistoryTransformer {
           ServiceHistoryResponse.ServiceHistoryEpisode.builder()
               .attributes(attributes)
               .id(
-                  ServiceEpisodeIdBuilder.buildServiceEpisodeId(
+                  buildServiceEpisodeId(
                       uuid,
                       militaryServiceEpisode
                           .getMilitaryServiceEpisodeData()

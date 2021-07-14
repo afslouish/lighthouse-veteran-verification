@@ -6,11 +6,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 import java.util.UUID;
-import lombok.experimental.UtilityClass;
 
 @SuppressFBWarnings({"WEAK_MESSAGE_DIGEST_SHA1"})
-@UtilityClass
-public class ServiceEpisodeIdBuilder {
+public class UuidV5 {
   private static final Charset UTF8 = Charset.forName("UTF-8");
 
   private static UUID fromBytes(byte[] data) {
@@ -57,18 +55,5 @@ public class ServiceEpisodeIdBuilder {
    */
   public static UUID nameUuidFromNamespaceAndString(String namespace, String name) {
     return nameUuidFromNamespaceAndBytes(namespace.getBytes(UTF8), name.getBytes(UTF8));
-  }
-
-  /**
-   * Builds uuid5 service episode id.
-   *
-   * @param uuid Unique user identity.
-   * @param beginDate Service episode begin date.
-   * @param endDate Service episode end date.
-   * @return Service episode uuid5 id.
-   */
-  public String buildServiceEpisodeId(String uuid, String beginDate, String endDate) {
-    String str = String.format("%s-%s-%s", uuid.trim(), beginDate, endDate);
-    return nameUuidFromNamespaceAndString("gov.vets.service-history-episodes", str).toString();
   }
 }
