@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 import javax.xml.bind.JAXBElement;
 import lombok.NonNull;
+import lombok.SneakyThrows;
 import org.hl7.v3.EnFamily;
 import org.hl7.v3.EnGiven;
 import org.hl7.v3.II;
@@ -30,29 +31,37 @@ public class MpiLookupUtils {
    * @param mpiResponse Mpi Response.
    * @return Returns first name of veteran.
    */
+  @SneakyThrows
   public static String getFirstName(@NonNull PRPAIN201306UV02 mpiResponse) {
-    return mpiResponse
-        .getControlActProcess()
-        .getSubject()
-        .get(0)
-        .getRegistrationEvent()
-        .getSubject1()
-        .getPatient()
-        .getPatientPerson()
-        .getValue()
-        .getName()
-        .get(0)
-        .getContent()
-        .stream()
-        .filter(item -> item.getClass() == JAXBElement.class)
-        .map(i -> (JAXBElement) i)
-        .filter(name -> name.getValue().getClass() == EnGiven.class)
-        .map(i -> (EnGiven) i.getValue())
-        .toList()
-        .get(0)
-        .getContent()
-        .get(0)
-        .toString();
+    String firstName;
+    try {
+      firstName =
+          mpiResponse
+              .getControlActProcess()
+              .getSubject()
+              .get(0)
+              .getRegistrationEvent()
+              .getSubject1()
+              .getPatient()
+              .getPatientPerson()
+              .getValue()
+              .getName()
+              .get(0)
+              .getContent()
+              .stream()
+              .filter(item -> item.getClass() == JAXBElement.class)
+              .map(i -> (JAXBElement) i)
+              .filter(name -> name.getValue().getClass() == EnGiven.class)
+              .map(i -> (EnGiven) i.getValue())
+              .toList()
+              .get(0)
+              .getContent()
+              .get(0)
+              .toString();
+    } catch (Exception e) {
+      throw new Exception("No last name found in mpi response.");
+    }
+    return firstName;
   }
 
   /** Loop through list of patient's IDs in search of one that matches lookup pattern. */
@@ -109,29 +118,39 @@ public class MpiLookupUtils {
    * @param mpiResponse Mpi Response.
    * @return Returns last name of veteran.
    */
+  @SneakyThrows
   public static String getLastName(@NonNull PRPAIN201306UV02 mpiResponse) {
-    return mpiResponse
-        .getControlActProcess()
-        .getSubject()
-        .get(0)
-        .getRegistrationEvent()
-        .getSubject1()
-        .getPatient()
-        .getPatientPerson()
-        .getValue()
-        .getName()
-        .get(0)
-        .getContent()
-        .stream()
-        .filter(item -> item.getClass() == JAXBElement.class)
-        .map(i -> (JAXBElement) i)
-        .filter(name -> name.getValue().getClass() == EnFamily.class)
-        .map(i -> (EnFamily) i.getValue())
-        .toList()
-        .get(0)
-        .getContent()
-        .get(0)
-        .toString();
+    String firstName;
+
+    try {
+      firstName =
+          mpiResponse
+              .getControlActProcess()
+              .getSubject()
+              .get(0)
+              .getRegistrationEvent()
+              .getSubject1()
+              .getPatient()
+              .getPatientPerson()
+              .getValue()
+              .getName()
+              .get(0)
+              .getContent()
+              .stream()
+              .filter(item -> item.getClass() == JAXBElement.class)
+              .map(i -> (JAXBElement) i)
+              .filter(name -> name.getValue().getClass() == EnFamily.class)
+              .map(i -> (EnFamily) i.getValue())
+              .toList()
+              .get(0)
+              .getContent()
+              .get(0)
+              .toString();
+    } catch (Exception e) {
+      throw new Exception("No last name found in mpi response.");
+    }
+
+    return firstName;
   }
 
   /** Extract SSN String from PRPAIN201306UV02 MPI response object. */

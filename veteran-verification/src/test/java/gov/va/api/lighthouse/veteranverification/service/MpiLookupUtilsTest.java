@@ -8,14 +8,24 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class MpiLookupUtilsTest {
-
   @Test
   public void getFirstNameHappyPath() {
     PRPAIN201306UV02 mpiResponse = TestUtils.createMpiResponse("mpi/mpi_profile_response_body.xml");
     String actual = MpiLookupUtils.getFirstName(mpiResponse);
     String expected = "Alfredo";
-
     Assertions.assertEquals(expected, actual);
+  }
+
+  @Test
+  public void getFirstNameMpiResponseHasNoNames() {
+    PRPAIN201306UV02 mpiResponse = TestUtils.createMpiResponse("mpi/mpi_profile_no_names.xml");
+    Exception exception =
+        Assertions.assertThrows(
+            Exception.class,
+            () -> {
+              MpiLookupUtils.getFirstName(mpiResponse);
+            });
+    Assertions.assertEquals("No last name found in mpi response.", exception.getMessage());
   }
 
   @Test
@@ -32,8 +42,19 @@ public class MpiLookupUtilsTest {
     PRPAIN201306UV02 mpiResponse = TestUtils.createMpiResponse("mpi/mpi_profile_response_body.xml");
     String actual = MpiLookupUtils.getLastName(mpiResponse);
     String expected = "Armstrong";
-
     Assertions.assertEquals(expected, actual);
+  }
+
+  @Test
+  public void getLastNameMpiResponseHasNoNames() {
+    PRPAIN201306UV02 mpiResponse = TestUtils.createMpiResponse("mpi/mpi_profile_no_names.xml");
+    Exception exception =
+        Assertions.assertThrows(
+            Exception.class,
+            () -> {
+              MpiLookupUtils.getLastName(mpiResponse);
+            });
+    Assertions.assertEquals("No last name found in mpi response.", exception.getMessage());
   }
 
   @Test
