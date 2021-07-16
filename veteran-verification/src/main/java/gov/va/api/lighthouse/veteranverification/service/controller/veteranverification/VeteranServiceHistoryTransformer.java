@@ -3,7 +3,6 @@ package gov.va.api.lighthouse.veteranverification.service.controller.veteranveri
 import gov.va.api.lighthouse.veteranverification.api.v0.Deployment;
 import gov.va.api.lighthouse.veteranverification.api.v0.ServiceHistoryResponse;
 import gov.va.api.lighthouse.veteranverification.service.MpiLookupUtils;
-import gov.va.api.lighthouse.veteranverification.service.utils.EmisUtils;
 import gov.va.api.lighthouse.veteranverification.service.utils.UuidV5;
 import gov.va.viers.cdi.emis.commonservice.v2.MilitaryServiceEpisode;
 import gov.va.viers.cdi.emis.requestresponse.v2.EMISdeploymentResponseType;
@@ -14,7 +13,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
+import javax.xml.datatype.XMLGregorianCalendar;
 import lombok.Builder;
 import lombok.NonNull;
 import org.apache.commons.lang3.StringUtils;
@@ -40,47 +41,6 @@ public class VeteranServiceHistoryTransformer {
                     && isBeforeOrEqualTo(startDate, deployment.startDate())
                     && (endDate == null || isBeforeOrEqualTo(deployment.endDate(), endDate)))
         .collect(Collectors.toList());
-  }
-
-  private ServiceHistoryResponse.ServiceHistoryAttributes buildMilitaryServiceEpisode(
-      @NonNull MilitaryServiceEpisode serviceEpisode,
-      @NonNull PRPAIN201306UV02 mpiResponse,
-      @NonNull List<Deployment> deployments) {
-    LocalDate startDate = EmisUtils.getMilitaryEpisodeStartDate(serviceEpisode);
-    LocalDate endDate = EmisUtils.getMilitaryEpisodeEndDate(serviceEpisode);
-    return ServiceHistoryResponse.ServiceHistoryAttributes.builder()
-        .firstName(MpiLookupUtils.getFirstName(mpiResponse))
-        .lastName(MpiLookupUtils.getLastName(mpiResponse))
-        .branchOfService(
-            makeBranchOfService(
-                serviceEpisode.getMilitaryServiceEpisodeData().getBranchOfServiceCode(),
-                serviceEpisode.getKeyData().getPersonnelCategoryTypeCode()))
-        .startDate(startDate)
-        .endDate(endDate)
-        .payGrade(
-            makePayGradeString(
-                serviceEpisode.getMilitaryServiceEpisodeData().getPayPlanCode(),
-                serviceEpisode.getMilitaryServiceEpisodeData().getPayGradeCode()))
-        .dischargeStatus(
-            ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.codeToEnum(
-                serviceEpisode
-                    .getMilitaryServiceEpisodeData()
-                    .getDischargeCharacterOfServiceCode()))
-        .separationReason(
-            serviceEpisode.getMilitaryServiceEpisodeData().getNarrativeReasonForSeparationTxt())
-        .deployments(buildDeployments(deployments, startDate, endDate))
-        .build();
-  }
-
-  private String buildServiceEpisodeId(String uuid, LocalDate beginDate, LocalDate endDate) {
-    String str =
-        String.format(
-            "%s-%s-%s",
-            uuid.trim(),
-            beginDate != null ? beginDate.toString() : null,
-            endDate != null ? endDate.toString() : null);
-    return UuidV5.nameUuidFromNamespaceAndString("gov.vets.service-history-episodes", str)
-        .toString();
   }
 
   private boolean isBeforeOrEqualTo(LocalDate dateOne, LocalDate dateTwo) {
@@ -113,7 +73,6 @@ public class VeteranServiceHistoryTransformer {
         break;
       default:
         branch = "Unknown";
-        ;
     }
     String category;
     switch (StringUtils.normalizeSpace(personnelCategory)) {
@@ -134,8 +93,18 @@ public class VeteranServiceHistoryTransformer {
     List<Deployment> list = new ArrayList<>();
     for (gov.va.viers.cdi.emis.commonservice.v2.Deployment deployment :
         deploymentResponse.getDeployment()) {
-      LocalDate startDate = EmisUtils.getEmisDeploymentStartDate(deployment);
-      LocalDate endDate = EmisUtils.getEmisDeploymentEndDate(deployment);
+      LocalDate startDate =
+          xmlGregorianToLocalDate(
+              Optional.ofNullable(deployment.getDeploymentData())
+                  .map(value -> value.getDeploymentStartDate())
+                  .orElse(null));
+
+      LocalDate endDate =
+          xmlGregorianToLocalDate(
+              Optional.ofNullable(deployment.getDeploymentData())
+                  .map(value -> value.getDeploymentEndDate())
+                  .orElse(null));
+
       String location = null;
       if (deployment.getDeploymentData() != null
           && deployment.getDeploymentData().getDeploymentLocation().size() > 0) {
@@ -166,12 +135,6 @@ public class VeteranServiceHistoryTransformer {
             StringUtils.normalizeSpace(payGradeCode)));
   }
 
-  private List<Deployment> removeUsedDeployments(
-      List<Deployment> fullDeploymentList, List<Deployment> usedDeploymentList) {
-    fullDeploymentList.removeAll(usedDeploymentList);
-    return fullDeploymentList;
-  }
-
   /**
    * Builds service history response from EMIS and MPI responses.
    *
@@ -180,6 +143,7 @@ public class VeteranServiceHistoryTransformer {
   public ServiceHistoryResponse serviceHistoryTransformer() {
     Deque<ServiceHistoryResponse.ServiceHistoryEpisode> episodes = new ArrayDeque<>();
     List<Deployment> unusedDeployments = makeDeploymentList(deploymentResponse);
+
     Collections.sort(
         serviceEpisodeResponseType.getMilitaryServiceEpisode(),
         (episodeOne, episodeTwo) ->
@@ -187,21 +151,73 @@ public class VeteranServiceHistoryTransformer {
                 .getMilitaryServiceEpisodeData()
                 .getServiceEpisodeStartDate()
                 .compare(episodeOne.getMilitaryServiceEpisodeData().getServiceEpisodeStartDate()));
+
     for (MilitaryServiceEpisode militaryServiceEpisode :
         serviceEpisodeResponseType.getMilitaryServiceEpisode()) {
+      LocalDate startDate =
+          xmlGregorianToLocalDate(
+              Optional.ofNullable(militaryServiceEpisode.getMilitaryServiceEpisodeData())
+                  .map(value -> value.getServiceEpisodeStartDate())
+                  .orElse(null));
+
+      LocalDate endDate =
+          xmlGregorianToLocalDate(
+              Optional.ofNullable(militaryServiceEpisode.getMilitaryServiceEpisodeData())
+                  .map(value -> value.getServiceEpisodeEndDate())
+                  .orElse(null));
+
       ServiceHistoryResponse.ServiceHistoryAttributes attributes =
-          buildMilitaryServiceEpisode(militaryServiceEpisode, mpiResponse, unusedDeployments);
-      unusedDeployments = removeUsedDeployments(unusedDeployments, attributes.deployments);
+          ServiceHistoryResponse.ServiceHistoryAttributes.builder()
+              .firstName(MpiLookupUtils.getFirstName(mpiResponse))
+              .lastName(MpiLookupUtils.getLastName(mpiResponse))
+              .branchOfService(
+                  makeBranchOfService(
+                      militaryServiceEpisode
+                          .getMilitaryServiceEpisodeData()
+                          .getBranchOfServiceCode(),
+                      militaryServiceEpisode.getKeyData().getPersonnelCategoryTypeCode()))
+              .startDate(startDate)
+              .endDate(endDate)
+              .payGrade(
+                  makePayGradeString(
+                      militaryServiceEpisode.getMilitaryServiceEpisodeData().getPayPlanCode(),
+                      militaryServiceEpisode.getMilitaryServiceEpisodeData().getPayGradeCode()))
+              .dischargeStatus(
+                  ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.codeToEnum(
+                      militaryServiceEpisode
+                          .getMilitaryServiceEpisodeData()
+                          .getDischargeCharacterOfServiceCode()))
+              .separationReason(
+                  militaryServiceEpisode
+                      .getMilitaryServiceEpisodeData()
+                      .getNarrativeReasonForSeparationTxt())
+              .deployments(buildDeployments(unusedDeployments, startDate, endDate))
+              .build();
+
+      String serviceHistoryId =
+          UuidV5.nameUuidFromNamespaceAndString(
+                  "gov.vets.service-history-episodes",
+                  String.format(
+                      "%s-%s-%s",
+                      icn.trim(),
+                      startDate != null ? startDate.toString() : null,
+                      endDate != null ? endDate.toString() : null))
+              .toString();
+
       episodes.push(
           ServiceHistoryResponse.ServiceHistoryEpisode.builder()
               .attributes(attributes)
-              .id(
-                  buildServiceEpisodeId(
-                      icn,
-                      EmisUtils.getMilitaryEpisodeStartDate(militaryServiceEpisode),
-                      EmisUtils.getMilitaryEpisodeEndDate(militaryServiceEpisode)))
+              .id(serviceHistoryId)
               .build());
+
+      unusedDeployments.removeAll(attributes.deployments);
     }
     return ServiceHistoryResponse.builder().data(episodes.stream().toList()).build();
+  }
+
+  private LocalDate xmlGregorianToLocalDate(XMLGregorianCalendar calendar) {
+    return calendar != null
+        ? LocalDate.of(calendar.getYear(), calendar.getMonth(), calendar.getDay())
+        : null;
   }
 }

@@ -33,7 +33,7 @@
   </acknowledgement>
   <controlActProcess classCode="CACT" moodCode="EVN">
     <code codeSystem="2.16.840.1.113883.1.6" code="PRPA_TE201306UV02"/>
-    <subject typeCode="SUBJ"></subject>
+    <subject typeCode="SUBJ"/>
     <queryAck>
       <queryId extension="18204" root="1.2.840.114350.1.13.28.1.18.5.999"/>
       <queryResponseCode code="OK"/>
