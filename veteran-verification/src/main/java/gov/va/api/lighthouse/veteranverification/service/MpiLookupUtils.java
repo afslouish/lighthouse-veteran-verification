@@ -9,10 +9,10 @@ import java.util.List;
 import java.util.Optional;
 import javax.xml.bind.JAXBElement;
 import lombok.NonNull;
-import lombok.SneakyThrows;
 import org.hl7.v3.EnFamily;
 import org.hl7.v3.EnGiven;
 import org.hl7.v3.II;
+import org.hl7.v3.PN;
 import org.hl7.v3.PRPAIN201306UV02;
 import org.hl7.v3.PRPAMT201310UV02OtherIDs;
 import org.hl7.v3.PRPAMT201310UV02Patient;
@@ -28,40 +28,22 @@ public class MpiLookupUtils {
   /**
    * Retrieves first name from MPI response.
    *
-   * @param mpiResponse Mpi Response.
+   * @param response Mpi Response.
    * @return Returns first name of veteran.
    */
-  @SneakyThrows
-  public static String getFirstName(@NonNull PRPAIN201306UV02 mpiResponse) {
-    String firstName;
-    try {
-      firstName =
-          mpiResponse
-              .getControlActProcess()
-              .getSubject()
-              .get(0)
-              .getRegistrationEvent()
-              .getSubject1()
-              .getPatient()
-              .getPatientPerson()
-              .getValue()
-              .getName()
-              .get(0)
-              .getContent()
-              .stream()
-              .filter(item -> item.getClass() == JAXBElement.class)
-              .map(i -> (JAXBElement) i)
-              .filter(name -> name.getValue().getClass() == EnGiven.class)
-              .map(i -> (EnGiven) i.getValue())
-              .toList()
-              .get(0)
-              .getContent()
-              .get(0)
-              .toString();
-    } catch (Exception e) {
-      throw new Exception("No last name found in mpi response.");
-    }
-    return firstName;
+  public static String getFirstName(@NonNull PRPAIN201306UV02 response) {
+    return Optional.ofNullable(getPn(response))
+        .map(value -> value.getContent())
+        .map(value -> value.stream())
+        .map(value -> value.filter(item -> item.getClass() == JAXBElement.class))
+        .map(value -> value.map(i -> (JAXBElement<?>) i))
+        .map(value -> value.filter(name -> name.getValue().getClass() == EnGiven.class))
+        .map(value -> value.map(i -> (EnGiven) i.getValue()))
+        .map(value -> value.toList().stream().findFirst().orElse(null))
+        .map(value -> value.getContent())
+        .map(value -> value.stream().findFirst().orElse(null))
+        .map(value -> value.toString())
+        .orElse(null);
   }
 
   /** Loop through list of patient's IDs in search of one that matches lookup pattern. */
@@ -115,42 +97,37 @@ public class MpiLookupUtils {
   /**
    * Retrieves last name from MPI response.
    *
-   * @param mpiResponse Mpi Response.
+   * @param response Mpi Response.
    * @return Returns last name of veteran.
    */
-  @SneakyThrows
-  public static String getLastName(@NonNull PRPAIN201306UV02 mpiResponse) {
-    String firstName;
+  public static String getLastName(@NonNull PRPAIN201306UV02 response) {
+    return Optional.ofNullable(getPn(response))
+        .map(value -> value.getContent())
+        .map(value -> value.stream())
+        .map(value -> value.filter(item -> item.getClass() == JAXBElement.class))
+        .map(value -> value.map(i -> (JAXBElement<?>) i))
+        .map(value -> value.filter(name -> name.getValue().getClass() == EnFamily.class))
+        .map(value -> value.map(i -> (EnFamily) i.getValue()))
+        .map(value -> value.toList().stream().findFirst().orElse(null))
+        .map(value -> value.getContent())
+        .map(value -> value.stream().findFirst().orElse(null))
+        .map(value -> value.toString())
+        .orElse(null);
+  }
 
-    try {
-      firstName =
-          mpiResponse
-              .getControlActProcess()
-              .getSubject()
-              .get(0)
-              .getRegistrationEvent()
-              .getSubject1()
-              .getPatient()
-              .getPatientPerson()
-              .getValue()
-              .getName()
-              .get(0)
-              .getContent()
-              .stream()
-              .filter(item -> item.getClass() == JAXBElement.class)
-              .map(i -> (JAXBElement) i)
-              .filter(name -> name.getValue().getClass() == EnFamily.class)
-              .map(i -> (EnFamily) i.getValue())
-              .toList()
-              .get(0)
-              .getContent()
-              .get(0)
-              .toString();
-    } catch (Exception e) {
-      throw new Exception("No last name found in mpi response.");
-    }
-
-    return firstName;
+  private static PN getPn(PRPAIN201306UV02 response) {
+    return Optional.ofNullable(response)
+        .map(value -> value.getControlActProcess())
+        .map(controlActProcess -> emptyToNull(controlActProcess.getSubject()))
+        .map(subject -> subject.stream().findFirst().orElse(null))
+        .map(getSubject -> getSubject.getRegistrationEvent())
+        .map(registrationEvent -> registrationEvent.getSubject1())
+        .map(subject1 -> subject1.getPatient())
+        .map(value -> value.getPatientPerson())
+        .map(value -> value.getValue())
+        .map(value -> value.getName())
+        .map(value -> value.stream().findFirst().orElse(null))
+        .orElse(null);
   }
 
   /** Extract SSN String from PRPAIN201306UV02 MPI response object. */
@@ -166,7 +143,6 @@ public class MpiLookupUtils {
             .map(person -> person.getPatientPerson().getValue())
             .map(ids -> ids.getAsOtherIDs())
             .orElse(null);
-
     if (asOtherIds == null || asOtherIds.isEmpty()) {
       return null;
     }

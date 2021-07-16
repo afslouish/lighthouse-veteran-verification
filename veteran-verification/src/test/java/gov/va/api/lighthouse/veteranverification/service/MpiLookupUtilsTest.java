@@ -19,13 +19,8 @@ public class MpiLookupUtilsTest {
   @Test
   public void getFirstNameMpiResponseHasNoNames() {
     PRPAIN201306UV02 mpiResponse = TestUtils.createMpiResponse("mpi/mpi_profile_no_names.xml");
-    Exception exception =
-        Assertions.assertThrows(
-            Exception.class,
-            () -> {
-              MpiLookupUtils.getFirstName(mpiResponse);
-            });
-    Assertions.assertEquals("No last name found in mpi response.", exception.getMessage());
+    String actual = MpiLookupUtils.getFirstName(mpiResponse);
+    Assertions.assertNull(actual);
   }
 
   @Test
@@ -48,13 +43,8 @@ public class MpiLookupUtilsTest {
   @Test
   public void getLastNameMpiResponseHasNoNames() {
     PRPAIN201306UV02 mpiResponse = TestUtils.createMpiResponse("mpi/mpi_profile_no_names.xml");
-    Exception exception =
-        Assertions.assertThrows(
-            Exception.class,
-            () -> {
-              MpiLookupUtils.getLastName(mpiResponse);
-            });
-    Assertions.assertEquals("No last name found in mpi response.", exception.getMessage());
+    String actual = MpiLookupUtils.getLastName(mpiResponse);
+    Assertions.assertNull(actual);
   }
 
   @Test
