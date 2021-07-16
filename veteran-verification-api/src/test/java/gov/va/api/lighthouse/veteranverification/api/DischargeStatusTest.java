@@ -6,13 +6,6 @@ import org.junit.jupiter.api.Test;
 
 public class DischargeStatusTest {
   @Test
-  public void badCode() {
-    Assertions.assertThrows(
-        Exception.class,
-        () -> ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.codeToEnum("R"));
-  }
-
-  @Test
   public void happyPathBadConduct() {
     ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus dischargeStatus =
         ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.codeToEnum("D");

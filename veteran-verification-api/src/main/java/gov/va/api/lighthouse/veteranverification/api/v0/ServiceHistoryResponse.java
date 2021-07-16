@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -141,20 +142,22 @@ public class ServiceHistoryResponse {
     List<Deployment> deployments = new ArrayList<>();
 
     public enum DischargeStatus {
-      HONORABLE("honorable"),
-      GENERAL("general"),
-      BAD_CONDUCT("bad-conduct"),
-      OTHER_THAN_HONORABLE("other-than-honorable"),
-      DISHONORABLE("dishonorable"),
-      HONORABLE_ABSENCE_OF_NEGATIVE_REPORT("honorable-absence-of-negative-report"),
-      HONORABLE_FOR_VA_PURPOSES("honorable-for-va-purposes"),
-      DISHONORABLE_FOR_VA_PURPOSES("dishonorable-for-va-purposes"),
-      UNCHARACTERIZED("uncharacterized"),
-      UNKNOWN("unknown");
+      HONORABLE("A", "honorable"),
+      GENERAL("B", "general"),
+      BAD_CONDUCT("D", "bad-conduct"),
+      OTHER_THAN_HONORABLE("E", "other-than-honorable"),
+      DISHONORABLE("F", "dishonorable"),
+      HONORABLE_ABSENCE_OF_NEGATIVE_REPORT("H", "honorable-absence-of-negative-report"),
+      HONORABLE_FOR_VA_PURPOSES("J", "honorable-for-va-purposes"),
+      DISHONORABLE_FOR_VA_PURPOSES("K", "dishonorable-for-va-purposes"),
+      UNCHARACTERIZED("Y", "uncharacterized"),
+      UNKNOWN(null, "unknown");
 
       private final String description;
+      private final String code;
 
-      DischargeStatus(String description) {
+      DischargeStatus(String code, String description) {
+        this.code = code;
         this.description = description;
       }
 
@@ -166,43 +169,14 @@ public class ServiceHistoryResponse {
        */
       @SneakyThrows
       public static DischargeStatus codeToEnum(String statusCode) {
-        DischargeStatus status;
-        switch (statusCode.toUpperCase()) {
-          case "A":
-            status = DischargeStatus.HONORABLE;
-            break;
-          case "B":
-            status = DischargeStatus.GENERAL;
-            break;
-          case "D":
-            status = DischargeStatus.BAD_CONDUCT;
-            break;
-          case "E":
-            status = DischargeStatus.OTHER_THAN_HONORABLE;
-            break;
-          case "F":
-            status = DischargeStatus.DISHONORABLE;
-            break;
-          case "H":
-            status = DischargeStatus.HONORABLE_ABSENCE_OF_NEGATIVE_REPORT;
-            break;
-          case "J":
-            status = DischargeStatus.HONORABLE_FOR_VA_PURPOSES;
-            break;
-          case "K":
-            status = DischargeStatus.DISHONORABLE_FOR_VA_PURPOSES;
-            break;
-          case "Y":
-            status = DischargeStatus.UNCHARACTERIZED;
-            break;
-          case "Z":
-            status = DischargeStatus.UNKNOWN;
-            break;
-          default:
-            // Or should this be unknown
-            throw new Exception("Invalid Discharge Status Code");
+        EnumSet<DischargeStatus> enumSet = EnumSet.allOf(DischargeStatus.class);
+        DischargeStatus matchingEnum = DischargeStatus.UNKNOWN;
+        for (DischargeStatus dischargeStatus : enumSet) {
+          if (statusCode.toUpperCase().strip().equals(dischargeStatus.code)) {
+            matchingEnum = dischargeStatus;
+          }
         }
-        return status;
+        return matchingEnum;
       }
 
       @Override
