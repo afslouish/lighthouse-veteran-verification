@@ -57,7 +57,7 @@ public class ServiceHistoryResponse {
         description = "Branch of military including National Guard or Reserve status",
         example = "Air Force",
         required = true)
-    BranchOfService branchOfService;
+    String branchOfService;
 
     @Schema(
         name = "start_date",

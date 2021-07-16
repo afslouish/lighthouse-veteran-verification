@@ -1,6 +1,5 @@
 package gov.va.api.lighthouse.veteranverification.service.controller.veteranverification;
 
-import gov.va.api.lighthouse.veteranverification.api.v0.BranchOfService;
 import gov.va.api.lighthouse.veteranverification.api.v0.Deployment;
 import gov.va.api.lighthouse.veteranverification.api.v0.ServiceHistoryResponse;
 import gov.va.api.lighthouse.veteranverification.service.MpiLookupUtils;
@@ -53,11 +52,9 @@ public class VeteranServiceHistoryTransformer {
         .firstName(MpiLookupUtils.getFirstName(mpiResponse))
         .lastName(MpiLookupUtils.getLastName(mpiResponse))
         .branchOfService(
-            BranchOfService.builder()
-                .branchOfService(
-                    serviceEpisode.getMilitaryServiceEpisodeData().getBranchOfServiceCode())
-                .personnelCategory(serviceEpisode.getKeyData().getPersonnelCategoryTypeCode())
-                .build())
+            makeBranchOfService(
+                serviceEpisode.getMilitaryServiceEpisodeData().getBranchOfServiceCode(),
+                serviceEpisode.getKeyData().getPersonnelCategoryTypeCode()))
         .startDate(startDate)
         .endDate(endDate)
         .payGrade(
@@ -88,6 +85,49 @@ public class VeteranServiceHistoryTransformer {
 
   private boolean isBeforeOrEqualTo(LocalDate dateOne, LocalDate dateTwo) {
     return dateOne.isBefore(dateTwo) || dateOne.isEqual(dateTwo);
+  }
+
+  private String makeBranchOfService(String branchOfService, String personnelCategory) {
+    String branch;
+    switch (StringUtils.normalizeSpace(branchOfService.toUpperCase())) {
+      case "O":
+        branch = "NOAA";
+        break;
+      case "H":
+        branch = "Public Health Service";
+        break;
+      case "A":
+        branch = "Army";
+        break;
+      case "C":
+        branch = "Coast Guard";
+        break;
+      case "F":
+        branch = "Air Force";
+        break;
+      case "M":
+        branch = "Marine Corps";
+        break;
+      case "N":
+        branch = "Navy";
+        break;
+      default:
+        branch = "Unknown";
+        ;
+    }
+    String category;
+    switch (StringUtils.normalizeSpace(personnelCategory)) {
+      case "N":
+        category = "National Guard";
+        break;
+      case "V":
+      case "Q":
+        category = "Reserve";
+        break;
+      default:
+        category = "";
+    }
+    return StringUtils.normalizeSpace(String.format("%s %s", branch, category));
   }
 
   private List<Deployment> makeDeploymentList(EMISdeploymentResponseType deploymentResponse) {
