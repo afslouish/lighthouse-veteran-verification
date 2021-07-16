@@ -24,6 +24,13 @@ public class MpiLookupUtilsTest {
   }
 
   @Test
+  public void getFirstNameMpiResponseHasNoSubject() {
+    PRPAIN201306UV02 mpiResponse = TestUtils.createMpiResponse("mpi/profile_no_subject.xml");
+    String actual = MpiLookupUtils.getFirstName(mpiResponse);
+    Assertions.assertNull(actual);
+  }
+
+  @Test
   public void getFirstNameMpiResponseIsNull() {
     Assertions.assertThrows(
         NullPointerException.class,
@@ -43,6 +50,13 @@ public class MpiLookupUtilsTest {
   @Test
   public void getLastNameMpiResponseHasNoNames() {
     PRPAIN201306UV02 mpiResponse = TestUtils.createMpiResponse("mpi/mpi_profile_no_names.xml");
+    String actual = MpiLookupUtils.getLastName(mpiResponse);
+    Assertions.assertNull(actual);
+  }
+
+  @Test
+  public void getLastNameMpiResponseHasNoSubject() {
+    PRPAIN201306UV02 mpiResponse = TestUtils.createMpiResponse("mpi/profile_no_subject.xml");
     String actual = MpiLookupUtils.getLastName(mpiResponse);
     Assertions.assertNull(actual);
   }
