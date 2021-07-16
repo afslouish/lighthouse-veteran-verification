@@ -2,7 +2,6 @@ package gov.va.api.lighthouse.veteranverification.api;
 
 import gov.va.api.lighthouse.veteranverification.api.v0.BranchOfService;
 import gov.va.api.lighthouse.veteranverification.api.v0.Deployment;
-import gov.va.api.lighthouse.veteranverification.api.v0.PayGrade;
 import gov.va.api.lighthouse.veteranverification.api.v0.ServiceHistoryResponse;
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -27,7 +26,7 @@ public class TestUtils {
             BranchOfService.builder().branchOfService("A").personnelCategory("A").build())
         .startDate(LocalDate.of(2000, 1, 1))
         .endDate(LocalDate.of(2001, 1, 1))
-        .payGrade(PayGrade.builder().payGradeCode("05").payPlanCode("ME").build())
+        .payGrade("E05")
         .dischargeStatus(ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE)
         .separationReason("SeparationReason")
         .deployments(Arrays.stream(deployments).toList())

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<NS4:eMISserviceEpisodeResponse xmlns:NS4="http://viers.va.gov/cdi/eMIS/RequestResponse/MilitaryInfo/v2">
+  <NS5:militaryServiceEpisode xmlns:NS5="http://viers.va.gov/cdi/eMIS/RequestResponse/v2">
+    <NS6:edipi xmlns:NS6="http://viers.va.gov/cdi/eMIS/commonService/v2">1007481507</NS6:edipi>
+    <NS7:keyData xmlns:NS7="http://viers.va.gov/cdi/eMIS/commonService/v2">
+      <NS7:personnelOrganizationCode>22</NS7:personnelOrganizationCode>
+      <NS7:personnelCategoryTypeCode>A</NS7:personnelCategoryTypeCode>
+      <NS7:personnelSegmentIdentifier>1</NS7:personnelSegmentIdentifier>
+    </NS7:keyData>
+    <NS8:militaryServiceEpisodeData xmlns:NS8="http://viers.va.gov/cdi/eMIS/commonService/v2">
+      <NS8:serviceEpisodeStartDate>2000-01-01</NS8:serviceEpisodeStartDate>
+      <NS8:serviceEpisodeEndDate>2001-02-01</NS8:serviceEpisodeEndDate>
+      <NS8:serviceEpisodeTerminationReason>S</NS8:serviceEpisodeTerminationReason>
+      <NS8:branchOfServiceCode>A</NS8:branchOfServiceCode>
+      <NS8:retirementTypeCode>B</NS8:retirementTypeCode>
+      <NS8:personnelProjectedEndDate>1990-11-19</NS8:personnelProjectedEndDate>
+      <NS8:personnelProjectedEndDateCertaintyCode>Q</NS8:personnelProjectedEndDateCertaintyCode>
+      <NS8:dischargeCharacterOfServiceCode>A</NS8:dischargeCharacterOfServiceCode>
+      <NS8:honorableDischargeForVaPurposeCode>J</NS8:honorableDischargeForVaPurposeCode>
+      <NS8:personnelStatusChangeTransactionTypeCode>111</NS8:personnelStatusChangeTransactionTypeCode>
+      <NS8:narrativeReasonForSeparationCode>033</NS8:narrativeReasonForSeparationCode>
+      <NS8:narrativeReasonForSeparationTxt>SUFFICIENT SERVICE FOR RETIREMENT</NS8:narrativeReasonForSeparationTxt>
+      <NS8:post911GIBillLossCategoryCode>99</NS8:post911GIBillLossCategoryCode>
+      <NS8:payPlanCode>ME</NS8:payPlanCode>
+      <NS8:payGradeCode>05</NS8:payGradeCode>
+      <NS8:mgadLossCategoryCode>08</NS8:mgadLossCategoryCode>
+      <NS8:activeDutyServiceAgreementQuantity>5</NS8:activeDutyServiceAgreementQuantity>
+      <NS8:initialEntryTrainingEndDate>2000-01-01</NS8:initialEntryTrainingEndDate>
+      <NS8:uniformServiceInitialEntryDate>2001-02-01</NS8:uniformServiceInitialEntryDate>
+      <NS8:militaryAccessionSourceCode>00</NS8:militaryAccessionSourceCode>
+      <NS8:personnelBeginDateSource>7</NS8:personnelBeginDateSource>
+      <NS8:personnelTerminationDateSourceCode>8</NS8:personnelTerminationDateSourceCode>
+      <NS8:activeFederalMilitaryServiceBaseDate>2000-02-22</NS8:activeFederalMilitaryServiceBaseDate>
+      <NS8:mgsrServiceAgreementDurationYearQuantityCode>4</NS8:mgsrServiceAgreementDurationYearQuantityCode>
+      <NS8:dodBeneficiaryTypeCode>07</NS8:dodBeneficiaryTypeCode>
+      <NS8:reserveUnderAge60Code>N</NS8:reserveUnderAge60Code>
+    </NS8:militaryServiceEpisodeData>
+  </NS5:militaryServiceEpisode>
+  <NS9:militaryServiceEpisode xmlns:NS9="http://viers.va.gov/cdi/eMIS/RequestResponse/v2">
+    <NS10:edipi xmlns:NS10="http://viers.va.gov/cdi/eMIS/commonService/v2">1007481507</NS10:edipi>
+    <NS11:keyData xmlns:NS11="http://viers.va.gov/cdi/eMIS/commonService/v2">
+      <NS11:personnelOrganizationCode>22</NS11:personnelOrganizationCode>
+      <NS11:personnelCategoryTypeCode>A</NS11:personnelCategoryTypeCode>
+      <NS11:personnelSegmentIdentifier>1</NS11:personnelSegmentIdentifier>
+    </NS11:keyData>
+    <NS12:militaryServiceEpisodeData xmlns:NS12="http://viers.va.gov/cdi/eMIS/commonService/v2">
+      <NS12:serviceEpisodeStartDate>2002-01-01</NS12:serviceEpisodeStartDate>
+      <NS12:serviceEpisodeEndDate>2003-02-01</NS12:serviceEpisodeEndDate>
+      <NS12:serviceEpisodeTerminationReason>S</NS12:serviceEpisodeTerminationReason>
+      <NS12:branchOfServiceCode>F</NS12:branchOfServiceCode>
+      <NS12:retirementTypeCode>B</NS12:retirementTypeCode>
+      <NS12:personnelProjectedEndDate>1980-02-22</NS12:personnelProjectedEndDate>
+      <NS12:personnelProjectedEndDateCertaintyCode>U</NS12:personnelProjectedEndDateCertaintyCode>
+      <NS12:dischargeCharacterOfServiceCode>A</NS12:dischargeCharacterOfServiceCode>
+      <NS12:honorableDischargeForVaPurposeCode>A</NS12:honorableDischargeForVaPurposeCode>
+      <NS12:personnelStatusChangeTransactionTypeCode>137</NS12:personnelStatusChangeTransactionTypeCode>
+      <NS12:narrativeReasonForSeparationCode>033</NS12:narrativeReasonForSeparationCode>
+      <NS12:narrativeReasonForSeparationTxt>SUFFICIENT SERVICE FOR RETIREMENT</NS12:narrativeReasonForSeparationTxt>
+      <NS12:post911GIBillLossCategoryCode>06</NS12:post911GIBillLossCategoryCode>
+      <NS12:payPlanCode>ME</NS12:payPlanCode>
+      <NS12:payGradeCode>05</NS12:payGradeCode>
+      <NS12:mgadLossCategoryCode>08</NS12:mgadLossCategoryCode>
+      <NS12:activeDutyServiceAgreementQuantity>3</NS12:activeDutyServiceAgreementQuantity>
+      <NS12:initialEntryTrainingEndDate>2002-01-01</NS12:initialEntryTrainingEndDate>
+      <NS12:uniformServiceInitialEntryDate>2003-02-01</NS12:uniformServiceInitialEntryDate>
+      <NS12:militaryAccessionSourceCode>00</NS12:militaryAccessionSourceCode>
+      <NS12:personnelBeginDateSource>7</NS12:personnelBeginDateSource>
+      <NS12:personnelTerminationDateSourceCode>8</NS12:personnelTerminationDateSourceCode>
+      <NS12:activeFederalMilitaryServiceBaseDate>1985-02-22</NS12:activeFederalMilitaryServiceBaseDate>
+      <NS12:mgsrServiceAgreementDurationYearQuantityCode>4</NS12:mgsrServiceAgreementDurationYearQuantityCode>
+      <NS12:dodBeneficiaryTypeCode>07</NS12:dodBeneficiaryTypeCode>
+      <NS12:reserveUnderAge60Code>N</NS12:reserveUnderAge60Code>
+    </NS12:militaryServiceEpisodeData>
+  </NS9:militaryServiceEpisode>
+  <NS5:militaryServiceEpisode xmlns:NS5="http://viers.va.gov/cdi/eMIS/RequestResponse/v2">
+    <NS6:edipi xmlns:NS6="http://viers.va.gov/cdi/eMIS/commonService/v2">1007481507</NS6:edipi>
+    <NS7:keyData xmlns:NS7="http://viers.va.gov/cdi/eMIS/commonService/v2">
+      <NS7:personnelOrganizationCode>22</NS7:personnelOrganizationCode>
+      <NS7:personnelCategoryTypeCode>A</NS7:personnelCategoryTypeCode>
+      <NS7:personnelSegmentIdentifier>1</NS7:personnelSegmentIdentifier>
+    </NS7:keyData>
+    <NS8:militaryServiceEpisodeData xmlns:NS8="http://viers.va.gov/cdi/eMIS/commonService/v2">
+      <NS8:serviceEpisodeStartDate>2004-01-01</NS8:serviceEpisodeStartDate>
+      <NS8:serviceEpisodeEndDate>2005-02-01</NS8:serviceEpisodeEndDate>
+      <NS8:serviceEpisodeTerminationReason>S</NS8:serviceEpisodeTerminationReason>
+      <NS8:branchOfServiceCode>A</NS8:branchOfServiceCode>
+      <NS8:retirementTypeCode>B</NS8:retirementTypeCode>
+      <NS8:personnelProjectedEndDate>1990-11-19</NS8:personnelProjectedEndDate>
+      <NS8:personnelProjectedEndDateCertaintyCode>Q</NS8:personnelProjectedEndDateCertaintyCode>
+      <NS8:dischargeCharacterOfServiceCode>A</NS8:dischargeCharacterOfServiceCode>
+      <NS8:honorableDischargeForVaPurposeCode>J</NS8:honorableDischargeForVaPurposeCode>
+      <NS8:personnelStatusChangeTransactionTypeCode>111</NS8:personnelStatusChangeTransactionTypeCode>
+      <NS8:narrativeReasonForSeparationCode>033</NS8:narrativeReasonForSeparationCode>
+      <NS8:narrativeReasonForSeparationTxt>SUFFICIENT SERVICE FOR RETIREMENT</NS8:narrativeReasonForSeparationTxt>
+      <NS8:post911GIBillLossCategoryCode>99</NS8:post911GIBillLossCategoryCode>
+      <NS8:payPlanCode>ME</NS8:payPlanCode>
+      <NS8:payGradeCode/>
+      <NS8:mgadLossCategoryCode>08</NS8:mgadLossCategoryCode>
+      <NS8:activeDutyServiceAgreementQuantity>5</NS8:activeDutyServiceAgreementQuantity>
+      <NS8:initialEntryTrainingEndDate>2000-01-01</NS8:initialEntryTrainingEndDate>
+      <NS8:uniformServiceInitialEntryDate>2001-02-01</NS8:uniformServiceInitialEntryDate>
+      <NS8:militaryAccessionSourceCode>00</NS8:militaryAccessionSourceCode>
+      <NS8:personnelBeginDateSource>7</NS8:personnelBeginDateSource>
+      <NS8:personnelTerminationDateSourceCode>8</NS8:personnelTerminationDateSourceCode>
+      <NS8:activeFederalMilitaryServiceBaseDate>2000-02-22</NS8:activeFederalMilitaryServiceBaseDate>
+      <NS8:mgsrServiceAgreementDurationYearQuantityCode>4</NS8:mgsrServiceAgreementDurationYearQuantityCode>
+      <NS8:dodBeneficiaryTypeCode>07</NS8:dodBeneficiaryTypeCode>
+      <NS8:reserveUnderAge60Code>N</NS8:reserveUnderAge60Code>
+    </NS8:militaryServiceEpisodeData>
+  </NS5:militaryServiceEpisode>
+  <NS5:militaryServiceEpisode xmlns:NS5="http://viers.va.gov/cdi/eMIS/RequestResponse/v2">
+    <NS6:edipi xmlns:NS6="http://viers.va.gov/cdi/eMIS/commonService/v2">1007481507</NS6:edipi>
+    <NS7:keyData xmlns:NS7="http://viers.va.gov/cdi/eMIS/commonService/v2">
+      <NS7:personnelOrganizationCode>22</NS7:personnelOrganizationCode>
+      <NS7:personnelCategoryTypeCode>A</NS7:personnelCategoryTypeCode>
+      <NS7:personnelSegmentIdentifier>1</NS7:personnelSegmentIdentifier>
+    </NS7:keyData>
+    <NS8:militaryServiceEpisodeData xmlns:NS8="http://viers.va.gov/cdi/eMIS/commonService/v2">
+      <NS8:serviceEpisodeStartDate>2006-01-01</NS8:serviceEpisodeStartDate>
+      <NS8:serviceEpisodeEndDate>2007-02-01</NS8:serviceEpisodeEndDate>
+      <NS8:serviceEpisodeTerminationReason>S</NS8:serviceEpisodeTerminationReason>
+      <NS8:branchOfServiceCode>A</NS8:branchOfServiceCode>
+      <NS8:retirementTypeCode>B</NS8:retirementTypeCode>
+      <NS8:personnelProjectedEndDate>1990-11-19</NS8:personnelProjectedEndDate>
+      <NS8:personnelProjectedEndDateCertaintyCode>Q</NS8:personnelProjectedEndDateCertaintyCode>
+      <NS8:dischargeCharacterOfServiceCode>A</NS8:dischargeCharacterOfServiceCode>
+      <NS8:honorableDischargeForVaPurposeCode>J</NS8:honorableDischargeForVaPurposeCode>
+      <NS8:personnelStatusChangeTransactionTypeCode>111</NS8:personnelStatusChangeTransactionTypeCode>
+      <NS8:narrativeReasonForSeparationCode>033</NS8:narrativeReasonForSeparationCode>
+      <NS8:narrativeReasonForSeparationTxt>SUFFICIENT SERVICE FOR RETIREMENT</NS8:narrativeReasonForSeparationTxt>
+      <NS8:post911GIBillLossCategoryCode>99</NS8:post911GIBillLossCategoryCode>
+      <NS8:payPlanCode>ME</NS8:payPlanCode>
+      <NS8:mgadLossCategoryCode>08</NS8:mgadLossCategoryCode>
+      <NS8:activeDutyServiceAgreementQuantity>5</NS8:activeDutyServiceAgreementQuantity>
+      <NS8:initialEntryTrainingEndDate>2000-01-01</NS8:initialEntryTrainingEndDate>
+      <NS8:uniformServiceInitialEntryDate>2001-02-01</NS8:uniformServiceInitialEntryDate>
+      <NS8:militaryAccessionSourceCode>00</NS8:militaryAccessionSourceCode>
+      <NS8:personnelBeginDateSource>7</NS8:personnelBeginDateSource>
+      <NS8:personnelTerminationDateSourceCode>8</NS8:personnelTerminationDateSourceCode>
+      <NS8:activeFederalMilitaryServiceBaseDate>2000-02-22</NS8:activeFederalMilitaryServiceBaseDate>
+      <NS8:mgsrServiceAgreementDurationYearQuantityCode>4</NS8:mgsrServiceAgreementDurationYearQuantityCode>
+      <NS8:dodBeneficiaryTypeCode>07</NS8:dodBeneficiaryTypeCode>
+      <NS8:reserveUnderAge60Code>N</NS8:reserveUnderAge60Code>
+    </NS8:militaryServiceEpisodeData>
+  </NS5:militaryServiceEpisode>
+  <NS5:militaryServiceEpisode xmlns:NS5="http://viers.va.gov/cdi/eMIS/RequestResponse/v2">
+    <NS6:edipi xmlns:NS6="http://viers.va.gov/cdi/eMIS/commonService/v2">1007481507</NS6:edipi>
+    <NS7:keyData xmlns:NS7="http://viers.va.gov/cdi/eMIS/commonService/v2">
+      <NS7:personnelOrganizationCode>22</NS7:personnelOrganizationCode>
+      <NS7:personnelCategoryTypeCode>A</NS7:personnelCategoryTypeCode>
+      <NS7:personnelSegmentIdentifier>1</NS7:personnelSegmentIdentifier>
+    </NS7:keyData>
+    <NS8:militaryServiceEpisodeData xmlns:NS8="http://viers.va.gov/cdi/eMIS/commonService/v2">
+      <NS8:serviceEpisodeStartDate>2008-01-01</NS8:serviceEpisodeStartDate>
+      <NS8:serviceEpisodeEndDate>2009-02-01</NS8:serviceEpisodeEndDate>
+      <NS8:serviceEpisodeTerminationReason>S</NS8:serviceEpisodeTerminationReason>
+      <NS8:branchOfServiceCode>A</NS8:branchOfServiceCode>
+      <NS8:retirementTypeCode>B</NS8:retirementTypeCode>
+      <NS8:personnelProjectedEndDate>1990-11-19</NS8:personnelProjectedEndDate>
+      <NS8:personnelProjectedEndDateCertaintyCode>Q</NS8:personnelProjectedEndDateCertaintyCode>
+      <NS8:dischargeCharacterOfServiceCode>A</NS8:dischargeCharacterOfServiceCode>
+      <NS8:honorableDischargeForVaPurposeCode>J</NS8:honorableDischargeForVaPurposeCode>
+      <NS8:personnelStatusChangeTransactionTypeCode>111</NS8:personnelStatusChangeTransactionTypeCode>
+      <NS8:narrativeReasonForSeparationCode>033</NS8:narrativeReasonForSeparationCode>
+      <NS8:narrativeReasonForSeparationTxt>SUFFICIENT SERVICE FOR RETIREMENT</NS8:narrativeReasonForSeparationTxt>
+      <NS8:post911GIBillLossCategoryCode>99</NS8:post911GIBillLossCategoryCode>
+      <NS8:payPlanCode/>
+      <NS8:payGradeCode>05</NS8:payGradeCode>
+      <NS8:mgadLossCategoryCode>08</NS8:mgadLossCategoryCode>
+      <NS8:activeDutyServiceAgreementQuantity>5</NS8:activeDutyServiceAgreementQuantity>
+      <NS8:initialEntryTrainingEndDate>2000-01-01</NS8:initialEntryTrainingEndDate>
+      <NS8:uniformServiceInitialEntryDate>2001-02-01</NS8:uniformServiceInitialEntryDate>
+      <NS8:militaryAccessionSourceCode>00</NS8:militaryAccessionSourceCode>
+      <NS8:personnelBeginDateSource>7</NS8:personnelBeginDateSource>
+      <NS8:personnelTerminationDateSourceCode>8</NS8:personnelTerminationDateSourceCode>
+      <NS8:activeFederalMilitaryServiceBaseDate>2000-02-22</NS8:activeFederalMilitaryServiceBaseDate>
+      <NS8:mgsrServiceAgreementDurationYearQuantityCode>4</NS8:mgsrServiceAgreementDurationYearQuantityCode>
+      <NS8:dodBeneficiaryTypeCode>07</NS8:dodBeneficiaryTypeCode>
+      <NS8:reserveUnderAge60Code>N</NS8:reserveUnderAge60Code>
+    </NS8:militaryServiceEpisodeData>
+  </NS5:militaryServiceEpisode>
+  <NS5:militaryServiceEpisode xmlns:NS5="http://viers.va.gov/cdi/eMIS/RequestResponse/v2">
+    <NS6:edipi xmlns:NS6="http://viers.va.gov/cdi/eMIS/commonService/v2">1007481507</NS6:edipi>
+    <NS7:keyData xmlns:NS7="http://viers.va.gov/cdi/eMIS/commonService/v2">
+      <NS7:personnelOrganizationCode>22</NS7:personnelOrganizationCode>
+      <NS7:personnelCategoryTypeCode>A</NS7:personnelCategoryTypeCode>
+      <NS7:personnelSegmentIdentifier>1</NS7:personnelSegmentIdentifier>
+    </NS7:keyData>
+    <NS8:militaryServiceEpisodeData xmlns:NS8="http://viers.va.gov/cdi/eMIS/commonService/v2">
+      <NS8:serviceEpisodeStartDate>2010-01-01</NS8:serviceEpisodeStartDate>
+      <NS8:serviceEpisodeEndDate>2011-02-01</NS8:serviceEpisodeEndDate>
+      <NS8:serviceEpisodeTerminationReason>S</NS8:serviceEpisodeTerminationReason>
+      <NS8:branchOfServiceCode>A</NS8:branchOfServiceCode>
+      <NS8:retirementTypeCode>B</NS8:retirementTypeCode>
+      <NS8:personnelProjectedEndDate>1990-11-19</NS8:personnelProjectedEndDate>
+      <NS8:personnelProjectedEndDateCertaintyCode>Q</NS8:personnelProjectedEndDateCertaintyCode>
+      <NS8:dischargeCharacterOfServiceCode>A</NS8:dischargeCharacterOfServiceCode>
+      <NS8:honorableDischargeForVaPurposeCode>J</NS8:honorableDischargeForVaPurposeCode>
+      <NS8:personnelStatusChangeTransactionTypeCode>111</NS8:personnelStatusChangeTransactionTypeCode>
+      <NS8:narrativeReasonForSeparationCode>033</NS8:narrativeReasonForSeparationCode>
+      <NS8:narrativeReasonForSeparationTxt>SUFFICIENT SERVICE FOR RETIREMENT</NS8:narrativeReasonForSeparationTxt>
+      <NS8:post911GIBillLossCategoryCode>99</NS8:post911GIBillLossCategoryCode>
+      <NS8:payGradeCode>05</NS8:payGradeCode>
+      <NS8:mgadLossCategoryCode>08</NS8:mgadLossCategoryCode>
+      <NS8:activeDutyServiceAgreementQuantity>5</NS8:activeDutyServiceAgreementQuantity>
+      <NS8:initialEntryTrainingEndDate>2000-01-01</NS8:initialEntryTrainingEndDate>
+      <NS8:uniformServiceInitialEntryDate>2001-02-01</NS8:uniformServiceInitialEntryDate>
+      <NS8:militaryAccessionSourceCode>00</NS8:militaryAccessionSourceCode>
+      <NS8:personnelBeginDateSource>7</NS8:personnelBeginDateSource>
+      <NS8:personnelTerminationDateSourceCode>8</NS8:personnelTerminationDateSourceCode>
+      <NS8:activeFederalMilitaryServiceBaseDate>2000-02-22</NS8:activeFederalMilitaryServiceBaseDate>
+      <NS8:mgsrServiceAgreementDurationYearQuantityCode>4</NS8:mgsrServiceAgreementDurationYearQuantityCode>
+      <NS8:dodBeneficiaryTypeCode>07</NS8:dodBeneficiaryTypeCode>
+      <NS8:reserveUnderAge60Code>N</NS8:reserveUnderAge60Code>
+    </NS8:militaryServiceEpisodeData>
+  </NS5:militaryServiceEpisode>
+</NS4:eMISserviceEpisodeResponse>

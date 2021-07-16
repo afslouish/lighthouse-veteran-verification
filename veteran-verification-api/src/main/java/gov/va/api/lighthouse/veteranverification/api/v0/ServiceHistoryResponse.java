@@ -96,7 +96,7 @@ public class ServiceHistoryResponse {
         example = "W01",
         required = true)
     @JsonProperty("pay_grade")
-    PayGrade payGrade;
+    String payGrade;
 
     @Schema(
         name = "discharge_status",

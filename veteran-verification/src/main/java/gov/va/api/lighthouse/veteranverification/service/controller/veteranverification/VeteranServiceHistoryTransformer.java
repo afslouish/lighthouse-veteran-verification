@@ -2,7 +2,6 @@ package gov.va.api.lighthouse.veteranverification.service.controller.veteranveri
 
 import gov.va.api.lighthouse.veteranverification.api.v0.BranchOfService;
 import gov.va.api.lighthouse.veteranverification.api.v0.Deployment;
-import gov.va.api.lighthouse.veteranverification.api.v0.PayGrade;
 import gov.va.api.lighthouse.veteranverification.api.v0.ServiceHistoryResponse;
 import gov.va.api.lighthouse.veteranverification.service.MpiLookupUtils;
 import gov.va.api.lighthouse.veteranverification.service.utils.EmisUtils;
@@ -19,6 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lombok.Builder;
 import lombok.NonNull;
+import org.apache.commons.lang3.StringUtils;
 import org.hl7.v3.PRPAIN201306UV02;
 
 @Builder
@@ -61,10 +61,9 @@ public class VeteranServiceHistoryTransformer {
         .startDate(startDate)
         .endDate(endDate)
         .payGrade(
-            PayGrade.builder()
-                .payPlanCode(serviceEpisode.getMilitaryServiceEpisodeData().getPayPlanCode())
-                .payGradeCode(serviceEpisode.getMilitaryServiceEpisodeData().getPayGradeCode())
-                .build())
+            makePayGradeString(
+                serviceEpisode.getMilitaryServiceEpisodeData().getPayPlanCode(),
+                serviceEpisode.getMilitaryServiceEpisodeData().getPayGradeCode()))
         .dischargeStatus(
             ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.codeToEnum(
                 serviceEpisode
@@ -111,6 +110,20 @@ public class VeteranServiceHistoryTransformer {
           Deployment.builder().endDate(endDate).startDate(startDate).location(location).build());
     }
     return list;
+  }
+
+  private String makePayGradeString(String payPlanCode, String payGradeCode) {
+    if (payPlanCode == null
+        || payPlanCode.trim().isEmpty()
+        || payGradeCode == null
+        || payGradeCode.trim().isEmpty()) {
+      return "unknown";
+    }
+    return StringUtils.normalizeSpace(
+        String.format(
+            "%s%s",
+            StringUtils.normalizeSpace(payPlanCode).charAt(1),
+            StringUtils.normalizeSpace(payGradeCode)));
   }
 
   private List<Deployment> removeUsedDeployments(

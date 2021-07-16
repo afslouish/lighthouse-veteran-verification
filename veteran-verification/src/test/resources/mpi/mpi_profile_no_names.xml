@@ -43,7 +43,7 @@
             <id extension="0000027604^PN^200PROV^USDVA^A" root="2.16.840.1.113883.4.349"/>
             <statusCode code="active"/>
             <patientPerson>
-              <name use="L"></name>
+              <name use="L"/>
               <administrativeGenderCode code="M"/>
               <birthTime value="19540526"/>
               <asOtherIDs classCode="SSN">
@@ -98,7 +98,7 @@
           <semanticsText>SSN</semanticsText>
         </livingSubjectId>
         <livingSubjectName>
-          <value use="L"></value>
+          <value use="L"/>
           <semanticsText>Legal Name</semanticsText>
         </livingSubjectName>
       </parameterList>
