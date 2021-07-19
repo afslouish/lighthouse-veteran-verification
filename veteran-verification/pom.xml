@@ -22,6 +22,7 @@
     <emis-model.version>2.0.0</emis-model.version>
     <mock-server.version>5.11.2</mock-server.version>
     <bgs-client.version>2.0.0</bgs-client.version>
+    <find-bugs-annotations.version>3.0.1</find-bugs-annotations.version>
   </properties>
   <dependencies>
     <dependency>
@@ -72,7 +73,7 @@
     <dependency>
       <groupId>com.google.code.findbugs</groupId>
       <artifactId>annotations</artifactId>
-      <version>3.0.1</version>
+      <version>${find-bugs-annotations.version}</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>
