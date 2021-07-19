@@ -151,7 +151,7 @@ public class ServiceHistoryResponse {
       HONORABLE_FOR_VA_PURPOSES("J", "honorable-for-va-purposes"),
       DISHONORABLE_FOR_VA_PURPOSES("K", "dishonorable-for-va-purposes"),
       UNCHARACTERIZED("Y", "uncharacterized"),
-      UNKNOWN(null, "unknown");
+      UNKNOWN("Z", "unknown");
 
       private final String description;
       private final String code;
