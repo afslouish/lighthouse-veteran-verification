@@ -32,14 +32,17 @@ public class VeteranServiceHistoryTransformer {
   @NonNull PRPAIN201306UV02 mpiResponse;
 
   private List<Deployment> buildDeployments(
-      List<Deployment> deployments, LocalDate startDate, LocalDate endDate) {
+      List<Deployment> deployments,
+      LocalDate servicePeriodStartDate,
+      LocalDate servicePeriodEndDate) {
     return deployments.stream()
         .filter(
             deployment ->
                 deployment.startDate() != null
                     && deployment.endDate() != null
-                    && isBeforeOrEqualTo(startDate, deployment.startDate())
-                    && (endDate == null || isBeforeOrEqualTo(deployment.endDate(), endDate)))
+                    && isBeforeOrEqualTo(servicePeriodStartDate, deployment.startDate())
+                    && (servicePeriodEndDate == null
+                        || isBeforeOrEqualTo(deployment.endDate(), servicePeriodEndDate)))
         .collect(Collectors.toList());
   }
 
