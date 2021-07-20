@@ -3,6 +3,7 @@ package gov.va.api.lighthouse.veteranverification.service.controller.veteranveri
 import gov.va.api.lighthouse.veteranverification.api.v0.Deployment;
 import gov.va.api.lighthouse.veteranverification.api.v0.ServiceHistoryResponse;
 import gov.va.api.lighthouse.veteranverification.service.MpiLookupUtils;
+import gov.va.api.lighthouse.veteranverification.service.controller.Transformers;
 import gov.va.api.lighthouse.veteranverification.service.utils.UuidV5;
 import gov.va.viers.cdi.emis.commonservice.v2.MilitaryServiceEpisode;
 import gov.va.viers.cdi.emis.requestresponse.v2.EMISdeploymentResponseType;
@@ -15,7 +16,6 @@ import java.util.Deque;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import javax.xml.datatype.XMLGregorianCalendar;
 import lombok.Builder;
 import lombok.NonNull;
 import org.apache.commons.lang3.StringUtils;
@@ -97,13 +97,13 @@ public class VeteranServiceHistoryTransformer {
     for (gov.va.viers.cdi.emis.commonservice.v2.Deployment deployment :
         deploymentResponse.getDeployment()) {
       LocalDate startDate =
-          xmlGregorianToLocalDate(
+          Transformers.xmlGregorianToLocalDate(
               Optional.ofNullable(deployment.getDeploymentData())
                   .map(value -> value.getDeploymentStartDate())
                   .orElse(null));
 
       LocalDate endDate =
-          xmlGregorianToLocalDate(
+          Transformers.xmlGregorianToLocalDate(
               Optional.ofNullable(deployment.getDeploymentData())
                   .map(value -> value.getDeploymentEndDate())
                   .orElse(null));
@@ -158,13 +158,13 @@ public class VeteranServiceHistoryTransformer {
     for (MilitaryServiceEpisode militaryServiceEpisode :
         serviceEpisodeResponseType.getMilitaryServiceEpisode()) {
       LocalDate startDate =
-          xmlGregorianToLocalDate(
+          Transformers.xmlGregorianToLocalDate(
               Optional.ofNullable(militaryServiceEpisode.getMilitaryServiceEpisodeData())
                   .map(value -> value.getServiceEpisodeStartDate())
                   .orElse(null));
 
       LocalDate endDate =
-          xmlGregorianToLocalDate(
+          Transformers.xmlGregorianToLocalDate(
               Optional.ofNullable(militaryServiceEpisode.getMilitaryServiceEpisodeData())
                   .map(value -> value.getServiceEpisodeEndDate())
                   .orElse(null));
@@ -216,11 +216,5 @@ public class VeteranServiceHistoryTransformer {
       unusedDeployments.removeAll(attributes.deployments);
     }
     return ServiceHistoryResponse.builder().data(episodes.stream().toList()).build();
-  }
-
-  private LocalDate xmlGregorianToLocalDate(XMLGregorianCalendar calendar) {
-    return calendar != null
-        ? LocalDate.of(calendar.getYear(), calendar.getMonth(), calendar.getDay())
-        : null;
   }
 }

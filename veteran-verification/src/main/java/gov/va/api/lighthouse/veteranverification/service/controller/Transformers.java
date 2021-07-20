@@ -2,12 +2,14 @@ package gov.va.api.lighthouse.veteranverification.service.controller;
 
 import static org.springframework.util.CollectionUtils.isEmpty;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import javax.xml.datatype.XMLGregorianCalendar;
 import lombok.experimental.UtilityClass;
 import org.apache.commons.lang3.StringUtils;
 
@@ -38,5 +40,12 @@ public final class Transformers {
       return ((Map<?, ?>) value).isEmpty();
     }
     return value == null;
+  }
+
+  /** Converts XmlGregorian to LocalDate. */
+  public static LocalDate xmlGregorianToLocalDate(XMLGregorianCalendar calendar) {
+    return calendar != null
+        ? LocalDate.of(calendar.getYear(), calendar.getMonth(), calendar.getDay())
+        : null;
   }
 }
