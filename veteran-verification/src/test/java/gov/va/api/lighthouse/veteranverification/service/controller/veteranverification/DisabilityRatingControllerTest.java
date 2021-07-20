@@ -28,7 +28,7 @@ public class DisabilityRatingControllerTest {
   @Test
   void happyPathRetrieveBySsnTest() {
     DisabilityRatingController controller = new DisabilityRatingController(mpiClient, bgsClient);
-    TestUtils.setMpiMockResponse(mpiClient, "mpi_profile_icn_response_body.xml");
+    TestUtils.setMpiMockResponse(mpiClient, "mpi/mpi_profile_icn_response_body.xml");
     TestUtils.setBgsMockResponse(
         bgsClient,
         RatingRecord.builder()

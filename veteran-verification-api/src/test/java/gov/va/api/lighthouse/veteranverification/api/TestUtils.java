@@ -21,12 +21,11 @@ public class TestUtils {
     return ServiceHistoryResponse.ServiceHistoryAttributes.builder()
         .firstName("John")
         .lastName("Doe")
-        .branchOfService("BranchOfService")
+        .branchOfService("Army")
         .startDate(LocalDate.of(2000, 1, 1))
         .endDate(LocalDate.of(2001, 1, 1))
-        .payGrade("PayGrade")
-        .dischargeStatus(
-            ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.ThisWillBeRemoved)
+        .payGrade("E05")
+        .dischargeStatus(ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE)
         .separationReason("SeparationReason")
         .deployments(Arrays.stream(deployments).toList())
         .build();

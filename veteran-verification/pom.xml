@@ -22,6 +22,7 @@
     <emis-model.version>2.0.0</emis-model.version>
     <mock-server.version>5.11.2</mock-server.version>
     <bgs-client.version>2.0.0</bgs-client.version>
+    <find-bugs-annotations.version>3.0.1</find-bugs-annotations.version>
   </properties>
   <dependencies>
     <dependency>
@@ -45,6 +46,11 @@
     </dependency>
     <dependency>
       <groupId>gov.va.api.lighthouse</groupId>
+      <artifactId>emis-client-v2</artifactId>
+      <version>${emis-client-v1.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>gov.va.api.lighthouse</groupId>
       <artifactId>emis-model</artifactId>
       <version>${emis-model.version}</version>
     </dependency>
@@ -63,6 +69,12 @@
       <artifactId>mockserver-netty</artifactId>
       <version>${mock-server.version}</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.findbugs</groupId>
+      <artifactId>annotations</artifactId>
+      <version>${find-bugs-annotations.version}</version>
+      <scope>compile</scope>
     </dependency>
   </dependencies>
   <build>

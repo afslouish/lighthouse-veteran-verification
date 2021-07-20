@@ -13,6 +13,8 @@
   <packaging>jar</packaging>
   <properties>
     <master-patient-index-client.version>2.0.6</master-patient-index-client.version>
+    <swagger-annotations.version>1.6.2</swagger-annotations.version>
+    <findbugs-annotations.version>3.0.1</findbugs-annotations.version>
   </properties>
   <dependencies>
     <dependency>
@@ -28,13 +30,13 @@
     <dependency>
       <groupId>com.google.code.findbugs</groupId>
       <artifactId>annotations</artifactId>
-      <version>3.0.1</version>
+      <version>${findbugs-annotations.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>io.swagger</groupId>
       <artifactId>swagger-annotations</artifactId>
-      <version>1.6.2</version>
+      <version>${swagger-annotations.version}</version>
       <scope>compile</scope>
     </dependency>
     <dependency>

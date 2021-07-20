@@ -1,17 +1,20 @@
 package gov.va.api.lighthouse.veteranverification.api.v0;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
+import lombok.SneakyThrows;
 import lombok.experimental.Accessors;
 import lombok.experimental.FieldDefaults;
 
@@ -34,20 +37,20 @@ public class ServiceHistoryResponse {
   @SuppressFBWarnings({"EI_EXPOSE_REP2", "EI_EXPOSE_REP"})
   @FieldDefaults(level = AccessLevel.PUBLIC)
   public static class ServiceHistoryAttributes {
-    @NonNull
     @Schema(
         name = "first_name",
         description = "Veteran first name",
         example = "Abraham",
-        required = true)
+        required = true,
+        nullable = true)
     String firstName;
 
-    @NonNull
     @Schema(
         name = "last_name",
         description = "Veteran last name",
         example = "Lincoln",
-        required = true)
+        required = true,
+        nullable = true)
     String lastName;
 
     @NonNull
@@ -140,7 +143,47 @@ public class ServiceHistoryResponse {
     List<Deployment> deployments = new ArrayList<>();
 
     public enum DischargeStatus {
-      ThisWillBeRemoved
+      HONORABLE("A", "honorable"),
+      GENERAL("B", "general"),
+      BAD_CONDUCT("D", "bad-conduct"),
+      OTHER_THAN_HONORABLE("E", "other-than-honorable"),
+      DISHONORABLE("F", "dishonorable"),
+      HONORABLE_ABSENCE_OF_NEGATIVE_REPORT("H", "honorable-absence-of-negative-report"),
+      HONORABLE_FOR_VA_PURPOSES("J", "honorable-for-va-purposes"),
+      DISHONORABLE_FOR_VA_PURPOSES("K", "dishonorable-for-va-purposes"),
+      UNCHARACTERIZED("Y", "uncharacterized"),
+      UNKNOWN("Z", "unknown");
+
+      private final String description;
+      private final String code;
+
+      DischargeStatus(String code, String description) {
+        this.code = code;
+        this.description = description;
+      }
+
+      /**
+       * Will return enum based on single letter code.
+       *
+       * @param statusCode Single letter code.
+       * @return DischargeStatus Enum.
+       */
+      @SneakyThrows
+      public static DischargeStatus codeToEnum(String statusCode) {
+        EnumSet<DischargeStatus> enumSet = EnumSet.allOf(DischargeStatus.class);
+        DischargeStatus matchingEnum = DischargeStatus.UNKNOWN;
+        for (DischargeStatus dischargeStatus : enumSet) {
+          if (statusCode.toUpperCase().strip().equals(dischargeStatus.code)) {
+            matchingEnum = dischargeStatus;
+          }
+        }
+        return matchingEnum;
+      }
+
+      @JsonValue
+      public String serializer() {
+        return this.description;
+      }
     }
   }
 
