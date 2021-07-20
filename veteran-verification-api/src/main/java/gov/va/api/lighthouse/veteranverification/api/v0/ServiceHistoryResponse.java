@@ -1,6 +1,7 @@
 package gov.va.api.lighthouse.veteranverification.api.v0;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -179,8 +180,8 @@ public class ServiceHistoryResponse {
         return matchingEnum;
       }
 
-      @Override
-      public String toString() {
+      @JsonValue
+      public String serializer() {
         return this.description;
       }
     }

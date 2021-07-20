@@ -12,7 +12,7 @@ public class DischargeStatusTest {
     Assertions.assertEquals(
         ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.BAD_CONDUCT,
         dischargeStatus);
-    Assertions.assertEquals("bad-conduct", dischargeStatus.toString());
+    Assertions.assertEquals("bad-conduct", dischargeStatus.serializer());
   }
 
   @Test
@@ -22,7 +22,7 @@ public class DischargeStatusTest {
     Assertions.assertEquals(
         ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.DISHONORABLE,
         dischargeStatus);
-    Assertions.assertEquals("dishonorable", dischargeStatus.toString());
+    Assertions.assertEquals("dishonorable", dischargeStatus.serializer());
   }
 
   @Test
@@ -33,7 +33,7 @@ public class DischargeStatusTest {
         ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus
             .DISHONORABLE_FOR_VA_PURPOSES,
         dischargeStatus);
-    Assertions.assertEquals("dishonorable-for-va-purposes", dischargeStatus.toString());
+    Assertions.assertEquals("dishonorable-for-va-purposes", dischargeStatus.serializer());
   }
 
   @Test
@@ -42,7 +42,7 @@ public class DischargeStatusTest {
         ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.codeToEnum("B");
     Assertions.assertEquals(
         ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.GENERAL, dischargeStatus);
-    Assertions.assertEquals("general", dischargeStatus.toString());
+    Assertions.assertEquals("general", dischargeStatus.serializer());
   }
 
   @Test
@@ -51,7 +51,7 @@ public class DischargeStatusTest {
         ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.codeToEnum("A");
     Assertions.assertEquals(
         ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE, dischargeStatus);
-    Assertions.assertEquals("honorable", dischargeStatus.toString());
+    Assertions.assertEquals("honorable", dischargeStatus.serializer());
   }
 
   @Test
@@ -62,7 +62,7 @@ public class DischargeStatusTest {
         ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus
             .HONORABLE_ABSENCE_OF_NEGATIVE_REPORT,
         dischargeStatus);
-    Assertions.assertEquals("honorable-absence-of-negative-report", dischargeStatus.toString());
+    Assertions.assertEquals("honorable-absence-of-negative-report", dischargeStatus.serializer());
   }
 
   @Test
@@ -72,7 +72,7 @@ public class DischargeStatusTest {
     Assertions.assertEquals(
         ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE_FOR_VA_PURPOSES,
         dischargeStatus);
-    Assertions.assertEquals("honorable-for-va-purposes", dischargeStatus.toString());
+    Assertions.assertEquals("honorable-for-va-purposes", dischargeStatus.serializer());
   }
 
   @Test
@@ -83,7 +83,7 @@ public class DischargeStatusTest {
         ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus
             .DISHONORABLE_FOR_VA_PURPOSES,
         dischargeStatus);
-    Assertions.assertEquals("dishonorable-for-va-purposes", dischargeStatus.toString());
+    Assertions.assertEquals("dishonorable-for-va-purposes", dischargeStatus.serializer());
   }
 
   @Test
@@ -93,7 +93,7 @@ public class DischargeStatusTest {
     Assertions.assertEquals(
         ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.OTHER_THAN_HONORABLE,
         dischargeStatus);
-    Assertions.assertEquals("other-than-honorable", dischargeStatus.toString());
+    Assertions.assertEquals("other-than-honorable", dischargeStatus.serializer());
   }
 
   @Test
@@ -103,7 +103,7 @@ public class DischargeStatusTest {
     Assertions.assertEquals(
         ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.UNCHARACTERIZED,
         dischargeStatus);
-    Assertions.assertEquals("uncharacterized", dischargeStatus.toString());
+    Assertions.assertEquals("uncharacterized", dischargeStatus.serializer());
   }
 
   @Test
@@ -112,6 +112,6 @@ public class DischargeStatusTest {
         ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.codeToEnum("Z");
     Assertions.assertEquals(
         ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.UNKNOWN, dischargeStatus);
-    Assertions.assertEquals("unknown", dischargeStatus.toString());
+    Assertions.assertEquals("unknown", dischargeStatus.serializer());
   }
 }
