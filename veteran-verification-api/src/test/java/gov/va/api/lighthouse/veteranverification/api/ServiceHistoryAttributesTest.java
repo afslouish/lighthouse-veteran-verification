@@ -51,14 +51,10 @@ public class ServiceHistoryAttributesTest {
   }
 
   @Test
-  public void firstNameIsNonNullable() {
+  public void firstNameIsNullable() {
     ServiceHistoryResponse.ServiceHistoryAttributes serviceHistoryAttributes =
         TestUtils.makeServiceHistoryAttributes();
-    Assertions.assertThrows(
-        NullPointerException.class,
-        () -> {
-          serviceHistoryAttributes.firstName(null);
-        });
+    serviceHistoryAttributes.firstName(null);
   }
 
   @Test
@@ -85,14 +81,10 @@ public class ServiceHistoryAttributesTest {
   }
 
   @Test
-  public void lastNameIsNonNullable() {
+  public void lastNameIsNullable() {
     ServiceHistoryResponse.ServiceHistoryAttributes serviceHistoryAttributes =
         TestUtils.makeServiceHistoryAttributes();
-    Assertions.assertThrows(
-        NullPointerException.class,
-        () -> {
-          serviceHistoryAttributes.lastName(null);
-        });
+    serviceHistoryAttributes.lastName(null);
   }
 
   @Test

@@ -37,20 +37,20 @@ public class ServiceHistoryResponse {
   @SuppressFBWarnings({"EI_EXPOSE_REP2", "EI_EXPOSE_REP"})
   @FieldDefaults(level = AccessLevel.PUBLIC)
   public static class ServiceHistoryAttributes {
-    @NonNull
     @Schema(
         name = "first_name",
         description = "Veteran first name",
         example = "Abraham",
-        required = true)
+        required = true,
+        nullable = true)
     String firstName;
 
-    @NonNull
     @Schema(
         name = "last_name",
         description = "Veteran last name",
         example = "Lincoln",
-        required = true)
+        required = true,
+        nullable = true)
     String lastName;
 
     @NonNull
