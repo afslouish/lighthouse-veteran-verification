@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 public class NotaryTest {
   @Test
   @SneakyThrows
-  public void ObjectToJwtHappyPath() {
+  public void objectToJwtHappyPath() {
     ServiceHistoryResponse.ServiceHistoryEpisode[] serviceHistoryEpisodes = {
       TestUtils.makeServiceHistoryResponse()
     };
