@@ -1,13 +1,9 @@
 package gov.va.api.lighthouse.veteranverification.api.v0;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
-import com.sun.xml.ws.developer.Serialization;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDate;
-
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;

@@ -81,27 +81,6 @@ public class TestUtils {
         .getValue();
   }
 
-  public ServiceHistoryResponse.ServiceHistoryAttributes makeServiceHistoryAttributes() {
-    return ServiceHistoryResponse.ServiceHistoryAttributes.builder()
-            .firstName("John")
-            .lastName("Doe")
-            .branchOfService("BranchOfService")
-            .startDate(LocalDate.of(2000, 1, 1))
-            .endDate(LocalDate.of(2001, 1, 1))
-            .payGrade("PayGrade")
-            .dischargeStatus(ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE)
-            .separationReason("SeparationReason")
-            .deployments(Arrays.stream(deploymentArray).toList())
-            .build();
-  }
-
-  public ServiceHistoryResponse.ServiceHistoryEpisode makeServiceHistoryResponse() {
-    return ServiceHistoryResponse.ServiceHistoryEpisode.builder()
-            .id("mock")
-            .attributes(makeServiceHistoryAttributes())
-            .build();
-  }
-
   @SneakyThrows
   public EMISserviceEpisodeResponseType createServiceHistoryResponse(String filename) {
     String profile = asString(TestUtils.class.getClassLoader().getResourceAsStream(filename));
@@ -160,6 +139,27 @@ public class TestUtils {
         .keystorePassword("secret")
         .truststorePath("src/test/resources/faketruststore.jks")
         .truststorePassword("secret")
+        .build();
+  }
+
+  public ServiceHistoryResponse.ServiceHistoryAttributes makeServiceHistoryAttributes() {
+    return ServiceHistoryResponse.ServiceHistoryAttributes.builder()
+        .firstName("John")
+        .lastName("Doe")
+        .branchOfService("BranchOfService")
+        .startDate(LocalDate.of(2000, 1, 1))
+        .endDate(LocalDate.of(2001, 1, 1))
+        .payGrade("PayGrade")
+        .dischargeStatus(ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE)
+        .separationReason("SeparationReason")
+        .deployments(Arrays.stream(deploymentArray).toList())
+        .build();
+  }
+
+  public ServiceHistoryResponse.ServiceHistoryEpisode makeServiceHistoryResponse() {
+    return ServiceHistoryResponse.ServiceHistoryEpisode.builder()
+        .id("mock")
+        .attributes(makeServiceHistoryAttributes())
         .build();
   }
 
