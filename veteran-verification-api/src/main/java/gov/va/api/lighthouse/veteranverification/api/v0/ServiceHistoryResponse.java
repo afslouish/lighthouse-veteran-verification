@@ -1,5 +1,6 @@
 package gov.va.api.lighthouse.veteranverification.api.v0;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
@@ -67,6 +68,7 @@ public class ServiceHistoryResponse {
         example = "1948-04-08",
         required = true,
         nullable = true)
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     LocalDate startDate;
 
     @Schema(
@@ -75,6 +77,7 @@ public class ServiceHistoryResponse {
         example = "1950-05-10",
         required = true,
         nullable = true)
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     LocalDate endDate;
 
     @NonNull
@@ -97,7 +100,6 @@ public class ServiceHistoryResponse {
                 + "Grade value, with the leading character (M or C) stripped from Pay Plan Code.",
         example = "W01",
         required = true)
-    @JsonProperty("pay_grade")
     String payGrade;
 
     @Schema(

@@ -24,24 +24,12 @@
     <bgs-client.version>2.0.0</bgs-client.version>
     <find-bugs-annotations.version>3.0.1</find-bugs-annotations.version>
     <java-jwt.version>3.18.1</java-jwt.version>
-    <bcprov-jdk16.version>1.46</bcprov-jdk16.version>
-    <bcpkix-jdk15on.version>1.69</bcpkix-jdk15on.version>
   </properties>
   <dependencies>
     <dependency>
       <groupId>com.auth0</groupId>
       <artifactId>java-jwt</artifactId>
       <version>${java-jwt.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.bouncycastle</groupId>
-      <artifactId>bcprov-jdk16</artifactId>
-      <version>${bcprov-jdk16.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.bouncycastle</groupId>
-      <artifactId>bcpkix-jdk15on</artifactId>
-      <version>${bcpkix-jdk15on.version}</version>
     </dependency>
     <dependency>
       <groupId>gov.va.api.health</groupId>
@@ -96,14 +84,30 @@
     </dependency>
     <dependency>
       <groupId>org.bouncycastle</groupId>
+      <artifactId>bcpkix-jdk15on</artifactId>
+      <version>1.69</version>
+    </dependency>
+    <dependency>
+      <groupId>org.bouncycastle</groupId>
       <artifactId>bcprov-jdk15on</artifactId>
       <version>1.59</version>
-      <scope>compile</scope>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.bouncycastle</groupId>
+      <artifactId>bcpkix-jdk15on</artifactId>
+      <version>1.69</version>
     </dependency>
     <dependency>
       <groupId>org.apache.santuario</groupId>
       <artifactId>xmlsec</artifactId>
       <version>2.2.0</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.bouncycastle</groupId>
+      <artifactId>bcprov-jdk15on</artifactId>
+      <version>1.59</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>
