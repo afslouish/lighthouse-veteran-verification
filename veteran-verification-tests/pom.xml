@@ -145,6 +145,7 @@
                 <argument>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5085</argument>
                 <argument>-cp</argument>
                 <argument>veteran-verification.jar</argument>
+                <argument>-Dprivate-key-path=${project.basedir}/../veteran-verification/src/test/resources/verification_test_private.pem</argument>
                 <argument>-Demis.v1.ssl-enabled=false</argument>
                 <argument>-Demis.v2.ssl-enabled=false</argument>
                 <argument>-Dmpi.ssl-enabled=false</argument>

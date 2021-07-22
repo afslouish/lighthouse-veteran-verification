@@ -115,6 +115,18 @@ public class TestUtils {
         .build();
   }
 
+  public EmisConfigV2 makeEmisConfigV2() {
+    return EmisConfigV2.builder()
+        .keyAlias("fake")
+        .keystorePath("src/test/resources/fakekeystore.jks")
+        .keystorePassword("secret")
+        .truststorePath("src/test/resources/faketruststore.jks")
+        .truststorePassword("secret")
+        .url("http://localhost:2020")
+        .wsdlLocation("http://localhost:2020")
+        .build();
+  }
+
   public EmisConfigV2 makeEmisV2Config() {
     return EmisConfigV2.builder()
         .keyAlias("fake")
