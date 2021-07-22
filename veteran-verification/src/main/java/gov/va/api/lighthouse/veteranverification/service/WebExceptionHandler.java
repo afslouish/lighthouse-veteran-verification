@@ -6,6 +6,7 @@ import gov.va.api.lighthouse.veteranverification.api.ApiError.EmisInaccessibleWs
 import gov.va.api.lighthouse.veteranverification.api.ApiError.InaccessibleWsdlErrorApiError;
 import gov.va.api.lighthouse.veteranverification.api.ApiError.InvalidParameterApiError;
 import gov.va.api.lighthouse.veteranverification.api.ApiError.MissingParameterApiError;
+import gov.va.api.lighthouse.veteranverification.api.ApiError.NoServiceHistoryFoundApiError;
 import gov.va.api.lighthouse.veteranverification.service.Exceptions.EmisInaccesibleWsdlException;
 import java.util.Optional;
 import org.springframework.http.HttpStatus;
@@ -71,5 +72,12 @@ public class WebExceptionHandler {
             .getMessage()
             .substring(0, e.getCause().getMessage().indexOf(" is marked non-null but is null"));
     return new MissingParameterApiError(missingField);
+  }
+
+  /** Return error for EMIS inaccessible wsdl exception. */
+  @ExceptionHandler({Exceptions.NoServiceHistoryFoundException.class})
+  @ResponseStatus(HttpStatus.NOT_IMPLEMENTED)
+  public NoServiceHistoryFoundApiError handleNoServiceHistoryFoundException() {
+    return new NoServiceHistoryFoundApiError();
   }
 }

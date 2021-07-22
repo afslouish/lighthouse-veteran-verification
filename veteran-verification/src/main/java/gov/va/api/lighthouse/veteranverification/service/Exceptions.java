@@ -11,4 +11,10 @@ public class Exceptions {
       super("EMIS WSDL not accessible.");
     }
   }
+
+  public static final class NoServiceHistoryFoundException extends RuntimeException {
+    public NoServiceHistoryFoundException() {
+      super("No service history found.");
+    }
+  }
 }
