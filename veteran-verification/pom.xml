@@ -13,7 +13,6 @@
   <packaging>jar</packaging>
   <properties>
     <docker.imageName>lighthouse-${project.artifactId}</docker.imageName>
-    <jacoco.coverage>0.92</jacoco.coverage>
     <master-patient-index-client.version>2.0.7</master-patient-index-client.version>
     <swagger-examples-plugin.version>1.0.1</swagger-examples-plugin.version>
     <swagger-maven-plugin.version>2.1.1</swagger-maven-plugin.version>
@@ -23,8 +22,16 @@
     <mock-server.version>5.11.2</mock-server.version>
     <bgs-client.version>2.0.0</bgs-client.version>
     <find-bugs-annotations.version>3.0.1</find-bugs-annotations.version>
+    <java-jwt.version>3.18.1</java-jwt.version>
+    <bcpkix-jdk15on.version>1.69</bcpkix-jdk15on.version>
+    <bcprov-jdk15on.version>1.59</bcprov-jdk15on.version>
   </properties>
   <dependencies>
+    <dependency>
+      <groupId>com.auth0</groupId>
+      <artifactId>java-jwt</artifactId>
+      <version>${java-jwt.version}</version>
+    </dependency>
     <dependency>
       <groupId>gov.va.api.health</groupId>
       <artifactId>service-auto-config</artifactId>
@@ -75,6 +82,16 @@
       <artifactId>annotations</artifactId>
       <version>${find-bugs-annotations.version}</version>
       <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.bouncycastle</groupId>
+      <artifactId>bcpkix-jdk15on</artifactId>
+      <version>${bcpkix-jdk15on.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.bouncycastle</groupId>
+      <artifactId>bcprov-jdk15on</artifactId>
+      <version>${bcprov-jdk15on.version}</version>
     </dependency>
   </dependencies>
   <build>
