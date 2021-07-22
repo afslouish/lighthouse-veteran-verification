@@ -103,6 +103,10 @@ public interface VeteranVerificationService {
       })
   @ApiResponse(responseCode = "401", description = "Not authorized")
   @ApiResponse(responseCode = "404", description = "No service history found")
+  @ApiResponse(
+          responseCode = "502",
+          description = "eMIS failed to respond or responded in a way we cannot handle")
+  @ApiResponse(responseCode = "503", description = "An external service is unavailable")
   @Operation(
       operationId = "getServiceHistory",
       summary = "Retrieve service history of authorized Veteran",
