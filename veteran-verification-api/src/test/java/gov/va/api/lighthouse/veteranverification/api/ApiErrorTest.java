@@ -46,6 +46,7 @@ public class ApiErrorTest {
     assertRoundTrip(noServiceHistoryFoundApiError);
   }
 
+  @Test
   void serverSoapFaultApiError() {
     ServerSoapFaultApiError serverSoapFaultApiError = ServerSoapFaultApiError.builder().build();
     assertRoundTrip(serverSoapFaultApiError);

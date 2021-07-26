@@ -82,7 +82,7 @@ public class WebExceptionHandler {
   public NoServiceHistoryFoundApiError handleNoServiceHistoryFoundException() {
     return new NoServiceHistoryFoundApiError();
   }
-  
+
   @ExceptionHandler({ServerSOAPFaultException.class})
   @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
   public ApiError handleSoapFaultException(ServerSOAPFaultException e) {

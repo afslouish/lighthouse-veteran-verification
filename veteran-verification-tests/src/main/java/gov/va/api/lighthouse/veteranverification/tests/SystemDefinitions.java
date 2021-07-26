@@ -276,7 +276,7 @@ public class SystemDefinitions {
     @NonNull String noMpiUserIcn;
 
     @NonNull String noEmisEpisodesUser;
-    
+
     @NonNull String noBgsUserDisabilityRatingIcn;
   }
 
