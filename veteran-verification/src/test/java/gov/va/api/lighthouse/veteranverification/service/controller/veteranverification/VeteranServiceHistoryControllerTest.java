@@ -9,10 +9,8 @@ import gov.va.api.lighthouse.mpi.MasterPatientIndexClient;
 import gov.va.api.lighthouse.veteranverification.api.v0.ServiceHistoryResponse;
 import gov.va.api.lighthouse.veteranverification.service.Exceptions;
 import gov.va.api.lighthouse.veteranverification.service.TestUtils;
-import gov.va.api.lighthouse.veteranverification.service.utils.Notary;
 import gov.va.viers.cdi.emis.requestresponse.v2.EMISdeploymentResponseType;
 import gov.va.viers.cdi.emis.requestresponse.v2.EMISserviceEpisodeResponseType;
-import java.io.File;
 import java.util.Arrays;
 import javax.xml.soap.SOAPFault;
 import org.junit.jupiter.api.Assertions;
@@ -28,12 +26,10 @@ public class VeteranServiceHistoryControllerTest {
 
   @Mock private SOAPFault soapFault;
 
-  private Notary notary;
-
   @Test
   public void HappyPath() {
     VeteranServiceHistoryController controller =
-        new VeteranServiceHistoryController(mpiClient, emisClient, notary);
+        new VeteranServiceHistoryController(mpiClient, emisClient);
     TestUtils.setMpiMockResponse(mpiClient, "mpi/mpi_profile_response_body.xml");
     EMISserviceEpisodeResponseType serviceEpisodeResponse =
         TestUtils.createServiceHistoryResponse("emis/service-episodes/ascending.xml");
@@ -83,48 +79,15 @@ public class VeteranServiceHistoryControllerTest {
     Assertions.assertEquals(attributesTwo.deployments().get(0).location(), "QAT");
   }
 
-  @Test
-  public void HappyPathveteranServiceHistoryJwtResponse() {
-    VeteranServiceHistoryController controller =
-        new VeteranServiceHistoryController(mpiClient, emisClient, notary);
-    TestUtils.setMpiMockResponse(mpiClient, "mpi/mpi_profile_response_body.xml");
-    EMISserviceEpisodeResponseType serviceEpisodeResponse =
-        TestUtils.createServiceHistoryResponse("emis/service-episodes/ascending.xml");
-    EMISdeploymentResponseType deployments =
-        TestUtils.createDeploymentResponse("emis/deployments_response.xml");
-    TestUtils.setServiceHistoryMockResponse(emisClient, serviceEpisodeResponse);
-    TestUtils.setDeploymentsMockResponse(emisClient, deployments);
-    String response = controller.veteranServiceHistoryJwtResponse("icn");
-    Assertions.assertEquals(
-        "eyJraWQiOiIwODhkMjQyMzJmZjZmYWE0Y2Q0Y2ZlYzEyNmFkMDQzMWRmZjFlYTAyOGFmZGIxYzg2YjM3MThkNzAxN"
-            + "zFhZWQ2IiwidHlwIjoiSldUIiwiYWxnIjoiUlMyNTYifQ.eyJkYXRhIjpbeyJpZCI6IjAwMzAwMWZiLTIwMjMtNTg5Mi"
-            + "1iY2I3LWFhNDFhNmI0ODVjMCIsInR5cGUiOiJzZXJ2aWNlLWhpc3RvcnktZXBpc29kZXMiLCJhdHRyaWJ1dGVzIjp7Im"
-            + "ZpcnN0X25hbWUiOiJBbGZyZWRvIiwibGFzdF9uYW1lIjoiQXJtc3Ryb25nIiwiYnJhbmNoX29mX3NlcnZpY2UiOiJBcm"
-            + "15Iiwic3RhcnRfZGF0ZSI6IjIwMDAtMDEtMDEiLCJlbmRfZGF0ZSI6IjIwMDEtMDItMDEiLCJwYXlfZ3JhZGUiOiJFMD"
-            + "UiLCJkaXNjaGFyZ2Vfc3RhdHVzIjoiaG9ub3JhYmxlIiwic2VwYXJhdGlvbl9yZWFzb24iOiJTVUZGSUNJRU5UIFNFUl"
-            + "ZJQ0UgRk9SIFJFVElSRU1FTlQiLCJkZXBsb3ltZW50cyI6W3sic3RhcnRfZGF0ZSI6IjIwMDAtMDItMDEiLCJlbmRfZG"
-            + "F0ZSI6IjIwMDEtMDEtMDEiLCJsb2NhdGlvbiI6IlFBVCJ9XX19LHsiaWQiOiI0NTdmNWEyNS0wMDY5LTU5Y2QtOTU5OS"
-            + "02Mzc4NGU0OTVlZGUiLCJ0eXBlIjoic2VydmljZS1oaXN0b3J5LWVwaXNvZGVzIiwiYXR0cmlidXRlcyI6eyJmaXJzdF"
-            + "9uYW1lIjoiQWxmcmVkbyIsImxhc3RfbmFtZSI6IkFybXN0cm9uZyIsImJyYW5jaF9vZl9zZXJ2aWNlIjoiQWlyIEZvcm"
-            + "NlIiwic3RhcnRfZGF0ZSI6IjIwMDItMDEtMDEiLCJlbmRfZGF0ZSI6IjIwMDMtMDItMDEiLCJwYXlfZ3JhZGUiOiJFMD"
-            + "UiLCJkaXNjaGFyZ2Vfc3RhdHVzIjoiaG9ub3JhYmxlIiwic2VwYXJhdGlvbl9yZWFzb24iOiJTVUZGSUNJRU5UIFNFUl"
-            + "ZJQ0UgRk9SIFJFVElSRU1FTlQiLCJkZXBsb3ltZW50cyI6W3sic3RhcnRfZGF0ZSI6IjIwMDItMDItMDEiLCJlbmRfZG"
-            + "F0ZSI6IjIwMDMtMDEtMDEiLCJsb2NhdGlvbiI6IlFBVCJ9XX19XX0.to888f8peRk9QPJJCB9PldMsWoVdLtllHgEKy0"
-            + "nEWLHVi7JgLr85iZmnvK4XaiUK8NNRDMrD48EsJkArh2kbfUAMDzXMQBk5Ht1vzI9Sc6s_KrIab5B6QVJhl3JgvpYpaY"
-            + "Hp3eOi2L_RnfV0z2ucDel_6dw2mzQcXfyb1SgNu1c",
-        response);
-  }
-
   @BeforeEach
   public void before() {
     MockitoAnnotations.initMocks(this);
-    notary = new Notary(new File("src/test/resources/verification_test_private.pem"));
   }
 
   @Test
   public void deploymentsRequestThrowsException() {
     VeteranServiceHistoryController controller =
-        new VeteranServiceHistoryController(mpiClient, emisClient, notary);
+        new VeteranServiceHistoryController(mpiClient, emisClient);
     TestUtils.setMpiMockResponse(mpiClient, "mpi/mpi_profile_response_body.xml");
     EMISserviceEpisodeResponseType serviceEpisodeResponse =
         TestUtils.createServiceHistoryResponse("emis/service-episodes/ascending.xml");
@@ -141,7 +104,7 @@ public class VeteranServiceHistoryControllerTest {
   @Test
   public void deploymentsRequestThrowsInaccessibleWsdlException() {
     VeteranServiceHistoryController controller =
-        new VeteranServiceHistoryController(mpiClient, emisClient, notary);
+        new VeteranServiceHistoryController(mpiClient, emisClient);
     TestUtils.setMpiMockResponse(mpiClient, "mpi/mpi_profile_response_body.xml");
     EMISserviceEpisodeResponseType serviceEpisodeResponse =
         TestUtils.createServiceHistoryResponse("emis/service-episodes/ascending.xml");
@@ -157,7 +120,7 @@ public class VeteranServiceHistoryControllerTest {
   @Test
   public void ediPiOrIcnIsNull() {
     VeteranServiceHistoryController controller =
-        new VeteranServiceHistoryController(mpiClient, emisClient, notary);
+        new VeteranServiceHistoryController(mpiClient, emisClient);
     TestUtils.setMpiMockResponse(mpiClient, "mpi/mpi_profile_not_found_response.xml");
     Assertions.assertThrows(
         Exception.class,
@@ -169,7 +132,7 @@ public class VeteranServiceHistoryControllerTest {
   @Test
   void emisSoapFaultException() {
     VeteranServiceHistoryController controller =
-        new VeteranServiceHistoryController(mpiClient, emisClient, notary);
+        new VeteranServiceHistoryController(mpiClient, emisClient);
     EMISserviceEpisodeResponseType serviceEpisodeResponse =
         TestUtils.createServiceHistoryResponse("emis/service-episodes/ascending.xml");
     TestUtils.setServiceHistoryMockResponse(emisClient, serviceEpisodeResponse);
@@ -184,7 +147,7 @@ public class VeteranServiceHistoryControllerTest {
   @Test
   public void episodesIsNull() {
     VeteranServiceHistoryController controller =
-        new VeteranServiceHistoryController(mpiClient, emisClient, notary);
+        new VeteranServiceHistoryController(mpiClient, emisClient);
     TestUtils.setMpiMockResponse(mpiClient, "mpi/mpi_profile_response_body.xml");
     EMISdeploymentResponseType deployments =
         TestUtils.createDeploymentResponse("emis/deployments_response.xml");
@@ -201,7 +164,7 @@ public class VeteranServiceHistoryControllerTest {
   @Test
   public void episodesRequestThrowsException() {
     VeteranServiceHistoryController controller =
-        new VeteranServiceHistoryController(mpiClient, emisClient, notary);
+        new VeteranServiceHistoryController(mpiClient, emisClient);
     TestUtils.setMpiMockResponse(mpiClient, "mpi/mpi_profile_response_body.xml");
     EMISserviceEpisodeResponseType serviceEpisodeResponse =
         TestUtils.createServiceHistoryResponse("emis/service-episodes/ascending.xml");
@@ -218,7 +181,7 @@ public class VeteranServiceHistoryControllerTest {
   @Test
   public void episodesRequestThrowsInaccessibleWsdlException() {
     VeteranServiceHistoryController controller =
-        new VeteranServiceHistoryController(mpiClient, emisClient, notary);
+        new VeteranServiceHistoryController(mpiClient, emisClient);
     TestUtils.setMpiMockResponse(mpiClient, "mpi/mpi_profile_response_body.xml");
     EMISserviceEpisodeResponseType serviceEpisodeResponse =
         TestUtils.createServiceHistoryResponse("emis/service-episodes/ascending.xml");
@@ -235,7 +198,7 @@ public class VeteranServiceHistoryControllerTest {
   @Test
   public void mpiThrowsError() {
     VeteranServiceHistoryController controller =
-        new VeteranServiceHistoryController(mpiClient, emisClient, notary);
+        new VeteranServiceHistoryController(mpiClient, emisClient);
     TestUtils.setMpiResponseException(mpiClient, new Exception("Test Exception"));
     Assertions.assertThrows(
         Exception.class,
