@@ -5,6 +5,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDate;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -15,6 +16,7 @@ import lombok.experimental.FieldDefaults;
 @Accessors(fluent = true)
 @Schema(type = "Object", description = "Deployment during a service history episode")
 @SuppressFBWarnings({"EI_EXPOSE_REP2", "EI_EXPOSE_REP"})
+@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PUBLIC)
 public class Deployment {
 

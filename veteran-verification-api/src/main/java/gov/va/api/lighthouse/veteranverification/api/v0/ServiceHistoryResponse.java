@@ -10,9 +10,11 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.SneakyThrows;
 import lombok.experimental.Accessors;
@@ -22,6 +24,8 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @Accessors(fluent = true)
 @Schema(description = "verification service_history endpoint")
+@NoArgsConstructor
+@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PUBLIC)
 public class ServiceHistoryResponse {
   @NonNull

@@ -76,7 +76,7 @@ public class WebExceptionHandler {
 
   /** Return error for EMIS inaccessible wsdl exception. */
   @ExceptionHandler({Exceptions.NoServiceHistoryFoundException.class})
-  @ResponseStatus(HttpStatus.NOT_IMPLEMENTED)
+  @ResponseStatus(HttpStatus.NOT_FOUND)
   public NoServiceHistoryFoundApiError handleNoServiceHistoryFoundException() {
     return new NoServiceHistoryFoundApiError();
   }

@@ -2,16 +2,19 @@ package gov.va.api.lighthouse.veteranverification.service.controller.veteranveri
 
 import static gov.va.api.lighthouse.veteranverification.service.Exceptions.EmisInaccesibleWsdlException;
 
+import com.sun.xml.ws.fault.ServerSOAPFaultException;
 import com.sun.xml.ws.wsdl.parser.InaccessibleWSDLException;
 import gov.va.api.lighthouse.emis.EmisMilitaryInformationServiceClient;
 import gov.va.api.lighthouse.mpi.MasterPatientIndexClient;
 import gov.va.api.lighthouse.veteranverification.api.v0.ServiceHistoryResponse;
+import gov.va.api.lighthouse.veteranverification.service.Exceptions;
 import gov.va.api.lighthouse.veteranverification.service.TestUtils;
 import gov.va.api.lighthouse.veteranverification.service.utils.Notary;
 import gov.va.viers.cdi.emis.requestresponse.v2.EMISdeploymentResponseType;
 import gov.va.viers.cdi.emis.requestresponse.v2.EMISserviceEpisodeResponseType;
 import java.io.File;
 import java.util.Arrays;
+import javax.xml.soap.SOAPFault;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,6 +25,8 @@ public class VeteranServiceHistoryControllerTest {
   @Mock private MasterPatientIndexClient mpiClient;
 
   @Mock private EmisMilitaryInformationServiceClient emisClient;
+
+  @Mock private SOAPFault soapFault;
 
   private Notary notary;
 
@@ -156,6 +161,21 @@ public class VeteranServiceHistoryControllerTest {
     TestUtils.setMpiMockResponse(mpiClient, "mpi/mpi_profile_not_found_response.xml");
     Assertions.assertThrows(
         Exception.class,
+        () -> {
+          controller.veteranServiceHistoryResponse("icn");
+        });
+  }
+
+  @Test
+  void emisSoapFaultException() {
+    VeteranServiceHistoryController controller =
+        new VeteranServiceHistoryController(mpiClient, emisClient, notary);
+    EMISserviceEpisodeResponseType serviceEpisodeResponse =
+        TestUtils.createServiceHistoryResponse("emis/service-episodes/ascending.xml");
+    TestUtils.setServiceHistoryMockResponse(emisClient, serviceEpisodeResponse);
+    TestUtils.setEpisodesResponseException(emisClient, new ServerSOAPFaultException(soapFault));
+    Assertions.assertThrows(
+        Exceptions.NoServiceHistoryFoundException.class,
         () -> {
           controller.veteranServiceHistoryResponse("icn");
         });
