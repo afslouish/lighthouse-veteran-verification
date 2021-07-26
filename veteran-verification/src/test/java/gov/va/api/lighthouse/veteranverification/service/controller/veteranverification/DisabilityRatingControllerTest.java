@@ -4,10 +4,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import gov.va.api.lighthouse.bgs.BenefitsGatewayServicesClient;
 import gov.va.api.lighthouse.mpi.MasterPatientIndexClient;
+import gov.va.api.lighthouse.veteranverification.api.v0.DisabilityRatingResponse;
 import gov.va.api.lighthouse.veteranverification.service.TestUtils;
 import gov.va.vba.benefits.share.services.DisabilityRating;
 import gov.va.vba.benefits.share.services.DisabilityRatingRecord;
-import gov.va.vba.benefits.share.services.FindRatingDataResponse;
 import gov.va.vba.benefits.share.services.RatingRecord;
 import java.util.Collections;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,6 +39,7 @@ public class DisabilityRatingControllerTest {
                     .nonServiceConnectedCombinedDegree("40")
                     .numberOfRecords("1")
                     .promulgationDate("01012014")
+                    .serviceConnectedCombinedDegree("40")
                     .ratings(
                         Collections.singletonList(
                             DisabilityRating.builder()
@@ -57,7 +58,9 @@ public class DisabilityRatingControllerTest {
                                 .build()))
                     .build())
             .build());
-    FindRatingDataResponse status = controller.findRatingDataResponse("1012829620V654328");
-    assertThat(status).isInstanceOf(FindRatingDataResponse.class);
+    String icn = "1012829620V654328";
+    DisabilityRatingResponse disabilityRatingResponse = controller.findRatingDataResponse(icn);
+    assertThat(disabilityRatingResponse).isInstanceOf(DisabilityRatingResponse.class);
+    assertThat(disabilityRatingResponse.getData().getId()).isEqualTo(icn);
   }
 }

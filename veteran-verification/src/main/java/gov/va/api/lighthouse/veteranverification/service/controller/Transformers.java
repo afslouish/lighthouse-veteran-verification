@@ -3,6 +3,7 @@ package gov.va.api.lighthouse.veteranverification.service.controller;
 import static org.springframework.util.CollectionUtils.isEmpty;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,16 @@ public final class Transformers {
     }
     List<T> filtered = items.stream().filter(Objects::nonNull).collect(Collectors.toList());
     return filtered.isEmpty() ? null : filtered;
+  }
+
+  /** Formats date time string from MMddyyyy format to yyyy-MM-dd. */
+  public static LocalDate formatDateString(String date) {
+    if (date != null) {
+      DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMddyyyy");
+      LocalDate localDate = LocalDate.parse(date, dateFormatter);
+      return localDate;
+    }
+    return null;
   }
 
   /** Return true if the value is a blank string, or any other object that is null. */

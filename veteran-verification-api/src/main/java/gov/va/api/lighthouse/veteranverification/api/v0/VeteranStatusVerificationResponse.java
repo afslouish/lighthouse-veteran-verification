@@ -1,4 +1,4 @@
-package gov.va.api.lighthouse.veteranverification.api;
+package gov.va.api.lighthouse.veteranverification.api.v0;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -16,7 +16,7 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(requiredProperties = "data")
-public class VeteranStatusVerification {
+public class VeteranStatusVerificationResponse {
 
   @NonNull VeteranStatusVerificationDetails data;
 
@@ -48,9 +48,11 @@ public class VeteranStatusVerification {
       description = "Veteran status confirmation for an individual",
       type = "object")
   public static class VeteranStatusVerificationDetails {
+    @NonNull
     @Schema(type = "string", description = "Confirmation ICN", example = "1012667145V762142")
     String id;
 
+    @NonNull
     @Schema(type = "string", example = "veteran_status_confirmations")
     @Builder.Default
     String type = "veteran_status_confirmations";

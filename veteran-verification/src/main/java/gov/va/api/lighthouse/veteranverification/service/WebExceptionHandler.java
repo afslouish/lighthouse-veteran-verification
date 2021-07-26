@@ -1,7 +1,9 @@
 package gov.va.api.lighthouse.veteranverification.service;
 
 import com.fasterxml.jackson.databind.exc.ValueInstantiationException;
+import com.sun.xml.ws.fault.ServerSOAPFaultException;
 import com.sun.xml.ws.wsdl.parser.InaccessibleWSDLException;
+import gov.va.api.lighthouse.veteranverification.api.ApiError;
 import gov.va.api.lighthouse.veteranverification.api.ApiError.EmisInaccessibleWsdlErrorApiError;
 import gov.va.api.lighthouse.veteranverification.api.ApiError.InaccessibleWsdlErrorApiError;
 import gov.va.api.lighthouse.veteranverification.api.ApiError.InvalidParameterApiError;
@@ -71,5 +73,11 @@ public class WebExceptionHandler {
             .getMessage()
             .substring(0, e.getCause().getMessage().indexOf(" is marked non-null but is null"));
     return new MissingParameterApiError(missingField);
+  }
+
+  @ExceptionHandler({ServerSOAPFaultException.class})
+  @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+  public ApiError handleSoapFaultException(ServerSOAPFaultException e) {
+    return new ApiError.ServerSoapFaultApiError();
   }
 }
