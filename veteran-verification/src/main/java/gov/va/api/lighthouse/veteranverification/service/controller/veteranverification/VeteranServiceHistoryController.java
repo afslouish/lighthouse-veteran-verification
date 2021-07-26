@@ -43,7 +43,7 @@ public class VeteranServiceHistoryController {
   /** Get veteran verification status from eMIS using an EDIPI or ICN from MPI lookup. */
   @GetMapping(
       value = {"/v0/service_history/{icn}"},
-      produces = {"application/jwt"})
+      produces = {"application/jwt", "application/json"})
   @ExceptionHandler({HttpMediaTypeNotAcceptableException.class})
   public String veteranServiceHistoryJwtResponse(@NonNull @PathVariable("icn") String icn) {
     ServiceHistoryResponse veteranServiceHistoryResponse = veteranServiceHistoryResponse(icn);
