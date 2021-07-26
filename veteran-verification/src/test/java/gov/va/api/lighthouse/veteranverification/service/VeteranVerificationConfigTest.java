@@ -6,7 +6,6 @@ import gov.va.api.lighthouse.bgs.SoapBenefitsGatewayServicesClient;
 import gov.va.api.lighthouse.emis.SoapEmisMilitaryInformationServiceClient;
 import gov.va.api.lighthouse.emis.SoapEmisVeteranStatusServiceClient;
 import gov.va.api.lighthouse.mpi.SoapMasterPatientIndexClient;
-import gov.va.api.lighthouse.veteranverification.service.utils.Notary;
 import org.junit.jupiter.api.Test;
 
 public class VeteranVerificationConfigTest {
@@ -15,8 +14,7 @@ public class VeteranVerificationConfigTest {
           TestUtils.makeMpiConfig(),
           TestUtils.makeEmisConfig(),
           TestUtils.makeEmisConfigV2(),
-          TestUtils.makeBgsConfig(),
-          "src/test/resources/verification_test_private.pem");
+          TestUtils.makeBgsConfig());
 
   @Test
   void bgsClient() {
@@ -40,10 +38,5 @@ public class VeteranVerificationConfigTest {
   void mpiClient() {
     assertThat(veteranVerificationConfig.masterPatientIndexClient())
         .isInstanceOf(SoapMasterPatientIndexClient.class);
-  }
-
-  @Test
-  void notary() {
-    assertThat(veteranVerificationConfig.notary()).isInstanceOf(Notary.class);
   }
 }
