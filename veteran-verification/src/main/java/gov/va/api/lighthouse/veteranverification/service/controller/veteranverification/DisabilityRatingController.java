@@ -4,6 +4,7 @@ import static gov.va.api.lighthouse.veteranverification.service.MpiLookupUtils.g
 
 import gov.va.api.lighthouse.bgs.BenefitsGatewayServicesClient;
 import gov.va.api.lighthouse.mpi.MasterPatientIndexClient;
+import gov.va.api.lighthouse.veteranverification.api.v0.DisabilityRatingResponse;
 import gov.va.vba.benefits.share.services.FindRatingData;
 import gov.va.vba.benefits.share.services.FindRatingDataResponse;
 import lombok.NonNull;
@@ -30,9 +31,14 @@ public class DisabilityRatingController {
 
   /** Get rating data from BGS using the SSN from MPI lookup. */
   @GetMapping({"/v0/disability_rating/{icn}"})
-  public FindRatingDataResponse findRatingDataResponse(@NonNull @PathVariable("icn") String icn) {
-    PRPAIN201306UV02 response = mpiClient.request1305ByIcn(icn);
-    String fileNumber = getSsn(response);
-    return bgsClient.ratingServiceRequest(FindRatingData.builder().fileNumber(fileNumber).build());
+  public DisabilityRatingResponse findRatingDataResponse(@NonNull @PathVariable("icn") String icn) {
+    PRPAIN201306UV02 mpiResponse = mpiClient.request1305ByIcn(icn);
+    String fileNumber = getSsn(mpiResponse);
+    FindRatingDataResponse bgsResponse =
+        bgsClient.ratingServiceRequest(FindRatingData.builder().fileNumber(fileNumber).build());
+    return DisabilityRatingTransformer.builder()
+        .response(bgsResponse)
+        .build()
+        .toDisabilityRating(icn);
   }
 }

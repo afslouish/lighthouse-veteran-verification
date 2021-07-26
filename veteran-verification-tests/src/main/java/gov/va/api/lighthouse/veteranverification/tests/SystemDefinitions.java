@@ -57,6 +57,7 @@ public class SystemDefinitions {
   public static final String NO_MPI_USER_ICN = "1012855585V634865";
 
   public static final String NO_EMIS_EPISODES_USER = "1012667122V019349";
+  public static final String N0_BGS_USER_DISABILITY_RATING_ICN = "1012661611V839382";
 
   /** Class of search attributes to be used for veteran confirmation status ITs. */
   public static Attributes attributes() {
@@ -112,6 +113,9 @@ public class SystemDefinitions {
                 "service-history-icn-null-end-date", SERVICE_HISTORY_ICN_NULL_END_DATE))
         .noMpiUserIcn(systemPropertyOrDefault("no-mpi-user-icn", NO_MPI_USER_ICN))
         .noEmisEpisodesUser(systemPropertyOrDefault("no-emis-episodes-user", NO_EMIS_EPISODES_USER))
+        .noBgsUserDisabilityRatingIcn(
+            systemPropertyOrDefault(
+                "no-bgs-user-disability-rating-icn", N0_BGS_USER_DISABILITY_RATING_ICN))
         .build();
   }
 
@@ -272,6 +276,8 @@ public class SystemDefinitions {
     @NonNull String noMpiUserIcn;
 
     @NonNull String noEmisEpisodesUser;
+    
+    @NonNull String noBgsUserDisabilityRatingIcn;
   }
 
   @Data

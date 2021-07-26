@@ -36,6 +36,8 @@ main() {
   addToSystemProperties "confirmed-status-icn" "${CONFIRMED_STATUS_ICN}"
   addToSystemProperties "v5-status-icn" "${V5_STATUS_ICN}"
   addToSystemProperties "no-emis-user-status-icn" "${NO_EMIS_USER_STATUS_ICN}"
+  addToSystemProperties "disability-rating-icn" "${DISABILITY_RATING_ICN}"
+  addToSystemProperties "no-bgs-user-disability-rating-icn" "${NO_BGS_USER_DISABILITY_RATING_ICN}"
 
   java-tests \
     --module-name "veteran-verification-tests" \

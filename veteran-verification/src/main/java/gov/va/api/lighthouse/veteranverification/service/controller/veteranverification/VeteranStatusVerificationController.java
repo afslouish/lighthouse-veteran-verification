@@ -6,8 +6,8 @@ import com.sun.xml.ws.fault.ServerSOAPFaultException;
 import com.sun.xml.ws.wsdl.parser.InaccessibleWSDLException;
 import gov.va.api.lighthouse.emis.EmisVeteranStatusServiceClient;
 import gov.va.api.lighthouse.mpi.MasterPatientIndexClient;
-import gov.va.api.lighthouse.veteranverification.api.VeteranStatusVerification;
-import gov.va.api.lighthouse.veteranverification.api.VeteranStatusVerification.VeteranStatusVerificationDetails;
+import gov.va.api.lighthouse.veteranverification.api.v0.VeteranStatusVerificationResponse;
+import gov.va.api.lighthouse.veteranverification.api.v0.VeteranStatusVerificationResponse.VeteranStatusVerificationDetails;
 import gov.va.api.lighthouse.veteranverification.service.Exceptions.EmisInaccesibleWsdlException;
 import gov.va.viers.cdi.emis.requestresponse.v1.EMISveteranStatusResponseType;
 import gov.va.viers.cdi.emis.requestresponse.v1.InputEdiPiOrIcn;
@@ -35,13 +35,13 @@ public class VeteranStatusVerificationController {
     this.emisClient = emisClient;
   }
 
-  private VeteranStatusVerification notConfirmed(String icn) {
-    return VeteranStatusVerification.builder()
+  private VeteranStatusVerificationResponse notConfirmed(String icn) {
+    return VeteranStatusVerificationResponse.builder()
         .data(
             VeteranStatusVerificationDetails.builder()
                 .id(icn)
                 .attributes(
-                    VeteranStatusVerification.VeteranStatusAttributes.builder()
+                    VeteranStatusVerificationResponse.VeteranStatusAttributes.builder()
                         .veteranStatus("not confirmed")
                         .build())
                 .build())
@@ -50,7 +50,7 @@ public class VeteranStatusVerificationController {
 
   /** Get veteran verification status from eMIS using an EDIPI or ICN from MPI lookup. */
   @GetMapping({"/v0/status/{icn}"})
-  public VeteranStatusVerification veteranStatusVerificationResponse(
+  public VeteranStatusVerificationResponse veteranStatusVerificationResponse(
       @NonNull @PathVariable("icn") String icn) {
     PRPAIN201306UV02 mpiResponse = mpiClient.request1305ByIcn(icn);
     InputEdiPiOrIcn ediPiOrIcn = getInputEdipiOrIcn(mpiResponse);

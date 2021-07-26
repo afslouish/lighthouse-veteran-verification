@@ -113,4 +113,20 @@ public abstract class ApiError {
                   .build()));
     }
   }
+
+  /** Error class for server soap fault exception. */
+  public static class ServerSoapFaultApiError extends ApiError {
+    /** Build API Error for server soap fault exception. */
+    @Builder
+    public ServerSoapFaultApiError() {
+      super(
+          singletonList(
+              ApiErrorDetails.builder()
+                  .title("Internal server error")
+                  .detail("Internal server error")
+                  .code("500")
+                  .status("500")
+                  .build()));
+    }
+  }
 }

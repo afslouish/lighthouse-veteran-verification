@@ -2,13 +2,13 @@ package gov.va.api.lighthouse.veteranverification.service.controller.veteranveri
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import gov.va.api.lighthouse.veteranverification.api.VeteranStatusVerification;
-import gov.va.api.lighthouse.veteranverification.api.VeteranStatusVerification.VeteranStatusVerificationDetails;
+import gov.va.api.lighthouse.veteranverification.api.v0.VeteranStatusVerificationResponse;
+import gov.va.api.lighthouse.veteranverification.api.v0.VeteranStatusVerificationResponse.VeteranStatusVerificationDetails;
 import gov.va.viers.cdi.emis.commonservice.v1.VeteranStatus;
 import gov.va.viers.cdi.emis.requestresponse.v1.EMISveteranStatusResponseType;
 import org.junit.jupiter.api.Test;
 
-public class VeteranStatusVerificationTransformerTest {
+public class VeteranStatusVerificationResponseTransformerTest {
   @Test
   public void confirmed() {
     EMISveteranStatusResponseType response =
@@ -28,12 +28,12 @@ public class VeteranStatusVerificationTransformerTest {
                 .build()
                 .toVeteranStatus("1111"))
         .isEqualTo(
-            VeteranStatusVerification.builder()
+            VeteranStatusVerificationResponse.builder()
                 .data(
                     VeteranStatusVerificationDetails.builder()
                         .id("1111")
                         .attributes(
-                            VeteranStatusVerification.VeteranStatusAttributes.builder()
+                            VeteranStatusVerificationResponse.VeteranStatusAttributes.builder()
                                 .veteranStatus("confirmed")
                                 .build())
                         .build())
@@ -48,28 +48,12 @@ public class VeteranStatusVerificationTransformerTest {
                 .build()
                 .toVeteranStatus("1111"))
         .isEqualTo(
-            VeteranStatusVerification.builder()
+            VeteranStatusVerificationResponse.builder()
                 .data(
                     VeteranStatusVerificationDetails.builder()
                         .id("1111")
                         .attributes(
-                            VeteranStatusVerification.VeteranStatusAttributes.builder()
-                                .veteranStatus("not confirmed")
-                                .build())
-                        .build())
-                .build());
-    assertThat(
-            VeteranStatusVerificationTransformer.builder()
-                .response(EMISveteranStatusResponseType.builder().veteranStatus(null).build())
-                .build()
-                .toVeteranStatus(null))
-        .isEqualTo(
-            VeteranStatusVerification.builder()
-                .data(
-                    VeteranStatusVerificationDetails.builder()
-                        .id(null)
-                        .attributes(
-                            VeteranStatusVerification.VeteranStatusAttributes.builder()
+                            VeteranStatusVerificationResponse.VeteranStatusAttributes.builder()
                                 .veteranStatus("not confirmed")
                                 .build())
                         .build())

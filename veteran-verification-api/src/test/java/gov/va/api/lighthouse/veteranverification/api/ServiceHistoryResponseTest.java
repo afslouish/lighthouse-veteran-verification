@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 @Data
-public class VeteranVerificationResponseTest {
+public class ServiceHistoryResponseTest {
   @Test
   public void dataIsNonNullable() {
     ServiceHistoryResponse veteranVerificationResponse = TestUtils.makeServiceHistoryResponse();

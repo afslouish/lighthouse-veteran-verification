@@ -13,7 +13,6 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.SneakyThrows;
@@ -192,19 +191,26 @@ public class ServiceHistoryResponse {
     }
   }
 
+  @Builder
   @Accessors(fluent = true)
   @Schema(description = "Service History for authorized Veteran")
   @Data
-  @EqualsAndHashCode(callSuper = true)
   @FieldDefaults(level = AccessLevel.PUBLIC)
-  public static class ServiceHistoryEpisode extends AbstractVeteranVerificationData {
+  public static class ServiceHistoryEpisode {
+    @NonNull
+    @Schema(
+        type = "string",
+        description = "Service History Episode ID",
+        example = "12312AASDf",
+        required = true)
+    String id;
+
+    @Schema(example = "service-history-episodes", required = true)
+    @NonNull
+    @Builder.Default
+    String type = "service-history-episodes";
+
     @Schema(implementation = ServiceHistoryAttributes.class, required = true)
     ServiceHistoryAttributes attributes;
-
-    @Builder
-    public ServiceHistoryEpisode(ServiceHistoryAttributes attributes, String id) {
-      super(id, "service-history-episodes");
-      this.attributes = attributes;
-    }
   }
 }
