@@ -50,7 +50,8 @@ public class VeteranStatusVerificationResponseControllerTest {
         new VeteranStatusVerificationController(mpiClient, emisClient);
     TestUtils.setMpiMockResponse(mpiClient, "mpi/mpi_profile_response_body.xml");
     TestUtils.setEmisResponseException(emisClient, new ServerSOAPFaultException(soapFault));
-    VeteranStatusVerificationResponse confirmation = controller.veteranStatusVerificationResponse("1111");
+    VeteranStatusVerificationResponse confirmation =
+        controller.veteranStatusVerificationResponse("1111");
     assertThat(confirmation.getData().getAttributes().getVeteranStatus())
         .isEqualTo("not confirmed");
   }
@@ -88,7 +89,8 @@ public class VeteranStatusVerificationResponseControllerTest {
             .post911DeploymentIndicator("N")
             .post911CombatIndicator("N")
             .build());
-    VeteranStatusVerificationResponse status = controller.veteranStatusVerificationResponse("1005396162");
+    VeteranStatusVerificationResponse status =
+        controller.veteranStatusVerificationResponse("1005396162");
     assertThat(status.getData().getAttributes().getVeteranStatus()).isEqualTo("confirmed");
   }
 
@@ -134,7 +136,8 @@ public class VeteranStatusVerificationResponseControllerTest {
     VeteranStatusVerificationController controller =
         new VeteranStatusVerificationController(mpiClient, emisClient);
     TestUtils.setMpiMockResponse(mpiClient, "mpi/mpi_profile_invalid_request_response.xml");
-    VeteranStatusVerificationResponse status = controller.veteranStatusVerificationResponse("invalid");
+    VeteranStatusVerificationResponse status =
+        controller.veteranStatusVerificationResponse("invalid");
     assertThat(status.getData().getAttributes().getVeteranStatus()).isEqualTo("not confirmed");
   }
 
@@ -152,7 +155,8 @@ public class VeteranStatusVerificationResponseControllerTest {
     VeteranStatusVerificationController controller =
         new VeteranStatusVerificationController(mpiClient, emisClient);
     TestUtils.setMpiMockResponse(mpiClient, "mpi/mpi_profile_not_found_response.xml");
-    VeteranStatusVerificationResponse status = controller.veteranStatusVerificationResponse("not_found");
+    VeteranStatusVerificationResponse status =
+        controller.veteranStatusVerificationResponse("not_found");
     assertThat(status.getData().getAttributes().getVeteranStatus()).isEqualTo("not confirmed");
   }
 
