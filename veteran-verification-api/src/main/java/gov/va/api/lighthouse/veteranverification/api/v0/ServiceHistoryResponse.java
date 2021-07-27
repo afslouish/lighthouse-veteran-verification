@@ -1,6 +1,7 @@
 package gov.va.api.lighthouse.veteranverification.api.v0;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonValue;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -10,8 +11,10 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.SneakyThrows;
 import lombok.experimental.Accessors;
@@ -21,6 +24,8 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @Accessors(fluent = true)
 @Schema(description = "verification service_history endpoint")
+@NoArgsConstructor
+@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PUBLIC)
 public class ServiceHistoryResponse {
   @NonNull
@@ -76,6 +81,7 @@ public class ServiceHistoryResponse {
         required = true,
         nullable = true)
     @JsonFormat(shape = JsonFormat.Shape.STRING)
+    @JsonInclude
     LocalDate endDate;
 
     @NonNull

@@ -64,6 +64,24 @@ public abstract class ApiError {
     }
   }
 
+  /** Error class for no service history found. */
+  public static class NoServiceHistoryFoundApiError extends ApiError {
+    /** Build Api Error for invalid parameter error using value and field name parameters. */
+    @Builder
+    public NoServiceHistoryFoundApiError() {
+      super(
+          singletonList(
+              ApiErrorDetails.builder()
+                  .title("Unexpected response body")
+                  .detail(
+                      "EMIS service responded with something other than the "
+                          + "expected array of service history hashes.")
+                  .code("EMIS_HIST502")
+                  .status("502")
+                  .build()));
+    }
+  }
+
   /** Error class for inaccessible WSDL. */
   public static class InaccessibleWsdlErrorApiError extends ApiError {
     /** Build API Error for General Soap Response Error. */

@@ -7,6 +7,7 @@ import gov.va.api.lighthouse.bgs.BenefitsGatewayServicesClient;
 import gov.va.api.lighthouse.bgs.BgsConfig;
 import gov.va.api.lighthouse.emis.EmisConfigV1;
 import gov.va.api.lighthouse.emis.EmisConfigV2;
+import gov.va.api.lighthouse.emis.EmisMilitaryInformationServiceClient;
 import gov.va.api.lighthouse.emis.EmisVeteranStatusServiceClient;
 import gov.va.api.lighthouse.mpi.MasterPatientIndexClient;
 import gov.va.api.lighthouse.mpi.MpiConfig;
@@ -115,6 +116,18 @@ public class TestUtils {
         .build();
   }
 
+  public EmisConfigV2 makeEmisConfigV2() {
+    return EmisConfigV2.builder()
+        .keyAlias("fake")
+        .keystorePath("src/test/resources/fakekeystore.jks")
+        .keystorePassword("secret")
+        .truststorePath("src/test/resources/faketruststore.jks")
+        .truststorePassword("secret")
+        .url("http://localhost:2020")
+        .wsdlLocation("http://localhost:2020")
+        .build();
+  }
+
   public EmisConfigV2 makeEmisV2Config() {
     return EmisConfigV2.builder()
         .keyAlias("fake")
@@ -169,6 +182,20 @@ public class TestUtils {
     Mockito.when(bgsClient.ratingServiceRequest(ArgumentMatchers.any())).thenReturn(response);
   }
 
+  public void setDeploymentsMockResponse(
+      @Mock EmisMilitaryInformationServiceClient emisClient, EMISdeploymentResponseType response) {
+    Mockito.when(emisClient.deploymentRequest(ArgumentMatchers.any())).thenReturn(response);
+  }
+
+  public void setDeploymentsResponseException(
+      @Mock EmisMilitaryInformationServiceClient emisClient, Exception e) {
+    given(emisClient.serviceEpisodesRequest(ArgumentMatchers.any()))
+        .willAnswer(
+            invocation -> {
+              throw e;
+            });
+  }
+
   public void setEmisMockResponse(
       @Mock EmisVeteranStatusServiceClient emisClient, VeteranStatus status) {
     EMISveteranStatusResponseType response = createEmisResponse(status);
@@ -178,6 +205,15 @@ public class TestUtils {
   public void setEmisResponseException(
       @Mock EmisVeteranStatusServiceClient emisClient, Exception e) {
     given(emisClient.veteranStatusRequest(ArgumentMatchers.any()))
+        .willAnswer(
+            invocation -> {
+              throw e;
+            });
+  }
+
+  public void setEpisodesResponseException(
+      @Mock EmisMilitaryInformationServiceClient emisClient, Exception e) {
+    given(emisClient.serviceEpisodesRequest(ArgumentMatchers.any()))
         .willAnswer(
             invocation -> {
               throw e;
@@ -208,5 +244,11 @@ public class TestUtils {
   public void setNullMpiMockResponse(@Mock MasterPatientIndexClient mpiClient) {
     Mockito.when(mpiClient.request1305ByAttributes(ArgumentMatchers.any())).thenReturn(null);
     Mockito.when(mpiClient.request1305ByIcn(ArgumentMatchers.any())).thenReturn(null);
+  }
+
+  public void setServiceHistoryMockResponse(
+      @Mock EmisMilitaryInformationServiceClient emisClient,
+      EMISserviceEpisodeResponseType response) {
+    Mockito.when(emisClient.serviceEpisodesRequest(ArgumentMatchers.any())).thenReturn(response);
   }
 }

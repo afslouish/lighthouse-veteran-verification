@@ -6,6 +6,7 @@ import gov.va.api.lighthouse.veteranverification.api.ApiError.EmisInaccessibleWs
 import gov.va.api.lighthouse.veteranverification.api.ApiError.InaccessibleWsdlErrorApiError;
 import gov.va.api.lighthouse.veteranverification.api.ApiError.InvalidParameterApiError;
 import gov.va.api.lighthouse.veteranverification.api.ApiError.MissingParameterApiError;
+import gov.va.api.lighthouse.veteranverification.api.ApiError.NoServiceHistoryFoundApiError;
 import gov.va.api.lighthouse.veteranverification.api.ApiError.ServerSoapFaultApiError;
 import org.junit.jupiter.api.Test;
 
@@ -36,6 +37,13 @@ public class ApiErrorTest {
     MissingParameterApiError missingParameterApiError =
         MissingParameterApiError.builder().field("firstName").build();
     assertRoundTrip(missingParameterApiError);
+  }
+
+  @Test
+  void noServiceHistoryFoundApiErrorError() {
+    NoServiceHistoryFoundApiError noServiceHistoryFoundApiError =
+        NoServiceHistoryFoundApiError.builder().build();
+    assertRoundTrip(noServiceHistoryFoundApiError);
   }
 
   @Test

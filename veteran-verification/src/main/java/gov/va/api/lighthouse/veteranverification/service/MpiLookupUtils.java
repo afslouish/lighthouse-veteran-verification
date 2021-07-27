@@ -94,6 +94,38 @@ public class MpiLookupUtils {
     return null;
   }
 
+  /** Build InputEdipiOrIcn object for eMIS lookup. */
+  public static gov.va.viers.cdi.emis.requestresponse.v2.InputEdiPiOrIcn getInputEdipiOrIcnV2(
+      PRPAIN201306UV02 response) {
+    PRPAMT201310UV02Patient patient =
+        Optional.ofNullable(response)
+            .map(value -> value.getControlActProcess())
+            .map(controlActProcess -> emptyToNull(controlActProcess.getSubject()))
+            .map(subject -> subject.get(0))
+            .map(getSubject -> getSubject.getRegistrationEvent())
+            .map(registrationEvent -> registrationEvent.getSubject1())
+            .map(subject1 -> subject1.getPatient())
+            .orElse(null);
+    if (getId(patient, EDIPI_LOOKUP_VALUE) != null) {
+      return gov.va.viers.cdi.emis.requestresponse.v2.InputEdiPiOrIcn.builder()
+          .edipiORicn(
+              gov.va.viers.cdi.emis.commonservice.v2.InputEdipiIcn.builder()
+                  .inputType("EDIPI")
+                  .edipiORicnValue(getId(patient, EDIPI_LOOKUP_VALUE))
+                  .build())
+          .build();
+    } else if (getId(patient, ICN_LOOKUP_VALUE) != null) {
+      return gov.va.viers.cdi.emis.requestresponse.v2.InputEdiPiOrIcn.builder()
+          .edipiORicn(
+              gov.va.viers.cdi.emis.commonservice.v2.InputEdipiIcn.builder()
+                  .inputType("ICN")
+                  .edipiORicnValue(getId(patient, ICN_LOOKUP_VALUE))
+                  .build())
+          .build();
+    }
+    return null;
+  }
+
   /**
    * Retrieves last name from MPI response.
    *
