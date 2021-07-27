@@ -151,6 +151,7 @@ public class ServiceHistoryIT {
     assertEquals(
         "Army National Guard", serviceHistory.data().get(2).attributes().branchOfService());
     assertEquals("2007-03-15", serviceHistory.data().get(2).attributes().startDate().toString());
+    assertEquals(null, serviceHistory.data().get(2).attributes().endDate());
     assertEquals("E07", serviceHistory.data().get(2).attributes().payGrade());
     assertEquals(
         "unknown", serviceHistory.data().get(2).attributes().dischargeStatus().serializer());
