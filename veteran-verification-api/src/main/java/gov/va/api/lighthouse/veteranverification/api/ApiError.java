@@ -64,7 +64,7 @@ public abstract class ApiError {
     }
   }
 
-  /** Error class for an no service history found. */
+  /** Error class for no service history found. */
   public static class NoServiceHistoryFoundApiError extends ApiError {
     /** Build Api Error for invalid parameter error using value and field name parameters. */
     @Builder

@@ -76,6 +76,48 @@ import javax.ws.rs.Path;
 @Path("/")
 public interface VeteranVerificationService {
   @GET
+  @Path("disability_rating")
+  @ApiResponse(
+      responseCode = "200",
+      description = "Disability Rating retrieved successfully",
+      content = {
+        @Content(
+            mediaType = "application/json",
+            schema = @Schema(implementation = DisabilityRatingResponse.class)),
+        @Content(
+            mediaType = "application/jwt",
+            schema =
+                @Schema(
+                    description =
+                        "A token containing signed claims about a Veteran's disability rating "
+                            + "percentage\n",
+                    example =
+                        "eyJhbGciOiJSUzI1NiIsImtpZCI6IjA4OGQyNDIzMmZmNmZhYTRjZ"
+                            + "DRjZmVjMTI2YWQwNDMxZGZmMWVhMDI4YWZkYjFjODZiMz"
+                            + "cxOGQ3MDE3MWFlZDYifQ.eyJkYXRhIjp7ImlkIjoxMjMwM"
+                            + "ywidHlwZSI6ImRvY3VtZW50X3VwbG9hZCIsImF0dHJpYnV"
+                            + "0ZXMiOnsiZGVjaXNpb24iOiJTZXJ2aWNlIENvbm5lY3RlZ"
+                            + "CIsImVmZmVjdGl2ZV9kYXRlIjoiMjAxOC0wMy0yN1QyMTo"
+                            + "wMDo0MS4wMDArMDAwMCIsInJhdGluZ19wZXJjZW50YWdlI"
+                            + "jo1MH19fQ.z3EeYFixwdmG_4_LFdzy6fdF2Y7nj3y9uOPR"
+                            + "TwLqsXVcLNUDIN72atn0SSI-hkF-rRkbFdyzLDaY2AWtQ-"
+                            + "LmBPdeWqyv4U2ZnjynAwlCnG0VNG3x4Wz2qSW7BW1cQVB"
+                            + "x0yvWag_NmQ74AfOBNz7K2qz8aEOvYIJaicRr2hSAu7A"))
+      })
+  @ApiResponse(responseCode = "401", description = "Not authorized")
+  @ApiResponse(
+      responseCode = "502",
+      description =
+          "BGS Service responded with something other "
+              + "than the expected disability rating response.")
+  @Operation(
+      operationId = "getDisabilityRating",
+      summary = "Retrieve disability rating of authorized Veteran",
+      security = {@SecurityRequirement(name = "bearer_token")})
+  @Tag(name = "Veteran Verification")
+  DisabilityRatingResponse disabilityRating();
+
+  @GET
   @Path("service_history")
   @ApiResponse(
       responseCode = "200",
