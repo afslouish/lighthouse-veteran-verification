@@ -72,10 +72,12 @@ public abstract class ApiError {
       super(
           singletonList(
               ApiErrorDetails.builder()
-                  .title("Not Implemented")
-                  .detail("No service history found.")
-                  .code("404")
-                  .status("404")
+                  .title("Unexpected response body")
+                  .detail(
+                      "EMIS service responded with something other than the "
+                          + "expected array of service history hashes.")
+                  .code("EMIS_HIST502")
+                  .status("502")
                   .build()));
     }
   }

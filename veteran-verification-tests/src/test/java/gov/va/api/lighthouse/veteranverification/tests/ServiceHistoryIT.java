@@ -24,13 +24,16 @@ public class ServiceHistoryIT {
   public void serviceHistoryEmisSoapFaultError() {
     String request =
         String.format("v0/service_history/%s", systemDefinition().icns().noEmisEpisodesUser());
-    ExpectedResponse response = veteranVerificationGetRequest(request, 404);
+    ExpectedResponse response = veteranVerificationGetRequest(request, 502);
     ApiError.NoServiceHistoryFoundApiError serviceHistory =
         response.response().getBody().as(ApiError.NoServiceHistoryFoundApiError.class);
-    assertEquals("Not Implemented", serviceHistory.errors().get(0).getTitle());
-    assertEquals("No service history found.", serviceHistory.errors().get(0).getDetail());
-    assertEquals("404", serviceHistory.errors().get(0).getCode());
-    assertEquals("404", serviceHistory.errors().get(0).getStatus());
+    assertEquals("Unexpected response body", serviceHistory.errors().get(0).getTitle());
+    assertEquals(
+        "EMIS service responded with something other than the expected array of service "
+            + "history hashes.",
+        serviceHistory.errors().get(0).getDetail());
+    assertEquals("EMIS_HIST502", serviceHistory.errors().get(0).getCode());
+    assertEquals("502", serviceHistory.errors().get(0).getStatus());
   }
 
   @Test
@@ -93,13 +96,16 @@ public class ServiceHistoryIT {
   public void serviceHistoryNoMpiResponse() {
     String request =
         String.format("v0/service_history/%s", systemDefinition().icns().noMpiUserIcn());
-    ExpectedResponse response = veteranVerificationGetRequest(request, 404);
+    ExpectedResponse response = veteranVerificationGetRequest(request, 502);
     ApiError.NoServiceHistoryFoundApiError serviceHistory =
         response.response().getBody().as(ApiError.NoServiceHistoryFoundApiError.class);
-    assertEquals("Not Implemented", serviceHistory.errors().get(0).getTitle());
-    assertEquals("No service history found.", serviceHistory.errors().get(0).getDetail());
-    assertEquals("404", serviceHistory.errors().get(0).getCode());
-    assertEquals("404", serviceHistory.errors().get(0).getStatus());
+    assertEquals("Unexpected response body", serviceHistory.errors().get(0).getTitle());
+    assertEquals(
+        "EMIS service responded with something other than the expected array of service "
+            + "history hashes.",
+        serviceHistory.errors().get(0).getDetail());
+    assertEquals("EMIS_HIST502", serviceHistory.errors().get(0).getCode());
+    assertEquals("502", serviceHistory.errors().get(0).getStatus());
   }
 
   @Test
