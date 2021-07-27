@@ -57,7 +57,7 @@ public class SystemDefinitions {
   public static final String NO_MPI_USER_ICN = "1012855585V634865";
 
   public static final String NO_EMIS_EPISODES_USER = "1012667122V019349";
-  
+
   public static final String N0_BGS_USER_DISABILITY_RATING_ICN = "1012661611V839382";
 
   /** Class of search attributes to be used for veteran confirmation status ITs. */
