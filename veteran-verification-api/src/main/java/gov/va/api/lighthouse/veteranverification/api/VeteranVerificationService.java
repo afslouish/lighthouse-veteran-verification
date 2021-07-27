@@ -1,5 +1,6 @@
 package gov.va.api.lighthouse.veteranverification.api;
 
+import gov.va.api.lighthouse.veteranverification.api.v0.DisabilityRatingResponse;
 import gov.va.api.lighthouse.veteranverification.api.v0.ServiceHistoryResponse;
 import gov.va.api.lighthouse.veteranverification.api.v0.VeteranStatusVerificationResponse;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
