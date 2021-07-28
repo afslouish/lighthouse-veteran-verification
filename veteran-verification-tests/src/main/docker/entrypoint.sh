@@ -38,6 +38,10 @@ main() {
   addToSystemProperties "no-emis-user-status-icn" "${NO_EMIS_USER_STATUS_ICN}"
   addToSystemProperties "disability-rating-icn" "${DISABILITY_RATING_ICN}"
   addToSystemProperties "no-bgs-user-disability-rating-icn" "${NO_BGS_USER_DISABILITY_RATING_ICN}"
+  addToSystemProperties "service-history-icn" "${SERVICE_HISTORY_ICN}"
+  addToSystemProperties "service-history-icn-null-end-date" "${SERVICE_HISTORY_ICN_NULL_END_DATE}"
+  addToSystemProperties "no-mpi-user-icn" "${NO_MPI_USER_ICN}"
+  addToSystemProperties "no-emis-episodes-user" "${NO_EMIS_EPISODES_USER}"
 
   java-tests \
     --module-name "veteran-verification-tests" \
