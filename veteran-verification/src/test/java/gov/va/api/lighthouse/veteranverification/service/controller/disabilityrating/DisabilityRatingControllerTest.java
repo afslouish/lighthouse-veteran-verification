@@ -1,4 +1,4 @@
-package gov.va.api.lighthouse.veteranverification.service.controller.veteranverification;
+package gov.va.api.lighthouse.veteranverification.service.controller.disabilityrating;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

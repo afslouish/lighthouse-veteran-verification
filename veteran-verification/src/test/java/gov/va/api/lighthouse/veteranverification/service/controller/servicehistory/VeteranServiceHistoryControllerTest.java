@@ -1,4 +1,4 @@
-package gov.va.api.lighthouse.veteranverification.service.controller.veteranverification;
+package gov.va.api.lighthouse.veteranverification.service.controller.servicehistory;
 
 import static gov.va.api.lighthouse.veteranverification.service.Exceptions.EmisInaccesibleWsdlException;
 

@@ -16,9 +16,9 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(requiredProperties = "data")
-public class VeteranStatusVerificationResponse {
+public class VeteranStatusResponse {
 
-  @NonNull VeteranStatusVerificationDetails data;
+  @NonNull VeteranStatusDetails data;
 
   /** Attributes object model. */
   @Data
@@ -47,7 +47,7 @@ public class VeteranStatusVerificationResponse {
       name = "VeteranStatusConfirmation",
       description = "Veteran status confirmation for an individual",
       type = "object")
-  public static class VeteranStatusVerificationDetails {
+  public static class VeteranStatusDetails {
     @NonNull
     @Schema(type = "string", description = "Confirmation ICN", example = "1012667145V762142")
     String id;

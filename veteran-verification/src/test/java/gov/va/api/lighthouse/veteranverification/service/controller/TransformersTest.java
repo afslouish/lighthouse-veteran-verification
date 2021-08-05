@@ -15,7 +15,7 @@ public class TransformersTest {
   }
 
   @Test
-  void isBlankCharSqequence() {
+  void isBlankCharSequence() {
     assertThat(Transformers.isBlank(new StringBuffer())).isTrue();
   }
 
