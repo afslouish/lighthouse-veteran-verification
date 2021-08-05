@@ -4,8 +4,6 @@ import static gov.va.api.lighthouse.veteranverification.api.RoundTrip.assertRoun
 
 import gov.va.api.lighthouse.veteranverification.api.ApiError.EmisInaccessibleWsdlErrorApiError;
 import gov.va.api.lighthouse.veteranverification.api.ApiError.InaccessibleWsdlErrorApiError;
-import gov.va.api.lighthouse.veteranverification.api.ApiError.InvalidParameterApiError;
-import gov.va.api.lighthouse.veteranverification.api.ApiError.MissingParameterApiError;
 import gov.va.api.lighthouse.veteranverification.api.ApiError.NoServiceHistoryFoundApiError;
 import gov.va.api.lighthouse.veteranverification.api.ApiError.ServerSoapFaultApiError;
 import org.junit.jupiter.api.Test;
@@ -23,20 +21,6 @@ public class ApiErrorTest {
     InaccessibleWsdlErrorApiError inaccessibleWsdlErrorApiError =
         InaccessibleWsdlErrorApiError.builder().build();
     assertRoundTrip(inaccessibleWsdlErrorApiError);
-  }
-
-  @Test
-  void invalidParameterApiErrorTest() {
-    InvalidParameterApiError invalidParameterApiError =
-        InvalidParameterApiError.builder().value("N").field("firstName").build();
-    assertRoundTrip(invalidParameterApiError);
-  }
-
-  @Test
-  void missingParameterApiErrorTest() {
-    MissingParameterApiError missingParameterApiError =
-        MissingParameterApiError.builder().field("firstName").build();
-    assertRoundTrip(missingParameterApiError);
   }
 
   @Test
