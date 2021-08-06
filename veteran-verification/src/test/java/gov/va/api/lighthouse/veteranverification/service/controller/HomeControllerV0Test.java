@@ -21,7 +21,6 @@ import org.springframework.test.web.servlet.MockMvc;
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = {HomeControllerV0.class})
 public class HomeControllerV0Test {
-  @Mock Resource veteranConfirmationOpenapi;
 
   @Mock Resource veteranVerificationOpenapi;
 
@@ -31,14 +30,13 @@ public class HomeControllerV0Test {
 
   @BeforeEach
   void _init() {
-    connerCaseController =
-        new HomeControllerV0(veteranConfirmationOpenapi, veteranVerificationOpenapi);
+    connerCaseController = new HomeControllerV0(veteranVerificationOpenapi);
   }
 
   @Test
   @SneakyThrows
   public void inputStreamError() {
-    given(veteranConfirmationOpenapi.getInputStream())
+    given(veteranVerificationOpenapi.getInputStream())
         .willAnswer(
             invocation -> {
               throw new Exception("Test Exception");
@@ -46,16 +44,8 @@ public class HomeControllerV0Test {
     Assertions.assertThrows(
         Exception.class,
         () -> {
-          connerCaseController.veteranConfirmationOpenApiJson();
+          connerCaseController.veteranVerificationOpenApiJson();
         });
-  }
-
-  @Test
-  @SneakyThrows
-  public void testVeteranConfirmationOpenapiPath() {
-    mvc.perform(get("/v0/docs/veteran_confirmation"))
-        .andExpect(status().isOk())
-        .andExpect(jsonPath("$.openapi", equalTo("3.0.1")));
   }
 
   @Test

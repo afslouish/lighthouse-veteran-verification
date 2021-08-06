@@ -1,4 +1,4 @@
-package gov.va.api.lighthouse.veteranverification.service.controller.veteranverification;
+package gov.va.api.lighthouse.veteranverification.service.controller.servicehistory;
 
 import gov.va.api.lighthouse.veteranverification.api.v0.ServiceHistoryResponse;
 import gov.va.api.lighthouse.veteranverification.service.TestUtils;

@@ -21,48 +21,8 @@ import lombok.NoArgsConstructor;
     isGetterVisibility = JsonAutoDetect.Visibility.NONE)
 @Schema(description = "API invocation or processing error", type = "object", name = "APIError")
 public abstract class ApiError {
-  private static final String BAD_REQUEST_ERROR_CODE = "400";
-
   @ArraySchema(schema = @Schema(implementation = ApiErrorDetails.class))
   List<ApiErrorDetails> errors;
-
-  private static String toSnakeCase(String field) {
-    return field.replaceAll("([a-z])([A-Z]+)", "$1_$2").toLowerCase();
-  }
-
-  /** Error class for a missing parameter. */
-  @NoArgsConstructor
-  public static class MissingParameterApiError extends ApiError {
-    /** Build Api Error for missing parameter with error message parameter. */
-    @Builder
-    public MissingParameterApiError(String field) {
-      super(
-          singletonList(
-              ApiErrorDetails.builder()
-                  .title("Missing parameter")
-                  .detail("The required parameter \"" + toSnakeCase(field) + "\", is missing")
-                  .code("108")
-                  .status(BAD_REQUEST_ERROR_CODE)
-                  .build()));
-    }
-  }
-
-  /** Error class for an invalid parameter. */
-  @NoArgsConstructor
-  public static class InvalidParameterApiError extends ApiError {
-    /** Build Api Error for invalid parameter error using value and field name parameters. */
-    @Builder
-    public InvalidParameterApiError(String value, String field) {
-      super(
-          singletonList(
-              ApiErrorDetails.builder()
-                  .title("Invalid field value")
-                  .detail(value + " is not a valid value for \"" + toSnakeCase(field) + "\"")
-                  .code("103")
-                  .status(BAD_REQUEST_ERROR_CODE)
-                  .build()));
-    }
-  }
 
   /** Error class for no service history found. */
   public static class NoServiceHistoryFoundApiError extends ApiError {

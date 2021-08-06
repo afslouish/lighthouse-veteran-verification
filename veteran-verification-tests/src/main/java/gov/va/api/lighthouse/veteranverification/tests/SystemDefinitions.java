@@ -10,38 +10,6 @@ import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class SystemDefinitions {
-  public static final String EDIPI_CONFIRMED_FIRST_NAME_DEFAULT = "ALFREDO";
-
-  public static final String EDIPI_CONFIRMED_LAST_NAME_DEFAULT = "ARMSTRONG";
-
-  public static final String EDIPI_CONFIRMED_BIRTH_DATE_DEFAULT = "1993-06-08";
-
-  public static final String EDIPI_CONFIRMED_SSN_DEFAULT = "796012476";
-
-  public static final String ICN_CONFIRMED_FIRST_NAME_DEFAULT_DEFAULT = "ARTHUR";
-
-  public static final String ICN_CONFIRMED_LAST_NAME_DEFAULT = "ROSE";
-
-  public static final String ICN_CONFIRMED_BIRTH_DATE_DEFAULT = "1954-05-26";
-
-  public static final String ICN_CONFIRMED_SSN_DEFAULT = "796220828";
-
-  public static final String V5_STATUS_FIRST_NAME_DEFAULT = "GREG";
-
-  public static final String V5_STATUS_LAST_NAME_DEFAULT = "ANDERSON";
-
-  public static final String V5_STATUS_BIRTH_DATE_DEFAULT = "1933-04-05";
-
-  public static final String V5_STATUS_SSN_DEFAULT = "796121200";
-
-  public static final String NO_EMIS_USER_FIRST_NAME_DEFAULT = "WILLARD";
-
-  public static final String NO_EMIS_USER_LAST_NAME_DEFAULT = "RILEY";
-
-  public static final String NO_EMIS_USER_BIRTH_DATE_DEFAULT = "1959-02-25";
-
-  public static final String NO_EMIS_USER_SSN_DEFAULT = "796013145";
-
   public static final String CONFIRMED_STATUS_ICN_DEFAULT = "1012667145V762142";
 
   public static final String V5_STATUS_ICN_DEFAULT = "1012666182V203559";
@@ -60,45 +28,7 @@ public class SystemDefinitions {
 
   public static final String N0_BGS_USER_DISABILITY_RATING_ICN = "1012661611V839382";
 
-  /** Class of search attributes to be used for veteran confirmation status ITs. */
-  public static Attributes attributes() {
-    return Attributes.builder()
-        .edipiConfirmedFirstName(
-            systemPropertyOrDefault(
-                "edipi-confirmed-first-name", EDIPI_CONFIRMED_FIRST_NAME_DEFAULT))
-        .edipiConfirmedLastName(
-            systemPropertyOrDefault("edipi-confirmed-last-name", EDIPI_CONFIRMED_LAST_NAME_DEFAULT))
-        .edipiConfirmedBirthDate(
-            systemPropertyOrDefault(
-                "edipi-confirmed-birth-date", EDIPI_CONFIRMED_BIRTH_DATE_DEFAULT))
-        .edipiConfirmedSsn(
-            systemPropertyOrDefault("edipi-confirmed-ssn", EDIPI_CONFIRMED_SSN_DEFAULT))
-        .icnConfirmedFirstName(
-            systemPropertyOrDefault(
-                "icn-confirmed-first-name", ICN_CONFIRMED_FIRST_NAME_DEFAULT_DEFAULT))
-        .icnConfirmedLastName(
-            systemPropertyOrDefault("icn-confirmed-last-name", ICN_CONFIRMED_LAST_NAME_DEFAULT))
-        .icnConfirmedBirthDate(
-            systemPropertyOrDefault("icn-confirmed-birth-date", ICN_CONFIRMED_BIRTH_DATE_DEFAULT))
-        .icnConfirmedSsn(systemPropertyOrDefault("icn-confirmed-ssn", ICN_CONFIRMED_SSN_DEFAULT))
-        .v5StatusFirstName(
-            systemPropertyOrDefault("v5-status-first-name", V5_STATUS_FIRST_NAME_DEFAULT))
-        .v5StatusLastName(
-            systemPropertyOrDefault("v5-status-last-name", V5_STATUS_LAST_NAME_DEFAULT))
-        .v5StatusBirthDate(
-            systemPropertyOrDefault("v5-status-birth-date", V5_STATUS_BIRTH_DATE_DEFAULT))
-        .v5StatusSsn(systemPropertyOrDefault("v5-status-ssn", V5_STATUS_SSN_DEFAULT))
-        .noEmisUserFirstName(
-            systemPropertyOrDefault("no-emis-user-first-name", NO_EMIS_USER_FIRST_NAME_DEFAULT))
-        .noEmisUserLastName(
-            systemPropertyOrDefault("no-emis-user-last-name", NO_EMIS_USER_LAST_NAME_DEFAULT))
-        .noEmisUserBirthDate(
-            systemPropertyOrDefault("no-emis-user-birth-date", NO_EMIS_USER_BIRTH_DATE_DEFAULT))
-        .noEmisUserSsn(systemPropertyOrDefault("no-emis-user-ssn", NO_EMIS_USER_SSN_DEFAULT))
-        .build();
-  }
-
-  /** Class of ICNs to be used for veteran verifciation ITs. */
+  /** Class of ICNs to be used for Veteran Verification ITs. */
   public static Icns icns() {
     return Icns.builder()
         .confirmedStatusIcn(
@@ -122,7 +52,6 @@ public class SystemDefinitions {
 
   private static SystemDefinition lab() {
     return SystemDefinition.builder()
-        .attributes(attributes())
         .icns(icns())
         .veteranVerification(
             serviceDefinition(
@@ -135,7 +64,6 @@ public class SystemDefinitions {
 
   private static SystemDefinition local() {
     return SystemDefinition.builder()
-        .attributes(attributes())
         .icns(icns())
         .veteranVerification(
             serviceDefinition("veteran-verification", "http://localhost", 8080, "/"))
@@ -144,7 +72,6 @@ public class SystemDefinitions {
 
   private static SystemDefinition production() {
     return SystemDefinition.builder()
-        .attributes(attributes())
         .icns(icns())
         .veteranVerification(
             serviceDefinition(
@@ -157,7 +84,6 @@ public class SystemDefinitions {
 
   private static SystemDefinition qa() {
     return SystemDefinition.builder()
-        .attributes(attributes())
         .icns(icns())
         .veteranVerification(
             serviceDefinition(
@@ -178,7 +104,6 @@ public class SystemDefinitions {
 
   private static SystemDefinition staging() {
     return SystemDefinition.builder()
-        .attributes(attributes())
         .icns(icns())
         .veteranVerification(
             serviceDefinition(
@@ -191,7 +116,6 @@ public class SystemDefinitions {
 
   private static SystemDefinition stagingLab() {
     return SystemDefinition.builder()
-        .attributes(attributes())
         .icns(icns())
         .veteranVerification(
             serviceDefinition(
@@ -254,8 +178,6 @@ public class SystemDefinitions {
   static final class SystemDefinition {
     @NonNull Service veteranVerification;
 
-    @NonNull Attributes attributes;
-
     @NonNull Icns icns;
   }
 
@@ -279,41 +201,5 @@ public class SystemDefinitions {
     @NonNull String noEmisEpisodesUser;
 
     @NonNull String noBgsUserDisabilityRatingIcn;
-  }
-
-  @Data
-  @Builder
-  static final class Attributes {
-    @NonNull String edipiConfirmedFirstName;
-
-    @NonNull String edipiConfirmedLastName;
-
-    @NonNull String edipiConfirmedBirthDate;
-
-    @NonNull String edipiConfirmedSsn;
-
-    @NonNull String icnConfirmedFirstName;
-
-    @NonNull String icnConfirmedLastName;
-
-    @NonNull String icnConfirmedBirthDate;
-
-    @NonNull String icnConfirmedSsn;
-
-    @NonNull String v5StatusFirstName;
-
-    @NonNull String v5StatusLastName;
-
-    @NonNull String v5StatusBirthDate;
-
-    @NonNull String v5StatusSsn;
-
-    @NonNull String noEmisUserFirstName;
-
-    @NonNull String noEmisUserLastName;
-
-    @NonNull String noEmisUserBirthDate;
-
-    @NonNull String noEmisUserSsn;
   }
 }

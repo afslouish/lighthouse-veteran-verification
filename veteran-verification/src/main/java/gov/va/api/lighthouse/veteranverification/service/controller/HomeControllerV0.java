@@ -16,28 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(produces = "application/json")
 public class HomeControllerV0 {
-  private final Resource veteranConfirmationOpenapi;
-
   private final Resource veteranVerificationOpenapi;
 
   @Autowired
   HomeControllerV0(
-      @Value("classpath:/veteran-confirmation-openapi.json") Resource veteranConfirmationOpenapi,
       @Value("classpath:/veteran-verification-openapi.json") Resource veteranVerificationOpenapi) {
-    this.veteranConfirmationOpenapi = veteranConfirmationOpenapi;
     this.veteranVerificationOpenapi = veteranVerificationOpenapi;
-  }
-
-  /** REST endpoint for OpenAPI JSON + redirect. */
-  @SneakyThrows
-  @GetMapping(
-      value = {"v0/docs/veteran_confirmation"},
-      produces = "application/json")
-  @ResponseBody
-  public Object veteranConfirmationOpenApiJson() {
-    try (InputStream is = veteranConfirmationOpenapi.getInputStream()) {
-      return StreamUtils.copyToString(is, Charset.defaultCharset());
-    }
   }
 
   /** REST endpoint for OpenAPI JSON + redirect. */

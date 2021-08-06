@@ -1,4 +1,4 @@
-package gov.va.api.lighthouse.veteranverification.service.controller.veteranverification;
+package gov.va.api.lighthouse.veteranverification.service.controller.disabilityrating;
 
 import static gov.va.api.lighthouse.veteranverification.service.controller.Transformers.formatDateString;
 

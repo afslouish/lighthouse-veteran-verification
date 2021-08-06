@@ -26,20 +26,4 @@ final class Requestor {
         .logAction(logAllWithTruncatedBody(2000))
         .expect(expectedStatus);
   }
-
-  static ExpectedResponse veteranVerificationPostRequest(
-      @NonNull String request, @NonNull String requestBody, int expectedStatus) {
-    SystemDefinitions.Service svc = systemDefinition().veteranVerification();
-    log.info("Expect {} is status code ({})", svc.apiPath() + request, expectedStatus);
-    return ExpectedResponse.of(
-            RestAssured.given()
-                .baseUri(svc.url())
-                .port(svc.port())
-                .relaxedHTTPSValidation()
-                .body(requestBody)
-                .contentType("application/json")
-                .request(Method.POST, svc.urlWithApiPath() + request))
-        .logAction(logAllWithTruncatedBody(2000))
-        .expect(expectedStatus);
-  }
 }
