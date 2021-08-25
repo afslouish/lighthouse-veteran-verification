@@ -1,0 +1,119 @@
+package gov.va.api.lighthouse.veteranverification.api;
+
+import static gov.va.api.lighthouse.veteranverification.api.RoundTrip.assertRoundTrip;
+
+import gov.va.api.lighthouse.veteranverification.api.v0.JwkKeyset;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+public class JwksTest {
+  @Test
+  public void algIsNonNull() {
+    Assertions.assertThrows(
+        NullPointerException.class,
+        () -> {
+          JwkKeyset.Jwks.builder()
+              .alg(null)
+              .kid("kid")
+              .kty("kty")
+              .exponent("e")
+              .modulus("n")
+              .pem("pem")
+              .build();
+        });
+  }
+
+  @Test
+  public void exponentIsNonNull() {
+    Assertions.assertThrows(
+        NullPointerException.class,
+        () -> {
+          JwkKeyset.Jwks.builder()
+              .alg("alg")
+              .kid("kid")
+              .kty("kty")
+              .exponent(null)
+              .modulus("n")
+              .pem("pem")
+              .build();
+        });
+  }
+
+  @Test
+  public void happyPath() {
+    JwkKeyset.Jwks jwks =
+        JwkKeyset.Jwks.builder()
+            .alg("alg")
+            .kid("kid")
+            .kty("kty")
+            .exponent("e")
+            .modulus("n")
+            .pem("pem")
+            .build();
+    assertRoundTrip(jwks);
+  }
+
+  @Test
+  public void kidIsNonNull() {
+    Assertions.assertThrows(
+        NullPointerException.class,
+        () -> {
+          JwkKeyset.Jwks.builder()
+              .alg("alg")
+              .kid(null)
+              .kty("kty")
+              .exponent("e")
+              .modulus("n")
+              .pem("pem")
+              .build();
+        });
+  }
+
+  @Test
+  public void ktyIsNonNull() {
+    Assertions.assertThrows(
+        NullPointerException.class,
+        () -> {
+          JwkKeyset.Jwks.builder()
+              .alg("alg")
+              .kid("kid")
+              .kty(null)
+              .exponent("e")
+              .modulus("n")
+              .pem("pem")
+              .build();
+        });
+  }
+
+  @Test
+  public void modulusIsNonNull() {
+    Assertions.assertThrows(
+        NullPointerException.class,
+        () -> {
+          JwkKeyset.Jwks.builder()
+              .alg("alg")
+              .kid("kid")
+              .kty("kty")
+              .exponent("e")
+              .modulus(null)
+              .pem("pem")
+              .build();
+        });
+  }
+
+  @Test
+  public void pemIsNonNull() {
+    Assertions.assertThrows(
+        NullPointerException.class,
+        () -> {
+          JwkKeyset.Jwks.builder()
+              .alg("alg")
+              .kid("kid")
+              .kty("kty")
+              .exponent("e")
+              .modulus("n")
+              .pem(null)
+              .build();
+        });
+  }
+}
