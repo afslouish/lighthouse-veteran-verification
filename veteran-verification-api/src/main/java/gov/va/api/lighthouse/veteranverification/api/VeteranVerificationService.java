@@ -123,14 +123,14 @@ public interface VeteranVerificationService {
   @Path("keys")
   @ApiResponse(
       responseCode = "200",
-      description = "Retrieve public keys to check Veteran Verification API token signatures",
+      description = "Keys retrieved successfully",
       content = {
         @Content(mediaType = "application/json", schema = @Schema(implementation = JwkKeyset.class))
       })
   @ApiResponse(responseCode = "401", description = "Not authorized")
   @Operation(
       operationId = "getKeys",
-      summary = "Get public keys to verify Veteran Verification API token signatures",
+      summary = "Retrieve public keys to check Veteran Verification API token signatures",
       security = {@SecurityRequirement(name = "bearer_token")})
   @Tag(name = "JWS Validation")
   JwkKeyset keys();
