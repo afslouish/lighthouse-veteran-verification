@@ -20,7 +20,7 @@ public class NotaryTest {
 
   @Test
   @SneakyThrows
-  public void objectToJwObjectIsNonNull() {
+  public void objectToJwtObjectIsNonNull() {
     Notary notary = new Notary(new File("src/test/resources/verification_test_private.pem"));
     Assertions.assertThrows(
         NullPointerException.class,
