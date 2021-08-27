@@ -10,6 +10,26 @@ import org.junit.jupiter.api.Test;
 
 public class NotaryTest {
   @Test
+  public void constructorFileIsNonNull() {
+    Assertions.assertThrows(
+        NullPointerException.class,
+        () -> {
+          new Notary(null);
+        });
+  }
+
+  @Test
+  @SneakyThrows
+  public void objectToJwObjectIsNonNull() {
+    Notary notary = new Notary(new File("src/test/resources/verification_test_private.pem"));
+    Assertions.assertThrows(
+        NullPointerException.class,
+        () -> {
+          notary.objectToJwt(null);
+        });
+  }
+
+  @Test
   @SneakyThrows
   public void objectToJwtHappyPath() {
     ServiceHistoryResponse.ServiceHistoryEpisode[] serviceHistoryEpisodes = {
