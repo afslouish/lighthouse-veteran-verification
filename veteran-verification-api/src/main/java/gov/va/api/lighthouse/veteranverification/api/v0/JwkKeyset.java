@@ -21,7 +21,7 @@ import lombok.experimental.Accessors;
     description = "A JWK Keyset compliant with RFC 7517",
     requiredProperties = {"keys"})
 public class JwkKeyset {
-  @NonNull @Builder.Default List<Jwks> keys = new ArrayList<>();
+  @NonNull @Builder.Default List<Jwk> keys = new ArrayList<>();
 
   @Data
   @Builder
@@ -31,7 +31,7 @@ public class JwkKeyset {
   @Schema(
       description = "JSON Web Key compliant with RFC 7517",
       requiredProperties = {"kty", "alg", "kid", "pem", "e", "n"})
-  public static class Jwks {
+  public static class Jwk {
     @NonNull
     @Schema(
         description =
