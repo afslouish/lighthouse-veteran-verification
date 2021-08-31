@@ -1,6 +1,7 @@
 package gov.va.api.lighthouse.veteranverification.api;
 
 import gov.va.api.lighthouse.veteranverification.api.v0.DisabilityRatingResponse;
+import gov.va.api.lighthouse.veteranverification.api.v0.JwkKeyset;
 import gov.va.api.lighthouse.veteranverification.api.v0.ServiceHistoryResponse;
 import gov.va.api.lighthouse.veteranverification.api.v0.VeteranStatusResponse;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
@@ -117,6 +118,22 @@ public interface VeteranVerificationService {
       security = {@SecurityRequirement(name = "bearer_token")})
   @Tag(name = "Veteran Verification")
   DisabilityRatingResponse disabilityRating();
+
+  @GET
+  @Path("keys")
+  @ApiResponse(
+      responseCode = "200",
+      description = "Keys retrieved successfully",
+      content = {
+        @Content(mediaType = "application/json", schema = @Schema(implementation = JwkKeyset.class))
+      })
+  @ApiResponse(responseCode = "401", description = "Not authorized")
+  @Operation(
+      operationId = "getKeys",
+      summary = "Retrieve public keys to check Veteran Verification API token signatures",
+      security = {@SecurityRequirement(name = "bearer_token")})
+  @Tag(name = "JWS Validation")
+  JwkKeyset keys();
 
   @GET
   @Path("service_history")
