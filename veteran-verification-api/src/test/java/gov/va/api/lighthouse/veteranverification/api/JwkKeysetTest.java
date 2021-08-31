@@ -13,8 +13,8 @@ public class JwkKeysetTest {
         JwkKeyset.builder()
             .keys(
                 Lists.newArrayList(
-                    new JwkKeyset.Jwks[] {
-                      JwkKeyset.Jwks.builder()
+                    new JwkKeyset.Jwk[] {
+                      JwkKeyset.Jwk.builder()
                           .alg("alg")
                           .kid("kid")
                           .kty("kty")

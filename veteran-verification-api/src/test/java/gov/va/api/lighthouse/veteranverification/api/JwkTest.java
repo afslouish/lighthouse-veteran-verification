@@ -6,13 +6,13 @@ import gov.va.api.lighthouse.veteranverification.api.v0.JwkKeyset;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class JwksTest {
+public class JwkTest {
   @Test
   public void algIsNonNull() {
     Assertions.assertThrows(
         NullPointerException.class,
         () -> {
-          JwkKeyset.Jwks.builder()
+          JwkKeyset.Jwk.builder()
               .alg(null)
               .kid("kid")
               .kty("kty")
@@ -28,7 +28,7 @@ public class JwksTest {
     Assertions.assertThrows(
         NullPointerException.class,
         () -> {
-          JwkKeyset.Jwks.builder()
+          JwkKeyset.Jwk.builder()
               .alg("alg")
               .kid("kid")
               .kty("kty")
@@ -41,8 +41,8 @@ public class JwksTest {
 
   @Test
   public void happyPath() {
-    JwkKeyset.Jwks jwks =
-        JwkKeyset.Jwks.builder()
+    JwkKeyset.Jwk jwk =
+        JwkKeyset.Jwk.builder()
             .alg("alg")
             .kid("kid")
             .kty("kty")
@@ -50,7 +50,7 @@ public class JwksTest {
             .modulus("n")
             .pem("pem")
             .build();
-    assertRoundTrip(jwks);
+    assertRoundTrip(jwk);
   }
 
   @Test
@@ -58,7 +58,7 @@ public class JwksTest {
     Assertions.assertThrows(
         NullPointerException.class,
         () -> {
-          JwkKeyset.Jwks.builder()
+          JwkKeyset.Jwk.builder()
               .alg("alg")
               .kid(null)
               .kty("kty")
@@ -74,7 +74,7 @@ public class JwksTest {
     Assertions.assertThrows(
         NullPointerException.class,
         () -> {
-          JwkKeyset.Jwks.builder()
+          JwkKeyset.Jwk.builder()
               .alg("alg")
               .kid("kid")
               .kty(null)
@@ -90,7 +90,7 @@ public class JwksTest {
     Assertions.assertThrows(
         NullPointerException.class,
         () -> {
-          JwkKeyset.Jwks.builder()
+          JwkKeyset.Jwk.builder()
               .alg("alg")
               .kid("kid")
               .kty("kty")
@@ -106,7 +106,7 @@ public class JwksTest {
     Assertions.assertThrows(
         NullPointerException.class,
         () -> {
-          JwkKeyset.Jwks.builder()
+          JwkKeyset.Jwk.builder()
               .alg("alg")
               .kid("kid")
               .kty("kty")
