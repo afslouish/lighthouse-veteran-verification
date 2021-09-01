@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.nimbusds.jose.JOSEObjectType;
-import com.nimbusds.jose.JWSAlgorithm;
 import com.nimbusds.jose.JWSHeader;
 import com.nimbusds.jose.JWSObject;
 import com.nimbusds.jose.crypto.RSASSASigner;
@@ -43,7 +42,7 @@ public class Notary {
   public String objectToJwt(@NonNull Object object) {
     JWSObject jwsObject =
         new JWSObject(
-            new JWSHeader.Builder(JWSAlgorithm.RS256)
+            new JWSHeader.Builder(jwksProperties.algorithm())
                 .keyID(jwksProperties.currentKeyId())
                 .type(JOSEObjectType.JWT)
                 .build(),
