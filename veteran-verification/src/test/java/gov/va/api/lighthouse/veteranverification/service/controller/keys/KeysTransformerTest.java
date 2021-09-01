@@ -21,6 +21,7 @@ public class KeysTransformerTest {
     Assertions.assertEquals("RS256", keySet.getKeys().get(0).getAlg());
     Assertions.assertEquals("fake", keySet.getKeys().get(0).getKid());
     Assertions.assertEquals("AQAB", keySet.getKeys().get(0).getExponent());
+    Assertions.assertEquals("pem", keySet.getKeys().get(0).getPem());
     Assertions.assertEquals(
         "l0HEtNs2NuvF20jd9cmwA1gtIUv-mpPpHkQcMU5Mx_EkLxWwwu1kZUMfrEGungdaf_SkN6_1_6Q2_4zxy1eJqYz9x"
             + "abxGC3QuEsUs1pzoVyS3OwPtnoWa1qpToUs0hxDSWJCdJ9NpGO4CZ__KtTELxq9Ym9ceho-YIUUO0RrLXl_3x1sAja"

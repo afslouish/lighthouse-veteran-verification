@@ -18,6 +18,7 @@ public class JwkTest {
               .kty("kty")
               .exponent("e")
               .modulus("n")
+              .pem("pem")
               .build();
         });
   }
@@ -33,6 +34,7 @@ public class JwkTest {
               .kty("kty")
               .exponent(null)
               .modulus("n")
+              .pem("pem")
               .build();
         });
   }
@@ -40,7 +42,14 @@ public class JwkTest {
   @Test
   public void happyPath() {
     JwkKeyset.Jwk jwk =
-        JwkKeyset.Jwk.builder().alg("alg").kid("kid").kty("kty").exponent("e").modulus("n").build();
+        JwkKeyset.Jwk.builder()
+            .alg("alg")
+            .kid("kid")
+            .kty("kty")
+            .exponent("e")
+            .modulus("n")
+            .pem("pem")
+            .build();
     assertRoundTrip(jwk);
   }
 
@@ -55,6 +64,7 @@ public class JwkTest {
               .kty("kty")
               .exponent("e")
               .modulus("n")
+              .pem("pem")
               .build();
         });
   }
@@ -70,6 +80,7 @@ public class JwkTest {
               .kty(null)
               .exponent("e")
               .modulus("n")
+              .pem("pem")
               .build();
         });
   }
@@ -85,6 +96,23 @@ public class JwkTest {
               .kty("kty")
               .exponent("e")
               .modulus(null)
+              .pem("pem")
+              .build();
+        });
+  }
+
+  @Test
+  public void pemIsNonNull() {
+    Assertions.assertThrows(
+        NullPointerException.class,
+        () -> {
+          JwkKeyset.Jwk.builder()
+              .alg("alg")
+              .kid("kid")
+              .kty("kty")
+              .exponent("e")
+              .modulus("n")
+              .pem(null)
               .build();
         });
   }

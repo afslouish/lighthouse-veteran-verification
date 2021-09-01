@@ -22,6 +22,7 @@ public class KeysTransformer {
                             .kty(jwk.getKeyType().toString())
                             .alg(jwksProperties.algorithm().toString())
                             .kid(jwk.getKeyID())
+                            .pem("pem")
                             .exponent(jwk.toRSAKey().getPublicExponent().toString())
                             .modulus(jwk.toRSAKey().getModulus().toString())
                             .build())

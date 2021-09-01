@@ -20,6 +20,7 @@ public class JwkKeysetTest {
                           .kty("kty")
                           .exponent("e")
                           .modulus("n")
+                          .pem("pem")
                           .build()
                     }))
             .build();

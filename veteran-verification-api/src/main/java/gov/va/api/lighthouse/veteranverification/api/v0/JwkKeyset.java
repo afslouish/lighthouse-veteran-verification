@@ -56,6 +56,16 @@ public class JwkKeyset {
 
     @NonNull
     @Schema(
+        description = "A pem version of the public key",
+        example =
+            "-----BEGIN PUBLIC KEY-----\\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDfC0vJvKBPhS+KA+"
+                + "ad1HkpXrI8\\nJoawtqzVwYgCGrlIgYgnRzKDvRFMbskYFTfPB7a8kT0gAkyFGvjlxp4EQ6mpVGhA"
+                + "\\nDNVWBVArQlcnMMbNsKRmb2jSLSzjX49C26na6mUi9X+xe6iS97L0yyJWBA91Yq3c\\nC0kJ8J"
+                + "8lwPoK9TvXqwIDAQAB\\n-----END PUBLIC KEY-----\\n")
+    String pem;
+
+    @NonNull
+    @Schema(
         name = "e",
         description =
             "The \"e\" (exponent) parameter contains the exponent value for the RSA public key. "
