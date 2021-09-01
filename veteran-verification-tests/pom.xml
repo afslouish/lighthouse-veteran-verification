@@ -4,16 +4,16 @@
   <parent>
     <groupId>gov.va.api.health</groupId>
     <artifactId>test-starter</artifactId>
-    <version>8.0.25</version>
+    <version>8.0.26</version>
     <relativePath/>
   </parent>
   <groupId>gov.va.api.lighthouse</groupId>
   <artifactId>veteran-verification-tests</artifactId>
-  <version>2.0.14-SNAPSHOT</version>
+  <version>2.0.14</version>
   <packaging>jar</packaging>
   <properties>
     <docker.imageName>lighthouse-${project.artifactId}</docker.imageName>
-    <mock-emis.version>2.0.0</mock-emis.version>
+    <mock-emis.version>2.0.1</mock-emis.version>
     <mock-mpi.version>2.0.1</mock-mpi.version>
     <mock-bgs.version>2.0.1</mock-bgs.version>
   </properties>
