@@ -3,21 +3,26 @@ package gov.va.api.lighthouse.veteranverification.service.utils;
 import com.nimbusds.jose.JWSAlgorithm;
 import com.nimbusds.jose.jwk.JWK;
 import com.nimbusds.jose.jwk.JWKSet;
+import java.io.StringWriter;
 import java.security.KeyStore;
+import javax.xml.bind.DatatypeConverter;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Value;
 
-@Getter
 public class JwksProperties {
-  private final JWKSet jwksPrivate;
+  public static final String BEGIN_CERT = "-----BEGIN PUBLIC KEY-----\n";
 
-  private final JWKSet jwksPublic;
+  public static final String END_CERT = "\n-----END PUBLIC KEY-----";
 
-  private final String jwksPublicJson;
+  @Getter private final JWKSet jwksPrivate;
 
-  private String currentKeyId;
+  @Getter private final JWKSet jwksPublic;
+
+  @Getter private final String jwksPublicJson;
+
+  @Getter private String currentKeyId;
 
   /** Constructor. */
   @SneakyThrows
@@ -56,5 +61,23 @@ public class JwksProperties {
    */
   public JWK currentPublicJwk() {
     return jwksPublic.getKeyByKeyId(currentKeyId);
+  }
+
+  /**
+   * Creates pub string from keyId.
+   *
+   * @param keyId kid.
+   * @return pub key string.
+   */
+  @SneakyThrows
+  public String jwkPublicPem(String keyId) {
+    StringWriter sw = new StringWriter();
+    sw.write(BEGIN_CERT);
+    sw.write(
+        DatatypeConverter.printBase64Binary(
+                jwksPublic().getKeyByKeyId(keyId).getParsedX509CertChain().get(0).getEncoded())
+            .replaceAll("(.{64})", "$1\n"));
+    sw.write(END_CERT);
+    return sw.toString();
   }
 }
