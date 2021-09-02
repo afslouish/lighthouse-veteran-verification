@@ -75,7 +75,12 @@ public class JwksProperties {
     sw.write(BEGIN_CERT);
     sw.write(
         DatatypeConverter.printBase64Binary(
-                jwksPublic().getKeyByKeyId(keyId).getParsedX509CertChain().get(0).getEncoded())
+                jwksPublic()
+                    .getKeyByKeyId(keyId)
+                    .getParsedX509CertChain()
+                    .get(0)
+                    .getPublicKey()
+                    .getEncoded())
             .replaceAll("(.{64})", "$1\n"));
     sw.write(END_CERT);
     return sw.toString();
