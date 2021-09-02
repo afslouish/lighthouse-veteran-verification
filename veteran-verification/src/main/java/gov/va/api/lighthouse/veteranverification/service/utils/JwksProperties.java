@@ -3,18 +3,27 @@ package gov.va.api.lighthouse.veteranverification.service.utils;
 import com.nimbusds.jose.JWSAlgorithm;
 import com.nimbusds.jose.jwk.JWK;
 import com.nimbusds.jose.jwk.JWKSet;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.StringWriter;
 import java.security.KeyStore;
 import javax.xml.bind.DatatypeConverter;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.Setter;
 import lombok.SneakyThrows;
-import org.springframework.beans.factory.annotation.Value;
+import lombok.experimental.Accessors;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.ResourceUtils;
 
+@Slf4j
 public class JwksProperties {
   public static final String BEGIN_CERT = "-----BEGIN PUBLIC KEY-----\n";
 
   public static final String END_CERT = "\n-----END PUBLIC KEY-----";
+
+  @Getter private final JWSAlgorithm algorithm = JWSAlgorithm.RS256;
 
   @Getter private final JWKSet jwksPrivate;
 
@@ -25,24 +34,17 @@ public class JwksProperties {
   @Getter private String currentKeyId;
 
   /** Constructor. */
-  @SneakyThrows
-  public JwksProperties(
-      @NonNull KeyStore keyStore,
-      @NonNull @Value("${jwk-set.current-key-id}") String currentKeyId,
-      @NonNull @Value("${jwk-set.current-password}") String currentKeyPassword) {
-    this.jwksPrivate = JWKSet.load(keyStore, name -> currentKeyPassword.toCharArray());
-    this.jwksPublic = jwksPrivate.toPublicJWKSet();
-    this.jwksPublicJson = jwksPublic.toString();
+  private JwksProperties(
+      @NonNull JWKSet jwksPrivate, JWKSet jwksPublic, String jwksPublicJson, String currentKeyId) {
+    this.jwksPrivate = jwksPrivate;
+    this.jwksPublic = jwksPublic;
+    this.jwksPublicJson = jwksPublicJson;
     this.currentKeyId = currentKeyId;
   }
 
-  /**
-   * Returns signing algorithm.
-   *
-   * @return Encryption algorithm type.
-   */
-  public JWSAlgorithm algorithm() {
-    return JWSAlgorithm.RS256;
+  /** return builder. */
+  public static JwksPropertiesBuilder builder() {
+    return new JwksPropertiesBuilder();
   }
 
   /**
@@ -84,5 +86,37 @@ public class JwksProperties {
             .replaceAll("(.{64})", "$1\n"));
     sw.write(END_CERT);
     return sw.toString();
+  }
+
+  /** Builder class for JwksProperties. */
+  @Accessors(fluent = true)
+  @Setter
+  @NoArgsConstructor
+  public static class JwksPropertiesBuilder {
+    @NonNull String currentKeyId;
+
+    @NonNull String currentKeyPassword;
+
+    @NonNull String keyStorePassword;
+
+    @NonNull String keyStorePath;
+
+    /** Builder method. */
+    @SneakyThrows
+    public JwksProperties build() {
+      KeyStore keystore = KeyStore.getInstance("JKS");
+      try (InputStream keystoreInputStream = ResourceUtils.getURL(keyStorePath).openStream()) {
+        keystore.load(keystoreInputStream, keyStorePassword.toCharArray());
+      } catch (IOException e) {
+        log.error("Failed to create keystore", e);
+        throw e;
+      }
+      JWKSet jwksPrivate = JWKSet.load(keystore, name -> currentKeyPassword.toCharArray());
+      return new JwksProperties(
+          jwksPrivate,
+          jwksPrivate.toPublicJWKSet(),
+          jwksPrivate.toPublicJWKSet().toString(),
+          currentKeyId);
+    }
   }
 }

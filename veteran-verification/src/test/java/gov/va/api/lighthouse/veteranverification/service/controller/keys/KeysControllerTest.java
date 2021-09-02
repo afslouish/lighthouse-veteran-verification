@@ -2,8 +2,6 @@ package gov.va.api.lighthouse.veteranverification.service.controller.keys;
 
 import gov.va.api.lighthouse.veteranverification.api.v0.JwkKeyset;
 import gov.va.api.lighthouse.veteranverification.service.utils.JwksProperties;
-import java.io.FileInputStream;
-import java.security.KeyStore;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -12,9 +10,14 @@ public class KeysControllerTest {
   @Test
   @SneakyThrows
   public void happyPath() {
-    KeyStore ks = KeyStore.getInstance("jks");
-    ks.load(new FileInputStream("src/test/resources/fakekeystore.jks"), "secret".toCharArray());
-    KeysController keysController = new KeysController(new JwksProperties(ks, "fake", "secret"));
+    KeysController keysController =
+        new KeysController(
+            JwksProperties.builder()
+                .keyStorePath("src/test/resources/fakekeystore.jks")
+                .keyStorePassword("secret")
+                .currentKeyId("fake")
+                .currentKeyPassword("secret")
+                .build());
     JwkKeyset keySet = keysController.keyset();
     Assertions.assertEquals(1, keySet.getKeys().size());
     Assertions.assertEquals("RS256", keySet.getKeys().get(0).getAlg());
