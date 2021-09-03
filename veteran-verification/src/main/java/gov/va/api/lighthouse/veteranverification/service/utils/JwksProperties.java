@@ -69,7 +69,6 @@ public class JwksProperties {
    * @param keyId kid.
    * @return pub key string.
    */
-  @SneakyThrows
   public String jwkPublicPem(String keyId) {
     StringWriter sw = new StringWriter();
     sw.write(BEGIN_CERT);
