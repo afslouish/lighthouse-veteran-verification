@@ -2,9 +2,13 @@ package gov.va.api.lighthouse.veteranverification.service.utils;
 
 import com.nimbusds.jose.jwk.JWK;
 import java.io.FileInputStream;
+import java.security.KeyFactory;
 import java.security.KeyStore;
+import java.security.interfaces.RSAPublicKey;
+import java.security.spec.X509EncodedKeySpec;
 import java.util.List;
 import lombok.SneakyThrows;
+import org.apache.commons.codec.binary.Base64;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -58,6 +62,26 @@ public class JwksPropertiesTest {
     ks.load(new FileInputStream("src/test/resources/fakekeystore.jks"), "secret".toCharArray());
     JwksProperties jwksProperties = new JwksProperties(ks, "fake", "secret");
     Assertions.assertNotNull(jwksProperties.currentPublicJwk());
+  }
+
+  @Test
+  @SneakyThrows
+  public void jwkPublicPemHappy() {
+    KeyStore ks = KeyStore.getInstance("jks");
+    ks.load(new FileInputStream("src/test/resources/fakekeystore.jks"), "secret".toCharArray());
+    JwksProperties jwksProperties = new JwksProperties(ks, "fake", "secret");
+    String publicKeyPEM =
+        jwksProperties
+            .jwkPublicPem("fake")
+            .replace("-----BEGIN PUBLIC KEY-----", "")
+            .replaceAll(System.lineSeparator(), "")
+            .replace("-----END PUBLIC KEY-----", "");
+    byte[] encoded = Base64.decodeBase64(publicKeyPEM);
+    KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+    X509EncodedKeySpec keySpec = new X509EncodedKeySpec(encoded);
+    // This would fail if a non public key was being return
+    RSAPublicKey key = (RSAPublicKey) keyFactory.generatePublic(keySpec);
+    Assertions.assertNotNull(key);
   }
 
   @Test
