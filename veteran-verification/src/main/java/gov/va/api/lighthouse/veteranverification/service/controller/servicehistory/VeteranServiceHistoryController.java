@@ -9,6 +9,7 @@ import com.sun.xml.ws.wsdl.parser.InaccessibleWSDLException;
 import gov.va.api.lighthouse.emis.EmisMilitaryInformationServiceClient;
 import gov.va.api.lighthouse.mpi.MasterPatientIndexClient;
 import gov.va.api.lighthouse.veteranverification.api.v0.ServiceHistoryResponse;
+import gov.va.api.lighthouse.veteranverification.service.utils.Notary;
 import gov.va.viers.cdi.emis.requestresponse.v2.EMISdeploymentResponseType;
 import gov.va.viers.cdi.emis.requestresponse.v2.EMISserviceEpisodeResponseType;
 import gov.va.viers.cdi.emis.requestresponse.v2.InputEdiPiOrIcn;
@@ -25,15 +26,30 @@ public class VeteranServiceHistoryController {
 
   private final EmisMilitaryInformationServiceClient emisClient;
 
+  private final Notary notary;
+
   /** Controller constructor. */
   public VeteranServiceHistoryController(
       @Autowired MasterPatientIndexClient mpiClient,
-      @Autowired EmisMilitaryInformationServiceClient emisClient) {
+      @Autowired EmisMilitaryInformationServiceClient emisClient,
+      @Autowired Notary notary) {
     this.mpiClient = mpiClient;
     this.emisClient = emisClient;
+    this.notary = notary;
   }
 
-  /** Get veteran verification status from eMIS using an EDIPI or ICN from MPI lookup. */
+  /**
+   * Get veteran verification service history jwt from eMIS using an EDIPI or ICN from MPI lookup.
+   */
+  @GetMapping(
+      value = {"/v0/service_history/{icn}"},
+      produces = {"application/jwt"})
+  public String veteranServiceHistoryJwtResponse(@NonNull @PathVariable("icn") String icn) {
+    ServiceHistoryResponse serviceHistoryResponse = veteranServiceHistoryResponse(icn);
+    return notary.objectToJwt(serviceHistoryResponse);
+  }
+
+  /** Get veteran verification service history from eMIS using an EDIPI or ICN from MPI lookup. */
   @GetMapping(
       value = {"/v0/service_history/{icn}"},
       produces = {"application/json"})
