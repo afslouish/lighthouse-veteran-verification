@@ -6,21 +6,19 @@ import lombok.SneakyThrows;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class KeysTransformerTest {
+public class KeysControllerTest {
   @Test
   @SneakyThrows
   public void happyPath() {
-    KeysTransformer transformer =
-        KeysTransformer.builder()
-            .jwksProperties(
-                JwksProperties.builder()
-                    .keyStorePath("src/test/resources/fakekeystore.jks")
-                    .keyStorePassword("secret")
-                    .currentKeyId("fake")
-                    .currentKeyPassword("secret")
-                    .build())
-            .build();
-    JwkKeyset keySet = transformer.keysTransformer();
+    KeysController keysController =
+        new KeysController(
+            JwksProperties.builder()
+                .keyStorePath("src/test/resources/fakekeystore.jks")
+                .keyStorePassword("secret")
+                .currentKeyId("fake")
+                .currentKeyPassword("secret")
+                .build());
+    JwkKeyset keySet = keysController.keyset();
     Assertions.assertEquals(1, keySet.getKeys().size());
     Assertions.assertEquals("RS256", keySet.getKeys().get(0).getAlg());
     Assertions.assertEquals("fake", keySet.getKeys().get(0).getKid());
@@ -42,14 +40,5 @@ public class KeysTransformerTest {
             + "y8ejSDxM3ld8LGsAskLYcfzlhPhKA36p9UFjPzijhQtuMbrczIr1bv-jrVgFOxOj5tiRVARHzhB1ptvS0mD6o5XV16"
             + "1M3TyXaegYk7cUfDrhHCxsezFNaSROs7pHm6Rfj1YXA2DiaD6HycXzD2M-wcsUhfPtyIoWbkQ",
         keySet.getKeys().get(0).getModulus());
-  }
-
-  @Test
-  public void jwksPropertiesIsNonNull() {
-    Assertions.assertThrows(
-        NullPointerException.class,
-        () -> {
-          KeysTransformer.builder().jwksProperties(null).build();
-        });
   }
 }

@@ -6,6 +6,7 @@ import gov.va.api.lighthouse.bgs.SoapBenefitsGatewayServicesClient;
 import gov.va.api.lighthouse.emis.SoapEmisMilitaryInformationServiceClient;
 import gov.va.api.lighthouse.emis.SoapEmisVeteranStatusServiceClient;
 import gov.va.api.lighthouse.mpi.SoapMasterPatientIndexClient;
+import gov.va.api.lighthouse.veteranverification.service.utils.JwksProperties;
 import org.junit.jupiter.api.Test;
 
 public class VeteranVerificationConfigTest {
@@ -14,7 +15,11 @@ public class VeteranVerificationConfigTest {
           TestUtils.makeMpiConfig(),
           TestUtils.makeEmisConfig(),
           TestUtils.makeEmisConfigV2(),
-          TestUtils.makeBgsConfig());
+          TestUtils.makeBgsConfig(),
+          "fake",
+          "secret",
+          "secret",
+          "src/test/resources/fakekeystore.jks");
 
   @Test
   void bgsClient() {
@@ -32,6 +37,11 @@ public class VeteranVerificationConfigTest {
   void emisMilitaryInformationClient() {
     assertThat(veteranVerificationConfig.emisMilitaryInformationServiceClient())
         .isInstanceOf(SoapEmisMilitaryInformationServiceClient.class);
+  }
+
+  @Test
+  void jwksProperties() {
+    assertThat(veteranVerificationConfig.jwksProperties()).isInstanceOf(JwksProperties.class);
   }
 
   @Test

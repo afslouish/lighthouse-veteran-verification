@@ -1,2 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<FindBugsFilter></FindBugsFilter>
+<FindBugsFilter>
+    <!-- Exclusions can be defined here and should include a comment on why the finding can be ignored -->
+    <!--
+    This finding is reported where keystores are loaded to configure the JwksProperties class.
+    This resource path is provided as configuration and is not user or
+    caller specified. Also this keystore is local and cannot be changed without us knowing.
+    -->
+    <Match>
+        <Class name="gov.va.api.lighthouse.veteranverification.service.utils.JwksProperties$JwksPropertiesBuilder"/>
+        <Bug pattern="URLCONNECTION_SSRF_FD"/>
+    </Match>
+</FindBugsFilter>

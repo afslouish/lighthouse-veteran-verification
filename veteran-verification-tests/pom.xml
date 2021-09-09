@@ -157,6 +157,10 @@
                 <argument>-Demis.v1.wsdl-location=http://localhost:9000/VIERSService/eMIS/v1/VeteranStatusService/eMISVeteranStatusService.wsdl</argument>
                 <argument>-Dbgs.url=http://localhost:8000/v0/RatingServiceBean/RatingService</argument>
                 <argument>-Dbgs.wsdl-location=http://localhost:8000/v0/RatingServiceBean/RatingService/ratingRecord.wsdl</argument>
+                <argument>-Djwk-set.current-key-id=fake</argument>
+                <argument>-Djwk-set.current-password=secret</argument>
+                <argument>-Djwk-set.keystore-password=secret</argument>
+                <argument>-Djwk-set.keystore-path=${project.basedir}/../veteran-verification/src/test/resources/fakekeystore.jks</argument>
                 <argument>-Dloader=gov.va.api.lighthouse.veteranverification.service.Application</argument>
                 <argument>-Dlogging.level.root=INFO</argument>
                 <argument>-Dspring.config.additional-location=classpath:/application.properties,optional:file:${project.basedir}/config/secrets.properties</argument>

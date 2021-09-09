@@ -2,8 +2,6 @@ package gov.va.api.lighthouse.veteranverification.service.utils;
 
 import gov.va.api.lighthouse.veteranverification.api.v0.ServiceHistoryResponse;
 import gov.va.api.lighthouse.veteranverification.service.TestUtils;
-import java.io.FileInputStream;
-import java.security.KeyStore;
 import java.util.Arrays;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Assertions;
@@ -29,9 +27,13 @@ public class NotaryTest {
         ServiceHistoryResponse.builder()
             .data(Arrays.stream(serviceHistoryEpisodes).toList())
             .build();
-    KeyStore ks = KeyStore.getInstance("jks");
-    ks.load(new FileInputStream("src/test/resources/fakekeystore.jks"), "secret".toCharArray());
-    JwksProperties jwksProperties = new JwksProperties(ks, "fake", "secret");
+    JwksProperties jwksProperties =
+        JwksProperties.builder()
+            .keyStorePath("src/test/resources/fakekeystore.jks")
+            .keyStorePassword("secret")
+            .currentKeyId("fake")
+            .currentKeyPassword("secret")
+            .build();
     Notary notary = new Notary(jwksProperties);
     String jwt = notary.objectToJwt(serviceHistoryResponse);
     Assertions.assertEquals(
@@ -54,9 +56,13 @@ public class NotaryTest {
   @Test
   @SneakyThrows
   public void objectToJwtObjectIsNonNull() {
-    KeyStore ks = KeyStore.getInstance("jks");
-    ks.load(new FileInputStream("src/test/resources/fakekeystore.jks"), "secret".toCharArray());
-    JwksProperties jwksProperties = new JwksProperties(ks, "fake", "fake");
+    JwksProperties jwksProperties =
+        JwksProperties.builder()
+            .keyStorePath("src/test/resources/fakekeystore.jks")
+            .keyStorePassword("secret")
+            .currentKeyId("fake")
+            .currentKeyPassword("secret")
+            .build();
     Notary notary = new Notary(jwksProperties);
     Assertions.assertThrows(
         NullPointerException.class,
