@@ -4,14 +4,12 @@ import gov.va.api.lighthouse.veteranverification.api.v0.JwkKeyset;
 import gov.va.api.lighthouse.veteranverification.service.utils.JwksProperties;
 import lombok.Builder;
 import lombok.NonNull;
-import lombok.SneakyThrows;
 
 @Builder
 public class KeysTransformer {
   @NonNull private final JwksProperties jwksProperties;
 
   /** Transformer for Keys response. */
-  @SneakyThrows
   public JwkKeyset keysTransformer() {
     return JwkKeyset.builder()
         .keys(
