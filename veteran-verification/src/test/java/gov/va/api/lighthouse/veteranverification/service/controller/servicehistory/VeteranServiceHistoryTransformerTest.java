@@ -3,6 +3,7 @@ package gov.va.api.lighthouse.veteranverification.service.controller.servicehist
 import gov.va.api.lighthouse.veteranverification.api.v0.ServiceHistoryResponse;
 import gov.va.api.lighthouse.veteranverification.service.TestUtils;
 import gov.va.viers.cdi.emis.requestresponse.v2.EMISdeploymentResponseType;
+import gov.va.viers.cdi.emis.requestresponse.v2.EMISguardReserveServicePeriodsResponseType;
 import gov.va.viers.cdi.emis.requestresponse.v2.EMISserviceEpisodeResponseType;
 import org.hl7.v3.PRPAIN201306UV02;
 import org.junit.jupiter.api.Assertions;
@@ -14,6 +15,8 @@ public class VeteranServiceHistoryTransformerTest {
     EMISserviceEpisodeResponseType serviceEpisodeResponse =
         TestUtils.createServiceHistoryResponse(
             "emis/service-episodes/pay_grade_and_branch_of_service_scenarios.xml");
+    EMISguardReserveServicePeriodsResponseType grasResponse =
+        TestUtils.createGrasResponse("emis/gras/single_title_training_period.xml");
     PRPAIN201306UV02 mpiResponse = TestUtils.createMpiResponse("mpi/mpi_profile_response_body.xml");
     EMISdeploymentResponseType deployments =
         TestUtils.createDeploymentResponse("emis/deployments_response.xml");
@@ -23,6 +26,7 @@ public class VeteranServiceHistoryTransformerTest {
             .deploymentResponse(deployments)
             .serviceEpisodeResponseType(serviceEpisodeResponse)
             .mpiResponse(mpiResponse)
+            .grasResponse(grasResponse)
             .build();
     ServiceHistoryResponse response = transformer.serviceHistoryTransformer();
     // Happy Path Air Force National Guard
@@ -169,9 +173,83 @@ public class VeteranServiceHistoryTransformerTest {
   }
 
   @Test
+  public void happyPathCheckForTitle32GrasResponsesAscending() {
+    EMISserviceEpisodeResponseType serviceEpisodeResponse =
+        TestUtils.createServiceHistoryResponse("emis/service-episodes/single_inactive.xml");
+    EMISguardReserveServicePeriodsResponseType grasResponse =
+        TestUtils.createGrasResponse("emis/gras/ascending.xml");
+    PRPAIN201306UV02 mpiResponse = TestUtils.createMpiResponse("mpi/mpi_profile_response_body.xml");
+    EMISdeploymentResponseType deployments =
+        TestUtils.createDeploymentResponse("emis/deployments_response.xml");
+    VeteranServiceHistoryTransformer transformer =
+        VeteranServiceHistoryTransformer.builder()
+            .icn("uuid")
+            .deploymentResponse(deployments)
+            .serviceEpisodeResponseType(serviceEpisodeResponse)
+            .mpiResponse(mpiResponse)
+            .grasResponse(grasResponse)
+            .build();
+    ServiceHistoryResponse response = transformer.serviceHistoryTransformer();
+    Assertions.assertEquals(1, response.data().size());
+    ServiceHistoryResponse.ServiceHistoryEpisode episodeOne = response.data().get(0);
+    Assertions.assertEquals("639dbf29-f2d0-54a7-a1d0-b26a26e13f8a", episodeOne.id());
+    Assertions.assertEquals("service-history-episodes", episodeOne.type());
+    ServiceHistoryResponse.ServiceHistoryAttributes attributesOne = episodeOne.attributes();
+    Assertions.assertEquals("Alfredo", attributesOne.firstName());
+    Assertions.assertEquals("Armstrong", attributesOne.lastName());
+    Assertions.assertNull(attributesOne.branchOfService());
+    Assertions.assertEquals("2012-01-01", attributesOne.startDate().toString());
+    Assertions.assertEquals("2013-02-01", attributesOne.endDate());
+    Assertions.assertNull(attributesOne.payGrade());
+    Assertions.assertEquals(
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE,
+        attributesOne.dischargeStatus());
+    Assertions.assertEquals("SUFFICIENT SERVICE FOR RETIREMENT", attributesOne.separationReason());
+    Assertions.assertEquals(attributesOne.deployments().stream().count(), 0);
+  }
+
+  @Test
+  public void happyPathCheckForTitle32GrasResponsesDescending() {
+    EMISserviceEpisodeResponseType serviceEpisodeResponse =
+        TestUtils.createServiceHistoryResponse("emis/service-episodes/single_inactive.xml");
+    EMISguardReserveServicePeriodsResponseType grasResponse =
+        TestUtils.createGrasResponse("emis/gras/descending.xml");
+    PRPAIN201306UV02 mpiResponse = TestUtils.createMpiResponse("mpi/mpi_profile_response_body.xml");
+    EMISdeploymentResponseType deployments =
+        TestUtils.createDeploymentResponse("emis/deployments_response.xml");
+    VeteranServiceHistoryTransformer transformer =
+        VeteranServiceHistoryTransformer.builder()
+            .icn("uuid")
+            .deploymentResponse(deployments)
+            .serviceEpisodeResponseType(serviceEpisodeResponse)
+            .mpiResponse(mpiResponse)
+            .grasResponse(grasResponse)
+            .build();
+    ServiceHistoryResponse response = transformer.serviceHistoryTransformer();
+    Assertions.assertEquals(1, response.data().size());
+    ServiceHistoryResponse.ServiceHistoryEpisode episodeOne = response.data().get(0);
+    Assertions.assertEquals("639dbf29-f2d0-54a7-a1d0-b26a26e13f8a", episodeOne.id());
+    Assertions.assertEquals("service-history-episodes", episodeOne.type());
+    ServiceHistoryResponse.ServiceHistoryAttributes attributesOne = episodeOne.attributes();
+    Assertions.assertEquals("Alfredo", attributesOne.firstName());
+    Assertions.assertEquals("Armstrong", attributesOne.lastName());
+    Assertions.assertNull(attributesOne.branchOfService());
+    Assertions.assertEquals("2012-01-01", attributesOne.startDate().toString());
+    Assertions.assertEquals("2013-02-01", attributesOne.endDate());
+    Assertions.assertNull(attributesOne.payGrade());
+    Assertions.assertEquals(
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE,
+        attributesOne.dischargeStatus());
+    Assertions.assertEquals("SUFFICIENT SERVICE FOR RETIREMENT", attributesOne.separationReason());
+    Assertions.assertEquals(attributesOne.deployments().stream().count(), 0);
+  }
+
+  @Test
   public void happyPathDeploymentDataIsNull() {
     EMISserviceEpisodeResponseType serviceEpisodeResponse =
         TestUtils.createServiceHistoryResponse("emis/service-episodes/ascending.xml");
+    EMISguardReserveServicePeriodsResponseType grasResponse =
+        TestUtils.createGrasResponse("emis/gras/single_title_training_period.xml");
     PRPAIN201306UV02 mpiResponse = TestUtils.createMpiResponse("mpi/mpi_profile_response_body.xml");
     EMISdeploymentResponseType deployments =
         TestUtils.createDeploymentResponse("emis/deployments_response.xml");
@@ -186,8 +264,10 @@ public class VeteranServiceHistoryTransformerTest {
             .deploymentResponse(deployments)
             .serviceEpisodeResponseType(serviceEpisodeResponse)
             .mpiResponse(mpiResponse)
+            .grasResponse(grasResponse)
             .build();
     ServiceHistoryResponse response = transformer.serviceHistoryTransformer();
+    // This checks that non active responses are filtered out
     Assertions.assertEquals(response.data().size(), 2);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeOne = response.data().get(0);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeTwo = response.data().get(1);
@@ -225,6 +305,8 @@ public class VeteranServiceHistoryTransformerTest {
   public void happyPathDeploymentLocationIsNull() {
     EMISserviceEpisodeResponseType serviceEpisodeResponse =
         TestUtils.createServiceHistoryResponse("emis/service-episodes/ascending.xml");
+    EMISguardReserveServicePeriodsResponseType grasResponse =
+        TestUtils.createGrasResponse("emis/gras/single_title_training_period.xml");
     PRPAIN201306UV02 mpiResponse = TestUtils.createMpiResponse("mpi/mpi_profile_response_body.xml");
     EMISdeploymentResponseType deployments =
         TestUtils.createDeploymentResponse("emis/deployments_response.xml");
@@ -269,8 +351,10 @@ public class VeteranServiceHistoryTransformerTest {
             .deploymentResponse(deployments)
             .serviceEpisodeResponseType(serviceEpisodeResponse)
             .mpiResponse(mpiResponse)
+            .grasResponse(grasResponse)
             .build();
     ServiceHistoryResponse response = transformer.serviceHistoryTransformer();
+    // This checks that non active responses are filtered out
     Assertions.assertEquals(response.data().size(), 2);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeOne = response.data().get(0);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeTwo = response.data().get(1);
@@ -316,6 +400,8 @@ public class VeteranServiceHistoryTransformerTest {
   public void happyPathFullData() {
     EMISserviceEpisodeResponseType serviceEpisodeResponse =
         TestUtils.createServiceHistoryResponse("emis/service-episodes/ascending.xml");
+    EMISguardReserveServicePeriodsResponseType grasResponse =
+        TestUtils.createGrasResponse("emis/gras/single_title_training_period.xml");
     PRPAIN201306UV02 mpiResponse = TestUtils.createMpiResponse("mpi/mpi_profile_response_body.xml");
     EMISdeploymentResponseType deployments =
         TestUtils.createDeploymentResponse("emis/deployments_response.xml");
@@ -325,8 +411,10 @@ public class VeteranServiceHistoryTransformerTest {
             .deploymentResponse(deployments)
             .serviceEpisodeResponseType(serviceEpisodeResponse)
             .mpiResponse(mpiResponse)
+            .grasResponse(grasResponse)
             .build();
     ServiceHistoryResponse response = transformer.serviceHistoryTransformer();
+    // This checks that non active responses are filtered out
     Assertions.assertEquals(response.data().size(), 2);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeOne = response.data().get(0);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeTwo = response.data().get(1);
@@ -372,6 +460,8 @@ public class VeteranServiceHistoryTransformerTest {
   public void happyPathNoNullsReverseEpisodes() {
     EMISserviceEpisodeResponseType serviceEpisodeResponse =
         TestUtils.createServiceHistoryResponse("emis/service-episodes/descending.xml");
+    EMISguardReserveServicePeriodsResponseType grasResponse =
+        TestUtils.createGrasResponse("emis/gras/single_title_training_period.xml");
     PRPAIN201306UV02 mpiResponse = TestUtils.createMpiResponse("mpi/mpi_profile_response_body.xml");
     EMISdeploymentResponseType deployments =
         TestUtils.createDeploymentResponse("emis/deployments_response.xml");
@@ -381,8 +471,10 @@ public class VeteranServiceHistoryTransformerTest {
             .deploymentResponse(deployments)
             .serviceEpisodeResponseType(serviceEpisodeResponse)
             .mpiResponse(mpiResponse)
+            .grasResponse(grasResponse)
             .build();
     ServiceHistoryResponse response = transformer.serviceHistoryTransformer();
+    // This checks that non active responses are filtered out
     Assertions.assertEquals(response.data().size(), 2);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeOne = response.data().get(0);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeTwo = response.data().get(1);
@@ -428,6 +520,8 @@ public class VeteranServiceHistoryTransformerTest {
   public void happyPathNullEndDate() {
     EMISserviceEpisodeResponseType serviceEpisodeResponse =
         TestUtils.createServiceHistoryResponse("emis/service-episodes/ascending.xml");
+    EMISguardReserveServicePeriodsResponseType grasResponse =
+        TestUtils.createGrasResponse("emis/gras/single_title_training_period.xml");
     PRPAIN201306UV02 mpiResponse = TestUtils.createMpiResponse("mpi/mpi_profile_response_body.xml");
     EMISdeploymentResponseType deployments =
         TestUtils.createDeploymentResponse("emis/deployments_response.xml");
@@ -442,8 +536,10 @@ public class VeteranServiceHistoryTransformerTest {
             .deploymentResponse(deployments)
             .serviceEpisodeResponseType(serviceEpisodeResponse)
             .mpiResponse(mpiResponse)
+            .grasResponse(grasResponse)
             .build();
     ServiceHistoryResponse response = transformer.serviceHistoryTransformer();
+    // This checks that non active responses are filtered out
     Assertions.assertEquals(response.data().size(), 2);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeOne = response.data().get(0);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeTwo = response.data().get(1);
@@ -505,6 +601,8 @@ public class VeteranServiceHistoryTransformerTest {
   public void happyPathNullEndDateEpisodesReverse() {
     EMISserviceEpisodeResponseType serviceEpisodeResponse =
         TestUtils.createServiceHistoryResponse("emis/service-episodes/descending.xml");
+    EMISguardReserveServicePeriodsResponseType grasResponse =
+        TestUtils.createGrasResponse("emis/gras/single_title_training_period.xml");
     PRPAIN201306UV02 mpiResponse = TestUtils.createMpiResponse("mpi/mpi_profile_response_body.xml");
     EMISdeploymentResponseType deployments =
         TestUtils.createDeploymentResponse("emis/deployments_response.xml");
@@ -519,8 +617,10 @@ public class VeteranServiceHistoryTransformerTest {
             .deploymentResponse(deployments)
             .serviceEpisodeResponseType(serviceEpisodeResponse)
             .mpiResponse(mpiResponse)
+            .grasResponse(grasResponse)
             .build();
     ServiceHistoryResponse response = transformer.serviceHistoryTransformer();
+    // This checks that non active responses are filtered out
     Assertions.assertEquals(response.data().size(), 2);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeOne = response.data().get(0);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeTwo = response.data().get(1);
@@ -578,6 +678,8 @@ public class VeteranServiceHistoryTransformerTest {
   public void nullDeployments() {
     EMISserviceEpisodeResponseType serviceEpisodeResponse =
         TestUtils.createServiceHistoryResponse("emis/service-episodes/ascending.xml");
+    EMISguardReserveServicePeriodsResponseType grasResponse =
+        TestUtils.createGrasResponse("emis/gras/single_title_training_period.xml");
     PRPAIN201306UV02 mpiResponse = TestUtils.createMpiResponse("mpi/mpi_profile_response_body.xml");
     EMISdeploymentResponseType deployments =
         TestUtils.createDeploymentResponse("emis/deployments_response.xml");
@@ -589,14 +691,37 @@ public class VeteranServiceHistoryTransformerTest {
               .deploymentResponse(null)
               .serviceEpisodeResponseType(serviceEpisodeResponse)
               .mpiResponse(mpiResponse)
+              .grasResponse(grasResponse)
               .build();
         });
+  }
+
+  @Test
+  public void nullGrasResponse() {
+    EMISserviceEpisodeResponseType serviceEpisodeResponse =
+        TestUtils.createServiceHistoryResponse("emis/service-episodes/single_inactive.xml");
+    PRPAIN201306UV02 mpiResponse = TestUtils.createMpiResponse("mpi/mpi_profile_response_body.xml");
+    EMISdeploymentResponseType deployments =
+        TestUtils.createDeploymentResponse("emis/deployments_response.xml");
+    VeteranServiceHistoryTransformer transformer =
+        VeteranServiceHistoryTransformer.builder()
+            .icn("uuid")
+            .deploymentResponse(deployments)
+            .serviceEpisodeResponseType(serviceEpisodeResponse)
+            .mpiResponse(mpiResponse)
+            .grasResponse(null)
+            .build();
+    ServiceHistoryResponse response = transformer.serviceHistoryTransformer();
+    // No error should be thrown
+    Assertions.assertEquals(response.data().size(), 0);
   }
 
   @Test
   public void nullIcn() {
     EMISserviceEpisodeResponseType serviceEpisodeResponse =
         TestUtils.createServiceHistoryResponse("emis/service-episodes/ascending.xml");
+    EMISguardReserveServicePeriodsResponseType grasResponse =
+        TestUtils.createGrasResponse("emis/gras/single_title_training_period.xml");
     PRPAIN201306UV02 mpiResponse = TestUtils.createMpiResponse("mpi/mpi_profile_response_body.xml");
     EMISdeploymentResponseType deployments =
         TestUtils.createDeploymentResponse("emis/deployments_response.xml");
@@ -608,6 +733,7 @@ public class VeteranServiceHistoryTransformerTest {
               .deploymentResponse(deployments)
               .serviceEpisodeResponseType(serviceEpisodeResponse)
               .mpiResponse(mpiResponse)
+              .grasResponse(grasResponse)
               .build();
         });
   }
@@ -616,6 +742,8 @@ public class VeteranServiceHistoryTransformerTest {
   public void nullMpiResponse() {
     EMISserviceEpisodeResponseType serviceEpisodeResponse =
         TestUtils.createServiceHistoryResponse("emis/service-episodes/ascending.xml");
+    EMISguardReserveServicePeriodsResponseType grasResponse =
+        TestUtils.createGrasResponse("emis/gras/single_title_training_period.xml");
     PRPAIN201306UV02 mpiResponse = TestUtils.createMpiResponse("mpi/mpi_profile_response_body.xml");
     EMISdeploymentResponseType deployments =
         TestUtils.createDeploymentResponse("emis/deployments_response.xml");
@@ -627,6 +755,7 @@ public class VeteranServiceHistoryTransformerTest {
               .deploymentResponse(deployments)
               .serviceEpisodeResponseType(serviceEpisodeResponse)
               .mpiResponse(null)
+              .grasResponse(grasResponse)
               .build();
         });
   }
@@ -635,6 +764,8 @@ public class VeteranServiceHistoryTransformerTest {
   public void nullServiceEpisodeResponse() {
     EMISserviceEpisodeResponseType serviceEpisodeResponse =
         TestUtils.createServiceHistoryResponse("emis/service-episodes/ascending.xml");
+    EMISguardReserveServicePeriodsResponseType grasResponse =
+        TestUtils.createGrasResponse("emis/gras/single_title_training_period.xml");
     PRPAIN201306UV02 mpiResponse = TestUtils.createMpiResponse("mpi/mpi_profile_response_body.xml");
     EMISdeploymentResponseType deployments =
         TestUtils.createDeploymentResponse("emis/deployments_response.xml");
@@ -646,6 +777,7 @@ public class VeteranServiceHistoryTransformerTest {
               .deploymentResponse(deployments)
               .serviceEpisodeResponseType(null)
               .mpiResponse(mpiResponse)
+              .grasResponse(grasResponse)
               .build();
         });
   }
@@ -655,6 +787,8 @@ public class VeteranServiceHistoryTransformerTest {
     EMISserviceEpisodeResponseType serviceEpisodeResponse =
         TestUtils.createServiceHistoryResponse(
             "emis/service-episodes/pay_grade_and_branch_of_service_scenarios.xml");
+    EMISguardReserveServicePeriodsResponseType grasResponse =
+        TestUtils.createGrasResponse("emis/gras/single_title_training_period.xml");
     PRPAIN201306UV02 mpiResponse = TestUtils.createMpiResponse("mpi/mpi_profile_response_body.xml");
     EMISdeploymentResponseType deployments =
         TestUtils.createDeploymentResponse("emis/deployments_response.xml");
@@ -664,6 +798,7 @@ public class VeteranServiceHistoryTransformerTest {
             .deploymentResponse(deployments)
             .serviceEpisodeResponseType(serviceEpisodeResponse)
             .mpiResponse(mpiResponse)
+            .grasResponse(grasResponse)
             .build();
     ServiceHistoryResponse response = transformer.serviceHistoryTransformer();
     // Happy Path

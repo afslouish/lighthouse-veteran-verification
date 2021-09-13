@@ -7,6 +7,7 @@ import gov.va.api.lighthouse.veteranverification.service.controller.Transformers
 import gov.va.api.lighthouse.veteranverification.service.utils.UuidV5;
 import gov.va.viers.cdi.emis.commonservice.v2.MilitaryServiceEpisode;
 import gov.va.viers.cdi.emis.requestresponse.v2.EMISdeploymentResponseType;
+import gov.va.viers.cdi.emis.requestresponse.v2.EMISguardReserveServicePeriodsResponseType;
 import gov.va.viers.cdi.emis.requestresponse.v2.EMISserviceEpisodeResponseType;
 import java.time.LocalDate;
 import java.util.ArrayDeque;
@@ -30,6 +31,8 @@ public class VeteranServiceHistoryTransformer {
   @NonNull EMISserviceEpisodeResponseType serviceEpisodeResponseType;
 
   @NonNull PRPAIN201306UV02 mpiResponse;
+
+  EMISguardReserveServicePeriodsResponseType grasResponse;
 
   private List<Deployment> buildDeployments(
       List<Deployment> deployments,

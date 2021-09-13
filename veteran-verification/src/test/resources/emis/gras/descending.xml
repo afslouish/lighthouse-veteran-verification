@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<NS3:eMISguardReserveServicePeriodsResponse xmlns:NS3="http://viers.va.gov/cdi/eMIS/RequestResponse/MilitaryInfo/v2">
+  <NS5:guardReserveServicePeriods xmlns:NS5="http://viers.va.gov/cdi/eMIS/RequestResponse/v2">
+    <NS6:edipi xmlns:NS6="http://viers.va.gov/cdi/eMIS/commonService/v2">1293307390</NS6:edipi>
+    <NS7:keyData xmlns:NS7="http://viers.va.gov/cdi/eMIS/commonService/v2">
+      <NS7:personnelOrganizationCode>22</NS7:personnelOrganizationCode>
+      <NS7:personnelCategoryTypeCode>V</NS7:personnelCategoryTypeCode>
+      <NS7:personnelSegmentIdentifier>1</NS7:personnelSegmentIdentifier>
+    </NS7:keyData>
+    <NS8:guardReserveServicePeriodsData xmlns:NS8="http://viers.va.gov/cdi/eMIS/commonService/v2">
+      <NS8:guardReserveSegmentIdentifier>5</NS8:guardReserveSegmentIdentifier>
+      <NS8:guardReservePeriodStartDate>2012-01-01</NS8:guardReservePeriodStartDate>
+      <NS8:guardReservePeriodEndDate>2013-02-01</NS8:guardReservePeriodEndDate>
+      <NS8:guardReservePeriodTerminationReason>C</NS8:guardReservePeriodTerminationReason>
+      <NS8:guardReservePeriodCharacterOfServiceCode>H</NS8:guardReservePeriodCharacterOfServiceCode>
+      <NS8:narrativeReasonForSeparationCode>999</NS8:narrativeReasonForSeparationCode>
+      <NS8:narrativeReasonForSeparationTxt>UNKNOWN</NS8:narrativeReasonForSeparationTxt>
+      <NS8:guardReservePeriodStatuteCode>A</NS8:guardReservePeriodStatuteCode>
+      <NS8:guardReservePeriodProjectCode>9GF</NS8:guardReservePeriodProjectCode>
+      <NS8:post911GIBilLossCategoryCode>06</NS8:post911GIBilLossCategoryCode>
+      <NS8:trainingIndicatorCode>N</NS8:trainingIndicatorCode>
+    </NS8:guardReserveServicePeriodsData>
+  </NS5:guardReserveServicePeriods>
+  <NS5:guardReserveServicePeriods xmlns:NS5="http://viers.va.gov/cdi/eMIS/RequestResponse/v2">
+    <NS6:edipi xmlns:NS6="http://viers.va.gov/cdi/eMIS/commonService/v2">1293307390</NS6:edipi>
+    <NS7:keyData xmlns:NS7="http://viers.va.gov/cdi/eMIS/commonService/v2">
+      <NS7:personnelOrganizationCode>22</NS7:personnelOrganizationCode>
+      <NS7:personnelCategoryTypeCode>V</NS7:personnelCategoryTypeCode>
+      <NS7:personnelSegmentIdentifier>1</NS7:personnelSegmentIdentifier>
+    </NS7:keyData>
+    <NS8:guardReserveServicePeriodsData xmlns:NS8="http://viers.va.gov/cdi/eMIS/commonService/v2">
+      <NS8:guardReserveSegmentIdentifier>5</NS8:guardReserveSegmentIdentifier>
+      <NS8:guardReservePeriodStartDate>2010-01-01</NS8:guardReservePeriodStartDate>
+      <NS8:guardReservePeriodEndDate>2011-02-01</NS8:guardReservePeriodEndDate>
+      <NS8:guardReservePeriodTerminationReason>C</NS8:guardReservePeriodTerminationReason>
+      <NS8:guardReservePeriodCharacterOfServiceCode>H</NS8:guardReservePeriodCharacterOfServiceCode>
+      <NS8:narrativeReasonForSeparationCode>999</NS8:narrativeReasonForSeparationCode>
+      <NS8:narrativeReasonForSeparationTxt>UNKNOWN</NS8:narrativeReasonForSeparationTxt>
+      <NS8:guardReservePeriodStatuteCode>Z</NS8:guardReservePeriodStatuteCode>
+      <NS8:guardReservePeriodProjectCode>9GF</NS8:guardReservePeriodProjectCode>
+      <NS8:post911GIBilLossCategoryCode>06</NS8:post911GIBilLossCategoryCode>
+      <NS8:trainingIndicatorCode>N</NS8:trainingIndicatorCode>
+    </NS8:guardReserveServicePeriodsData>
+  </NS5:guardReserveServicePeriods>
+  <NS5:guardReserveServicePeriods xmlns:NS5="http://viers.va.gov/cdi/eMIS/RequestResponse/v2">
+    <NS6:edipi xmlns:NS6="http://viers.va.gov/cdi/eMIS/commonService/v2">1293307390</NS6:edipi>
+    <NS7:keyData xmlns:NS7="http://viers.va.gov/cdi/eMIS/commonService/v2">
+      <NS7:personnelOrganizationCode>22</NS7:personnelOrganizationCode>
+      <NS7:personnelCategoryTypeCode>V</NS7:personnelCategoryTypeCode>
+      <NS7:personnelSegmentIdentifier>1</NS7:personnelSegmentIdentifier>
+    </NS7:keyData>
+    <NS8:guardReserveServicePeriodsData xmlns:NS8="http://viers.va.gov/cdi/eMIS/commonService/v2">
+      <NS8:guardReserveSegmentIdentifier>5</NS8:guardReserveSegmentIdentifier>
+      <NS8:guardReservePeriodStartDate>2008-01-01</NS8:guardReservePeriodStartDate>
+      <NS8:guardReservePeriodEndDate>2009-02-01</NS8:guardReservePeriodEndDate>
+      <NS8:guardReservePeriodTerminationReason>C</NS8:guardReservePeriodTerminationReason>
+      <NS8:guardReservePeriodCharacterOfServiceCode>H</NS8:guardReservePeriodCharacterOfServiceCode>
+      <NS8:narrativeReasonForSeparationCode>999</NS8:narrativeReasonForSeparationCode>
+      <NS8:narrativeReasonForSeparationTxt>UNKNOWN</NS8:narrativeReasonForSeparationTxt>
+      <NS8:guardReservePeriodStatuteCode>Q</NS8:guardReservePeriodStatuteCode>
+      <NS8:guardReservePeriodProjectCode>9GF</NS8:guardReservePeriodProjectCode>
+      <NS8:post911GIBilLossCategoryCode>06</NS8:post911GIBilLossCategoryCode>
+      <NS8:trainingIndicatorCode>N</NS8:trainingIndicatorCode>
+    </NS8:guardReserveServicePeriodsData>
+  </NS5:guardReserveServicePeriods>
+  <NS5:guardReserveServicePeriods xmlns:NS5="http://viers.va.gov/cdi/eMIS/RequestResponse/v2">
+    <NS6:edipi xmlns:NS6="http://viers.va.gov/cdi/eMIS/commonService/v2">1293307390</NS6:edipi>
+    <NS7:keyData xmlns:NS7="http://viers.va.gov/cdi/eMIS/commonService/v2">
+      <NS7:personnelOrganizationCode>22</NS7:personnelOrganizationCode>
+      <NS7:personnelCategoryTypeCode>V</NS7:personnelCategoryTypeCode>
+      <NS7:personnelSegmentIdentifier>1</NS7:personnelSegmentIdentifier>
+    </NS7:keyData>
+    <NS8:guardReserveServicePeriodsData xmlns:NS8="http://viers.va.gov/cdi/eMIS/commonService/v2">
+      <NS8:guardReserveSegmentIdentifier>5</NS8:guardReserveSegmentIdentifier>
+      <NS8:guardReservePeriodStartDate>2006-01-01</NS8:guardReservePeriodStartDate>
+      <NS8:guardReservePeriodEndDate>2007-02-01</NS8:guardReservePeriodEndDate>
+      <NS8:guardReservePeriodTerminationReason>C</NS8:guardReservePeriodTerminationReason>
+      <NS8:guardReservePeriodCharacterOfServiceCode>H</NS8:guardReservePeriodCharacterOfServiceCode>
+      <NS8:narrativeReasonForSeparationCode>999</NS8:narrativeReasonForSeparationCode>
+      <NS8:narrativeReasonForSeparationTxt>UNKNOWN</NS8:narrativeReasonForSeparationTxt>
+      <NS8:guardReservePeriodStatuteCode>P</NS8:guardReservePeriodStatuteCode>
+      <NS8:guardReservePeriodProjectCode>9GF</NS8:guardReservePeriodProjectCode>
+      <NS8:post911GIBilLossCategoryCode>06</NS8:post911GIBilLossCategoryCode>
+      <NS8:trainingIndicatorCode>N</NS8:trainingIndicatorCode>
+    </NS8:guardReserveServicePeriodsData>
+  </NS5:guardReserveServicePeriods>
+  <NS5:guardReserveServicePeriods xmlns:NS5="http://viers.va.gov/cdi/eMIS/RequestResponse/v2">
+    <NS6:edipi xmlns:NS6="http://viers.va.gov/cdi/eMIS/commonService/v2">1293307390</NS6:edipi>
+    <NS7:keyData xmlns:NS7="http://viers.va.gov/cdi/eMIS/commonService/v2">
+      <NS7:personnelOrganizationCode>22</NS7:personnelOrganizationCode>
+      <NS7:personnelCategoryTypeCode>V</NS7:personnelCategoryTypeCode>
+      <NS7:personnelSegmentIdentifier>1</NS7:personnelSegmentIdentifier>
+    </NS7:keyData>
+    <NS8:guardReserveServicePeriodsData xmlns:NS8="http://viers.va.gov/cdi/eMIS/commonService/v2">
+      <NS8:guardReserveSegmentIdentifier>5</NS8:guardReserveSegmentIdentifier>
+      <NS8:guardReservePeriodStartDate>2004-01-01</NS8:guardReservePeriodStartDate>
+      <NS8:guardReservePeriodEndDate>2005-02-01</NS8:guardReservePeriodEndDate>
+      <NS8:guardReservePeriodTerminationReason>C</NS8:guardReservePeriodTerminationReason>
+      <NS8:guardReservePeriodCharacterOfServiceCode>H</NS8:guardReservePeriodCharacterOfServiceCode>
+      <NS8:narrativeReasonForSeparationCode>999</NS8:narrativeReasonForSeparationCode>
+      <NS8:narrativeReasonForSeparationTxt>UNKNOWN</NS8:narrativeReasonForSeparationTxt>
+      <NS8:guardReservePeriodStatuteCode>N</NS8:guardReservePeriodStatuteCode>
+      <NS8:guardReservePeriodProjectCode>9GF</NS8:guardReservePeriodProjectCode>
+      <NS8:post911GIBilLossCategoryCode>06</NS8:post911GIBilLossCategoryCode>
+      <NS8:trainingIndicatorCode>N</NS8:trainingIndicatorCode>
+    </NS8:guardReserveServicePeriodsData>
+  </NS5:guardReserveServicePeriods>
+  <NS5:guardReserveServicePeriods xmlns:NS5="http://viers.va.gov/cdi/eMIS/RequestResponse/v2">
+    <NS6:edipi xmlns:NS6="http://viers.va.gov/cdi/eMIS/commonService/v2">1293307390</NS6:edipi>
+    <NS7:keyData xmlns:NS7="http://viers.va.gov/cdi/eMIS/commonService/v2">
+      <NS7:personnelOrganizationCode>22</NS7:personnelOrganizationCode>
+      <NS7:personnelCategoryTypeCode>V</NS7:personnelCategoryTypeCode>
+      <NS7:personnelSegmentIdentifier>1</NS7:personnelSegmentIdentifier>
+    </NS7:keyData>
+    <NS8:guardReserveServicePeriodsData xmlns:NS8="http://viers.va.gov/cdi/eMIS/commonService/v2">
+      <NS8:guardReserveSegmentIdentifier>5</NS8:guardReserveSegmentIdentifier>
+      <NS8:guardReservePeriodStartDate>2002-01-01</NS8:guardReservePeriodStartDate>
+      <NS8:guardReservePeriodEndDate>2003-02-01</NS8:guardReservePeriodEndDate>
+      <NS8:guardReservePeriodTerminationReason>C</NS8:guardReservePeriodTerminationReason>
+      <NS8:guardReservePeriodCharacterOfServiceCode>H</NS8:guardReservePeriodCharacterOfServiceCode>
+      <NS8:narrativeReasonForSeparationCode>999</NS8:narrativeReasonForSeparationCode>
+      <NS8:narrativeReasonForSeparationTxt>UNKNOWN</NS8:narrativeReasonForSeparationTxt>
+      <NS8:guardReservePeriodStatuteCode>J</NS8:guardReservePeriodStatuteCode>
+      <NS8:guardReservePeriodProjectCode>9GF</NS8:guardReservePeriodProjectCode>
+      <NS8:post911GIBilLossCategoryCode>06</NS8:post911GIBilLossCategoryCode>
+      <NS8:trainingIndicatorCode>N</NS8:trainingIndicatorCode>
+    </NS8:guardReserveServicePeriodsData>
+  </NS5:guardReserveServicePeriods>
+  <NS5:guardReserveServicePeriods xmlns:NS5="http://viers.va.gov/cdi/eMIS/RequestResponse/v2">
+    <NS6:edipi xmlns:NS6="http://viers.va.gov/cdi/eMIS/commonService/v2">1293307390</NS6:edipi>
+    <NS7:keyData xmlns:NS7="http://viers.va.gov/cdi/eMIS/commonService/v2">
+      <NS7:personnelOrganizationCode>22</NS7:personnelOrganizationCode>
+      <NS7:personnelCategoryTypeCode>V</NS7:personnelCategoryTypeCode>
+      <NS7:personnelSegmentIdentifier>1</NS7:personnelSegmentIdentifier>
+    </NS7:keyData>
+    <NS8:guardReserveServicePeriodsData xmlns:NS8="http://viers.va.gov/cdi/eMIS/commonService/v2">
+      <NS8:guardReserveSegmentIdentifier>5</NS8:guardReserveSegmentIdentifier>
+      <NS8:guardReservePeriodStartDate>2000-01-01</NS8:guardReservePeriodStartDate>
+      <NS8:guardReservePeriodEndDate>2001-02-01</NS8:guardReservePeriodEndDate>
+      <NS8:guardReservePeriodTerminationReason>C</NS8:guardReservePeriodTerminationReason>
+      <NS8:guardReservePeriodCharacterOfServiceCode>H</NS8:guardReservePeriodCharacterOfServiceCode>
+      <NS8:narrativeReasonForSeparationCode>999</NS8:narrativeReasonForSeparationCode>
+      <NS8:narrativeReasonForSeparationTxt>UNKNOWN</NS8:narrativeReasonForSeparationTxt>
+      <NS8:guardReservePeriodStatuteCode>D</NS8:guardReservePeriodStatuteCode>
+      <NS8:guardReservePeriodProjectCode>9GF</NS8:guardReservePeriodProjectCode>
+      <NS8:post911GIBilLossCategoryCode>06</NS8:post911GIBilLossCategoryCode>
+      <NS8:trainingIndicatorCode>Y</NS8:trainingIndicatorCode>
+    </NS8:guardReserveServicePeriodsData>
+  </NS5:guardReserveServicePeriods>
+</NS3:eMISguardReserveServicePeriodsResponse>

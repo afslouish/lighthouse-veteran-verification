@@ -18,6 +18,7 @@ import gov.va.vba.benefits.share.services.RatingRecord;
 import gov.va.viers.cdi.emis.commonservice.v1.VeteranStatus;
 import gov.va.viers.cdi.emis.requestresponse.v1.EMISveteranStatusResponseType;
 import gov.va.viers.cdi.emis.requestresponse.v2.EMISdeploymentResponseType;
+import gov.va.viers.cdi.emis.requestresponse.v2.EMISguardReserveServicePeriodsResponseType;
 import gov.va.viers.cdi.emis.requestresponse.v2.EMISserviceEpisodeResponseType;
 import java.io.StringReader;
 import java.time.LocalDate;
@@ -71,6 +72,17 @@ public class TestUtils {
 
   private EMISveteranStatusResponseType createEmisResponse(VeteranStatus veteranStatus) {
     return EMISveteranStatusResponseType.builder().veteranStatus(veteranStatus).build();
+  }
+
+  @SneakyThrows
+  public EMISguardReserveServicePeriodsResponseType createGrasResponse(String filename) {
+    String profile = asString(TestUtils.class.getClassLoader().getResourceAsStream(filename));
+    return JAXBContext.newInstance(PRPAIN201306UV02.class)
+        .createUnmarshaller()
+        .unmarshal(
+            new StreamSource(new StringReader(profile)),
+            EMISguardReserveServicePeriodsResponseType.class)
+        .getValue();
   }
 
   @SneakyThrows
