@@ -24,7 +24,7 @@ public class ServiceHistoryIT {
   public void serviceHistoryEmisSoapFaultError() {
     String request =
         String.format("v0/service_history/%s", systemDefinition().icns().noEmisEpisodesUser());
-    ExpectedResponse response = veteranVerificationGetRequest(request, 502);
+    ExpectedResponse response = veteranVerificationGetRequest(request, "application/json", 502);
     ApiError.NoServiceHistoryFoundApiError serviceHistory =
         response.response().getBody().as(ApiError.NoServiceHistoryFoundApiError.class);
     assertEquals("Unexpected response body", serviceHistory.errors().get(0).getTitle());
@@ -68,7 +68,7 @@ public class ServiceHistoryIT {
   void serviceHistoryHappyPath() {
     String request =
         String.format("v0/service_history/%s", systemDefinition().icns().serviceHistoryIcn());
-    ExpectedResponse response = veteranVerificationGetRequest(request, 200);
+    ExpectedResponse response = veteranVerificationGetRequest(request, "application/json", 200);
     ServiceHistoryResponse serviceHistory =
         response.response().getBody().as(ServiceHistoryResponse.class);
     assertEquals("e28a2359-48a5-55ce-890c-76b51c749b6b", serviceHistory.data().get(0).id());
@@ -124,7 +124,7 @@ public class ServiceHistoryIT {
   public void serviceHistoryNoMpiResponse() {
     String request =
         String.format("v0/service_history/%s", systemDefinition().icns().noMpiUserIcn());
-    ExpectedResponse response = veteranVerificationGetRequest(request, 502);
+    ExpectedResponse response = veteranVerificationGetRequest(request, "application/json", 502);
     ApiError.NoServiceHistoryFoundApiError serviceHistory =
         response.response().getBody().as(ApiError.NoServiceHistoryFoundApiError.class);
     assertEquals("Unexpected response body", serviceHistory.errors().get(0).getTitle());
@@ -141,7 +141,7 @@ public class ServiceHistoryIT {
     String request =
         String.format(
             "v0/service_history/%s", systemDefinition().icns().serviceHistoryIcnNullEndDate());
-    ExpectedResponse response = veteranVerificationGetRequest(request, 200);
+    ExpectedResponse response = veteranVerificationGetRequest(request, "application/json", 200);
     ServiceHistoryResponse serviceHistory =
         response.response().getBody().as(ServiceHistoryResponse.class);
     assertEquals("0f33ef25-241a-57bb-998c-4c06ded1be8b", serviceHistory.data().get(0).id());

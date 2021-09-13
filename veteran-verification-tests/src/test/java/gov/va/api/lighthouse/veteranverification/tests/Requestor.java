@@ -14,20 +14,6 @@ import lombok.extern.slf4j.Slf4j;
 @UtilityClass
 final class Requestor {
   static ExpectedResponse veteranVerificationGetRequest(
-      @NonNull String request, int expectedStatus) {
-    SystemDefinitions.Service svc = systemDefinition().veteranVerification();
-    log.info("Expect {} is status code ({})", svc.apiPath() + request, expectedStatus);
-    return ExpectedResponse.of(
-            RestAssured.given()
-                .baseUri(svc.url())
-                .port(svc.port())
-                .relaxedHTTPSValidation()
-                .request(Method.GET, svc.urlWithApiPath() + request))
-        .logAction(logAllWithTruncatedBody(2000))
-        .expect(expectedStatus);
-  }
-
-  static ExpectedResponse veteranVerificationGetRequest(
       @NonNull String request, String contentType, int expectedStatus) {
     SystemDefinitions.Service svc = systemDefinition().veteranVerification();
     log.info("Expect {} is status code ({})", svc.apiPath() + request, expectedStatus);
