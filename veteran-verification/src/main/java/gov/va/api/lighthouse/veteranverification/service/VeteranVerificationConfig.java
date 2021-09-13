@@ -13,6 +13,7 @@ import gov.va.api.lighthouse.mpi.MasterPatientIndexClient;
 import gov.va.api.lighthouse.mpi.MpiConfig;
 import gov.va.api.lighthouse.mpi.SoapMasterPatientIndexClient;
 import gov.va.api.lighthouse.veteranverification.service.utils.JwksProperties;
+import gov.va.api.lighthouse.veteranverification.service.utils.Notary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -84,5 +85,16 @@ public class VeteranVerificationConfig {
   @Bean
   public MasterPatientIndexClient masterPatientIndexClient() {
     return SoapMasterPatientIndexClient.of(mpiConfig);
+  }
+
+  @Bean
+  Notary notary() {
+    return new Notary(
+        JwksProperties.builder()
+            .currentKeyId(currentKeyId)
+            .currentKeyPassword(currentKeyPassword)
+            .keyStorePassword(keyStorePassword)
+            .keyStorePath(keyStorePath)
+            .build());
   }
 }

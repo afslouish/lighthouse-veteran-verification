@@ -24,7 +24,7 @@ public class ServiceHistoryIT {
   public void serviceHistoryEmisSoapFaultError() {
     String request =
         String.format("v0/service_history/%s", systemDefinition().icns().noEmisEpisodesUser());
-    ExpectedResponse response = veteranVerificationGetRequest(request, 502);
+    ExpectedResponse response = veteranVerificationGetRequest(request, "application/json", 502);
     ApiError.NoServiceHistoryFoundApiError serviceHistory =
         response.response().getBody().as(ApiError.NoServiceHistoryFoundApiError.class);
     assertEquals("Unexpected response body", serviceHistory.errors().get(0).getTitle());
@@ -37,10 +37,38 @@ public class ServiceHistoryIT {
   }
 
   @Test
+  void serviceHistoryHappyJwtPath() {
+    String request =
+        String.format("v0/service_history/%s", systemDefinition().icns().serviceHistoryIcn());
+    ExpectedResponse response = veteranVerificationGetRequest(request, "application/jwt", 200);
+    String serviceHistory = response.response().asString();
+    assertEquals(
+        "eyJraWQiOiJmYWtlIiwidHlwIjoiSldUIiwiYWxnIjoiUlMyNTYifQ.eyJkYXRhIjpbeyJpZCI6ImUyO"
+            + "GEyMzU5LTQ4YTUtNTVjZS04OTBjLTc2YjUxYzc0OWI2YiIsInR5cGUiOiJzZXJ2aWNlLWhpc3RvcnktZXBpc29kZXMiLCJ"
+            + "hdHRyaWJ1dGVzIjp7ImZpcnN0X25hbWUiOiJXZXNsZXkiLCJsYXN0X25hbWUiOiJGb3JkIiwiYnJhbmNoX29mX3NlcnZpY"
+            + "2UiOiJBaXIgRm9yY2UiLCJzdGFydF9kYXRlIjoiMjAwNS0wNC0xMiIsImVuZF9kYXRlIjoiMjAwOS0wNC0xMSIsInBheV9"
+            + "ncmFkZSI6IkUwNCIsImRpc2NoYXJnZV9zdGF0dXMiOiJob25vcmFibGUiLCJzZXBhcmF0aW9uX3JlYXNvbiI6IkNPTVBMR"
+            + "VRJT04gT0YgUkVRVUlSRUQgQUNUSVZFIFNFUlZJQ0UiLCJkZXBsb3ltZW50cyI6W3sic3RhcnRfZGF0ZSI6IjIwMDgtMDc"
+            + "tMjUiLCJlbmRfZGF0ZSI6IjIwMDktMDEtMjIiLCJsb2NhdGlvbiI6IlFBVCJ9LHsic3RhcnRfZGF0ZSI6IjIwMDgtMDUtM"
+            + "DEiLCJlbmRfZGF0ZSI6IjIwMDgtMDUtMzEiLCJsb2NhdGlvbiI6IkFYMSJ9XX19LHsiaWQiOiIwY2JjNDE0My02ZDYwLTV"
+            + "kN2EtOGM3Zi05ODg3YTQ0NzhjOTQiLCJ0eXBlIjoic2VydmljZS1oaXN0b3J5LWVwaXNvZGVzIiwiYXR0cmlidXRlcyI6e"
+            + "yJmaXJzdF9uYW1lIjoiV2VzbGV5IiwibGFzdF9uYW1lIjoiRm9yZCIsImJyYW5jaF9vZl9zZXJ2aWNlIjoiQWlyIEZvcmN"
+            + "lIFJlc2VydmUiLCJzdGFydF9kYXRlIjoiMjAwOS0wNC0xMiIsImVuZF9kYXRlIjoiMjAxMy0wNC0xMSIsInBheV9ncmFkZ"
+            + "SI6IkUwNCIsImRpc2NoYXJnZV9zdGF0dXMiOiJob25vcmFibGUiLCJzZXBhcmF0aW9uX3JlYXNvbiI6IkNPTVBMRVRJT04"
+            + "gT0YgUkVRVUlSRUQgQUNUSVZFIFNFUlZJQ0UiLCJkZXBsb3ltZW50cyI6W3sic3RhcnRfZGF0ZSI6IjIwMDktMDUtMDEiL"
+            + "CJlbmRfZGF0ZSI6IjIwMDktMDUtMzEiLCJsb2NhdGlvbiI6IlFBVCJ9XX19XX0.bv_7-QyX9_tOIs-rtpkz_oR_nJTvIwv"
+            + "vYKaM0KKKmAVzCsmxfi7oIVsNNogHZZqwcoMlklfCXdSKlCU62bvMmFQWta2xwVluDBD1_ixPAvy-E09DSZ_-Yn3qJrrAS"
+            + "ZaknVjoCKywPoZAjC0LhUNi37XVKSXlwi5o-Tgy7uAVnyZutKIjovQVZ9Kbqwpng0fw-Giylt__IFb6eccIpzOX5x4pWi2"
+            + "BbY4IA9RuCgWlURHhzAGcTY6E1LXuOK14_w2laETxAu77T5XZUzHYL1XUX49Ccf7lbgkY-_6itzHOYgD8fxNvM6wTrjWOv"
+            + "4uzmlc32nHDuSKO8ouM-WjA8IWLng",
+        serviceHistory);
+  }
+
+  @Test
   void serviceHistoryHappyPath() {
     String request =
         String.format("v0/service_history/%s", systemDefinition().icns().serviceHistoryIcn());
-    ExpectedResponse response = veteranVerificationGetRequest(request, 200);
+    ExpectedResponse response = veteranVerificationGetRequest(request, "application/json", 200);
     ServiceHistoryResponse serviceHistory =
         response.response().getBody().as(ServiceHistoryResponse.class);
     assertEquals("e28a2359-48a5-55ce-890c-76b51c749b6b", serviceHistory.data().get(0).id());
@@ -96,7 +124,7 @@ public class ServiceHistoryIT {
   public void serviceHistoryNoMpiResponse() {
     String request =
         String.format("v0/service_history/%s", systemDefinition().icns().noMpiUserIcn());
-    ExpectedResponse response = veteranVerificationGetRequest(request, 502);
+    ExpectedResponse response = veteranVerificationGetRequest(request, "application/json", 502);
     ApiError.NoServiceHistoryFoundApiError serviceHistory =
         response.response().getBody().as(ApiError.NoServiceHistoryFoundApiError.class);
     assertEquals("Unexpected response body", serviceHistory.errors().get(0).getTitle());
@@ -113,7 +141,7 @@ public class ServiceHistoryIT {
     String request =
         String.format(
             "v0/service_history/%s", systemDefinition().icns().serviceHistoryIcnNullEndDate());
-    ExpectedResponse response = veteranVerificationGetRequest(request, 200);
+    ExpectedResponse response = veteranVerificationGetRequest(request, "application/json", 200);
     ServiceHistoryResponse serviceHistory =
         response.response().getBody().as(ServiceHistoryResponse.class);
     assertEquals("0f33ef25-241a-57bb-998c-4c06ded1be8b", serviceHistory.data().get(0).id());
