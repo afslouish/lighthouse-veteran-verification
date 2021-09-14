@@ -139,7 +139,7 @@ public class VeteranServiceHistoryTransformer {
     return dateOne.isBefore(dateTwo) || dateOne.isEqual(dateTwo);
   }
 
-  private String makeBranchOfService(String branchOfService, String personnelCategory) {
+  private String makeBranchOfService(String branchOfService) {
     String branch;
     switch (StringUtils.normalizeSpace(branchOfService.toUpperCase())) {
       case "O":
@@ -166,19 +166,7 @@ public class VeteranServiceHistoryTransformer {
       default:
         branch = "Unknown";
     }
-    String category;
-    switch (StringUtils.normalizeSpace(personnelCategory)) {
-      case "N":
-        category = "National Guard";
-        break;
-      case "V":
-      case "Q":
-        category = "Reserve";
-        break;
-      default:
-        category = "";
-    }
-    return StringUtils.normalizeSpace(String.format("%s %s", branch, category));
+    return branch;
   }
 
   private List<Deployment> makeDeploymentList(EMISdeploymentResponseType deploymentResponse) {
@@ -262,8 +250,7 @@ public class VeteranServiceHistoryTransformer {
                   makeBranchOfService(
                       militaryServiceEpisode
                           .getMilitaryServiceEpisodeData()
-                          .getBranchOfServiceCode(),
-                      militaryServiceEpisode.getKeyData().getPersonnelCategoryTypeCode()))
+                          .getBranchOfServiceCode()))
               .startDate(startDate)
               .endDate(endDate)
               .payGrade(
