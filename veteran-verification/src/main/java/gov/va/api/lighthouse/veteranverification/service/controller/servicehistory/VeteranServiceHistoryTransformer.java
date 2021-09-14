@@ -11,6 +11,7 @@ import gov.va.viers.cdi.emis.requestresponse.v2.EMISdeploymentResponseType;
 import gov.va.viers.cdi.emis.requestresponse.v2.EMISguardReserveServicePeriodsResponseType;
 import gov.va.viers.cdi.emis.requestresponse.v2.EMISserviceEpisodeResponseType;
 import java.time.LocalDate;
+import java.util.AbstractMap;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,6 +19,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Deque;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.Builder;
@@ -27,6 +29,24 @@ import org.hl7.v3.PRPAIN201306UV02;
 
 @Builder
 public class VeteranServiceHistoryTransformer {
+  private final Map<String, String> grasBranchOfServiceMap =
+      Map.ofEntries(
+          new AbstractMap.SimpleEntry<>("N", "National Guard"),
+          new AbstractMap.SimpleEntry<>("V", "Reserve"),
+          new AbstractMap.SimpleEntry<>("Q", "Reserve"));
+
+  private final Map<String, String> serviceHistoryBranchOfServiceMap =
+      Map.ofEntries(
+          new AbstractMap.SimpleEntry<>("O", "NOAA"),
+          new AbstractMap.SimpleEntry<>("H", "Public Health Service"),
+          new AbstractMap.SimpleEntry<>("A", "Army"),
+          new AbstractMap.SimpleEntry<>("C", "Coast Guard"),
+          new AbstractMap.SimpleEntry<>("F", "Air Force"),
+          new AbstractMap.SimpleEntry<>("M", "Marine Corps"),
+          new AbstractMap.SimpleEntry<>("N", "Navy"));
+
+  private final String[] thirtyTwoStatuteCodes = {"J", "N", "P", "Q", "Z"};
+
   @NonNull String icn;
 
   @NonNull EMISdeploymentResponseType deploymentResponse;
@@ -53,16 +73,14 @@ public class VeteranServiceHistoryTransformer {
   }
 
   private List<ServiceHistoryResponse.ServiceHistoryEpisode> getNonTitle32ReservePeriods() {
-    ArrayDeque<ServiceHistoryResponse.ServiceHistoryEpisode> nonTitle32ReservePeriods =
-        new ArrayDeque<>();
-    String[] thirtyTwoStatuteCodes = {"J", "N", "P", "Q", "Z"};
+    List<ServiceHistoryResponse.ServiceHistoryEpisode> nonTitle32ReservePeriods = new ArrayList<>();
     List<GuardReserveServicePeriods> periods =
         Optional.ofNullable(grasResponse)
             .map(response -> response.getGuardReserveServicePeriods())
             .orElse(null);
 
     if (periods == null) {
-      return nonTitle32ReservePeriods.stream().toList();
+      return nonTitle32ReservePeriods;
     }
 
     periods.removeIf(
@@ -89,25 +107,14 @@ public class VeteranServiceHistoryTransformer {
               Optional.ofNullable(period.getGuardReserveServicePeriodsData())
                   .map(value -> value.getGuardReservePeriodEndDate())
                   .orElse(null));
-      String branchOfService;
-
-      switch (period.getKeyData().getPersonnelCategoryTypeCode()) {
-        case "N":
-          branchOfService = "National Guard";
-          break;
-        case "V":
-        case "Q":
-          branchOfService = "Reserve";
-          break;
-        default:
-          branchOfService = null;
-      }
+      String branchOfService =
+          grasBranchOfServiceMap.get(period.getKeyData().getPersonnelCategoryTypeCode());
 
       ServiceHistoryResponse.ServiceHistoryAttributes attributes =
           ServiceHistoryResponse.ServiceHistoryAttributes.builder()
               .firstName(MpiLookupUtils.getFirstName(mpiResponse))
               .lastName(MpiLookupUtils.getLastName(mpiResponse))
-              .branchOfService(branchOfService)
+              .branchOfService(branchOfService == null ? "Unknown" : branchOfService)
               .startDate(startDate)
               .endDate(endDate)
               .dischargeStatus(
@@ -118,6 +125,7 @@ public class VeteranServiceHistoryTransformer {
               .separationReason(
                   period.getGuardReserveServicePeriodsData().getNarrativeReasonForSeparationTxt())
               .build();
+
       String serviceHistoryId =
           UuidV5.nameUuidFromNamespaceAndString(
                   "gov.vets.service-history-episodes",
@@ -127,47 +135,19 @@ public class VeteranServiceHistoryTransformer {
                       startDate != null ? startDate.toString() : null,
                       endDate != null ? endDate.toString() : null))
               .toString();
-      nonTitle32ReservePeriods.push(
+
+      nonTitle32ReservePeriods.add(
           ServiceHistoryResponse.ServiceHistoryEpisode.builder()
               .attributes(attributes)
               .id(serviceHistoryId)
               .build());
     }
-    return nonTitle32ReservePeriods.stream().toList();
+
+    return nonTitle32ReservePeriods;
   }
 
   private boolean isBeforeOrEqualTo(LocalDate dateOne, LocalDate dateTwo) {
     return dateOne.isBefore(dateTwo) || dateOne.isEqual(dateTwo);
-  }
-
-  private String makeBranchOfService(String branchOfService) {
-    String branch;
-    switch (StringUtils.normalizeSpace(branchOfService.toUpperCase())) {
-      case "O":
-        branch = "NOAA";
-        break;
-      case "H":
-        branch = "Public Health Service";
-        break;
-      case "A":
-        branch = "Army";
-        break;
-      case "C":
-        branch = "Coast Guard";
-        break;
-      case "F":
-        branch = "Air Force";
-        break;
-      case "M":
-        branch = "Marine Corps";
-        break;
-      case "N":
-        branch = "Navy";
-        break;
-      default:
-        branch = "Unknown";
-    }
-    return branch;
   }
 
   private List<Deployment> makeDeploymentList(EMISdeploymentResponseType deploymentResponse) {
@@ -225,7 +205,6 @@ public class VeteranServiceHistoryTransformer {
                 .getMilitaryServiceEpisodeData()
                 .getServiceEpisodeStartDate()
                 .compare(episodeOne.getMilitaryServiceEpisodeData().getServiceEpisodeStartDate()));
-
     serviceEpisodeResponseType
         .getMilitaryServiceEpisode()
         .removeIf(
@@ -243,15 +222,15 @@ public class VeteranServiceHistoryTransformer {
               Optional.ofNullable(militaryServiceEpisode.getMilitaryServiceEpisodeData())
                   .map(value -> value.getServiceEpisodeEndDate())
                   .orElse(null));
+      String branchOfService =
+          serviceHistoryBranchOfServiceMap.get(
+              militaryServiceEpisode.getMilitaryServiceEpisodeData().getBranchOfServiceCode());
+
       ServiceHistoryResponse.ServiceHistoryAttributes attributes =
           ServiceHistoryResponse.ServiceHistoryAttributes.builder()
               .firstName(MpiLookupUtils.getFirstName(mpiResponse))
               .lastName(MpiLookupUtils.getLastName(mpiResponse))
-              .branchOfService(
-                  makeBranchOfService(
-                      militaryServiceEpisode
-                          .getMilitaryServiceEpisodeData()
-                          .getBranchOfServiceCode()))
+              .branchOfService(branchOfService == null ? "Unknown" : branchOfService)
               .startDate(startDate)
               .endDate(endDate)
               .payGrade(
@@ -286,8 +265,7 @@ public class VeteranServiceHistoryTransformer {
       unusedDeployments.removeAll(attributes.deployments);
     }
 
-    Optional.ofNullable(getNonTitle32ReservePeriods()).ifPresent(episodes::addAll);
-
+    episodes.addAll(getNonTitle32ReservePeriods());
     ArrayList<ServiceHistoryResponse.ServiceHistoryEpisode> episodeList = new ArrayList<>(episodes);
     Collections.sort(
         episodeList, Comparator.comparing(episode -> episode.attributes().startDate()));

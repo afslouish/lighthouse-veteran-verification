@@ -15,10 +15,14 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 public class ServiceHistoryAttributesTest {
   @Test
-  public void branchOfServiceIsNullable() {
+  public void branchOfServiceIsNonNullable() {
     ServiceHistoryResponse.ServiceHistoryAttributes serviceHistoryAttributes =
         TestUtils.makeServiceHistoryAttributes();
-    serviceHistoryAttributes.branchOfService(null);
+    Assertions.assertThrows(
+            NullPointerException.class,
+            () -> {
+              serviceHistoryAttributes.branchOfService(null);
+            });
   }
 
   @Test

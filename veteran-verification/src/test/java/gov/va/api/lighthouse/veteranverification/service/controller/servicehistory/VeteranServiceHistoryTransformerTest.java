@@ -94,7 +94,7 @@ public class VeteranServiceHistoryTransformerTest {
     ServiceHistoryResponse.ServiceHistoryAttributes attributesOne = episodeOne.attributes();
     Assertions.assertEquals("Alfredo", attributesOne.firstName());
     Assertions.assertEquals("Armstrong", attributesOne.lastName());
-    // branchOfService is N
+    // personnelCategoryTypeCode is N
     Assertions.assertEquals("National Guard", attributesOne.branchOfService());
     Assertions.assertEquals("2012-01-01", attributesOne.startDate().toString());
     Assertions.assertEquals("2013-02-01", attributesOne.endDate().toString());
@@ -112,7 +112,7 @@ public class VeteranServiceHistoryTransformerTest {
     ServiceHistoryResponse.ServiceHistoryAttributes attributesTwo = episodeTwo.attributes();
     Assertions.assertEquals("Alfredo", attributesTwo.firstName());
     Assertions.assertEquals("Armstrong", attributesTwo.lastName());
-    // branchOfService is V
+    // personnelCategoryTypeCode is V
     Assertions.assertEquals("Reserve", attributesTwo.branchOfService());
     Assertions.assertEquals("2014-01-01", attributesTwo.startDate().toString());
     Assertions.assertEquals("2015-02-01", attributesTwo.endDate().toString());
@@ -130,7 +130,7 @@ public class VeteranServiceHistoryTransformerTest {
     ServiceHistoryResponse.ServiceHistoryAttributes attributesThree = episodeThree.attributes();
     Assertions.assertEquals("Alfredo", attributesThree.firstName());
     Assertions.assertEquals("Armstrong", attributesThree.lastName());
-    // branchOfService is Q
+    // personnelCategoryTypeCode is Q
     Assertions.assertEquals("Reserve", attributesThree.branchOfService());
     Assertions.assertEquals("2016-01-01", attributesThree.startDate().toString());
     Assertions.assertEquals("2017-02-01", attributesThree.endDate().toString());
@@ -149,8 +149,8 @@ public class VeteranServiceHistoryTransformerTest {
     ServiceHistoryResponse.ServiceHistoryAttributes attributesFour = episodeFour.attributes();
     Assertions.assertEquals("Alfredo", attributesFour.firstName());
     Assertions.assertEquals("Armstrong", attributesFour.lastName());
-    // branchOfService is Other
-    Assertions.assertNull(attributesFour.branchOfService());
+    // personnelCategoryTypeCode is Other
+    Assertions.assertEquals("Unknown", attributesFour.branchOfService());
     Assertions.assertEquals("2018-01-01", attributesFour.startDate().toString());
     Assertions.assertEquals("2019-02-01", attributesFour.endDate().toString());
     Assertions.assertNull(attributesFour.payGrade());
@@ -187,7 +187,7 @@ public class VeteranServiceHistoryTransformerTest {
     ServiceHistoryResponse.ServiceHistoryAttributes attributesOne = episodeOne.attributes();
     Assertions.assertEquals("Alfredo", attributesOne.firstName());
     Assertions.assertEquals("Armstrong", attributesOne.lastName());
-    // branchOfService is N
+    // personnelCategoryTypeCode is N
     Assertions.assertEquals("National Guard", attributesOne.branchOfService());
     Assertions.assertEquals("2012-01-01", attributesOne.startDate().toString());
     Assertions.assertEquals("2013-02-01", attributesOne.endDate().toString());
@@ -205,7 +205,7 @@ public class VeteranServiceHistoryTransformerTest {
     ServiceHistoryResponse.ServiceHistoryAttributes attributesTwo = episodeTwo.attributes();
     Assertions.assertEquals("Alfredo", attributesTwo.firstName());
     Assertions.assertEquals("Armstrong", attributesTwo.lastName());
-    // branchOfService is V
+    // personnelCategoryTypeCode is V
     Assertions.assertEquals("Reserve", attributesTwo.branchOfService());
     Assertions.assertEquals("2014-01-01", attributesTwo.startDate().toString());
     Assertions.assertEquals("2015-02-01", attributesTwo.endDate().toString());
@@ -223,7 +223,7 @@ public class VeteranServiceHistoryTransformerTest {
     ServiceHistoryResponse.ServiceHistoryAttributes attributesThree = episodeThree.attributes();
     Assertions.assertEquals("Alfredo", attributesThree.firstName());
     Assertions.assertEquals("Armstrong", attributesThree.lastName());
-    // branchOfService is Q
+    // personnelCategoryTypeCode is Q
     Assertions.assertEquals("Reserve", attributesThree.branchOfService());
     Assertions.assertEquals("2016-01-01", attributesThree.startDate().toString());
     Assertions.assertEquals("2017-02-01", attributesThree.endDate().toString());
@@ -242,8 +242,8 @@ public class VeteranServiceHistoryTransformerTest {
     ServiceHistoryResponse.ServiceHistoryAttributes attributesFour = episodeFour.attributes();
     Assertions.assertEquals("Alfredo", attributesFour.firstName());
     Assertions.assertEquals("Armstrong", attributesFour.lastName());
-    // branchOfService is Other
-    Assertions.assertNull(attributesFour.branchOfService());
+    // personnelCategoryTypeCode is Other
+    Assertions.assertEquals("Unknown", attributesFour.branchOfService());
     Assertions.assertEquals("2018-01-01", attributesFour.startDate().toString());
     Assertions.assertEquals("2019-02-01", attributesFour.endDate().toString());
     Assertions.assertNull(attributesFour.payGrade());
