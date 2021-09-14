@@ -19,10 +19,10 @@ public class ServiceHistoryAttributesTest {
     ServiceHistoryResponse.ServiceHistoryAttributes serviceHistoryAttributes =
         TestUtils.makeServiceHistoryAttributes();
     Assertions.assertThrows(
-            NullPointerException.class,
-            () -> {
-              serviceHistoryAttributes.branchOfService(null);
-            });
+        NullPointerException.class,
+        () -> {
+          serviceHistoryAttributes.branchOfService(null);
+        });
   }
 
   @Test
