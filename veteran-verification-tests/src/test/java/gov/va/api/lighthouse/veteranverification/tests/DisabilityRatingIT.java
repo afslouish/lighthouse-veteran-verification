@@ -24,7 +24,7 @@ public class DisabilityRatingIT {
   void disabilityRatingRecordFound() {
     String request =
         String.format("v0/disability_rating/%s", systemDefinition().icns().disabilityRatingIcn());
-    ExpectedResponse response = veteranVerificationGetRequest(request, 200);
+    ExpectedResponse response = veteranVerificationGetRequest(request, "application/json", 200);
     response.expectValid(DisabilityRatingResponse.class);
     DisabilityRatingResponse disabilityRatingResponse =
         response.response().getBody().as(DisabilityRatingResponse.class);
@@ -119,7 +119,7 @@ public class DisabilityRatingIT {
     String request =
         String.format(
             "v0/disability_rating/%s", systemDefinition().icns().noBgsUserDisabilityRatingIcn());
-    ExpectedResponse response = veteranVerificationGetRequest(request, 500);
+    ExpectedResponse response = veteranVerificationGetRequest(request, "application/json", 500);
     response.expectValid(ApiError.ServerSoapFaultApiError.class);
   }
 }

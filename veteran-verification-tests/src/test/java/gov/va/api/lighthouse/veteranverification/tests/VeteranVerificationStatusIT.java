@@ -24,7 +24,7 @@ public class VeteranVerificationStatusIT {
   @Test
   void veteranVerificationEmisV5Status() {
     String request = String.format("v0/status/%s", systemDefinition().icns().v5StatusIcn());
-    ExpectedResponse response = veteranVerificationGetRequest(request, 200);
+    ExpectedResponse response = veteranVerificationGetRequest(request, "application/json", 200);
     response.expectValid(VeteranStatusResponse.class);
     VeteranStatusResponse status = response.response().getBody().as(VeteranStatusResponse.class);
     assertThat(status.getData().getAttributes().getVeteranStatus()).isEqualTo("not confirmed");
@@ -33,7 +33,7 @@ public class VeteranVerificationStatusIT {
   @Test
   void veteranVerificationStatusFound() {
     String request = String.format("v0/status/%s", systemDefinition().icns().confirmedStatusIcn());
-    ExpectedResponse response = veteranVerificationGetRequest(request, 200);
+    ExpectedResponse response = veteranVerificationGetRequest(request, "application/json", 200);
     response.expectValid(VeteranStatusResponse.class);
     VeteranStatusResponse status = response.response().getBody().as(VeteranStatusResponse.class);
     assertThat(status.getData().getAttributes().getVeteranStatus()).isEqualTo("confirmed");
@@ -42,7 +42,7 @@ public class VeteranVerificationStatusIT {
   @Test
   void veteranVerificationStatusNoEmisUser() {
     String request = String.format("v0/status/%s", systemDefinition().icns().noEmisUserStatusIcn());
-    ExpectedResponse response = veteranVerificationGetRequest(request, 200);
+    ExpectedResponse response = veteranVerificationGetRequest(request, "application/json", 200);
     response.expectValid(VeteranStatusResponse.class);
     VeteranStatusResponse status = response.response().getBody().as(VeteranStatusResponse.class);
     assertThat(status.getData().getAttributes().getVeteranStatus()).isEqualTo("not confirmed");
@@ -51,7 +51,7 @@ public class VeteranVerificationStatusIT {
   @Test
   void veteranVerificationStatusNotFound() {
     String request = String.format("v0/status/%s", "not_found");
-    ExpectedResponse response = veteranVerificationGetRequest(request, 200);
+    ExpectedResponse response = veteranVerificationGetRequest(request, "application/json", 200);
     response.expectValid(VeteranStatusResponse.class);
     VeteranStatusResponse status = response.response().getBody().as(VeteranStatusResponse.class);
     assertThat(status.getData().getAttributes().getVeteranStatus()).isEqualTo("not confirmed");

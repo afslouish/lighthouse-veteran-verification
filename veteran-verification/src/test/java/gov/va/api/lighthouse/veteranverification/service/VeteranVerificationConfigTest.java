@@ -7,6 +7,7 @@ import gov.va.api.lighthouse.emis.SoapEmisMilitaryInformationServiceClient;
 import gov.va.api.lighthouse.emis.SoapEmisVeteranStatusServiceClient;
 import gov.va.api.lighthouse.mpi.SoapMasterPatientIndexClient;
 import gov.va.api.lighthouse.veteranverification.service.utils.JwksProperties;
+import gov.va.api.lighthouse.veteranverification.service.utils.Notary;
 import org.junit.jupiter.api.Test;
 
 public class VeteranVerificationConfigTest {
@@ -48,5 +49,10 @@ public class VeteranVerificationConfigTest {
   void mpiClient() {
     assertThat(veteranVerificationConfig.masterPatientIndexClient())
         .isInstanceOf(SoapMasterPatientIndexClient.class);
+  }
+
+  @Test
+  void notary() {
+    assertThat(veteranVerificationConfig.notary()).isInstanceOf(Notary.class);
   }
 }
