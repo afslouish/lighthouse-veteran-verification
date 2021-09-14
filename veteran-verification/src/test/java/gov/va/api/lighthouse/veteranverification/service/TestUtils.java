@@ -232,6 +232,22 @@ public class TestUtils {
             });
   }
 
+  public void setGrasMockResponse(
+      @Mock EmisMilitaryInformationServiceClient emisClient,
+      EMISguardReserveServicePeriodsResponseType response) {
+    Mockito.when(emisClient.guardReserveServiceRequest(ArgumentMatchers.any()))
+        .thenReturn(response);
+  }
+
+  public void setGrasResponseException(
+      @Mock EmisMilitaryInformationServiceClient emisClient, Exception e) {
+    given(emisClient.guardReserveServiceRequest(ArgumentMatchers.any()))
+        .willAnswer(
+            invocation -> {
+              throw e;
+            });
+  }
+
   @SneakyThrows
   public void setMpiMockResponse(@Mock MasterPatientIndexClient mpiClient, String filename) {
     PRPAIN201306UV02 response = createMpiResponse(filename);

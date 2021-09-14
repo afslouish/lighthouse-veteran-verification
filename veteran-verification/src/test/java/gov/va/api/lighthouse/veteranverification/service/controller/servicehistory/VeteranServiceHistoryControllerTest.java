@@ -12,6 +12,7 @@ import gov.va.api.lighthouse.veteranverification.service.TestUtils;
 import gov.va.api.lighthouse.veteranverification.service.utils.JwksProperties;
 import gov.va.api.lighthouse.veteranverification.service.utils.Notary;
 import gov.va.viers.cdi.emis.requestresponse.v2.EMISdeploymentResponseType;
+import gov.va.viers.cdi.emis.requestresponse.v2.EMISguardReserveServicePeriodsResponseType;
 import gov.va.viers.cdi.emis.requestresponse.v2.EMISserviceEpisodeResponseType;
 import java.util.Arrays;
 import javax.xml.soap.SOAPFault;
@@ -39,8 +40,11 @@ public class VeteranServiceHistoryControllerTest {
         TestUtils.createServiceHistoryResponse("emis/service-episodes/ascending.xml");
     EMISdeploymentResponseType deployments =
         TestUtils.createDeploymentResponse("emis/deployments_response.xml");
+    EMISguardReserveServicePeriodsResponseType grasResponse =
+        TestUtils.createGrasResponse("emis/gras/single_title_training_period.xml");
     TestUtils.setServiceHistoryMockResponse(emisClient, serviceEpisodeResponse);
     TestUtils.setDeploymentsMockResponse(emisClient, deployments);
+    TestUtils.setGrasMockResponse(emisClient, grasResponse);
     ServiceHistoryResponse response = controller.veteranServiceHistoryResponse("icn");
     Assertions.assertEquals(response.data().size(), 2);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeOne = response.data().get(0);
@@ -92,8 +96,11 @@ public class VeteranServiceHistoryControllerTest {
         TestUtils.createServiceHistoryResponse("emis/service-episodes/ascending.xml");
     EMISdeploymentResponseType deployments =
         TestUtils.createDeploymentResponse("emis/deployments_response.xml");
+    EMISguardReserveServicePeriodsResponseType grasResponse =
+        TestUtils.createGrasResponse("emis/gras/single_title_training_period.xml");
     TestUtils.setServiceHistoryMockResponse(emisClient, serviceEpisodeResponse);
     TestUtils.setDeploymentsMockResponse(emisClient, deployments);
+    TestUtils.setGrasMockResponse(emisClient, grasResponse);
     String response = controller.veteranServiceHistoryJwtResponse("icn");
     Assertions.assertEquals(
         "eyJraWQiOiJmYWtlIiwidHlwIjoiSldUIiwiYWxnIjoiUlMyNTYifQ.eyJkYXRhIjpbey"
@@ -136,8 +143,11 @@ public class VeteranServiceHistoryControllerTest {
     TestUtils.setMpiMockResponse(mpiClient, "mpi/mpi_profile_response_body.xml");
     EMISserviceEpisodeResponseType serviceEpisodeResponse =
         TestUtils.createServiceHistoryResponse("emis/service-episodes/ascending.xml");
+    EMISguardReserveServicePeriodsResponseType grasResponse =
+        TestUtils.createGrasResponse("emis/gras/single_title_training_period.xml");
     TestUtils.setServiceHistoryMockResponse(emisClient, serviceEpisodeResponse);
     TestUtils.setDeploymentsResponseException(emisClient, new Exception());
+    TestUtils.setGrasMockResponse(emisClient, grasResponse);
     // unhandled exceptions become 503 errors
     Assertions.assertThrows(
         Exception.class,
@@ -151,8 +161,6 @@ public class VeteranServiceHistoryControllerTest {
     VeteranServiceHistoryController controller =
         new VeteranServiceHistoryController(mpiClient, emisClient, notary);
     TestUtils.setMpiMockResponse(mpiClient, "mpi/mpi_profile_response_body.xml");
-    EMISserviceEpisodeResponseType serviceEpisodeResponse =
-        TestUtils.createServiceHistoryResponse("emis/service-episodes/ascending.xml");
     TestUtils.setDeploymentsResponseException(
         emisClient, new InaccessibleWSDLException(Arrays.asList(new Error(""))));
     Assertions.assertThrows(
@@ -180,7 +188,10 @@ public class VeteranServiceHistoryControllerTest {
         new VeteranServiceHistoryController(mpiClient, emisClient, notary);
     EMISserviceEpisodeResponseType serviceEpisodeResponse =
         TestUtils.createServiceHistoryResponse("emis/service-episodes/ascending.xml");
+    EMISguardReserveServicePeriodsResponseType grasResponse =
+        TestUtils.createGrasResponse("emis/gras/single_title_training_period.xml");
     TestUtils.setServiceHistoryMockResponse(emisClient, serviceEpisodeResponse);
+    TestUtils.setGrasMockResponse(emisClient, grasResponse);
     TestUtils.setEpisodesResponseException(emisClient, new ServerSOAPFaultException(soapFault));
     Assertions.assertThrows(
         Exceptions.NoServiceHistoryFoundException.class,
@@ -196,8 +207,11 @@ public class VeteranServiceHistoryControllerTest {
     TestUtils.setMpiMockResponse(mpiClient, "mpi/mpi_profile_response_body.xml");
     EMISdeploymentResponseType deployments =
         TestUtils.createDeploymentResponse("emis/deployments_response.xml");
+    EMISguardReserveServicePeriodsResponseType grasResponse =
+        TestUtils.createGrasResponse("emis/gras/single_title_training_period.xml");
     TestUtils.setServiceHistoryMockResponse(emisClient, null);
     TestUtils.setDeploymentsMockResponse(emisClient, deployments);
+    TestUtils.setGrasMockResponse(emisClient, grasResponse);
     // unhandled exceptions become 503 errors
     Assertions.assertThrows(
         Exception.class,
@@ -213,8 +227,11 @@ public class VeteranServiceHistoryControllerTest {
     TestUtils.setMpiMockResponse(mpiClient, "mpi/mpi_profile_response_body.xml");
     EMISserviceEpisodeResponseType serviceEpisodeResponse =
         TestUtils.createServiceHistoryResponse("emis/service-episodes/ascending.xml");
+    EMISguardReserveServicePeriodsResponseType grasResponse =
+        TestUtils.createGrasResponse("emis/gras/single_title_training_period.xml");
     TestUtils.setServiceHistoryMockResponse(emisClient, serviceEpisodeResponse);
     TestUtils.setEpisodesResponseException(emisClient, new Exception());
+    TestUtils.setGrasMockResponse(emisClient, grasResponse);
     // unhandled exceptions become 503 errors
     Assertions.assertThrows(
         Exception.class,
@@ -230,8 +247,31 @@ public class VeteranServiceHistoryControllerTest {
     TestUtils.setMpiMockResponse(mpiClient, "mpi/mpi_profile_response_body.xml");
     EMISserviceEpisodeResponseType serviceEpisodeResponse =
         TestUtils.createServiceHistoryResponse("emis/service-episodes/ascending.xml");
+    EMISguardReserveServicePeriodsResponseType grasResponse =
+        TestUtils.createGrasResponse("emis/gras/single_title_training_period.xml");
     TestUtils.setServiceHistoryMockResponse(emisClient, serviceEpisodeResponse);
+    TestUtils.setGrasMockResponse(emisClient, grasResponse);
     TestUtils.setEpisodesResponseException(
+        emisClient, new InaccessibleWSDLException(Arrays.asList(new Error(""))));
+    Assertions.assertThrows(
+        EmisInaccesibleWsdlException.class,
+        () -> {
+          controller.veteranServiceHistoryResponse("icn");
+        });
+  }
+
+  @Test
+  public void grasRequestThrowsInaccessibleWsdlException() {
+    VeteranServiceHistoryController controller =
+        new VeteranServiceHistoryController(mpiClient, emisClient, notary);
+    TestUtils.setMpiMockResponse(mpiClient, "mpi/mpi_profile_response_body.xml");
+    EMISserviceEpisodeResponseType serviceEpisodeResponse =
+        TestUtils.createServiceHistoryResponse("emis/service-episodes/ascending.xml");
+    EMISdeploymentResponseType deployments =
+        TestUtils.createDeploymentResponse("emis/deployments_response.xml");
+    TestUtils.setServiceHistoryMockResponse(emisClient, serviceEpisodeResponse);
+    TestUtils.setDeploymentsMockResponse(emisClient, deployments);
+    TestUtils.setGrasResponseException(
         emisClient, new InaccessibleWSDLException(Arrays.asList(new Error(""))));
     Assertions.assertThrows(
         EmisInaccesibleWsdlException.class,

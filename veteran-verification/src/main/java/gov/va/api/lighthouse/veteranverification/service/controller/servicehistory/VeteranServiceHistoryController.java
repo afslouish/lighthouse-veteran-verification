@@ -11,6 +11,7 @@ import gov.va.api.lighthouse.mpi.MasterPatientIndexClient;
 import gov.va.api.lighthouse.veteranverification.api.v0.ServiceHistoryResponse;
 import gov.va.api.lighthouse.veteranverification.service.utils.Notary;
 import gov.va.viers.cdi.emis.requestresponse.v2.EMISdeploymentResponseType;
+import gov.va.viers.cdi.emis.requestresponse.v2.EMISguardReserveServicePeriodsResponseType;
 import gov.va.viers.cdi.emis.requestresponse.v2.EMISserviceEpisodeResponseType;
 import gov.va.viers.cdi.emis.requestresponse.v2.InputEdiPiOrIcn;
 import lombok.NonNull;
@@ -75,11 +76,21 @@ public class VeteranServiceHistoryController {
       throw new NoServiceHistoryFoundException();
     }
 
+    EMISguardReserveServicePeriodsResponseType grasResponse;
+    try {
+      grasResponse = emisClient.guardReserveServiceRequest(ediPiOrIcn);
+    } catch (ServerSOAPFaultException exception) {
+      grasResponse = null;
+    } catch (InaccessibleWSDLException exception) {
+      throw new EmisInaccesibleWsdlException();
+    }
+
     return VeteranServiceHistoryTransformer.builder()
         .icn(icn)
         .serviceEpisodeResponseType(episodes)
         .mpiResponse(mpiResponse)
         .deploymentResponse(deployments)
+        .grasResponse(grasResponse)
         .build()
         .serviceHistoryTransformer();
   }
