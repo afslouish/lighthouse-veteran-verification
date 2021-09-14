@@ -4,7 +4,7 @@
     <NS10:edipi xmlns:NS10="http://viers.va.gov/cdi/eMIS/commonService/v2">1007481507</NS10:edipi>
     <NS11:keyData xmlns:NS11="http://viers.va.gov/cdi/eMIS/commonService/v2">
       <NS11:personnelOrganizationCode>22</NS11:personnelOrganizationCode>
-      <NS11:personnelCategoryTypeCode>A</NS11:personnelCategoryTypeCode>
+      <NS11:personnelCategoryTypeCode>N</NS11:personnelCategoryTypeCode>
       <NS11:personnelSegmentIdentifier>1</NS11:personnelSegmentIdentifier>
     </NS11:keyData>
     <NS12:militaryServiceEpisodeData xmlns:NS12="http://viers.va.gov/cdi/eMIS/commonService/v2">

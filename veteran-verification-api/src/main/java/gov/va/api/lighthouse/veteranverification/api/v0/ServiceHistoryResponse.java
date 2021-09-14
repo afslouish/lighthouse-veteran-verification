@@ -84,7 +84,6 @@ public class ServiceHistoryResponse {
     @JsonInclude
     LocalDate endDate;
 
-    @NonNull
     @Schema(
         name = "pay_grade",
         type = "string",

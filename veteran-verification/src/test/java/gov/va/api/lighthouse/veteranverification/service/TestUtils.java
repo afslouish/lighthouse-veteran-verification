@@ -77,7 +77,7 @@ public class TestUtils {
   @SneakyThrows
   public EMISguardReserveServicePeriodsResponseType createGrasResponse(String filename) {
     String profile = asString(TestUtils.class.getClassLoader().getResourceAsStream(filename));
-    return JAXBContext.newInstance(PRPAIN201306UV02.class)
+    return JAXBContext.newInstance(EMISguardReserveServicePeriodsResponseType.class)
         .createUnmarshaller()
         .unmarshal(
             new StreamSource(new StringReader(profile)),
