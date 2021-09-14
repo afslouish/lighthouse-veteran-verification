@@ -15,6 +15,7 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Deque;
 import java.util.List;
 import java.util.Optional;
@@ -99,7 +100,7 @@ public class VeteranServiceHistoryTransformer {
           branchOfService = "Reserve";
           break;
         default:
-          branchOfService = "";
+          branchOfService = null;
       }
 
       ServiceHistoryResponse.ServiceHistoryAttributes attributes =
@@ -286,6 +287,10 @@ public class VeteranServiceHistoryTransformer {
     }
 
     Optional.ofNullable(getNonTitle32ReservePeriods()).ifPresent(episodes::addAll);
-    return ServiceHistoryResponse.builder().data(episodes.stream().toList()).build();
+
+    ArrayList<ServiceHistoryResponse.ServiceHistoryEpisode> episodeList = new ArrayList<>(episodes);
+    Collections.sort(
+        episodeList, Comparator.comparing(episode -> episode.attributes().startDate()));
+    return ServiceHistoryResponse.builder().data(episodeList).build();
   }
 }
