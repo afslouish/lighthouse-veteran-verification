@@ -780,17 +780,19 @@ public class VeteranServiceHistoryTransformerTest {
     PRPAIN201306UV02 mpiResponse = TestUtils.createMpiResponse("mpi/mpi_profile_response_body.xml");
     EMISdeploymentResponseType deployments =
         TestUtils.createDeploymentResponse("emis/deployments_response.xml");
-    Assertions.assertThrows(
-        NullPointerException.class,
-        () -> {
-          VeteranServiceHistoryTransformer.builder()
-              .icn("uuid")
-              .deploymentResponse(deployments)
-              .serviceEpisodeResponseType(null)
-              .mpiResponse(mpiResponse)
-              .grasResponse(grasResponse)
-              .build();
-        });
+
+    VeteranServiceHistoryTransformer transformer =
+        VeteranServiceHistoryTransformer.builder()
+            .icn("uuid")
+            .deploymentResponse(deployments)
+            .serviceEpisodeResponseType(null)
+            .mpiResponse(mpiResponse)
+            .grasResponse(grasResponse)
+            .build();
+
+    ServiceHistoryResponse response = transformer.serviceHistoryTransformer();
+    // No error should be thrown
+    Assertions.assertEquals(response.data().size(), 0);
   }
 
   @Test

@@ -201,17 +201,15 @@ public class VeteranServiceHistoryControllerTest {
   }
 
   @Test
-  public void episodesIsNull() {
+  public void episodesAndGrasResponseAreNull() {
     VeteranServiceHistoryController controller =
         new VeteranServiceHistoryController(mpiClient, emisClient, notary);
     TestUtils.setMpiMockResponse(mpiClient, "mpi/mpi_profile_response_body.xml");
     EMISdeploymentResponseType deployments =
         TestUtils.createDeploymentResponse("emis/deployments_response.xml");
-    EMISguardReserveServicePeriodsResponseType grasResponse =
-        TestUtils.createGrasResponse("emis/gras/single_title_training_period.xml");
     TestUtils.setServiceHistoryMockResponse(emisClient, null);
     TestUtils.setDeploymentsMockResponse(emisClient, deployments);
-    TestUtils.setGrasMockResponse(emisClient, grasResponse);
+    TestUtils.setGrasMockResponse(emisClient, null);
     // unhandled exceptions become 503 errors
     Assertions.assertThrows(
         Exception.class,

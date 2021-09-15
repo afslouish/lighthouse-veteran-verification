@@ -62,18 +62,22 @@ public class VeteranServiceHistoryController {
       throw new NoServiceHistoryFoundException();
     }
 
-    EMISserviceEpisodeResponseType episodes;
     EMISdeploymentResponseType deployments;
     try {
-      episodes = emisClient.serviceEpisodesRequest(ediPiOrIcn);
       deployments = emisClient.deploymentRequest(ediPiOrIcn);
     } catch (ServerSOAPFaultException exception) {
       throw new NoServiceHistoryFoundException();
     } catch (InaccessibleWSDLException exception) {
       throw new EmisInaccesibleWsdlException();
     }
-    if (episodes == null) {
-      throw new NoServiceHistoryFoundException();
+
+    EMISserviceEpisodeResponseType episodes;
+    try {
+      episodes = emisClient.serviceEpisodesRequest(ediPiOrIcn);
+    } catch (ServerSOAPFaultException exception) {
+      episodes = null;
+    } catch (InaccessibleWSDLException exception) {
+      throw new EmisInaccesibleWsdlException();
     }
 
     EMISguardReserveServicePeriodsResponseType grasResponse;
@@ -83,6 +87,10 @@ public class VeteranServiceHistoryController {
       grasResponse = null;
     } catch (InaccessibleWSDLException exception) {
       throw new EmisInaccesibleWsdlException();
+    }
+
+    if (episodes == null && grasResponse == null) {
+      throw new NoServiceHistoryFoundException();
     }
 
     return VeteranServiceHistoryTransformer.builder()
