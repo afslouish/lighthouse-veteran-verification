@@ -107,23 +107,6 @@
         <version>${swagger-maven-plugin.version}</version>
         <executions>
           <execution>
-            <id>vc-swagger</id>
-            <phase>compile</phase>
-            <goals>
-              <goal>resolve</goal>
-            </goals>
-            <configuration>
-              <contextId>vc-openapi</contextId>
-              <resourceClasses>
-                <resourceClass>gov.va.api.lighthouse.veteranverification.api.VeteranConfirmationService</resourceClass>
-              </resourceClasses>
-              <outputFileName>veteran-confirmation-openapi</outputFileName>
-              <outputPath>${project.build.outputDirectory}</outputPath>
-              <outputFormat>JSON</outputFormat>
-              <prettyPrint>true</prettyPrint>
-            </configuration>
-          </execution>
-          <execution>
             <id>vv-swagger</id>
             <phase>compile</phase>
             <goals>
