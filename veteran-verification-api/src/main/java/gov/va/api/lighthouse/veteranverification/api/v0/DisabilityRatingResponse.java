@@ -1,5 +1,6 @@
 package gov.va.api.lighthouse.veteranverification.api.v0;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDate;
@@ -50,10 +51,12 @@ public class DisabilityRatingResponse {
 
     @Nullable
     @JsonProperty("combined_effective_date")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     LocalDate combinedEffectiveDate;
 
     @Nullable
     @JsonProperty("legal_effective_date")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     LocalDate legalEffectiveDate;
 
     @Nullable
@@ -72,6 +75,7 @@ public class DisabilityRatingResponse {
 
     @Nullable
     @JsonProperty("effective_date")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     LocalDate effectiveDate;
 
     @Nullable

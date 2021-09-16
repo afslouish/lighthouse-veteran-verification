@@ -4,6 +4,7 @@ import static gov.va.api.health.sentinel.EnvironmentAssumptions.assumeEnvironmen
 import static gov.va.api.lighthouse.veteranverification.tests.Requestor.veteranVerificationGetRequest;
 import static gov.va.api.lighthouse.veteranverification.tests.SystemDefinitions.systemDefinition;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import gov.va.api.health.sentinel.Environment;
 import gov.va.api.health.sentinel.ExpectedResponse;
@@ -18,6 +19,15 @@ public class DisabilityRatingIT {
   static void assumeEnvironment() {
     // Do not run these tests in non-mocked environments: production and staging.
     assumeEnvironmentNotIn(Environment.PROD, Environment.STAGING);
+  }
+
+  @Test
+  void disabilityRatingHappyJwtPath() {
+    String request =
+        String.format("v0/disability_rating/%s", systemDefinition().icns().disabilityRatingIcn());
+    ExpectedResponse response = veteranVerificationGetRequest(request, "application/jwt", 200);
+    String disabilityRating = response.response().asString();
+    assertNotNull(disabilityRating);
   }
 
   @Test
