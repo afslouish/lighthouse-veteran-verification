@@ -40,6 +40,8 @@ public class ServiceHistoryResponse {
       description = "Attributes for veteran verification service_history endpoint")
   @SuppressFBWarnings({"EI_EXPOSE_REP2", "EI_EXPOSE_REP"})
   @FieldDefaults(level = AccessLevel.PUBLIC)
+  @NoArgsConstructor
+  @AllArgsConstructor
   public static class ServiceHistoryAttributes {
     @Schema(
         name = "first_name",
@@ -197,6 +199,8 @@ public class ServiceHistoryResponse {
   @Schema(description = "Service History for authorized Veteran")
   @Data
   @FieldDefaults(level = AccessLevel.PUBLIC)
+  @NoArgsConstructor
+  @AllArgsConstructor
   public static class ServiceHistoryEpisode {
     @NonNull
     @Schema(

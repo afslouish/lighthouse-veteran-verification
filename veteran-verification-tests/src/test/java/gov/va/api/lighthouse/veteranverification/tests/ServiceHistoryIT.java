@@ -4,13 +4,17 @@ import static gov.va.api.health.sentinel.EnvironmentAssumptions.assumeEnvironmen
 import static gov.va.api.lighthouse.veteranverification.tests.Requestor.veteranVerificationGetRequest;
 import static gov.va.api.lighthouse.veteranverification.tests.SystemDefinitions.systemDefinition;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import gov.va.api.health.sentinel.Environment;
 import gov.va.api.health.sentinel.ExpectedResponse;
 import gov.va.api.lighthouse.veteranverification.api.ApiError;
 import gov.va.api.lighthouse.veteranverification.api.v0.ServiceHistoryResponse;
+import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -48,12 +52,13 @@ public class ServiceHistoryIT {
   }
 
   @Test
+  @SneakyThrows
   void serviceHistoryHappyPath() {
     String request =
         String.format("v0/service_history/%s", systemDefinition().icns().serviceHistoryIcn());
     ExpectedResponse response = veteranVerificationGetRequest(request, "application/json", 200);
     ServiceHistoryResponse serviceHistory =
-        response.response().getBody().as(ServiceHistoryResponse.class);
+        toServiceEpisodesResponse(response.response().getBody().print());
     assertEquals("e28a2359-48a5-55ce-890c-76b51c749b6b", serviceHistory.data().get(0).id());
     assertEquals("service-history-episodes", serviceHistory.data().get(0).type());
     assertEquals("Wesley", serviceHistory.data().get(0).attributes().firstName());
@@ -134,7 +139,7 @@ public class ServiceHistoryIT {
             "v0/service_history/%s", systemDefinition().icns().serviceHistoryIcnNullEndDate());
     ExpectedResponse response = veteranVerificationGetRequest(request, "application/json", 200);
     ServiceHistoryResponse serviceHistory =
-        response.response().getBody().as(ServiceHistoryResponse.class);
+        toServiceEpisodesResponse(response.response().getBody().print());
     assertEquals("f4bce9c3-0aa1-5080-b6bf-7261914fffd5", serviceHistory.data().get(0).id());
     assertEquals("service-history-episodes", serviceHistory.data().get(0).type());
     assertEquals("Herbert", serviceHistory.data().get(0).attributes().firstName());
@@ -149,5 +154,14 @@ public class ServiceHistoryIT {
         "FAILED MEDICAL/PHYSICAL PROCUREMENT STANDARDS",
         serviceHistory.data().get(0).attributes().separationReason());
     assertEquals(0, serviceHistory.data().get(0).attributes().deployments().size());
+  }
+
+  @SneakyThrows
+  private ServiceHistoryResponse toServiceEpisodesResponse(String response) {
+    ObjectMapper objectMapper = new ObjectMapper();
+    objectMapper.registerModule(new JavaTimeModule());
+    objectMapper.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
+
+    return objectMapper.readValue(response, ServiceHistoryResponse.class);
   }
 }
