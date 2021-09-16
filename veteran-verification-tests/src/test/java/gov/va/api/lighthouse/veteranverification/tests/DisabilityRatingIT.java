@@ -4,7 +4,7 @@ import static gov.va.api.health.sentinel.EnvironmentAssumptions.assumeEnvironmen
 import static gov.va.api.lighthouse.veteranverification.tests.Requestor.veteranVerificationGetRequest;
 import static gov.va.api.lighthouse.veteranverification.tests.SystemDefinitions.systemDefinition;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import gov.va.api.health.sentinel.Environment;
 import gov.va.api.health.sentinel.ExpectedResponse;
@@ -27,20 +27,7 @@ public class DisabilityRatingIT {
         String.format("v0/disability_rating/%s", systemDefinition().icns().disabilityRatingIcn());
     ExpectedResponse response = veteranVerificationGetRequest(request, "application/jwt", 200);
     String disabilityRating = response.response().asString();
-    assertEquals(
-        "eyJraWQiOiJmYWtlIiwidHlwIjoiSldUIiwiYWxnIjoiUlMyNTYifQ.eyJkYXRhIjp7ImlkIjoiMTAx"
-            + "MjgyOTYyMFY2NTQzMjgiLCJ0eXBlIjoiZGlzYWJpbGl0eV9yYXRpbmdzIiwiYXR0cmlidXRlcyI6eyJj"
-            + "b21iaW5lZF9kaXNhYmlsaXR5X3JhdGluZyI6NDAsImNvbWJpbmVkX2VmZmVjdGl2ZV9kYXRlIjoiMjA"
-            + "xMC0wOC0wMSIsImxlZ2FsX2VmZmVjdGl2ZV9kYXRlIjoiMjAxMC0wNy0xMSIsImluZGl2aWR1YWxfcm"
-            + "F0aW5ncyI6W3siZGVjaXNpb24iOiJTZXJ2aWNlIENvbm5lY3RlZCIsImVmZmVjdGl2ZV9kYXRlIjoiM"
-            + "jAxMC0wNy0xMSIsInJhdGluZ19wZXJjZW50YWdlIjozMH0seyJkZWNpc2lvbiI6IlNlcnZpY2UgQ29ub"
-            + "mVjdGVkIiwiZWZmZWN0aXZlX2RhdGUiOiIyMDEwLTA3LTExIiwicmF0aW5nX3BlcmNlbnRhZ2UiOjIw"
-            + "fV19fX0.FB-We9PGN2t-cPJhcYg7-ih37_jbJ-muZkEw6J522gV0IUQELkA0v0rGGfEbAveD0ryDDXs"
-            + "LFm3V5NyVlm8u4e1gL8Dil492l0xf3f7Ptgqm21byEAYiMls0ag1AEu31LNW7BvdtxDbhKCPZPOMBHi"
-            + "fkIbIqdV5JwPJBzIFqjKwEznWs5JGKOyQvboO2d9DgV5AsLBu-PdgXibpTCOcCSEid39dkb-RoDJus1"
-            + "qyQUIV9HyZadZySPYhZ2CLfeU70DC3gA9DmiptIK7c3RRQHTKtrLWiXw3MdHR93Md8JC4FKL77C2bov"
-            + "xpmUU3A5aArQDbg-k0lOIWNmZsdZ4eOk4Q",
-        disabilityRating);
+    assertNotNull(disabilityRating);
   }
 
   @Test
