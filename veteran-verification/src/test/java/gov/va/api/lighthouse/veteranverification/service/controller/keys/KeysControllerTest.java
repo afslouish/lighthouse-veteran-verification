@@ -1,6 +1,6 @@
 package gov.va.api.lighthouse.veteranverification.service.controller.keys;
 
-import gov.va.api.lighthouse.veteranverification.api.v0.JwkKeyset;
+import gov.va.api.lighthouse.veteranverification.api.v1.JwkKeyset;
 import gov.va.api.lighthouse.veteranverification.service.utils.JwksProperties;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Assertions;

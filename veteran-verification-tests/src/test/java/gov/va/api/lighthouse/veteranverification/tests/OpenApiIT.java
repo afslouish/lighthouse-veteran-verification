@@ -7,6 +7,6 @@ import org.junit.jupiter.api.Test;
 public class OpenApiIT {
   @Test
   void veteranVerificationDocs() {
-    veteranVerificationGetRequest("v0/docs/veteran_verification", "application/json", 200);
+    veteranVerificationGetRequest("v1/docs/veteran_verification", "application/json", 200);
   }
 }

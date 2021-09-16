@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import gov.va.api.health.sentinel.Environment;
 import gov.va.api.health.sentinel.ExpectedResponse;
 import gov.va.api.lighthouse.veteranverification.api.ApiError;
-import gov.va.api.lighthouse.veteranverification.api.v0.DisabilityRatingResponse;
+import gov.va.api.lighthouse.veteranverification.api.v1.DisabilityRatingResponse;
 import java.time.LocalDate;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -24,7 +24,7 @@ public class DisabilityRatingIT {
   @Test
   void disabilityRatingHappyJwtPath() {
     String request =
-        String.format("v0/disability_rating/%s", systemDefinition().icns().disabilityRatingIcn());
+        String.format("v1/disability_rating/%s", systemDefinition().icns().disabilityRatingIcn());
     ExpectedResponse response = veteranVerificationGetRequest(request, "application/jwt", 200);
     String disabilityRating = response.response().asString();
     assertNotNull(disabilityRating);
@@ -33,7 +33,7 @@ public class DisabilityRatingIT {
   @Test
   void disabilityRatingRecordFound() {
     String request =
-        String.format("v0/disability_rating/%s", systemDefinition().icns().disabilityRatingIcn());
+        String.format("v1/disability_rating/%s", systemDefinition().icns().disabilityRatingIcn());
     ExpectedResponse response = veteranVerificationGetRequest(request, "application/json", 200);
     response.expectValid(DisabilityRatingResponse.class);
     DisabilityRatingResponse disabilityRatingResponse =
@@ -128,7 +128,7 @@ public class DisabilityRatingIT {
   void noBgsUser() {
     String request =
         String.format(
-            "v0/disability_rating/%s", systemDefinition().icns().noBgsUserDisabilityRatingIcn());
+            "v1/disability_rating/%s", systemDefinition().icns().noBgsUserDisabilityRatingIcn());
     ExpectedResponse response = veteranVerificationGetRequest(request, "application/json", 500);
     response.expectValid(ApiError.ServerSoapFaultApiError.class);
   }

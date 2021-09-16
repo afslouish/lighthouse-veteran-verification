@@ -19,18 +19,18 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(controllers = {HomeControllerV0.class})
-public class HomeControllerV0Test {
+@WebMvcTest(controllers = {HomeControllerV1.class})
+public class HomeControllerV1Test {
 
   @Mock Resource veteranVerificationOpenapi;
 
-  HomeControllerV0 connerCaseController;
+  HomeControllerV1 connerCaseController;
 
   @Autowired private MockMvc mvc;
 
   @BeforeEach
   void _init() {
-    connerCaseController = new HomeControllerV0(veteranVerificationOpenapi);
+    connerCaseController = new HomeControllerV1(veteranVerificationOpenapi);
   }
 
   @Test
@@ -51,7 +51,7 @@ public class HomeControllerV0Test {
   @Test
   @SneakyThrows
   public void testVeteranVerificationOpenapiPath() {
-    mvc.perform(get("/v0/docs/veteran_verification"))
+    mvc.perform(get("/v1/docs/veteran_verification"))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.openapi", equalTo("3.0.1")));
   }

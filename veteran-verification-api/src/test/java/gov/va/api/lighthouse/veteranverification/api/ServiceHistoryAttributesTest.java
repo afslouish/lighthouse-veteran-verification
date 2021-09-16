@@ -3,8 +3,8 @@ package gov.va.api.lighthouse.veteranverification.api;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.samePropertyValuesAs;
 
-import gov.va.api.lighthouse.veteranverification.api.v0.Deployment;
-import gov.va.api.lighthouse.veteranverification.api.v0.ServiceHistoryResponse;
+import gov.va.api.lighthouse.veteranverification.api.v1.Deployment;
+import gov.va.api.lighthouse.veteranverification.api.v1.ServiceHistoryResponse;
 import java.time.LocalDate;
 import java.util.Arrays;
 import org.junit.jupiter.api.Assertions;

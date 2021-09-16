@@ -1,6 +1,6 @@
 package gov.va.api.lighthouse.veteranverification.api;
 
-import gov.va.api.lighthouse.veteranverification.api.v0.ServiceHistoryResponse;
+import gov.va.api.lighthouse.veteranverification.api.v1.ServiceHistoryResponse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

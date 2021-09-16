@@ -4,7 +4,7 @@ import static gov.va.api.lighthouse.veteranverification.service.MpiLookupUtils.g
 
 import gov.va.api.lighthouse.bgs.BenefitsGatewayServicesClient;
 import gov.va.api.lighthouse.mpi.MasterPatientIndexClient;
-import gov.va.api.lighthouse.veteranverification.api.v0.DisabilityRatingResponse;
+import gov.va.api.lighthouse.veteranverification.api.v1.DisabilityRatingResponse;
 import gov.va.api.lighthouse.veteranverification.service.utils.Notary;
 import gov.va.vba.benefits.share.services.FindRatingData;
 import gov.va.vba.benefits.share.services.FindRatingDataResponse;
@@ -35,7 +35,7 @@ public class DisabilityRatingController {
 
   /** Get veteran verification disability rating jwt from BGS using ICN from MPI lookup. */
   @GetMapping(
-      value = {"/v0/disability_rating/{icn}"},
+      value = {"/v1/disability_rating/{icn}"},
       produces = {"application/jwt"})
   public String disabilityRatingJwtResponse(@NonNull @PathVariable("icn") String icn) {
     DisabilityRatingResponse ratingDataResponse = findRatingDataResponse(icn);
@@ -43,7 +43,7 @@ public class DisabilityRatingController {
   }
 
   /** Get rating data from BGS using the SSN from MPI lookup. */
-  @GetMapping({"/v0/disability_rating/{icn}"})
+  @GetMapping({"/v1/disability_rating/{icn}"})
   public DisabilityRatingResponse findRatingDataResponse(@NonNull @PathVariable("icn") String icn) {
     PRPAIN201306UV02 mpiResponse = mpiClient.request1305ByIcn(icn);
     String fileNumber = getSsn(mpiResponse);

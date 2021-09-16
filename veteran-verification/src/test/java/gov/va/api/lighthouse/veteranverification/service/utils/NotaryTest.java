@@ -1,6 +1,6 @@
 package gov.va.api.lighthouse.veteranverification.service.utils;
 
-import gov.va.api.lighthouse.veteranverification.api.v0.ServiceHistoryResponse;
+import gov.va.api.lighthouse.veteranverification.api.v1.ServiceHistoryResponse;
 import gov.va.api.lighthouse.veteranverification.service.TestUtils;
 import java.util.Arrays;
 import lombok.SneakyThrows;

@@ -2,7 +2,7 @@ package gov.va.api.lighthouse.veteranverification.api;
 
 import static gov.va.api.lighthouse.veteranverification.api.RoundTrip.assertRoundTrip;
 
-import gov.va.api.lighthouse.veteranverification.api.v0.JwkKeyset;
+import gov.va.api.lighthouse.veteranverification.api.v1.JwkKeyset;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
