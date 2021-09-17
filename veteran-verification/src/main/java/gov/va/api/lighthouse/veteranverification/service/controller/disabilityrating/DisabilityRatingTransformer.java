@@ -2,8 +2,8 @@ package gov.va.api.lighthouse.veteranverification.service.controller.disabilityr
 
 import static gov.va.api.lighthouse.veteranverification.service.controller.Transformers.formatDateString;
 
-import gov.va.api.lighthouse.veteranverification.api.v0.DisabilityRatingResponse;
-import gov.va.api.lighthouse.veteranverification.api.v0.DisabilityRatingResponse.IndividualRating;
+import gov.va.api.lighthouse.veteranverification.api.v1.DisabilityRatingResponse;
+import gov.va.api.lighthouse.veteranverification.api.v1.DisabilityRatingResponse.IndividualRating;
 import gov.va.vba.benefits.share.services.DisabilityRatingRecord;
 import gov.va.vba.benefits.share.services.FindRatingDataResponse;
 import java.util.ArrayList;

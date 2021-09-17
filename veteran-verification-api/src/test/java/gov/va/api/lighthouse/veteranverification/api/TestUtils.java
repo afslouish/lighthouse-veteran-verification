@@ -1,7 +1,7 @@
 package gov.va.api.lighthouse.veteranverification.api;
 
-import gov.va.api.lighthouse.veteranverification.api.v0.Deployment;
-import gov.va.api.lighthouse.veteranverification.api.v0.ServiceHistoryResponse;
+import gov.va.api.lighthouse.veteranverification.api.v1.Deployment;
+import gov.va.api.lighthouse.veteranverification.api.v1.ServiceHistoryResponse;
 import java.time.LocalDate;
 import java.util.Arrays;
 import lombok.experimental.UtilityClass;

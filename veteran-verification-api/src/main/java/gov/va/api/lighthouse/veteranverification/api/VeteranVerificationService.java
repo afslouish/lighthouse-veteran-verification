@@ -1,9 +1,9 @@
 package gov.va.api.lighthouse.veteranverification.api;
 
-import gov.va.api.lighthouse.veteranverification.api.v0.DisabilityRatingResponse;
-import gov.va.api.lighthouse.veteranverification.api.v0.JwkKeyset;
-import gov.va.api.lighthouse.veteranverification.api.v0.ServiceHistoryResponse;
-import gov.va.api.lighthouse.veteranverification.api.v0.VeteranStatusResponse;
+import gov.va.api.lighthouse.veteranverification.api.v1.DisabilityRatingResponse;
+import gov.va.api.lighthouse.veteranverification.api.v1.JwkKeyset;
+import gov.va.api.lighthouse.veteranverification.api.v1.ServiceHistoryResponse;
+import gov.va.api.lighthouse.veteranverification.api.v1.VeteranStatusResponse;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.info.Contact;
@@ -42,7 +42,7 @@ import javax.ws.rs.Path;
                     + "### 3. Build your app\n\n"
                     + "The base URI for the Veteran Verification API in the Sandbox environment "
                     + "is:\n\n"
-                    + "https://sandbox-api.va.gov/services/veteran_verification/v0\n\n"
+                    + "https://sandbox-api.va.gov/services/veteran_verification/v1\n\n"
                     + "Check out some of our [sample apps]"
                     + "(https://github.com/department-of-veterans-affairs/vets-api-clients/tree/master/samples/). "
                     + "Please visit our VA Lighthouse [Support portal](/support) should you need "
@@ -62,18 +62,18 @@ import javax.ws.rs.Path;
                     + "for increased rate limits by emailing, and requests will be decided on a "
                     + "case by case basis.\n\n"
                     + "### Raw Open API Spec\n"
-                    + "https://api.va.gov/services/veteran_verification/docs/v0/veteran_verification",
+                    + "https://api.va.gov/services/veteran_verification/docs/v1/veteran_verification",
             termsOfService = "",
             contact = @Contact(name = "VA.gov")),
     servers = {
       @Server(
           url = "https://sandbox-api.va.gov/services/veteran_verification/{version}",
           description = "VA.gov API sandbox environment",
-          variables = {@ServerVariable(name = "version", defaultValue = "v0")}),
+          variables = {@ServerVariable(name = "version", defaultValue = "v1")}),
       @Server(
           url = "https://api.va.gov/services/veteran_verification/{version}",
           description = "VA.gov API production environment",
-          variables = {@ServerVariable(name = "version", defaultValue = "v0")})
+          variables = {@ServerVariable(name = "version", defaultValue = "v1")})
     })
 @Path("/")
 public interface VeteranVerificationService {

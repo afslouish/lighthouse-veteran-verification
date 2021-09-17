@@ -8,6 +8,6 @@ import org.junit.jupiter.api.Test;
 public class KeysIT {
   @Test
   public void happyPath() {
-    ExpectedResponse response = veteranVerificationGetRequest("v0/keys", "application/json", 200);
+    ExpectedResponse response = veteranVerificationGetRequest("v1/keys", "application/json", 200);
   }
 }

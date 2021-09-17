@@ -1,8 +1,8 @@
 package gov.va.api.lighthouse.veteranverification.service.controller.veteranstatus;
 
-import gov.va.api.lighthouse.veteranverification.api.v0.VeteranStatusResponse;
-import gov.va.api.lighthouse.veteranverification.api.v0.VeteranStatusResponse.VeteranStatusAttributes;
-import gov.va.api.lighthouse.veteranverification.api.v0.VeteranStatusResponse.VeteranStatusDetails;
+import gov.va.api.lighthouse.veteranverification.api.v1.VeteranStatusResponse;
+import gov.va.api.lighthouse.veteranverification.api.v1.VeteranStatusResponse.VeteranStatusAttributes;
+import gov.va.api.lighthouse.veteranverification.api.v1.VeteranStatusResponse.VeteranStatusDetails;
 import gov.va.viers.cdi.emis.requestresponse.v1.EMISveteranStatusResponseType;
 import lombok.Builder;
 import lombok.NonNull;

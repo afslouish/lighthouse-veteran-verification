@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import gov.va.api.lighthouse.bgs.BenefitsGatewayServicesClient;
 import gov.va.api.lighthouse.mpi.MasterPatientIndexClient;
-import gov.va.api.lighthouse.veteranverification.api.v0.DisabilityRatingResponse;
+import gov.va.api.lighthouse.veteranverification.api.v1.DisabilityRatingResponse;
 import gov.va.api.lighthouse.veteranverification.service.TestUtils;
 import gov.va.api.lighthouse.veteranverification.service.utils.JwksProperties;
 import gov.va.api.lighthouse.veteranverification.service.utils.Notary;

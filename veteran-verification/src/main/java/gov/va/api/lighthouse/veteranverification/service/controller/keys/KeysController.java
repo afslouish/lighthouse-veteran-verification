@@ -1,6 +1,6 @@
 package gov.va.api.lighthouse.veteranverification.service.controller.keys;
 
-import gov.va.api.lighthouse.veteranverification.api.v0.JwkKeyset;
+import gov.va.api.lighthouse.veteranverification.api.v1.JwkKeyset;
 import gov.va.api.lighthouse.veteranverification.service.utils.JwksProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +16,7 @@ public class KeysController {
     this.jwksProperties = jwksProperties;
   }
 
-  @GetMapping({"/v0/keys"})
+  @GetMapping({"/v1/keys"})
   public JwkKeyset keyset() {
     KeysTransformer transformer = KeysTransformer.builder().jwksProperties(jwksProperties).build();
     return transformer.keysTransformer();

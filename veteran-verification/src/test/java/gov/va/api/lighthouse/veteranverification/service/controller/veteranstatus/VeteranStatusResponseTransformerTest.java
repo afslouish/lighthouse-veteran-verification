@@ -2,8 +2,8 @@ package gov.va.api.lighthouse.veteranverification.service.controller.veteranstat
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import gov.va.api.lighthouse.veteranverification.api.v0.VeteranStatusResponse;
-import gov.va.api.lighthouse.veteranverification.api.v0.VeteranStatusResponse.VeteranStatusDetails;
+import gov.va.api.lighthouse.veteranverification.api.v1.VeteranStatusResponse;
+import gov.va.api.lighthouse.veteranverification.api.v1.VeteranStatusResponse.VeteranStatusDetails;
 import gov.va.viers.cdi.emis.commonservice.v1.VeteranStatus;
 import gov.va.viers.cdi.emis.requestresponse.v1.EMISveteranStatusResponseType;
 import org.junit.jupiter.api.Test;
