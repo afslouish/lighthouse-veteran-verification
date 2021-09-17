@@ -46,7 +46,7 @@ public class VeteranServiceHistoryTransformer {
           new AbstractMap.SimpleEntry<>("M", "Marine Corps"),
           new AbstractMap.SimpleEntry<>("N", "Navy"));
 
-  private final String[] thirtyTwoStatuteCodes = {"J", "N", "P", "Q", "Z"};
+  private final String[] title32StatuteCodes = {"J", "N", "P", "Q", "Z"};
 
   @NonNull String icn;
 
@@ -73,6 +73,10 @@ public class VeteranServiceHistoryTransformer {
         .collect(Collectors.toList());
   }
 
+  /**
+   * Returns filtered list of active ServiceHistoryEpisodes from Emis's serviceEpisodesRequest
+   * response.
+   */
   private AbstractList<ServiceHistoryResponse.ServiceHistoryEpisode> getActiveServicePeriods() {
     if (serviceEpisodeResponseType == null) {
       return new ArrayList<>();
@@ -146,6 +150,10 @@ public class VeteranServiceHistoryTransformer {
     return new ArrayList<>(episodes);
   }
 
+  /**
+   * Returns filtered list of non title32StatuteCodes reserve ServiceHistoryEpisodes from Emis's
+   * guardReserveServicePeriodsResponse response.
+   */
   private List<ServiceHistoryResponse.ServiceHistoryEpisode> getNonTitle32ReservePeriods() {
     List<ServiceHistoryResponse.ServiceHistoryEpisode> nonTitle32ReservePeriods = new ArrayList<>();
     List<GuardReserveServicePeriods> periods =
@@ -161,7 +169,7 @@ public class VeteranServiceHistoryTransformer {
                 || "Y"
                     .equalsIgnoreCase(
                         period.getGuardReserveServicePeriodsData().getTrainingIndicatorCode())
-                || Arrays.stream(thirtyTwoStatuteCodes)
+                || Arrays.stream(title32StatuteCodes)
                     .toList()
                     .contains(
                         period
