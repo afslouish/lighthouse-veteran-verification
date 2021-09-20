@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-/** V0 Home Controller class for open api. */
+/** V1 Home Controller class for open api. */
 @RestController
 @RequestMapping(produces = "application/json")
-public class HomeControllerV0 {
+public class HomeControllerV1 {
   private final Resource veteranVerificationOpenapi;
 
   @Autowired
-  HomeControllerV0(
+  HomeControllerV1(
       @Value("classpath:/veteran-verification-openapi.json") Resource veteranVerificationOpenapi) {
     this.veteranVerificationOpenapi = veteranVerificationOpenapi;
   }
@@ -27,7 +27,7 @@ public class HomeControllerV0 {
   /** REST endpoint for OpenAPI JSON + redirect. */
   @SneakyThrows
   @GetMapping(
-      value = {"v0/docs/veteran_verification"},
+      value = {"v1/docs/veteran_verification"},
       produces = "application/json")
   @ResponseBody
   public Object veteranVerificationOpenApiJson() {

@@ -2,7 +2,7 @@
 
 ## Veteran status confirmed user
 ```
-curl http://localhost:8080/v0/status/1012667145V762142
+curl http://localhost:8080/v1/status/1012667145V762142
 ```
 **Expected Results**
 ```json
@@ -19,7 +19,7 @@ curl http://localhost:8080/v0/status/1012667145V762142
 
 ## Veteran status not confirmed user
 ```
-curl http://localhost:8080/v0/status/1012666182V203777
+curl http://localhost:8080/v1/status/1012666182V203777
 ```
 
 **Expected Results**

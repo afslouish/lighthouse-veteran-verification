@@ -13,7 +13,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import gov.va.api.health.sentinel.Environment;
 import gov.va.api.health.sentinel.ExpectedResponse;
 import gov.va.api.lighthouse.veteranverification.api.ApiError;
-import gov.va.api.lighthouse.veteranverification.api.v0.ServiceHistoryResponse;
+import gov.va.api.lighthouse.veteranverification.api.v1.ServiceHistoryResponse;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -29,7 +29,7 @@ public class ServiceHistoryIT {
   @Test
   public void serviceHistoryEmisSoapFaultError() {
     String request =
-        String.format("v0/service_history/%s", systemDefinition().icns().noEmisEpisodesUser());
+        String.format("v1/service_history/%s", systemDefinition().icns().noEmisEpisodesUser());
     ExpectedResponse response = veteranVerificationGetRequest(request, "application/json", 502);
     ApiError.NoServiceHistoryFoundApiError serviceHistory =
         response.response().getBody().as(ApiError.NoServiceHistoryFoundApiError.class);
@@ -45,7 +45,7 @@ public class ServiceHistoryIT {
   @Test
   void serviceHistoryHappyJwtPath() {
     String request =
-        String.format("v0/service_history/%s", systemDefinition().icns().serviceHistoryIcn());
+        String.format("v1/service_history/%s", systemDefinition().icns().serviceHistoryIcn());
     ExpectedResponse response = veteranVerificationGetRequest(request, "application/jwt", 200);
     String serviceHistory = response.response().asString();
     assertNotNull(serviceHistory);
@@ -55,7 +55,7 @@ public class ServiceHistoryIT {
   @SneakyThrows
   void serviceHistoryHappyPath() {
     String request =
-        String.format("v0/service_history/%s", systemDefinition().icns().serviceHistoryIcn());
+        String.format("v1/service_history/%s", systemDefinition().icns().serviceHistoryIcn());
     ExpectedResponse response = veteranVerificationGetRequest(request, "application/json", 200);
     ServiceHistoryResponse serviceHistory =
         toServiceEpisodesResponse(response.response().getBody().print());
@@ -119,7 +119,7 @@ public class ServiceHistoryIT {
   @Test
   public void serviceHistoryNoMpiResponse() {
     String request =
-        String.format("v0/service_history/%s", systemDefinition().icns().noMpiUserIcn());
+        String.format("v1/service_history/%s", systemDefinition().icns().noMpiUserIcn());
     ExpectedResponse response = veteranVerificationGetRequest(request, "application/json", 502);
     ApiError.NoServiceHistoryFoundApiError serviceHistory =
         response.response().getBody().as(ApiError.NoServiceHistoryFoundApiError.class);
@@ -136,7 +136,7 @@ public class ServiceHistoryIT {
   public void serviceHistoryNullEndDate() {
     String request =
         String.format(
-            "v0/service_history/%s", systemDefinition().icns().serviceHistoryIcnNullEndDate());
+            "v1/service_history/%s", systemDefinition().icns().serviceHistoryIcnNullEndDate());
     ExpectedResponse response = veteranVerificationGetRequest(request, "application/json", 200);
     ServiceHistoryResponse serviceHistory =
         toServiceEpisodesResponse(response.response().getBody().print());

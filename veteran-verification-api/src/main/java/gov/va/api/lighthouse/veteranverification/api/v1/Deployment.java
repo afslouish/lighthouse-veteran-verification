@@ -1,4 +1,4 @@
-package gov.va.api.lighthouse.veteranverification.api.v0;
+package gov.va.api.lighthouse.veteranverification.api.v1;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;

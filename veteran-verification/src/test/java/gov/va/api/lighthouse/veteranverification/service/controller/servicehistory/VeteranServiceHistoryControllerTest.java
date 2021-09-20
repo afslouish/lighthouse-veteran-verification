@@ -6,7 +6,7 @@ import com.sun.xml.ws.fault.ServerSOAPFaultException;
 import com.sun.xml.ws.wsdl.parser.InaccessibleWSDLException;
 import gov.va.api.lighthouse.emis.EmisMilitaryInformationServiceClient;
 import gov.va.api.lighthouse.mpi.MasterPatientIndexClient;
-import gov.va.api.lighthouse.veteranverification.api.v0.ServiceHistoryResponse;
+import gov.va.api.lighthouse.veteranverification.api.v1.ServiceHistoryResponse;
 import gov.va.api.lighthouse.veteranverification.service.Exceptions;
 import gov.va.api.lighthouse.veteranverification.service.TestUtils;
 import gov.va.api.lighthouse.veteranverification.service.utils.JwksProperties;

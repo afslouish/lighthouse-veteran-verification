@@ -8,7 +8,7 @@ import com.sun.xml.ws.fault.ServerSOAPFaultException;
 import com.sun.xml.ws.wsdl.parser.InaccessibleWSDLException;
 import gov.va.api.lighthouse.emis.EmisMilitaryInformationServiceClient;
 import gov.va.api.lighthouse.mpi.MasterPatientIndexClient;
-import gov.va.api.lighthouse.veteranverification.api.v0.ServiceHistoryResponse;
+import gov.va.api.lighthouse.veteranverification.api.v1.ServiceHistoryResponse;
 import gov.va.api.lighthouse.veteranverification.service.utils.Notary;
 import gov.va.viers.cdi.emis.requestresponse.v2.EMISdeploymentResponseType;
 import gov.va.viers.cdi.emis.requestresponse.v2.EMISguardReserveServicePeriodsResponseType;
@@ -43,7 +43,7 @@ public class VeteranServiceHistoryController {
    * Get veteran verification service history jwt from eMIS using an EDIPI or ICN from MPI lookup.
    */
   @GetMapping(
-      value = {"/v0/service_history/{icn}"},
+      value = {"/v1/service_history/{icn}"},
       produces = {"application/jwt"})
   public String veteranServiceHistoryJwtResponse(@NonNull @PathVariable("icn") String icn) {
     ServiceHistoryResponse serviceHistoryResponse = veteranServiceHistoryResponse(icn);
@@ -52,7 +52,7 @@ public class VeteranServiceHistoryController {
 
   /** Get veteran verification service history from eMIS using an EDIPI or ICN from MPI lookup. */
   @GetMapping(
-      value = {"/v0/service_history/{icn}"},
+      value = {"/v1/service_history/{icn}"},
       produces = {"application/json"})
   public ServiceHistoryResponse veteranServiceHistoryResponse(
       @NonNull @PathVariable("icn") String icn) {

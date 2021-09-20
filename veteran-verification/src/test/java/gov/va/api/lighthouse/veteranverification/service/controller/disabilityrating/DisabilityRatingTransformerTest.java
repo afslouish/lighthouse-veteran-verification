@@ -3,10 +3,10 @@ package gov.va.api.lighthouse.veteranverification.service.controller.disabilityr
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import gov.va.api.lighthouse.veteranverification.api.v0.DisabilityRatingResponse;
-import gov.va.api.lighthouse.veteranverification.api.v0.DisabilityRatingResponse.DisabilityRatingAttributes;
-import gov.va.api.lighthouse.veteranverification.api.v0.DisabilityRatingResponse.DisabilityRatingData;
-import gov.va.api.lighthouse.veteranverification.api.v0.DisabilityRatingResponse.IndividualRating;
+import gov.va.api.lighthouse.veteranverification.api.v1.DisabilityRatingResponse;
+import gov.va.api.lighthouse.veteranverification.api.v1.DisabilityRatingResponse.DisabilityRatingAttributes;
+import gov.va.api.lighthouse.veteranverification.api.v1.DisabilityRatingResponse.DisabilityRatingData;
+import gov.va.api.lighthouse.veteranverification.api.v1.DisabilityRatingResponse.IndividualRating;
 import gov.va.vba.benefits.share.services.DisabilityRating;
 import gov.va.vba.benefits.share.services.DisabilityRatingRecord;
 import gov.va.vba.benefits.share.services.FindRatingDataResponse;

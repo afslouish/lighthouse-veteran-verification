@@ -1,7 +1,7 @@
 package gov.va.api.lighthouse.veteranverification.service.controller.servicehistory;
 
-import gov.va.api.lighthouse.veteranverification.api.v0.Deployment;
-import gov.va.api.lighthouse.veteranverification.api.v0.ServiceHistoryResponse;
+import gov.va.api.lighthouse.veteranverification.api.v1.Deployment;
+import gov.va.api.lighthouse.veteranverification.api.v1.ServiceHistoryResponse;
 import gov.va.api.lighthouse.veteranverification.service.MpiLookupUtils;
 import gov.va.api.lighthouse.veteranverification.service.controller.Transformers;
 import gov.va.api.lighthouse.veteranverification.service.utils.UuidV5;

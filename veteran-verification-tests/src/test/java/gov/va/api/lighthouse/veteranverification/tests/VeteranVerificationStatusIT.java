@@ -7,7 +7,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import gov.va.api.health.sentinel.Environment;
 import gov.va.api.health.sentinel.ExpectedResponse;
-import gov.va.api.lighthouse.veteranverification.api.v0.VeteranStatusResponse;
+import gov.va.api.lighthouse.veteranverification.api.v1.VeteranStatusResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -23,7 +23,7 @@ public class VeteranVerificationStatusIT {
 
   @Test
   void veteranVerificationEmisV5Status() {
-    String request = String.format("v0/status/%s", systemDefinition().icns().v5StatusIcn());
+    String request = String.format("v1/status/%s", systemDefinition().icns().v5StatusIcn());
     ExpectedResponse response = veteranVerificationGetRequest(request, "application/json", 200);
     response.expectValid(VeteranStatusResponse.class);
     VeteranStatusResponse status = response.response().getBody().as(VeteranStatusResponse.class);
@@ -32,7 +32,7 @@ public class VeteranVerificationStatusIT {
 
   @Test
   void veteranVerificationStatusFound() {
-    String request = String.format("v0/status/%s", systemDefinition().icns().confirmedStatusIcn());
+    String request = String.format("v1/status/%s", systemDefinition().icns().confirmedStatusIcn());
     ExpectedResponse response = veteranVerificationGetRequest(request, "application/json", 200);
     response.expectValid(VeteranStatusResponse.class);
     VeteranStatusResponse status = response.response().getBody().as(VeteranStatusResponse.class);
@@ -41,7 +41,7 @@ public class VeteranVerificationStatusIT {
 
   @Test
   void veteranVerificationStatusNoEmisUser() {
-    String request = String.format("v0/status/%s", systemDefinition().icns().noEmisUserStatusIcn());
+    String request = String.format("v1/status/%s", systemDefinition().icns().noEmisUserStatusIcn());
     ExpectedResponse response = veteranVerificationGetRequest(request, "application/json", 200);
     response.expectValid(VeteranStatusResponse.class);
     VeteranStatusResponse status = response.response().getBody().as(VeteranStatusResponse.class);
@@ -50,7 +50,7 @@ public class VeteranVerificationStatusIT {
 
   @Test
   void veteranVerificationStatusNotFound() {
-    String request = String.format("v0/status/%s", "not_found");
+    String request = String.format("v1/status/%s", "not_found");
     ExpectedResponse response = veteranVerificationGetRequest(request, "application/json", 200);
     response.expectValid(VeteranStatusResponse.class);
     VeteranStatusResponse status = response.response().getBody().as(VeteranStatusResponse.class);
