@@ -88,14 +88,10 @@ public class ServiceHistoryAttributesTest {
   }
 
   @Test
-  public void payGradeIsNonNullable() {
+  public void payGradeIsNullable() {
     ServiceHistoryResponse.ServiceHistoryAttributes serviceHistoryAttributes =
         TestUtils.makeServiceHistoryAttributes();
-    Assertions.assertThrows(
-        NullPointerException.class,
-        () -> {
-          serviceHistoryAttributes.payGrade(null);
-        });
+    serviceHistoryAttributes.payGrade(null);
   }
 
   @Test
