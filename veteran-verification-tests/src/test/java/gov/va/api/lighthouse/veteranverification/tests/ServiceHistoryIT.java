@@ -1,6 +1,6 @@
 package gov.va.api.lighthouse.veteranverification.tests;
 
-import static gov.va.api.health.sentinel.EnvironmentAssumptions.assumeEnvironmentNotIn;
+import static gov.va.api.health.sentinel.EnvironmentAssumptions.assumeEnvironmentIn;
 import static gov.va.api.lighthouse.veteranverification.tests.Requestor.veteranVerificationGetRequest;
 import static gov.va.api.lighthouse.veteranverification.tests.SystemDefinitions.systemDefinition;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -16,9 +16,8 @@ import org.junit.jupiter.api.Test;
 public class ServiceHistoryIT {
   @BeforeAll
   static void assumeEnvironment() {
-    // These tests would require PII to run in environments that do not use mock data.
-    // Tests must be limited to QA, Staging Lab, and Lab environments where mock applications run.
-    assumeEnvironmentNotIn(Environment.PROD, Environment.STAGING);
+    // Tests are only ran in environments that are not blocked by the kong gateway (ie Localhost).
+    assumeEnvironmentIn(Environment.LOCAL);
   }
 
   @Test

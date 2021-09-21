@@ -1,6 +1,6 @@
 package gov.va.api.lighthouse.veteranverification.tests;
 
-import static gov.va.api.health.sentinel.EnvironmentAssumptions.assumeEnvironmentNotIn;
+import static gov.va.api.health.sentinel.EnvironmentAssumptions.assumeEnvironmentIn;
 import static gov.va.api.lighthouse.veteranverification.tests.Requestor.veteranVerificationGetRequest;
 import static gov.va.api.lighthouse.veteranverification.tests.SystemDefinitions.systemDefinition;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -17,8 +17,8 @@ import org.junit.jupiter.api.Test;
 public class DisabilityRatingIT {
   @BeforeAll
   static void assumeEnvironment() {
-    // Do not run these tests in non-mocked environments: production and staging.
-    assumeEnvironmentNotIn(Environment.PROD, Environment.STAGING);
+    // Tests are only ran in environments that are not blocked by the kong gateway (ie Localhost).
+    assumeEnvironmentIn(Environment.LOCAL);
   }
 
   @Test
