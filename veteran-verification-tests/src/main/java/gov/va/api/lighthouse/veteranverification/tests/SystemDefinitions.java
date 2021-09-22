@@ -20,7 +20,7 @@ public class SystemDefinitions {
 
   public static final String SERVICE_HISTORY_ICN = "1012832025V743496";
 
-  public static final String SERVICE_HISTORY_ICN_NULL_END_DATE = "1012829446V964657";
+  public static final String SERVICE_HISTORY_ICN_NULL_END_DATE = "1012845631V882122";
 
   public static final String NO_MPI_USER_ICN = "1012855585V634865";
 

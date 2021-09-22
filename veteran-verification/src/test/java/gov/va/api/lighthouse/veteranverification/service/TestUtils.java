@@ -18,6 +18,7 @@ import gov.va.vba.benefits.share.services.RatingRecord;
 import gov.va.viers.cdi.emis.commonservice.v1.VeteranStatus;
 import gov.va.viers.cdi.emis.requestresponse.v1.EMISveteranStatusResponseType;
 import gov.va.viers.cdi.emis.requestresponse.v2.EMISdeploymentResponseType;
+import gov.va.viers.cdi.emis.requestresponse.v2.EMISguardReserveServicePeriodsResponseType;
 import gov.va.viers.cdi.emis.requestresponse.v2.EMISserviceEpisodeResponseType;
 import java.io.StringReader;
 import java.time.LocalDate;
@@ -71,6 +72,17 @@ public class TestUtils {
 
   private EMISveteranStatusResponseType createEmisResponse(VeteranStatus veteranStatus) {
     return EMISveteranStatusResponseType.builder().veteranStatus(veteranStatus).build();
+  }
+
+  @SneakyThrows
+  public EMISguardReserveServicePeriodsResponseType createGrasResponse(String filename) {
+    String profile = asString(TestUtils.class.getClassLoader().getResourceAsStream(filename));
+    return JAXBContext.newInstance(EMISguardReserveServicePeriodsResponseType.class)
+        .createUnmarshaller()
+        .unmarshal(
+            new StreamSource(new StringReader(profile)),
+            EMISguardReserveServicePeriodsResponseType.class)
+        .getValue();
   }
 
   @SneakyThrows
@@ -214,6 +226,22 @@ public class TestUtils {
   public void setEpisodesResponseException(
       @Mock EmisMilitaryInformationServiceClient emisClient, Exception e) {
     given(emisClient.serviceEpisodesRequest(ArgumentMatchers.any()))
+        .willAnswer(
+            invocation -> {
+              throw e;
+            });
+  }
+
+  public void setGrasMockResponse(
+      @Mock EmisMilitaryInformationServiceClient emisClient,
+      EMISguardReserveServicePeriodsResponseType response) {
+    Mockito.when(emisClient.guardReserveServiceRequest(ArgumentMatchers.any()))
+        .thenReturn(response);
+  }
+
+  public void setGrasResponseException(
+      @Mock EmisMilitaryInformationServiceClient emisClient, Exception e) {
+    given(emisClient.guardReserveServiceRequest(ArgumentMatchers.any()))
         .willAnswer(
             invocation -> {
               throw e;
