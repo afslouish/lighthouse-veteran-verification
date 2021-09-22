@@ -23,8 +23,6 @@
     <bgs-client.version>2.0.0</bgs-client.version>
     <find-bugs-annotations.version>3.0.1</find-bugs-annotations.version>
     <java-jwt.version>3.18.1</java-jwt.version>
-    <bcpkix-jdk15on.version>1.69</bcpkix-jdk15on.version>
-    <bcprov-jdk15on.version>1.59</bcprov-jdk15on.version>
   </properties>
   <dependencies>
     <dependency>
@@ -87,16 +85,6 @@
       <artifactId>annotations</artifactId>
       <version>${find-bugs-annotations.version}</version>
       <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.bouncycastle</groupId>
-      <artifactId>bcpkix-jdk15on</artifactId>
-      <version>${bcpkix-jdk15on.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.bouncycastle</groupId>
-      <artifactId>bcprov-jdk15on</artifactId>
-      <version>${bcprov-jdk15on.version}</version>
     </dependency>
   </dependencies>
   <build>
