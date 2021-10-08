@@ -5,30 +5,34 @@ import gov.va.api.lighthouse.emis.EmisVeteranStatusServiceClient;
 import java.util.AbstractMap;
 import java.util.Map;
 import java.util.concurrent.Callable;
+import lombok.Builder;
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.ResponseEntity;
 
 @Configuration
 public class BackEndHealthCheckRegistry {
-
-  private final BenefitsGatewayServicesClient bgsClient;
-  private final EmisVeteranStatusServiceClient emisClient;
+  private Map<String, Callable<ResponseEntity<String>>> registry;
 
   /** constructor. */
+  @Builder
   public BackEndHealthCheckRegistry(
-      @Autowired BenefitsGatewayServicesClient bgsClient,
-      @Autowired EmisVeteranStatusServiceClient emisClient) {
-    this.bgsClient = bgsClient;
-    this.emisClient = emisClient;
+      @NonNull @Autowired BenefitsGatewayServicesClient bgsClient,
+      @NonNull @Autowired EmisVeteranStatusServiceClient emisClient) {
+    this.registry =
+        Map.ofEntries(
+            new AbstractMap.SimpleEntry<String, Callable<ResponseEntity<String>>>(
+                "BGS", () -> bgsClient.wsdl()),
+            new AbstractMap.SimpleEntry<String, Callable<ResponseEntity<String>>>(
+                "EMIS", () -> emisClient.wsdl()));
   }
 
-  /** Returns registry of all backend health checks. */
-  public Map<String, Callable<ResponseEntity<String>>> getRegistry() {
-    return Map.ofEntries(
-        new AbstractMap.SimpleEntry<String, Callable<ResponseEntity<String>>>(
-            "BGS", () -> bgsClient.wsdl()),
-        new AbstractMap.SimpleEntry<String, Callable<ResponseEntity<String>>>(
-            "EMIS", () -> emisClient.wsdl()));
+  @Bean
+  @Qualifier("healthCheckRegistry")
+  public Map<String, Callable<ResponseEntity<String>>> registry() {
+    return registry;
   }
 }

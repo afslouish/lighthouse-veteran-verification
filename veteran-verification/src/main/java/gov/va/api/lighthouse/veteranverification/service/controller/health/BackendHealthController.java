@@ -9,6 +9,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.Status;
 import org.springframework.cache.annotation.CacheEvict;
@@ -32,8 +33,10 @@ public class BackendHealthController {
 
   private Map<String, Callable<ResponseEntity<String>>> healthChecks;
 
-  BackendHealthController(@Autowired BackEndHealthCheckRegistry backEndHealthCheckRegistry) {
-    this.healthChecks = backEndHealthCheckRegistry.getRegistry();
+  BackendHealthController(
+      @Autowired @Qualifier("healthCheckRegistry")
+          Map<String, Callable<ResponseEntity<String>>> healthChecks) {
+    this.healthChecks = healthChecks;
   }
 
   /** Clear cached resources. */
