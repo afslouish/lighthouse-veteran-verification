@@ -17,6 +17,7 @@ import io.swagger.v3.oas.annotations.servers.ServerVariable;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import org.springframework.boot.actuate.health.Health;
 
 /** Open API information for Veteran Verification Service. */
 @OpenAPIDefinition(
@@ -78,6 +79,23 @@ import javax.ws.rs.Path;
 @Path("/")
 public interface VeteranVerificationService {
   @GET
+  @Path("backend/health")
+  @ApiResponse(
+      responseCode = "200",
+      description = "Veteran Verification and all dependencies are health.",
+      content = {
+        @Content(mediaType = "application/json", schema = @Schema(implementation = JwkKeyset.class))
+      })
+  @ApiResponse(
+      responseCode = "500",
+      description = "Either Veteran Verification or one of its dependencies is not healthy.")
+  @Operation(
+      operationId = "getBackendHealthCheck",
+      summary = "Retrieves health status of Veteran Verification and its dependencies.")
+  @Tag(name = "JWS Validation")
+  Health collectBackendHealth();
+
+  @GET
   @Path("disability_rating")
   @ApiResponse(
       responseCode = "200",
@@ -130,8 +148,7 @@ public interface VeteranVerificationService {
   @ApiResponse(responseCode = "401", description = "Not authorized")
   @Operation(
       operationId = "getKeys",
-      summary = "Retrieve public keys to check Veteran Verification API token signatures",
-      security = {@SecurityRequirement(name = "bearer_token")})
+      summary = "Retrieve public keys to check Veteran Verification API token signatures")
   @Tag(name = "JWS Validation")
   JwkKeyset keys();
 
