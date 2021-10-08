@@ -1,18 +1,13 @@
 package gov.va.api.lighthouse.veteranverification.service.controller.health;
 
-import gov.va.api.lighthouse.bgs.BenefitsGatewayServicesClient;
-import gov.va.api.lighthouse.emis.EmisVeteranStatusServiceClient;
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicBoolean;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.weaver.ast.Call;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.Status;
@@ -36,8 +31,8 @@ public class BackendHealthController {
   private final AtomicBoolean hasCachedBackendHealth = new AtomicBoolean(false);
 
   private Map<String, Callable<ResponseEntity<String>>> healthChecks;
-  BackendHealthController(
-      @Autowired BackEndHealthCheckRegistry backEndHealthCheckRegistry) {
+
+  BackendHealthController(@Autowired BackEndHealthCheckRegistry backEndHealthCheckRegistry) {
     this.healthChecks = backEndHealthCheckRegistry.getRegistry();
   }
 
@@ -76,7 +71,7 @@ public class BackendHealthController {
 
   @SneakyThrows
   private Health testHealth(
-          String name, Callable<ResponseEntity<String>> healthCheck, Instant now) {
+      String name, Callable<ResponseEntity<String>> healthCheck, Instant now) {
     HttpStatus status;
     try {
       ResponseEntity<String> response = healthCheck.call();
