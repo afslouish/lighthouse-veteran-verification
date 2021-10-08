@@ -4,14 +4,15 @@ import gov.va.api.lighthouse.bgs.BenefitsGatewayServicesClient;
 import gov.va.api.lighthouse.emis.EmisVeteranStatusServiceClient;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.Callable;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.weaver.ast.Call;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.Status;
@@ -34,14 +35,10 @@ import org.springframework.web.client.RestClientException;
 public class BackendHealthController {
   private final AtomicBoolean hasCachedBackendHealth = new AtomicBoolean(false);
 
-  private final BenefitsGatewayServicesClient bgsClient;
-  private final EmisVeteranStatusServiceClient emisClient;
-
+  private Map<String, Callable<ResponseEntity<String>>> healthChecks;
   BackendHealthController(
-      @Autowired BenefitsGatewayServicesClient bgsClient,
-      @Autowired EmisVeteranStatusServiceClient emisClient) {
-    this.bgsClient = bgsClient;
-    this.emisClient = emisClient;
+      @Autowired BackEndHealthCheckRegistry backEndHealthCheckRegistry) {
+    this.healthChecks = backEndHealthCheckRegistry.getRegistry();
   }
 
   /** Clear cached resources. */
@@ -60,32 +57,13 @@ public class BackendHealthController {
     Instant now = Instant.now();
     List<Health> backendHealths = new ArrayList<>();
 
-    HttpStatus bgsStatus;
-    try {
-      ResponseEntity<String> response = bgsClient.wsdl();
-      bgsStatus = response.getStatusCode();
-    } catch (RestClientException e) {
-      log.error("Failure occurred when getting {} health: {}", "BGS", e.getMessage());
-      bgsStatus = HttpStatus.INTERNAL_SERVER_ERROR;
-    }
-    backendHealths.add(testHealth("BGS", bgsStatus, now));
-
-    HttpStatus emisStatus;
-    try {
-      ResponseEntity<String> response = emisClient.wsdl();
-      emisStatus = response.getStatusCode();
-    } catch (RestClientException e) {
-      log.error("Failure occurred when getting {} health: {}", "EMIS", e.getMessage());
-      emisStatus = HttpStatus.INTERNAL_SERVER_ERROR;
-    }
-    backendHealths.add(testHealth("EMIS", emisStatus, now));
-
+    healthChecks.forEach((service, check) -> backendHealths.add(testHealth(service, check, now)));
     Status status =
         backendHealths.stream().anyMatch(h -> h.getStatus().equals(Status.DOWN))
             ? Status.DOWN
             : Status.UP;
     Health overallHealth =
-        Health.status(new Status(status.getCode(), "Vista-Fhir-Query Backend Health Check"))
+        Health.status(new Status(status.getCode(), "Veteran-Verification Backend Health Check"))
             .withDetail("time", now)
             .withDetail("backendServices", backendHealths)
             .build();
@@ -97,7 +75,16 @@ public class BackendHealthController {
   }
 
   @SneakyThrows
-  private Health testHealth(String name, HttpStatus status, Instant now) {
+  private Health testHealth(
+          String name, Callable<ResponseEntity<String>> healthCheck, Instant now) {
+    HttpStatus status;
+    try {
+      ResponseEntity<String> response = healthCheck.call();
+      status = response.getStatusCode();
+    } catch (RestClientException e) {
+      log.error("Failure occurred when getting {} health: {}", name, e.getMessage());
+      status = HttpStatus.INTERNAL_SERVER_ERROR;
+    }
     return Health.status(new Status(status.is2xxSuccessful() ? "UP" : "DOWN", name))
         .withDetail("name", name)
         .withDetail("httpCode", status.value())
