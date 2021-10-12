@@ -25,9 +25,9 @@ public class BackEndHealthCheckRegistry {
     this.registry =
         Map.ofEntries(
             new AbstractMap.SimpleEntry<String, Callable<ResponseEntity<String>>>(
-                "BGS", () -> bgsClient.wsdl()),
+                "BGS", () -> bgsClient.health()),
             new AbstractMap.SimpleEntry<String, Callable<ResponseEntity<String>>>(
-                "EMIS", () -> emisClient.wsdl()));
+                "EMIS", () -> emisClient.health()));
   }
 
   @Bean
