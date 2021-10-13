@@ -17,7 +17,12 @@ import org.springframework.http.ResponseEntity;
 public class BackEndHealthCheckRegistry {
   private Map<String, Callable<ResponseEntity<String>>> registry;
 
-  /** constructor. */
+  /**
+   * Contains a map of all backend health checks. To extend add a new health check entry to the
+   * list. The key should be the backend service's name. The value of each key contains a Callable
+   * command object. This object's call method should return the health check command returned as a
+   * ResponseEntity/<String/> for its respective service.
+   */
   @Builder
   public BackEndHealthCheckRegistry(
       @NonNull @Autowired BenefitsGatewayServicesClient bgsClient,
