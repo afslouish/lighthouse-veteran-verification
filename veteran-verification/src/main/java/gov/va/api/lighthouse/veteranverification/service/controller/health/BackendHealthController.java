@@ -1,7 +1,5 @@
 package gov.va.api.lighthouse.veteranverification.service.controller.health;
 
-import com.sun.xml.ws.wsdl.parser.InaccessibleWSDLException;
-import java.net.MalformedURLException;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -81,9 +79,7 @@ public class BackendHealthController {
     try {
       ResponseEntity<String> response = healthCheck.call();
       status = response.getStatusCode();
-    } catch (RestClientException | InaccessibleWSDLException | MalformedURLException e) {
-      // InaccessibleWSDLException and MalformedURLException are thrown by Lighthouse SOAP clients
-      // RestClientException is thrown by Lighthouse REST clients
+    } catch (RestClientException e) {
       log.error("Failure occurred when getting {} health: {}", name, e.getMessage());
       status = HttpStatus.INTERNAL_SERVER_ERROR;
     }
