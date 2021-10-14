@@ -130,8 +130,7 @@ public interface VeteranVerificationService {
   @ApiResponse(responseCode = "401", description = "Not authorized")
   @Operation(
       operationId = "getKeys",
-      summary = "Retrieve public keys to check Veteran Verification API token signatures",
-      security = {@SecurityRequirement(name = "bearer_token")})
+      summary = "Retrieve public keys to check Veteran Verification API token signatures")
   @Tag(name = "JWS Validation")
   JwkKeyset keys();
 
