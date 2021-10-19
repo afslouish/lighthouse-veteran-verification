@@ -9,7 +9,7 @@
   </parent>
   <groupId>gov.va.api.lighthouse</groupId>
   <artifactId>veteran-verification</artifactId>
-  <version>2.0.26-SNAPSHOT</version>
+  <version>2.0.26</version>
   <packaging>jar</packaging>
   <properties>
     <docker.imageName>lighthouse-${project.artifactId}</docker.imageName>
@@ -18,7 +18,7 @@
     <swagger-maven-plugin.version>2.1.1</swagger-maven-plugin.version>
     <jersey-common.version>2.34</jersey-common.version>
     <emis-client-v1.version>2.0.4</emis-client-v1.version>
-    <emis-model.version>2.0.1</emis-model.version>
+    <emis-model.version>2.0.4</emis-model.version>
     <mock-server.version>5.11.2</mock-server.version>
     <bgs-client.version>2.0.3</bgs-client.version>
     <find-bugs-annotations.version>3.0.1</find-bugs-annotations.version>

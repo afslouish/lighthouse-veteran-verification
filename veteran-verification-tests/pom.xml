@@ -9,13 +9,13 @@
   </parent>
   <groupId>gov.va.api.lighthouse</groupId>
   <artifactId>veteran-verification-tests</artifactId>
-  <version>2.0.26-SNAPSHOT</version>
+  <version>2.0.26</version>
   <packaging>jar</packaging>
   <properties>
     <docker.imageName>lighthouse-${project.artifactId}</docker.imageName>
-    <mock-emis.version>2.0.1</mock-emis.version>
-    <mock-mpi.version>2.0.2</mock-mpi.version>
-    <mock-bgs.version>2.0.1</mock-bgs.version>
+    <mock-emis.version>2.0.2</mock-emis.version>
+    <mock-mpi.version>2.0.3</mock-mpi.version>
+    <mock-bgs.version>2.0.2</mock-bgs.version>
   </properties>
   <dependencies>
     <dependency>
