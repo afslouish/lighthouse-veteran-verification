@@ -155,8 +155,8 @@
                 <argument>-Demis.v2.wsdl-location=http://localhost:9000/VIERSService/eMIS/v2/MilitaryInformationService/eMISMilitaryInformationService.wsdl</argument>
                 <argument>-Demis.v1.url=http://localhost:9000/VIERSService/eMIS/v1/VeteranStatusService</argument>
                 <argument>-Demis.v1.wsdl-location=http://localhost:9000/VIERSService/eMIS/v1/VeteranStatusService/eMISVeteranStatusService.wsdl</argument>
-                <argument>-Dbgs.url=http://localhost:8000/v0/RatingServiceBean/RatingService</argument>
-                <argument>-Dbgs.wsdl-location=http://localhost:8000/v0/RatingServiceBean/RatingService/ratingRecord.wsdl</argument>
+                <argument>-Dbgs.url=http://localhost:8090/v0/RatingServiceBean/RatingService</argument>
+                <argument>-Dbgs.wsdl-location=http://localhost:8090/v0/RatingServiceBean/RatingService/ratingRecord.wsdl</argument>
                 <argument>-Djwk-set.current-key-id=fake</argument>
                 <argument>-Djwk-set.current-password=secret</argument>
                 <argument>-Djwk-set.keystore-password=secret</argument>
