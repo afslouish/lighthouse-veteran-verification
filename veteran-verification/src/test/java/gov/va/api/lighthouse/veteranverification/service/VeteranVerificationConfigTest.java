@@ -2,7 +2,7 @@ package gov.va.api.lighthouse.veteranverification.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import gov.va.api.lighthouse.bgs.SoapBenefitsGatewayServicesClient;
+import gov.va.api.lighthouse.bgs.SoapBgsRatingServiceClient;
 import gov.va.api.lighthouse.emis.SoapEmisMilitaryInformationServiceClient;
 import gov.va.api.lighthouse.emis.SoapEmisVeteranStatusServiceClient;
 import gov.va.api.lighthouse.mpi.SoapMasterPatientIndexClient;
@@ -23,9 +23,9 @@ public class VeteranVerificationConfigTest {
           "src/test/resources/fakekeystore.jks");
 
   @Test
-  void bgsClient() {
-    assertThat(veteranVerificationConfig.benefitsGatewayServicesClient())
-        .isInstanceOf(SoapBenefitsGatewayServicesClient.class);
+  void bgsRatingServiceClient() {
+    assertThat(veteranVerificationConfig.bgsRatingServiceClient())
+        .isInstanceOf(SoapBgsRatingServiceClient.class);
   }
 
   @Test

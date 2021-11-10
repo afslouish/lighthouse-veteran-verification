@@ -1,8 +1,8 @@
 package gov.va.api.lighthouse.veteranverification.service;
 
-import gov.va.api.lighthouse.bgs.BenefitsGatewayServicesClient;
-import gov.va.api.lighthouse.bgs.BgsConfig;
-import gov.va.api.lighthouse.bgs.SoapBenefitsGatewayServicesClient;
+import gov.va.api.lighthouse.bgs.BgsRatingServiceClient;
+import gov.va.api.lighthouse.bgs.BgsRatingServiceConfig;
+import gov.va.api.lighthouse.bgs.SoapBgsRatingServiceClient;
 import gov.va.api.lighthouse.emis.EmisConfigV1;
 import gov.va.api.lighthouse.emis.EmisConfigV2;
 import gov.va.api.lighthouse.emis.EmisMilitaryInformationServiceClient;
@@ -28,7 +28,7 @@ public class VeteranVerificationConfig {
 
   private EmisConfigV2 emisConfigV2;
 
-  private BgsConfig bgsConfig;
+  private BgsRatingServiceConfig bgsRatingServiceConfig;
 
   private String currentKeyId;
 
@@ -42,7 +42,7 @@ public class VeteranVerificationConfig {
       @Autowired MpiConfig mpiConfig,
       @Autowired EmisConfigV1 emisConfigV1,
       @Autowired EmisConfigV2 emisConfigV2,
-      @Autowired BgsConfig bgsConfig,
+      @Autowired BgsRatingServiceConfig bgsRatingServiceConfig,
       @Value("${jwk-set.current-key-id}") String currentKeyId,
       @Value("${jwk-set.current-password}") String currentKeyPassword,
       @Value("${jwk-set.keystore-password}") String keyStorePassword,
@@ -50,7 +50,7 @@ public class VeteranVerificationConfig {
     this.mpiConfig = mpiConfig;
     this.emisConfigV1 = emisConfigV1;
     this.emisConfigV2 = emisConfigV2;
-    this.bgsConfig = bgsConfig;
+    this.bgsRatingServiceConfig = bgsRatingServiceConfig;
     this.currentKeyId = currentKeyId;
     this.currentKeyPassword = currentKeyPassword;
     this.keyStorePassword = keyStorePassword;
@@ -58,8 +58,8 @@ public class VeteranVerificationConfig {
   }
 
   @Bean
-  public BenefitsGatewayServicesClient benefitsGatewayServicesClient() {
-    return SoapBenefitsGatewayServicesClient.of(bgsConfig);
+  public BgsRatingServiceClient bgsRatingServiceClient() {
+    return SoapBgsRatingServiceClient.of(bgsRatingServiceConfig);
   }
 
   @Bean

@@ -3,8 +3,8 @@ package gov.va.api.lighthouse.veteranverification.service;
 import static org.apache.tomcat.util.http.fileupload.util.Streams.asString;
 import static org.mockito.BDDMockito.given;
 
-import gov.va.api.lighthouse.bgs.BenefitsGatewayServicesClient;
-import gov.va.api.lighthouse.bgs.BgsConfig;
+import gov.va.api.lighthouse.bgs.BgsRatingServiceClient;
+import gov.va.api.lighthouse.bgs.BgsRatingServiceConfig;
 import gov.va.api.lighthouse.emis.EmisConfigV1;
 import gov.va.api.lighthouse.emis.EmisConfigV2;
 import gov.va.api.lighthouse.emis.EmisMilitaryInformationServiceClient;
@@ -104,8 +104,8 @@ public class TestUtils {
         .getValue();
   }
 
-  public BgsConfig makeBgsConfig() {
-    return BgsConfig.builder()
+  public BgsRatingServiceConfig makeBgsConfig() {
+    return BgsRatingServiceConfig.builder()
         .keyAlias("fake")
         .url("http://localhost:2021")
         .wsdlLocation("http://localhost:2021")
@@ -189,9 +189,10 @@ public class TestUtils {
   }
 
   public void setBgsMockResponse(
-      @Mock BenefitsGatewayServicesClient bgsClient, RatingRecord ratingRecord) {
+      @Mock BgsRatingServiceClient bgsRatingServiceClient, RatingRecord ratingRecord) {
     FindRatingDataResponse response = createBgsResponse(ratingRecord);
-    Mockito.when(bgsClient.ratingServiceRequest(ArgumentMatchers.any())).thenReturn(response);
+    Mockito.when(bgsRatingServiceClient.ratingServiceRequest(ArgumentMatchers.any()))
+        .thenReturn(response);
   }
 
   public void setDeploymentsMockResponse(

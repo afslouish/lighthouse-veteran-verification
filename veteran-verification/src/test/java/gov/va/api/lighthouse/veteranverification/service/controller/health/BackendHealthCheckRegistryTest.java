@@ -1,6 +1,6 @@
 package gov.va.api.lighthouse.veteranverification.service.controller.health;
 
-import gov.va.api.lighthouse.bgs.BenefitsGatewayServicesClient;
+import gov.va.api.lighthouse.bgs.BgsRatingServiceClient;
 import gov.va.api.lighthouse.emis.EmisVeteranStatusServiceClient;
 import java.util.Map;
 import java.util.concurrent.Callable;
@@ -17,7 +17,7 @@ public class BackendHealthCheckRegistryTest {
 
   @Mock private EmisVeteranStatusServiceClient emisClient;
 
-  @Mock private BenefitsGatewayServicesClient bgsClient;
+  @Mock private BgsRatingServiceClient bgsRatingServiceClient;
 
   @AfterEach
   void afterEach() throws Exception {
@@ -34,7 +34,10 @@ public class BackendHealthCheckRegistryTest {
     Assertions.assertThrows(
         NullPointerException.class,
         () -> {
-          BackEndHealthCheckRegistry.builder().emisClient(emisClient).bgsClient(null).build();
+          BackEndHealthCheckRegistry.builder()
+              .emisClient(emisClient)
+              .bgsRatingServiceClient(null)
+              .build();
         });
   }
 
@@ -43,14 +46,20 @@ public class BackendHealthCheckRegistryTest {
     Assertions.assertThrows(
         NullPointerException.class,
         () -> {
-          BackEndHealthCheckRegistry.builder().emisClient(null).bgsClient(bgsClient).build();
+          BackEndHealthCheckRegistry.builder()
+              .emisClient(null)
+              .bgsRatingServiceClient(bgsRatingServiceClient)
+              .build();
         });
   }
 
   @Test
   public void happyPath() {
     BackEndHealthCheckRegistry backEndHealthCheckRegistry =
-        BackEndHealthCheckRegistry.builder().emisClient(emisClient).bgsClient(bgsClient).build();
+        BackEndHealthCheckRegistry.builder()
+            .emisClient(emisClient)
+            .bgsRatingServiceClient(bgsRatingServiceClient)
+            .build();
     Map<String, Callable<ResponseEntity<String>>> registry = backEndHealthCheckRegistry.registry();
     Assertions.assertEquals(2, registry.size());
     Assertions.assertNotNull(registry.get("BGS"));
