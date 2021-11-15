@@ -4,7 +4,7 @@
   <parent>
     <groupId>gov.va.api.health</groupId>
     <artifactId>api-starter</artifactId>
-    <version>8.0.28</version>
+    <version>9.0.0</version>
     <relativePath/>
   </parent>
   <groupId>gov.va.api.lighthouse</groupId>
@@ -12,16 +12,10 @@
   <version>2.0.29-SNAPSHOT</version>
   <packaging>jar</packaging>
   <properties>
-    <master-patient-index-client.version>2.0.8</master-patient-index-client.version>
     <swagger-annotations.version>1.6.2</swagger-annotations.version>
     <findbugs-annotations.version>3.0.1</findbugs-annotations.version>
   </properties>
   <dependencies>
-    <dependency>
-      <groupId>gov.va.api.lighthouse</groupId>
-      <artifactId>master-patient-index-client</artifactId>
-      <version>${master-patient-index-client.version}</version>
-    </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-beans</artifactId>

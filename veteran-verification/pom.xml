@@ -4,7 +4,7 @@
   <parent>
     <groupId>gov.va.api.health</groupId>
     <artifactId>service-starter</artifactId>
-    <version>8.0.28</version>
+    <version>9.0.0</version>
     <relativePath/>
   </parent>
   <groupId>gov.va.api.lighthouse</groupId>
@@ -13,14 +13,14 @@
   <packaging>jar</packaging>
   <properties>
     <docker.imageName>lighthouse-${project.artifactId}</docker.imageName>
-    <master-patient-index-client.version>2.0.8</master-patient-index-client.version>
+    <master-patient-index-client.version>3.0.0</master-patient-index-client.version>
     <swagger-examples-plugin.version>1.0.1</swagger-examples-plugin.version>
     <swagger-maven-plugin.version>2.1.1</swagger-maven-plugin.version>
     <jersey-common.version>2.34</jersey-common.version>
-    <emis-client-v1.version>2.0.4</emis-client-v1.version>
-    <emis-model.version>2.0.4</emis-model.version>
+    <emis-client-v1.version>3.0.0</emis-client-v1.version>
+    <emis-model.version>3.0.0</emis-model.version>
     <mock-server.version>5.11.2</mock-server.version>
-    <bgs-client-rating-service.version>2.0.10</bgs-client-rating-service.version>
+    <bgs-client-rating-service.version>3.0.0</bgs-client-rating-service.version>
     <find-bugs-annotations.version>3.0.1</find-bugs-annotations.version>
     <java-jwt.version>3.18.1</java-jwt.version>
   </properties>
