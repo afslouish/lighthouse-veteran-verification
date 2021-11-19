@@ -8,9 +8,9 @@ import gov.va.api.lighthouse.veteranverification.api.v1.DisabilityRatingResponse
 import gov.va.api.lighthouse.veteranverification.service.TestUtils;
 import gov.va.api.lighthouse.veteranverification.service.utils.JwksProperties;
 import gov.va.api.lighthouse.veteranverification.service.utils.Notary;
-import gov.va.vba.benefits.share.services.DisabilityRating;
-import gov.va.vba.benefits.share.services.DisabilityRatingRecord;
-import gov.va.vba.benefits.share.services.RatingRecord;
+import gov.va.vba.benefits.share.services.rating.DisabilityRating;
+import gov.va.vba.benefits.share.services.rating.DisabilityRatingRecord;
+import gov.va.vba.benefits.share.services.rating.RatingRecord;
 import java.util.Collections;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

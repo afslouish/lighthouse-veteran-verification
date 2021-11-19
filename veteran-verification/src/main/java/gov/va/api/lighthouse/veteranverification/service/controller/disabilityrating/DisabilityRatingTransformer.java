@@ -4,8 +4,8 @@ import static gov.va.api.lighthouse.veteranverification.service.controller.Trans
 
 import gov.va.api.lighthouse.veteranverification.api.v1.DisabilityRatingResponse;
 import gov.va.api.lighthouse.veteranverification.api.v1.DisabilityRatingResponse.IndividualRating;
-import gov.va.vba.benefits.share.services.DisabilityRatingRecord;
-import gov.va.vba.benefits.share.services.FindRatingDataResponse;
+import gov.va.vba.benefits.share.services.rating.DisabilityRatingRecord;
+import gov.va.vba.benefits.share.services.rating.FindRatingDataResponse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -25,7 +25,7 @@ public class DisabilityRatingTransformer {
   }
 
   List<IndividualRating> individualRatings() {
-    List<gov.va.vba.benefits.share.services.DisabilityRating> disabilityRatings =
+    List<gov.va.vba.benefits.share.services.rating.DisabilityRating> disabilityRatings =
         Optional.ofNullable(response)
             .map(value -> value.getReturn())
             .map(returnValue -> returnValue.getDisabilityRatingRecord())
@@ -35,7 +35,8 @@ public class DisabilityRatingTransformer {
       return null;
     }
     List<IndividualRating> individualRatings = new ArrayList<>();
-    for (gov.va.vba.benefits.share.services.DisabilityRating disabilityRating : disabilityRatings) {
+    for (gov.va.vba.benefits.share.services.rating.DisabilityRating disabilityRating :
+        disabilityRatings) {
       individualRatings.add(
           IndividualRating.builder()
               .decision(disabilityRating.getDisabilityDecisionTypeName())

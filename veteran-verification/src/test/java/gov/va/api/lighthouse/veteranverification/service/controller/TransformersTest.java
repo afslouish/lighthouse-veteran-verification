@@ -21,12 +21,12 @@ public class TransformersTest {
 
   @Test
   void isBlankCollection() {
-    assertThat(Transformers.isBlank(new LinkedList())).isTrue();
+    assertThat(Transformers.isBlank(new LinkedList<>())).isTrue();
   }
 
   @Test
   void isBlankMap() {
-    assertThat(Transformers.isBlank(new HashMap())).isTrue();
+    assertThat(Transformers.isBlank(new HashMap<>())).isTrue();
   }
 
   @Test

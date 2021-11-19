@@ -15,7 +15,7 @@
     <docker.imageName>lighthouse-${project.artifactId}</docker.imageName>
     <mock-emis.version>3.0.0</mock-emis.version>
     <mock-mpi.version>3.0.0</mock-mpi.version>
-    <mock-bgs.version>3.0.1</mock-bgs.version>
+    <mock-bgs.version>3.0.3</mock-bgs.version>
   </properties>
   <dependencies>
     <dependency>
