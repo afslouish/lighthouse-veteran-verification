@@ -1,6 +1,6 @@
 package gov.va.api.lighthouse.veteranverification.service.controller.health;
 
-import gov.va.api.lighthouse.bgs.BgsRatingServiceClient;
+import gov.va.api.lighthouse.bgs.BgsClient;
 import gov.va.api.lighthouse.emis.EmisVeteranStatusServiceClient;
 import java.util.Map;
 import java.util.concurrent.Callable;
@@ -17,7 +17,7 @@ public class BackendHealthCheckRegistryTest {
 
   @Mock private EmisVeteranStatusServiceClient emisClient;
 
-  @Mock private BgsRatingServiceClient bgsRatingServiceClient;
+  @Mock private BgsClient bgsClient;
 
   @AfterEach
   void afterEach() throws Exception {
@@ -34,10 +34,7 @@ public class BackendHealthCheckRegistryTest {
     Assertions.assertThrows(
         NullPointerException.class,
         () -> {
-          BackEndHealthCheckRegistry.builder()
-              .emisClient(emisClient)
-              .bgsRatingServiceClient(null)
-              .build();
+          BackEndHealthCheckRegistry.builder().emisClient(emisClient).bgsClient(null).build();
         });
   }
 
@@ -46,20 +43,14 @@ public class BackendHealthCheckRegistryTest {
     Assertions.assertThrows(
         NullPointerException.class,
         () -> {
-          BackEndHealthCheckRegistry.builder()
-              .emisClient(null)
-              .bgsRatingServiceClient(bgsRatingServiceClient)
-              .build();
+          BackEndHealthCheckRegistry.builder().emisClient(null).bgsClient(bgsClient).build();
         });
   }
 
   @Test
   public void happyPath() {
     BackEndHealthCheckRegistry backEndHealthCheckRegistry =
-        BackEndHealthCheckRegistry.builder()
-            .emisClient(emisClient)
-            .bgsRatingServiceClient(bgsRatingServiceClient)
-            .build();
+        BackEndHealthCheckRegistry.builder().emisClient(emisClient).bgsClient(bgsClient).build();
     Map<String, Callable<ResponseEntity<String>>> registry = backEndHealthCheckRegistry.registry();
     Assertions.assertEquals(2, registry.size());
     Assertions.assertNotNull(registry.get("BGS"));

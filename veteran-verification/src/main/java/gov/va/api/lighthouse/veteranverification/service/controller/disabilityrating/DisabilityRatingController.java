@@ -2,7 +2,7 @@ package gov.va.api.lighthouse.veteranverification.service.controller.disabilityr
 
 import static gov.va.api.lighthouse.veteranverification.service.MpiLookupUtils.getSsn;
 
-import gov.va.api.lighthouse.bgs.BgsRatingServiceClient;
+import gov.va.api.lighthouse.bgs.BgsClient;
 import gov.va.api.lighthouse.mpi.MasterPatientIndexClient;
 import gov.va.api.lighthouse.veteranverification.api.v1.DisabilityRatingResponse;
 import gov.va.api.lighthouse.veteranverification.service.utils.Notary;
@@ -20,16 +20,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(produces = {"application/json"})
 public class DisabilityRatingController {
   private final MasterPatientIndexClient mpiClient;
-  private final BgsRatingServiceClient bgsRatingServiceClient;
+  private final BgsClient bgsClient;
   private final Notary notary;
 
   /** Controller constructor. */
   public DisabilityRatingController(
       @Autowired MasterPatientIndexClient mpiClient,
-      @Autowired BgsRatingServiceClient bgsRatingServiceClient,
+      @Autowired BgsClient bgsClient,
       @Autowired Notary notary) {
     this.mpiClient = mpiClient;
-    this.bgsRatingServiceClient = bgsRatingServiceClient;
+    this.bgsClient = bgsClient;
     this.notary = notary;
   }
 
@@ -48,8 +48,7 @@ public class DisabilityRatingController {
     PRPAIN201306UV02 mpiResponse = mpiClient.request1305ByIcn(icn);
     String fileNumber = getSsn(mpiResponse);
     FindRatingDataResponse bgsResponse =
-        bgsRatingServiceClient.ratingServiceRequest(
-            FindRatingData.builder().fileNumber(fileNumber).build());
+        bgsClient.ratingServiceRequest(FindRatingData.builder().fileNumber(fileNumber).build());
     return DisabilityRatingTransformer.builder()
         .response(bgsResponse)
         .build()

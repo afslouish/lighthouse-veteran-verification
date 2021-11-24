@@ -1,8 +1,8 @@
 package gov.va.api.lighthouse.veteranverification.service;
 
-import gov.va.api.lighthouse.bgs.BgsRatingServiceClient;
-import gov.va.api.lighthouse.bgs.BgsRatingServiceConfig;
-import gov.va.api.lighthouse.bgs.SoapBgsRatingServiceClient;
+import gov.va.api.lighthouse.bgs.BgsClient;
+import gov.va.api.lighthouse.bgs.BgsClientConfig;
+import gov.va.api.lighthouse.bgs.SoapBgsClient;
 import gov.va.api.lighthouse.emis.EmisConfigV1;
 import gov.va.api.lighthouse.emis.EmisConfigV2;
 import gov.va.api.lighthouse.emis.EmisMilitaryInformationServiceClient;
@@ -28,7 +28,7 @@ public class VeteranVerificationConfig {
 
   private EmisConfigV2 emisConfigV2;
 
-  private BgsRatingServiceConfig bgsRatingServiceConfig;
+  private BgsClientConfig bgsClientConfig;
 
   private String currentKeyId;
 
@@ -42,7 +42,7 @@ public class VeteranVerificationConfig {
       @Autowired MpiConfig mpiConfig,
       @Autowired EmisConfigV1 emisConfigV1,
       @Autowired EmisConfigV2 emisConfigV2,
-      @Autowired BgsRatingServiceConfig bgsRatingServiceConfig,
+      @Autowired BgsClientConfig bgsClientConfig,
       @Value("${jwk-set.current-key-id}") String currentKeyId,
       @Value("${jwk-set.current-password}") String currentKeyPassword,
       @Value("${jwk-set.keystore-password}") String keyStorePassword,
@@ -50,7 +50,7 @@ public class VeteranVerificationConfig {
     this.mpiConfig = mpiConfig;
     this.emisConfigV1 = emisConfigV1;
     this.emisConfigV2 = emisConfigV2;
-    this.bgsRatingServiceConfig = bgsRatingServiceConfig;
+    this.bgsClientConfig = bgsClientConfig;
     this.currentKeyId = currentKeyId;
     this.currentKeyPassword = currentKeyPassword;
     this.keyStorePassword = keyStorePassword;
@@ -58,8 +58,8 @@ public class VeteranVerificationConfig {
   }
 
   @Bean
-  public BgsRatingServiceClient bgsRatingServiceClient() {
-    return SoapBgsRatingServiceClient.of(bgsRatingServiceConfig);
+  public BgsClient bgsClient() {
+    return SoapBgsClient.of(bgsClientConfig);
   }
 
   @Bean

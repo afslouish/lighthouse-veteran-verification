@@ -3,8 +3,8 @@ package gov.va.api.lighthouse.veteranverification.service;
 import static org.apache.tomcat.util.http.fileupload.util.Streams.asString;
 import static org.mockito.BDDMockito.given;
 
-import gov.va.api.lighthouse.bgs.BgsRatingServiceClient;
-import gov.va.api.lighthouse.bgs.BgsRatingServiceConfig;
+import gov.va.api.lighthouse.bgs.BgsClient;
+import gov.va.api.lighthouse.bgs.BgsClientConfig;
 import gov.va.api.lighthouse.emis.EmisConfigV1;
 import gov.va.api.lighthouse.emis.EmisConfigV2;
 import gov.va.api.lighthouse.emis.EmisMilitaryInformationServiceClient;
@@ -104,15 +104,22 @@ public class TestUtils {
         .getValue();
   }
 
-  public BgsRatingServiceConfig makeBgsConfig() {
-    return BgsRatingServiceConfig.builder()
-        .keyAlias("fake")
-        .url("http://localhost:2021")
-        .wsdlLocation("http://localhost:2021")
-        .keystorePath("src/test/resources/fakekeystore.jks")
-        .keystorePassword("secret")
-        .truststorePath("src/test/resources/faketruststore.jks")
-        .truststorePassword("secret")
+  public BgsClientConfig makeBgsConfig() {
+    return BgsClientConfig.builder()
+        .rating(
+            BgsClientConfig.Service.builder()
+                .url("http://localhost:2021")
+                .wsdl("http://localhost:2021")
+                .build())
+        .ssl(
+            BgsClientConfig.Ssl.builder()
+                .keyStore(
+                    BgsClientConfig.KeyStore.builder()
+                        .path("src/test/resources/fakekeystore.jks")
+                        .password("secret")
+                        .keyPassword("secret")
+                        .build())
+                .build())
         .build();
   }
 
@@ -188,11 +195,9 @@ public class TestUtils {
         .build();
   }
 
-  public void setBgsMockResponse(
-      @Mock BgsRatingServiceClient bgsRatingServiceClient, RatingRecord ratingRecord) {
+  public void setBgsMockResponse(@Mock BgsClient bgsClient, RatingRecord ratingRecord) {
     FindRatingDataResponse response = createBgsResponse(ratingRecord);
-    Mockito.when(bgsRatingServiceClient.ratingServiceRequest(ArgumentMatchers.any()))
-        .thenReturn(response);
+    Mockito.when(bgsClient.ratingServiceRequest(ArgumentMatchers.any())).thenReturn(response);
   }
 
   public void setDeploymentsMockResponse(

@@ -2,7 +2,7 @@ package gov.va.api.lighthouse.veteranverification.service.controller.disabilityr
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import gov.va.api.lighthouse.bgs.BgsRatingServiceClient;
+import gov.va.api.lighthouse.bgs.BgsClient;
 import gov.va.api.lighthouse.mpi.MasterPatientIndexClient;
 import gov.va.api.lighthouse.veteranverification.api.v1.DisabilityRatingResponse;
 import gov.va.api.lighthouse.veteranverification.service.TestUtils;
@@ -21,17 +21,17 @@ import org.mockito.MockitoAnnotations;
 public class DisabilityRatingControllerTest {
   @Mock private MasterPatientIndexClient mpiClient;
 
-  @Mock private BgsRatingServiceClient bgsRatingServiceClient;
+  @Mock private BgsClient bgsClient;
 
   private Notary notary;
 
   @Test
   public void HappyPathJwt() {
     DisabilityRatingController controller =
-        new DisabilityRatingController(mpiClient, bgsRatingServiceClient, notary);
+        new DisabilityRatingController(mpiClient, bgsClient, notary);
     TestUtils.setMpiMockResponse(mpiClient, "mpi/mpi_profile_response_body.xml");
     TestUtils.setBgsMockResponse(
-        bgsRatingServiceClient,
+        bgsClient,
         RatingRecord.builder()
             .disabilityRatingRecord(
                 DisabilityRatingRecord.builder()
@@ -90,10 +90,10 @@ public class DisabilityRatingControllerTest {
   @Test
   void happyPathRetrieveBySsnTest() {
     DisabilityRatingController controller =
-        new DisabilityRatingController(mpiClient, bgsRatingServiceClient, notary);
+        new DisabilityRatingController(mpiClient, bgsClient, notary);
     TestUtils.setMpiMockResponse(mpiClient, "mpi/mpi_profile_icn_response_body.xml");
     TestUtils.setBgsMockResponse(
-        bgsRatingServiceClient,
+        bgsClient,
         RatingRecord.builder()
             .disabilityRatingRecord(
                 DisabilityRatingRecord.builder()

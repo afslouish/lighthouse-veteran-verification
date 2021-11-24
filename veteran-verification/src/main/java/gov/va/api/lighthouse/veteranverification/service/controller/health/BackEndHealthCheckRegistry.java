@@ -1,6 +1,6 @@
 package gov.va.api.lighthouse.veteranverification.service.controller.health;
 
-import gov.va.api.lighthouse.bgs.BgsRatingServiceClient;
+import gov.va.api.lighthouse.bgs.BgsClient;
 import gov.va.api.lighthouse.emis.EmisVeteranStatusServiceClient;
 import java.util.AbstractMap;
 import java.util.Map;
@@ -25,12 +25,12 @@ public class BackEndHealthCheckRegistry {
    */
   @Builder
   public BackEndHealthCheckRegistry(
-      @NonNull @Autowired BgsRatingServiceClient bgsRatingServiceClient,
+      @NonNull @Autowired BgsClient bgsClient,
       @NonNull @Autowired EmisVeteranStatusServiceClient emisClient) {
     this.registry =
         Map.ofEntries(
             new AbstractMap.SimpleEntry<String, Callable<ResponseEntity<String>>>(
-                "BGS", () -> bgsRatingServiceClient.health()),
+                "BGS", () -> bgsClient.ratingServiceHealth()),
             new AbstractMap.SimpleEntry<String, Callable<ResponseEntity<String>>>(
                 "EMIS", () -> emisClient.health()));
   }
