@@ -52,7 +52,7 @@ public class MpiLookupUtils {
       return null;
     }
     for (II id : patient.getId()) {
-      if (id == null || id.getExtension() == null || isBlank(id.getExtension())) {
+      if (id == null || isBlank(id.getExtension())) {
         continue;
       }
       String extension = id.getExtension();
@@ -179,7 +179,7 @@ public class MpiLookupUtils {
       return null;
     }
     for (PRPAMT201310UV02OtherIDs asOtherId : asOtherIds) {
-      if (asOtherId == null || asOtherId.getId() == null || isBlank(asOtherId.getId())) {
+      if (asOtherId == null || isBlank(asOtherId.getId())) {
         continue;
       } else {
         for (II id : asOtherId.getId()) {

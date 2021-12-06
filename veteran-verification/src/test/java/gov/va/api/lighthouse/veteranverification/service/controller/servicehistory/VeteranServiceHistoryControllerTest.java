@@ -49,42 +49,42 @@ public class VeteranServiceHistoryControllerTest {
     Assertions.assertEquals(response.data().size(), 2);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeOne = response.data().get(0);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeTwo = response.data().get(1);
-    Assertions.assertEquals(episodeOne.id(), "003001fb-2023-5892-bcb7-aa41a6b485c0");
-    Assertions.assertEquals(episodeOne.type(), "service-history-episodes");
-    Assertions.assertEquals(episodeTwo.id(), "457f5a25-0069-59cd-9599-63784e495ede");
-    Assertions.assertEquals(episodeTwo.type(), "service-history-episodes");
+    Assertions.assertEquals("8456c5a3-dfa4-5758-9693-414bdc234b4e", episodeOne.id());
+    Assertions.assertEquals("service-history-episodes", episodeOne.type());
+    Assertions.assertEquals("ffeeff47-e910-5df1-93f5-f77e846dbef0", episodeTwo.id());
+    Assertions.assertEquals("service-history-episodes", episodeTwo.type());
     ServiceHistoryResponse.ServiceHistoryAttributes attributesOne = episodeOne.attributes();
     ServiceHistoryResponse.ServiceHistoryAttributes attributesTwo = episodeTwo.attributes();
-    Assertions.assertEquals(attributesOne.firstName(), "Alfredo");
-    Assertions.assertEquals(attributesOne.lastName(), "Armstrong");
-    Assertions.assertEquals(attributesOne.branchOfService(), "Army");
-    Assertions.assertEquals(attributesOne.startDate().toString(), "2000-01-01");
-    Assertions.assertEquals(attributesOne.endDate().toString(), "2001-02-01");
-    Assertions.assertEquals(attributesOne.payGrade(), "E05");
+    Assertions.assertEquals("Alfredo", attributesOne.firstName());
+    Assertions.assertEquals("Armstrong", attributesOne.lastName());
+    Assertions.assertEquals("Army", attributesOne.branchOfService());
+    Assertions.assertEquals("2000-01-01", attributesOne.startDate().toString());
+    Assertions.assertEquals("2001-02-01", attributesOne.endDate().toString());
+    Assertions.assertEquals("E05", attributesOne.payGrade());
     Assertions.assertEquals(
-        attributesOne.dischargeStatus(),
-        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);
-    Assertions.assertEquals(attributesOne.separationReason(), "SUFFICIENT SERVICE FOR RETIREMENT");
-    Assertions.assertEquals(attributesOne.deployments().stream().count(), 1);
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE,
+        attributesOne.dischargeStatus());
+    Assertions.assertEquals("SUFFICIENT SERVICE FOR RETIREMENT", attributesOne.separationReason());
+    Assertions.assertEquals(1, attributesOne.deployments().stream().count());
     Assertions.assertEquals(
-        attributesOne.deployments().get(0).startDate().toString(), "2000-02-01");
-    Assertions.assertEquals(attributesOne.deployments().get(0).endDate().toString(), "2001-01-01");
-    Assertions.assertEquals(attributesOne.deployments().get(0).location(), "QAT");
-    Assertions.assertEquals(attributesTwo.firstName(), "Alfredo");
-    Assertions.assertEquals(attributesTwo.lastName(), "Armstrong");
-    Assertions.assertEquals(attributesTwo.branchOfService(), "Air Force");
-    Assertions.assertEquals(attributesTwo.startDate().toString(), "2002-01-01");
-    Assertions.assertEquals(attributesTwo.endDate().toString(), "2003-02-01");
-    Assertions.assertEquals(attributesTwo.payGrade(), "E05");
+        "2000-02-01", attributesOne.deployments().get(0).startDate().toString());
+    Assertions.assertEquals("2001-01-01", attributesOne.deployments().get(0).endDate().toString());
+    Assertions.assertEquals("QAT", attributesOne.deployments().get(0).location());
+    Assertions.assertEquals("Alfredo", attributesTwo.firstName());
+    Assertions.assertEquals("Armstrong", attributesTwo.lastName());
+    Assertions.assertEquals("Air Force", attributesTwo.branchOfService());
+    Assertions.assertEquals("2002-01-01", attributesTwo.startDate().toString());
+    Assertions.assertEquals("2003-02-01", attributesTwo.endDate().toString());
+    Assertions.assertEquals("E05", attributesTwo.payGrade());
     Assertions.assertEquals(
-        attributesTwo.dischargeStatus(),
-        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);
-    Assertions.assertEquals(attributesTwo.separationReason(), "SUFFICIENT SERVICE FOR RETIREMENT");
-    Assertions.assertEquals(attributesTwo.deployments().stream().count(), 1);
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE,
+        attributesTwo.dischargeStatus());
+    Assertions.assertEquals("SUFFICIENT SERVICE FOR RETIREMENT", attributesTwo.separationReason());
+    Assertions.assertEquals(1, attributesTwo.deployments().stream().count());
     Assertions.assertEquals(
-        attributesTwo.deployments().get(0).startDate().toString(), "2002-02-01");
-    Assertions.assertEquals(attributesTwo.deployments().get(0).endDate().toString(), "2003-01-01");
-    Assertions.assertEquals(attributesTwo.deployments().get(0).location(), "QAT");
+        "2002-02-01", attributesTwo.deployments().get(0).startDate().toString());
+    Assertions.assertEquals("2003-01-01", attributesTwo.deployments().get(0).endDate().toString());
+    Assertions.assertEquals("QAT", attributesTwo.deployments().get(0).location());
   }
 
   @Test
@@ -103,23 +103,26 @@ public class VeteranServiceHistoryControllerTest {
     TestUtils.setGrasMockResponse(emisClient, grasResponse);
     String response = controller.veteranServiceHistoryJwtResponse("icn");
     Assertions.assertEquals(
-        "eyJraWQiOiJmYWtlIiwidHlwIjoiSldUIiwiYWxnIjoiUlMyNTYifQ.eyJkYXRhIjpbey"
-            + "JpZCI6IjAwMzAwMWZiLTIwMjMtNTg5Mi1iY2I3LWFhNDFhNmI0ODVjMCIsInR5cGUiOiJzZXJ2aWNlLWhpc3RvcnktZXBp"
-            + "c29kZXMiLCJhdHRyaWJ1dGVzIjp7ImZpcnN0X25hbWUiOiJBbGZyZWRvIiwibGFzdF9uYW1lIjoiQXJtc3Ryb25nIiwiYn"
-            + "JhbmNoX29mX3NlcnZpY2UiOiJBcm15Iiwic3RhcnRfZGF0ZSI6IjIwMDAtMDEtMDEiLCJlbmRfZGF0ZSI6IjIwMDEtMDIt"
-            + "MDEiLCJwYXlfZ3JhZGUiOiJFMDUiLCJkaXNjaGFyZ2Vfc3RhdHVzIjoiaG9ub3JhYmxlIiwic2VwYXJhdGlvbl9yZWFzb2"
-            + "4iOiJTVUZGSUNJRU5UIFNFUlZJQ0UgRk9SIFJFVElSRU1FTlQiLCJkZXBsb3ltZW50cyI6W3sic3RhcnRfZGF0ZSI6IjIw"
-            + "MDAtMDItMDEiLCJlbmRfZGF0ZSI6IjIwMDEtMDEtMDEiLCJsb2NhdGlvbiI6IlFBVCJ9XX19LHsiaWQiOiI0NTdmNWEyNS"
-            + "0wMDY5LTU5Y2QtOTU5OS02Mzc4NGU0OTVlZGUiLCJ0eXBlIjoic2VydmljZS1oaXN0b3J5LWVwaXNvZGVzIiwiYXR0cmli"
-            + "dXRlcyI6eyJmaXJzdF9uYW1lIjoiQWxmcmVkbyIsImxhc3RfbmFtZSI6IkFybXN0cm9uZyIsImJyYW5jaF9vZl9zZXJ2aW"
-            + "NlIjoiQWlyIEZvcmNlIiwic3RhcnRfZGF0ZSI6IjIwMDItMDEtMDEiLCJlbmRfZGF0ZSI6IjIwMDMtMDItMDEiLCJwYXlf"
-            + "Z3JhZGUiOiJFMDUiLCJkaXNjaGFyZ2Vfc3RhdHVzIjoiaG9ub3JhYmxlIiwic2VwYXJhdGlvbl9yZWFzb24iOiJTVUZGSU"
-            + "NJRU5UIFNFUlZJQ0UgRk9SIFJFVElSRU1FTlQiLCJkZXBsb3ltZW50cyI6W3sic3RhcnRfZGF0ZSI6IjIwMDItMDItMDEi"
-            + "LCJlbmRfZGF0ZSI6IjIwMDMtMDEtMDEiLCJsb2NhdGlvbiI6IlFBVCJ9XX19XX0.gIeCkhn5hut7M7f4xsAa6GPDUpB_Gu"
-            + "HbffaC8QALRe6WZu_j_vg1-kUVWWsmWjlr8a_NBrniZ6NUuomWTtLr_O-G88kPghzeMbGCNpyLuGvPsUZey5kL9PTv3aWj"
-            + "J1YwVHCaYSao7QhS-D6N4DwhmKbR8MXfGevyozJRg4fLsAGh9NLox-9JrQIp8dRhwoiCD5MG56iOj5Fk2IqaH_QUgIafe5"
-            + "iNAke4NY1FSytKrrDaR-tKOEkPpkAzTriNPcYQCE0S6kO7xATeqBqE-_c9rVdGLi7Cb7nHLjmzZvFhV3r50b8Z-IYpmMPF"
-            + "i24hFY4s97JhrZsATZdU7Km8OHw0-Q",
+        "eyJraWQiOiJmYWtlIiwidHlwIjoiSldUIiwiYWxnIjoiUlMyNTYifQ.eyJkYXRhIjpbeyJpZCI6Ijg"
+            + "0NTZjNWEzLWRmYTQtNTc1OC05NjkzLTQxNGJkYzIzNGI0ZSIsInR5cGUiOiJzZXJ2aWNlLWhpc3Rvc"
+            + "nktZXBpc29kZXMiLCJhdHRyaWJ1dGVzIjp7ImZpcnN0X25hbWUiOiJBbGZyZWRvIiwibGFzdF9uYW1l"
+            + "IjoiQXJtc3Ryb25nIiwiYnJhbmNoX29mX3NlcnZpY2UiOiJBcm15Iiwic3RhcnRfZGF0ZSI6IjIwMDA"
+            + "tMDEtMDEiLCJlbmRfZGF0ZSI6IjIwMDEtMDItMDEiLCJwYXlfZ3JhZGUiOiJFMDUiLCJkaXNjaGFyZ2V"
+            + "fc3RhdHVzIjoiaG9ub3JhYmxlIiwic2VwYXJhdGlvbl9yZWFzb24iOiJTVUZGSUNJRU5UIFNFUlZJQ0"
+            + "UgRk9SIFJFVElSRU1FTlQiLCJkZXBsb3ltZW50cyI6W3sic3RhcnRfZGF0ZSI6IjIwMDAtMDItMDEiL"
+            + "CJlbmRfZGF0ZSI6IjIwMDEtMDEtMDEiLCJsb2NhdGlvbiI6IlFBVCJ9XX19LHsiaWQiOiJmZmVlZmY"
+            + "0Ny1lOTEwLTVkZjEtOTNmNS1mNzdlODQ2ZGJlZjAiLCJ0eXBlIjoic2VydmljZS1oaXN0b3J5LWVwaX"
+            + "NvZGVzIiwiYXR0cmlidXRlcyI6eyJmaXJzdF9uYW1lIjoiQWxmcmVkbyIsImxhc3RfbmFtZSI6IkFyb"
+            + "XN0cm9uZyIsImJyYW5jaF9vZl9zZXJ2aWNlIjoiQWlyIEZvcmNlIiwic3RhcnRfZGF0ZSI6IjIwMDIt"
+            + "MDEtMDEiLCJlbmRfZGF0ZSI6IjIwMDMtMDItMDEiLCJwYXlfZ3JhZGUiOiJFMDUiLCJkaXNjaGFyZ2V"
+            + "fc3RhdHVzIjoiaG9ub3JhYmxlIiwic2VwYXJhdGlvbl9yZWFzb24iOiJTVUZGSUNJRU5UIFNFUlZJQ0"
+            + "UgRk9SIFJFVElSRU1FTlQiLCJkZXBsb3ltZW50cyI6W3sic3RhcnRfZGF0ZSI6IjIwMDItMDItMDEiL"
+            + "CJlbmRfZGF0ZSI6IjIwMDMtMDEtMDEiLCJsb2NhdGlvbiI6IlFBVCJ9XX19XX0.SoBVl41Ue0Dpf74Z0"
+            + "Txx3OJVAZ1vVebRCidZ5sFoEhfZw0XUmUZW08fY82Vm2HYAG-l6oLL7xbMrbzuhWg498fZZ3pC2R7VxA"
+            + "gJ5RKXTcQRvjpuWMicV8Lz0KFr7wezb_QrmBltKSmqwU5JjTDO_k67oP_p9c1Ijl17jDLuUrCZe_7YbU"
+            + "i9fXZdUKg6tl6p6JZL6zIMHnPQFRIlxhpYT7XHz9T_6WRUCdQh_Wm5TyF0nDDuUHT01_1VHvHqDUgt43"
+            + "hVP6uQmgUzq_v03Mpuj61MTltA56dW0XkPnE6H6CGvqeuERfL8HWO-6aG-82gsi-Z5o4S0x7Asb3VdI"
+            + "H8O_Ng",
         response);
   }
 

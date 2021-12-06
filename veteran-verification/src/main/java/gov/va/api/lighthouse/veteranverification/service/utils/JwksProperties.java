@@ -107,7 +107,7 @@ public class JwksProperties {
       try (InputStream keystoreInputStream = ResourceUtils.getURL(keyStorePath).openStream()) {
         keystore.load(keystoreInputStream, keyStorePassword.toCharArray());
       } catch (IOException e) {
-        log.error("Failed to create keystore", e);
+        log.error("Failed to create keystore");
         throw e;
       }
       JWKSet jwksPrivate = JWKSet.load(keystore, name -> currentKeyPassword.toCharArray());

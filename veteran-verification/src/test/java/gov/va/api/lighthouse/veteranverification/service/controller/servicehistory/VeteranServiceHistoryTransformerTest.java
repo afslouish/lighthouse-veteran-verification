@@ -89,7 +89,7 @@ public class VeteranServiceHistoryTransformerTest {
     ServiceHistoryResponse response = transformer.serviceHistoryTransformer();
     Assertions.assertEquals(4, response.data().size());
     ServiceHistoryResponse.ServiceHistoryEpisode episodeOne = response.data().get(0);
-    Assertions.assertEquals("74f6658f-d17c-5182-917b-1a409fcb77b0", episodeOne.id());
+    Assertions.assertEquals("f15059f7-963a-5c02-b97b-18888d0496c1", episodeOne.id());
     Assertions.assertEquals("service-history-episodes", episodeOne.type());
     ServiceHistoryResponse.ServiceHistoryAttributes attributesOne = episodeOne.attributes();
     Assertions.assertEquals("Alfredo", attributesOne.firstName());
@@ -107,7 +107,7 @@ public class VeteranServiceHistoryTransformerTest {
     Assertions.assertEquals(attributesOne.deployments().stream().count(), 0);
 
     ServiceHistoryResponse.ServiceHistoryEpisode episodeTwo = response.data().get(1);
-    Assertions.assertEquals("a0682550-f285-50d9-98ce-7a83982efe37", episodeTwo.id());
+    Assertions.assertEquals("c40dc18f-52b3-5c2a-97d3-78fa62a836fe", episodeTwo.id());
     Assertions.assertEquals("service-history-episodes", episodeTwo.type());
     ServiceHistoryResponse.ServiceHistoryAttributes attributesTwo = episodeTwo.attributes();
     Assertions.assertEquals("Alfredo", attributesTwo.firstName());
@@ -125,7 +125,7 @@ public class VeteranServiceHistoryTransformerTest {
     Assertions.assertEquals(attributesTwo.deployments().stream().count(), 0);
 
     ServiceHistoryResponse.ServiceHistoryEpisode episodeThree = response.data().get(2);
-    Assertions.assertEquals("b687a52c-11a5-5095-9d01-b09b55dbb1b2", episodeThree.id());
+    Assertions.assertEquals("0564c93f-6409-58cb-a868-0bcf201b7dac", episodeThree.id());
     Assertions.assertEquals("service-history-episodes", episodeThree.type());
     ServiceHistoryResponse.ServiceHistoryAttributes attributesThree = episodeThree.attributes();
     Assertions.assertEquals("Alfredo", attributesThree.firstName());
@@ -144,7 +144,7 @@ public class VeteranServiceHistoryTransformerTest {
     Assertions.assertEquals(attributesThree.deployments().stream().count(), 0);
 
     ServiceHistoryResponse.ServiceHistoryEpisode episodeFour = response.data().get(3);
-    Assertions.assertEquals("efc43e85-f327-5bbf-9d02-3b861e1c5a9a", episodeFour.id());
+    Assertions.assertEquals("178f9eb0-9552-5751-92ae-83edfb13ac2d", episodeFour.id());
     Assertions.assertEquals("service-history-episodes", episodeFour.type());
     ServiceHistoryResponse.ServiceHistoryAttributes attributesFour = episodeFour.attributes();
     Assertions.assertEquals("Alfredo", attributesFour.firstName());
@@ -182,7 +182,7 @@ public class VeteranServiceHistoryTransformerTest {
     ServiceHistoryResponse response = transformer.serviceHistoryTransformer();
     Assertions.assertEquals(4, response.data().size());
     ServiceHistoryResponse.ServiceHistoryEpisode episodeOne = response.data().get(0);
-    Assertions.assertEquals("74f6658f-d17c-5182-917b-1a409fcb77b0", episodeOne.id());
+    Assertions.assertEquals("f15059f7-963a-5c02-b97b-18888d0496c1", episodeOne.id());
     Assertions.assertEquals("service-history-episodes", episodeOne.type());
     ServiceHistoryResponse.ServiceHistoryAttributes attributesOne = episodeOne.attributes();
     Assertions.assertEquals("Alfredo", attributesOne.firstName());
@@ -200,7 +200,7 @@ public class VeteranServiceHistoryTransformerTest {
     Assertions.assertEquals(attributesOne.deployments().stream().count(), 0);
 
     ServiceHistoryResponse.ServiceHistoryEpisode episodeTwo = response.data().get(1);
-    Assertions.assertEquals("a0682550-f285-50d9-98ce-7a83982efe37", episodeTwo.id());
+    Assertions.assertEquals("c40dc18f-52b3-5c2a-97d3-78fa62a836fe", episodeTwo.id());
     Assertions.assertEquals("service-history-episodes", episodeTwo.type());
     ServiceHistoryResponse.ServiceHistoryAttributes attributesTwo = episodeTwo.attributes();
     Assertions.assertEquals("Alfredo", attributesTwo.firstName());
@@ -218,7 +218,7 @@ public class VeteranServiceHistoryTransformerTest {
     Assertions.assertEquals(attributesTwo.deployments().stream().count(), 0);
 
     ServiceHistoryResponse.ServiceHistoryEpisode episodeThree = response.data().get(2);
-    Assertions.assertEquals("b687a52c-11a5-5095-9d01-b09b55dbb1b2", episodeThree.id());
+    Assertions.assertEquals("0564c93f-6409-58cb-a868-0bcf201b7dac", episodeThree.id());
     Assertions.assertEquals("service-history-episodes", episodeThree.type());
     ServiceHistoryResponse.ServiceHistoryAttributes attributesThree = episodeThree.attributes();
     Assertions.assertEquals("Alfredo", attributesThree.firstName());
@@ -237,7 +237,7 @@ public class VeteranServiceHistoryTransformerTest {
     Assertions.assertEquals(attributesThree.deployments().stream().count(), 0);
 
     ServiceHistoryResponse.ServiceHistoryEpisode episodeFour = response.data().get(3);
-    Assertions.assertEquals("efc43e85-f327-5bbf-9d02-3b861e1c5a9a", episodeFour.id());
+    Assertions.assertEquals("178f9eb0-9552-5751-92ae-83edfb13ac2d", episodeFour.id());
     Assertions.assertEquals("service-history-episodes", episodeFour.type());
     ServiceHistoryResponse.ServiceHistoryAttributes attributesFour = episodeFour.attributes();
     Assertions.assertEquals("Alfredo", attributesFour.firstName());
@@ -282,33 +282,33 @@ public class VeteranServiceHistoryTransformerTest {
     Assertions.assertEquals(response.data().size(), 2);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeOne = response.data().get(0);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeTwo = response.data().get(1);
-    Assertions.assertEquals(episodeOne.id(), "90a16974-079a-563e-94dd-365a68b209d9");
-    Assertions.assertEquals(episodeOne.type(), "service-history-episodes");
-    Assertions.assertEquals(episodeTwo.id(), "eee59014-6bc4-5c7a-ab24-4bd64c090948");
-    Assertions.assertEquals(episodeTwo.type(), "service-history-episodes");
+    Assertions.assertEquals("fb8d1335-6ad4-5155-a2e1-be9f6c2af42f", episodeOne.id());
+    Assertions.assertEquals("service-history-episodes", episodeOne.type());
+    Assertions.assertEquals("3d72b5cc-afca-5190-9dbf-0f5c97f80b6c", episodeTwo.id());
+    Assertions.assertEquals("service-history-episodes", episodeTwo.type());
     ServiceHistoryResponse.ServiceHistoryAttributes attributesOne = episodeOne.attributes();
     ServiceHistoryResponse.ServiceHistoryAttributes attributesTwo = episodeTwo.attributes();
-    Assertions.assertEquals(attributesOne.firstName(), "Alfredo");
-    Assertions.assertEquals(attributesOne.lastName(), "Armstrong");
-    Assertions.assertEquals(attributesOne.branchOfService().toString(), "Army");
-    Assertions.assertEquals(attributesOne.startDate().toString(), "2000-01-01");
+    Assertions.assertEquals("Alfredo", attributesOne.firstName());
+    Assertions.assertEquals("Armstrong", attributesOne.lastName());
+    Assertions.assertEquals("Army", attributesOne.branchOfService().toString());
+    Assertions.assertEquals("2000-01-01", attributesOne.startDate().toString());
     Assertions.assertEquals(attributesOne.endDate().toString(), "2001-02-01");
-    Assertions.assertEquals(attributesOne.payGrade().toString(), "E05");
+    Assertions.assertEquals("E05", attributesOne.payGrade().toString());
     Assertions.assertEquals(
-        attributesOne.dischargeStatus(),
-        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);
-    Assertions.assertEquals(attributesOne.separationReason(), "SUFFICIENT SERVICE FOR RETIREMENT");
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE,
+        attributesOne.dischargeStatus());
+    Assertions.assertEquals("SUFFICIENT SERVICE FOR RETIREMENT", attributesOne.separationReason());
     Assertions.assertEquals(0, attributesOne.deployments().stream().count());
-    Assertions.assertEquals(attributesTwo.firstName(), "Alfredo");
-    Assertions.assertEquals(attributesTwo.lastName(), "Armstrong");
-    Assertions.assertEquals(attributesTwo.branchOfService().toString(), "Air Force");
-    Assertions.assertEquals(attributesTwo.startDate().toString(), "2002-01-01");
-    Assertions.assertEquals(attributesTwo.endDate().toString(), "2003-02-01");
-    Assertions.assertEquals(attributesTwo.payGrade().toString(), "E05");
+    Assertions.assertEquals("Alfredo", attributesTwo.firstName());
+    Assertions.assertEquals("Armstrong", attributesTwo.lastName());
+    Assertions.assertEquals("Air Force", attributesTwo.branchOfService().toString());
+    Assertions.assertEquals("2002-01-01", attributesTwo.startDate().toString());
+    Assertions.assertEquals("2003-02-01", attributesTwo.endDate().toString());
+    Assertions.assertEquals("E05", attributesTwo.payGrade().toString());
     Assertions.assertEquals(
-        attributesTwo.dischargeStatus(),
-        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);
-    Assertions.assertEquals(attributesTwo.separationReason(), "SUFFICIENT SERVICE FOR RETIREMENT");
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE,
+        attributesTwo.dischargeStatus());
+    Assertions.assertEquals("SUFFICIENT SERVICE FOR RETIREMENT", attributesTwo.separationReason());
     Assertions.assertEquals(0, attributesTwo.deployments().stream().count());
   }
 
@@ -369,41 +369,41 @@ public class VeteranServiceHistoryTransformerTest {
     Assertions.assertEquals(response.data().size(), 2);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeOne = response.data().get(0);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeTwo = response.data().get(1);
-    Assertions.assertEquals(episodeOne.id(), "90a16974-079a-563e-94dd-365a68b209d9");
-    Assertions.assertEquals(episodeOne.type(), "service-history-episodes");
-    Assertions.assertEquals(episodeTwo.id(), "eee59014-6bc4-5c7a-ab24-4bd64c090948");
-    Assertions.assertEquals(episodeTwo.type(), "service-history-episodes");
+    Assertions.assertEquals(episodeOne.id(), "fb8d1335-6ad4-5155-a2e1-be9f6c2af42f");
+    Assertions.assertEquals("service-history-episodes", episodeOne.type());
+    Assertions.assertEquals(episodeTwo.id(), "3d72b5cc-afca-5190-9dbf-0f5c97f80b6c");
+    Assertions.assertEquals("service-history-episodes", episodeTwo.type());
     ServiceHistoryResponse.ServiceHistoryAttributes attributesOne = episodeOne.attributes();
     ServiceHistoryResponse.ServiceHistoryAttributes attributesTwo = episodeTwo.attributes();
-    Assertions.assertEquals(attributesOne.firstName(), "Alfredo");
-    Assertions.assertEquals(attributesOne.lastName(), "Armstrong");
-    Assertions.assertEquals(attributesOne.branchOfService().toString(), "Army");
-    Assertions.assertEquals(attributesOne.startDate().toString(), "2000-01-01");
+    Assertions.assertEquals("Alfredo", attributesOne.firstName());
+    Assertions.assertEquals("Armstrong", attributesOne.lastName());
+    Assertions.assertEquals("Army", attributesOne.branchOfService().toString());
+    Assertions.assertEquals("2000-01-01", attributesOne.startDate().toString());
     Assertions.assertEquals(attributesOne.endDate().toString(), "2001-02-01");
-    Assertions.assertEquals(attributesOne.payGrade().toString(), "E05");
+    Assertions.assertEquals("E05", attributesOne.payGrade().toString());
     Assertions.assertEquals(
-        attributesOne.dischargeStatus(),
-        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);
-    Assertions.assertEquals(attributesOne.separationReason(), "SUFFICIENT SERVICE FOR RETIREMENT");
-    Assertions.assertEquals(attributesOne.deployments().stream().count(), 1);
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE,
+        attributesOne.dischargeStatus());
+    Assertions.assertEquals("SUFFICIENT SERVICE FOR RETIREMENT", attributesOne.separationReason());
+    Assertions.assertEquals(1, attributesOne.deployments().stream().count());
     Assertions.assertEquals(
-        attributesOne.deployments().get(0).startDate().toString(), "2000-02-01");
-    Assertions.assertEquals(attributesOne.deployments().get(0).endDate().toString(), "2001-01-01");
+        "2000-02-01", attributesOne.deployments().get(0).startDate().toString());
+    Assertions.assertEquals("2001-01-01", attributesOne.deployments().get(0).endDate().toString());
     Assertions.assertEquals(attributesOne.deployments().get(0).location(), null);
-    Assertions.assertEquals(attributesTwo.firstName(), "Alfredo");
-    Assertions.assertEquals(attributesTwo.lastName(), "Armstrong");
-    Assertions.assertEquals(attributesTwo.branchOfService().toString(), "Air Force");
-    Assertions.assertEquals(attributesTwo.startDate().toString(), "2002-01-01");
-    Assertions.assertEquals(attributesTwo.endDate().toString(), "2003-02-01");
-    Assertions.assertEquals(attributesTwo.payGrade().toString(), "E05");
+    Assertions.assertEquals("Alfredo", attributesTwo.firstName());
+    Assertions.assertEquals("Armstrong", attributesTwo.lastName());
+    Assertions.assertEquals("Air Force", attributesTwo.branchOfService().toString());
+    Assertions.assertEquals("2002-01-01", attributesTwo.startDate().toString());
+    Assertions.assertEquals("2003-02-01", attributesTwo.endDate().toString());
+    Assertions.assertEquals("E05", attributesTwo.payGrade().toString());
     Assertions.assertEquals(
-        attributesTwo.dischargeStatus(),
-        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);
-    Assertions.assertEquals(attributesTwo.separationReason(), "SUFFICIENT SERVICE FOR RETIREMENT");
-    Assertions.assertEquals(attributesTwo.deployments().stream().count(), 1);
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE,
+        attributesTwo.dischargeStatus());
+    Assertions.assertEquals("SUFFICIENT SERVICE FOR RETIREMENT", attributesTwo.separationReason());
+    Assertions.assertEquals(1, attributesTwo.deployments().stream().count());
     Assertions.assertEquals(
-        attributesTwo.deployments().get(0).startDate().toString(), "2002-02-01");
-    Assertions.assertEquals(attributesTwo.deployments().get(0).endDate().toString(), "2003-01-01");
+        "2002-02-01", attributesTwo.deployments().get(0).startDate().toString());
+    Assertions.assertEquals("2003-01-01", attributesTwo.deployments().get(0).endDate().toString());
     Assertions.assertEquals(attributesTwo.deployments().get(0).location(), null);
   }
 
@@ -429,42 +429,42 @@ public class VeteranServiceHistoryTransformerTest {
     Assertions.assertEquals(response.data().size(), 2);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeOne = response.data().get(0);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeTwo = response.data().get(1);
-    Assertions.assertEquals(episodeOne.id(), "90a16974-079a-563e-94dd-365a68b209d9");
-    Assertions.assertEquals(episodeOne.type(), "service-history-episodes");
-    Assertions.assertEquals(episodeTwo.id(), "eee59014-6bc4-5c7a-ab24-4bd64c090948");
-    Assertions.assertEquals(episodeTwo.type(), "service-history-episodes");
+    Assertions.assertEquals("fb8d1335-6ad4-5155-a2e1-be9f6c2af42f", episodeOne.id());
+    Assertions.assertEquals("service-history-episodes", episodeOne.type());
+    Assertions.assertEquals("3d72b5cc-afca-5190-9dbf-0f5c97f80b6c", episodeTwo.id());
+    Assertions.assertEquals("service-history-episodes", episodeTwo.type());
     ServiceHistoryResponse.ServiceHistoryAttributes attributesOne = episodeOne.attributes();
     ServiceHistoryResponse.ServiceHistoryAttributes attributesTwo = episodeTwo.attributes();
-    Assertions.assertEquals(attributesOne.firstName(), "Alfredo");
-    Assertions.assertEquals(attributesOne.lastName(), "Armstrong");
-    Assertions.assertEquals(attributesOne.branchOfService().toString(), "Army");
-    Assertions.assertEquals(attributesOne.startDate().toString(), "2000-01-01");
+    Assertions.assertEquals("Alfredo", attributesOne.firstName());
+    Assertions.assertEquals("Armstrong", attributesOne.lastName());
+    Assertions.assertEquals("Army", attributesOne.branchOfService().toString());
+    Assertions.assertEquals("2000-01-01", attributesOne.startDate().toString());
     Assertions.assertEquals(attributesOne.endDate().toString(), "2001-02-01");
-    Assertions.assertEquals(attributesOne.payGrade().toString(), "E05");
+    Assertions.assertEquals("E05", attributesOne.payGrade().toString());
     Assertions.assertEquals(
-        attributesOne.dischargeStatus(),
-        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);
-    Assertions.assertEquals(attributesOne.separationReason(), "SUFFICIENT SERVICE FOR RETIREMENT");
-    Assertions.assertEquals(attributesOne.deployments().stream().count(), 1);
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE,
+        attributesOne.dischargeStatus());
+    Assertions.assertEquals("SUFFICIENT SERVICE FOR RETIREMENT", attributesOne.separationReason());
+    Assertions.assertEquals(1, attributesOne.deployments().stream().count());
     Assertions.assertEquals(
-        attributesOne.deployments().get(0).startDate().toString(), "2000-02-01");
-    Assertions.assertEquals(attributesOne.deployments().get(0).endDate().toString(), "2001-01-01");
-    Assertions.assertEquals(attributesOne.deployments().get(0).location(), "QAT");
-    Assertions.assertEquals(attributesTwo.firstName(), "Alfredo");
-    Assertions.assertEquals(attributesTwo.lastName(), "Armstrong");
-    Assertions.assertEquals(attributesTwo.branchOfService().toString(), "Air Force");
-    Assertions.assertEquals(attributesTwo.startDate().toString(), "2002-01-01");
-    Assertions.assertEquals(attributesTwo.endDate().toString(), "2003-02-01");
-    Assertions.assertEquals(attributesTwo.payGrade().toString(), "E05");
+        "2000-02-01", attributesOne.deployments().get(0).startDate().toString());
+    Assertions.assertEquals("2001-01-01", attributesOne.deployments().get(0).endDate().toString());
+    Assertions.assertEquals("QAT", attributesOne.deployments().get(0).location());
+    Assertions.assertEquals("Alfredo", attributesTwo.firstName());
+    Assertions.assertEquals("Armstrong", attributesTwo.lastName());
+    Assertions.assertEquals("Air Force", attributesTwo.branchOfService().toString());
+    Assertions.assertEquals("2002-01-01", attributesTwo.startDate().toString());
+    Assertions.assertEquals("2003-02-01", attributesTwo.endDate().toString());
+    Assertions.assertEquals("E05", attributesTwo.payGrade().toString());
     Assertions.assertEquals(
-        attributesTwo.dischargeStatus(),
-        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);
-    Assertions.assertEquals(attributesTwo.separationReason(), "SUFFICIENT SERVICE FOR RETIREMENT");
-    Assertions.assertEquals(attributesTwo.deployments().stream().count(), 1);
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE,
+        attributesTwo.dischargeStatus());
+    Assertions.assertEquals("SUFFICIENT SERVICE FOR RETIREMENT", attributesTwo.separationReason());
+    Assertions.assertEquals(1, attributesTwo.deployments().stream().count());
     Assertions.assertEquals(
-        attributesTwo.deployments().get(0).startDate().toString(), "2002-02-01");
-    Assertions.assertEquals(attributesTwo.deployments().get(0).endDate().toString(), "2003-01-01");
-    Assertions.assertEquals(attributesTwo.deployments().get(0).location(), "QAT");
+        "2002-02-01", attributesTwo.deployments().get(0).startDate().toString());
+    Assertions.assertEquals("2003-01-01", attributesTwo.deployments().get(0).endDate().toString());
+    Assertions.assertEquals("QAT", attributesTwo.deployments().get(0).location());
   }
 
   @Test
@@ -489,42 +489,42 @@ public class VeteranServiceHistoryTransformerTest {
     Assertions.assertEquals(response.data().size(), 2);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeOne = response.data().get(0);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeTwo = response.data().get(1);
-    Assertions.assertEquals(episodeOne.id(), "90a16974-079a-563e-94dd-365a68b209d9");
-    Assertions.assertEquals(episodeOne.type(), "service-history-episodes");
-    Assertions.assertEquals(episodeTwo.id(), "eee59014-6bc4-5c7a-ab24-4bd64c090948");
-    Assertions.assertEquals(episodeTwo.type(), "service-history-episodes");
+    Assertions.assertEquals(episodeOne.id(), "fb8d1335-6ad4-5155-a2e1-be9f6c2af42f");
+    Assertions.assertEquals("service-history-episodes", episodeOne.type());
+    Assertions.assertEquals(episodeTwo.id(), "3d72b5cc-afca-5190-9dbf-0f5c97f80b6c");
+    Assertions.assertEquals("service-history-episodes", episodeTwo.type());
     ServiceHistoryResponse.ServiceHistoryAttributes attributesOne = episodeOne.attributes();
     ServiceHistoryResponse.ServiceHistoryAttributes attributesTwo = episodeTwo.attributes();
-    Assertions.assertEquals(attributesOne.firstName(), "Alfredo");
-    Assertions.assertEquals(attributesOne.lastName(), "Armstrong");
-    Assertions.assertEquals(attributesOne.branchOfService().toString(), "Army");
-    Assertions.assertEquals(attributesOne.startDate().toString(), "2000-01-01");
+    Assertions.assertEquals("Alfredo", attributesOne.firstName());
+    Assertions.assertEquals("Armstrong", attributesOne.lastName());
+    Assertions.assertEquals("Army", attributesOne.branchOfService().toString());
+    Assertions.assertEquals("2000-01-01", attributesOne.startDate().toString());
     Assertions.assertEquals(attributesOne.endDate().toString(), "2001-02-01");
-    Assertions.assertEquals(attributesOne.payGrade().toString(), "E05");
+    Assertions.assertEquals("E05", attributesOne.payGrade().toString());
     Assertions.assertEquals(
-        attributesOne.dischargeStatus(),
-        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);
-    Assertions.assertEquals(attributesOne.separationReason(), "SUFFICIENT SERVICE FOR RETIREMENT");
-    Assertions.assertEquals(attributesOne.deployments().stream().count(), 1);
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE,
+        attributesOne.dischargeStatus());
+    Assertions.assertEquals("SUFFICIENT SERVICE FOR RETIREMENT", attributesOne.separationReason());
+    Assertions.assertEquals(1, attributesOne.deployments().stream().count());
     Assertions.assertEquals(
-        attributesOne.deployments().get(0).startDate().toString(), "2000-02-01");
-    Assertions.assertEquals(attributesOne.deployments().get(0).endDate().toString(), "2001-01-01");
-    Assertions.assertEquals(attributesOne.deployments().get(0).location(), "QAT");
-    Assertions.assertEquals(attributesTwo.firstName(), "Alfredo");
-    Assertions.assertEquals(attributesTwo.lastName(), "Armstrong");
-    Assertions.assertEquals(attributesTwo.branchOfService().toString(), "Air Force");
-    Assertions.assertEquals(attributesTwo.startDate().toString(), "2002-01-01");
-    Assertions.assertEquals(attributesTwo.endDate().toString(), "2003-02-01");
-    Assertions.assertEquals(attributesTwo.payGrade().toString(), "E05");
+        "2000-02-01", attributesOne.deployments().get(0).startDate().toString());
+    Assertions.assertEquals("2001-01-01", attributesOne.deployments().get(0).endDate().toString());
+    Assertions.assertEquals("QAT", attributesOne.deployments().get(0).location());
+    Assertions.assertEquals("Alfredo", attributesTwo.firstName());
+    Assertions.assertEquals("Armstrong", attributesTwo.lastName());
+    Assertions.assertEquals("Air Force", attributesTwo.branchOfService().toString());
+    Assertions.assertEquals("2002-01-01", attributesTwo.startDate().toString());
+    Assertions.assertEquals("2003-02-01", attributesTwo.endDate().toString());
+    Assertions.assertEquals("E05", attributesTwo.payGrade().toString());
     Assertions.assertEquals(
-        attributesTwo.dischargeStatus(),
-        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);
-    Assertions.assertEquals(attributesTwo.separationReason(), "SUFFICIENT SERVICE FOR RETIREMENT");
-    Assertions.assertEquals(attributesTwo.deployments().stream().count(), 1);
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE,
+        attributesTwo.dischargeStatus());
+    Assertions.assertEquals("SUFFICIENT SERVICE FOR RETIREMENT", attributesTwo.separationReason());
+    Assertions.assertEquals(1, attributesTwo.deployments().stream().count());
     Assertions.assertEquals(
-        attributesTwo.deployments().get(0).startDate().toString(), "2002-02-01");
-    Assertions.assertEquals(attributesTwo.deployments().get(0).endDate().toString(), "2003-01-01");
-    Assertions.assertEquals(attributesTwo.deployments().get(0).location(), "QAT");
+        "2002-02-01", attributesTwo.deployments().get(0).startDate().toString());
+    Assertions.assertEquals("2003-01-01", attributesTwo.deployments().get(0).endDate().toString());
+    Assertions.assertEquals("QAT", attributesTwo.deployments().get(0).location());
   }
 
   @Test
@@ -554,58 +554,58 @@ public class VeteranServiceHistoryTransformerTest {
     Assertions.assertEquals(response.data().size(), 2);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeOne = response.data().get(0);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeTwo = response.data().get(1);
-    Assertions.assertEquals(episodeOne.id(), "639dbf29-f2d0-54a7-a1d0-b26a26e13f8a");
-    Assertions.assertEquals(episodeOne.type(), "service-history-episodes");
-    Assertions.assertEquals(episodeTwo.id(), "eee59014-6bc4-5c7a-ab24-4bd64c090948");
-    Assertions.assertEquals(episodeTwo.type(), "service-history-episodes");
+    Assertions.assertEquals("09b4ef73-68af-5a53-900e-012716f45fd1", episodeOne.id());
+    Assertions.assertEquals("service-history-episodes", episodeOne.type());
+    Assertions.assertEquals("3d72b5cc-afca-5190-9dbf-0f5c97f80b6c", episodeTwo.id());
+    Assertions.assertEquals("service-history-episodes", episodeTwo.type());
     ServiceHistoryResponse.ServiceHistoryAttributes attributesOne = episodeOne.attributes();
     ServiceHistoryResponse.ServiceHistoryAttributes attributesTwo = episodeTwo.attributes();
-    Assertions.assertEquals(attributesOne.firstName(), "Alfredo");
-    Assertions.assertEquals(attributesOne.lastName(), "Armstrong");
-    Assertions.assertEquals(attributesOne.branchOfService().toString(), "Army");
-    Assertions.assertEquals(attributesOne.startDate().toString(), "2000-01-01");
+    Assertions.assertEquals("Alfredo", attributesOne.firstName());
+    Assertions.assertEquals("Armstrong", attributesOne.lastName());
+    Assertions.assertEquals("Army", attributesOne.branchOfService().toString());
+    Assertions.assertEquals("2000-01-01", attributesOne.startDate().toString());
     Assertions.assertNull(attributesOne.endDate());
-    Assertions.assertEquals(attributesOne.payGrade().toString(), "E05");
+    Assertions.assertEquals("E05", attributesOne.payGrade().toString());
     Assertions.assertEquals(
-        attributesOne.dischargeStatus(),
-        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);
-    Assertions.assertEquals(attributesOne.separationReason(), "SUFFICIENT SERVICE FOR RETIREMENT");
-    Assertions.assertEquals(attributesOne.deployments().stream().count(), 4);
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE,
+        attributesOne.dischargeStatus());
+    Assertions.assertEquals("SUFFICIENT SERVICE FOR RETIREMENT", attributesOne.separationReason());
+    Assertions.assertEquals(4, attributesOne.deployments().stream().count());
     Assertions.assertEquals(
-        attributesOne.deployments().get(0).startDate().toString(), "2000-02-01");
-    Assertions.assertEquals(attributesOne.deployments().get(0).endDate().toString(), "2001-01-01");
-    Assertions.assertEquals(attributesOne.deployments().get(0).location(), "QAT");
-    Assertions.assertEquals(
-        attributesOne.deployments().get(1).startDate().toString(), "2000-03-01");
-    Assertions.assertEquals(attributesOne.deployments().get(1).endDate().toString(), "2003-01-01");
-    Assertions.assertEquals(attributesOne.deployments().get(1).location(), "QAT");
+        "2000-02-01", attributesOne.deployments().get(0).startDate().toString());
+    Assertions.assertEquals("2001-01-01", attributesOne.deployments().get(0).endDate().toString());
+    Assertions.assertEquals("QAT", attributesOne.deployments().get(0).location());
     Assertions.assertEquals(
         attributesOne.deployments().get(1).startDate().toString(), "2000-03-01");
-    Assertions.assertEquals(attributesOne.deployments().get(1).endDate().toString(), "2003-01-01");
-    Assertions.assertEquals(attributesOne.deployments().get(1).location(), "QAT");
+    Assertions.assertEquals("2003-01-01", attributesOne.deployments().get(1).endDate().toString());
+    Assertions.assertEquals("QAT", attributesOne.deployments().get(1).location());
     Assertions.assertEquals(
-        attributesOne.deployments().get(2).startDate().toString(), "2004-02-01");
-    Assertions.assertEquals(attributesOne.deployments().get(2).endDate().toString(), "2005-01-01");
-    Assertions.assertEquals(attributesOne.deployments().get(2).location(), "AX1");
+        "2000-03-01", attributesOne.deployments().get(1).startDate().toString());
+    Assertions.assertEquals("2003-01-01", attributesOne.deployments().get(1).endDate().toString());
+    Assertions.assertEquals("QAT", attributesOne.deployments().get(1).location());
     Assertions.assertEquals(
-        attributesOne.deployments().get(3).startDate().toString(), "2006-02-01");
-    Assertions.assertEquals(attributesOne.deployments().get(3).endDate().toString(), "2007-01-01");
-    Assertions.assertEquals(attributesOne.deployments().get(3).location(), "AX1");
-    Assertions.assertEquals(attributesTwo.firstName(), "Alfredo");
-    Assertions.assertEquals(attributesTwo.lastName(), "Armstrong");
-    Assertions.assertEquals(attributesTwo.branchOfService().toString(), "Air Force");
-    Assertions.assertEquals(attributesTwo.startDate().toString(), "2002-01-01");
-    Assertions.assertEquals(attributesTwo.endDate().toString(), "2003-02-01");
-    Assertions.assertEquals(attributesTwo.payGrade().toString(), "E05");
+        "2004-02-01", attributesOne.deployments().get(2).startDate().toString());
+    Assertions.assertEquals("2005-01-01", attributesOne.deployments().get(2).endDate().toString());
+    Assertions.assertEquals("AX1", attributesOne.deployments().get(2).location());
     Assertions.assertEquals(
-        attributesTwo.dischargeStatus(),
-        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);
-    Assertions.assertEquals(attributesTwo.separationReason(), "SUFFICIENT SERVICE FOR RETIREMENT");
-    Assertions.assertEquals(attributesTwo.deployments().stream().count(), 1);
+        "2006-02-01", attributesOne.deployments().get(3).startDate().toString());
+    Assertions.assertEquals("2007-01-01", attributesOne.deployments().get(3).endDate().toString());
+    Assertions.assertEquals("AX1", attributesOne.deployments().get(3).location());
+    Assertions.assertEquals("Alfredo", attributesTwo.firstName());
+    Assertions.assertEquals("Armstrong", attributesTwo.lastName());
+    Assertions.assertEquals("Air Force", attributesTwo.branchOfService().toString());
+    Assertions.assertEquals("2002-01-01", attributesTwo.startDate().toString());
+    Assertions.assertEquals("2003-02-01", attributesTwo.endDate().toString());
+    Assertions.assertEquals("E05", attributesTwo.payGrade().toString());
     Assertions.assertEquals(
-        attributesTwo.deployments().get(0).startDate().toString(), "2002-02-01");
-    Assertions.assertEquals(attributesTwo.deployments().get(0).endDate().toString(), "2003-01-01");
-    Assertions.assertEquals(attributesTwo.deployments().get(0).location(), "QAT");
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE,
+        attributesTwo.dischargeStatus());
+    Assertions.assertEquals("SUFFICIENT SERVICE FOR RETIREMENT", attributesTwo.separationReason());
+    Assertions.assertEquals(1, attributesTwo.deployments().stream().count());
+    Assertions.assertEquals(
+        "2002-02-01", attributesTwo.deployments().get(0).startDate().toString());
+    Assertions.assertEquals("2003-01-01", attributesTwo.deployments().get(0).endDate().toString());
+    Assertions.assertEquals("QAT", attributesTwo.deployments().get(0).location());
   }
 
   @Test
@@ -635,54 +635,54 @@ public class VeteranServiceHistoryTransformerTest {
     Assertions.assertEquals(response.data().size(), 2);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeOne = response.data().get(0);
     ServiceHistoryResponse.ServiceHistoryEpisode episodeTwo = response.data().get(1);
-    Assertions.assertEquals(episodeOne.id(), "639dbf29-f2d0-54a7-a1d0-b26a26e13f8a");
-    Assertions.assertEquals(episodeOne.type(), "service-history-episodes");
-    Assertions.assertEquals(episodeTwo.id(), "eee59014-6bc4-5c7a-ab24-4bd64c090948");
-    Assertions.assertEquals(episodeTwo.type(), "service-history-episodes");
+    Assertions.assertEquals("09b4ef73-68af-5a53-900e-012716f45fd1", episodeOne.id());
+    Assertions.assertEquals("service-history-episodes", episodeOne.type());
+    Assertions.assertEquals("3d72b5cc-afca-5190-9dbf-0f5c97f80b6c", episodeTwo.id());
+    Assertions.assertEquals("service-history-episodes", episodeTwo.type());
     ServiceHistoryResponse.ServiceHistoryAttributes attributesOne = episodeOne.attributes();
     ServiceHistoryResponse.ServiceHistoryAttributes attributesTwo = episodeTwo.attributes();
-    Assertions.assertEquals(attributesOne.firstName(), "Alfredo");
-    Assertions.assertEquals(attributesOne.lastName(), "Armstrong");
-    Assertions.assertEquals(attributesOne.branchOfService().toString(), "Army");
-    Assertions.assertEquals(attributesOne.startDate().toString(), "2000-01-01");
+    Assertions.assertEquals("Alfredo", attributesOne.firstName());
+    Assertions.assertEquals("Armstrong", attributesOne.lastName());
+    Assertions.assertEquals("Army", attributesOne.branchOfService().toString());
+    Assertions.assertEquals("2000-01-01", attributesOne.startDate().toString());
     Assertions.assertNull(attributesOne.endDate());
-    Assertions.assertEquals(attributesOne.payGrade().toString(), "E05");
+    Assertions.assertEquals("E05", attributesOne.payGrade().toString());
     Assertions.assertEquals(
-        attributesOne.dischargeStatus(),
-        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);
-    Assertions.assertEquals(attributesOne.separationReason(), "SUFFICIENT SERVICE FOR RETIREMENT");
-    Assertions.assertEquals(attributesOne.deployments().stream().count(), 4);
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE,
+        attributesOne.dischargeStatus());
+    Assertions.assertEquals("SUFFICIENT SERVICE FOR RETIREMENT", attributesOne.separationReason());
+    Assertions.assertEquals(4, attributesOne.deployments().stream().count());
     Assertions.assertEquals(
-        attributesOne.deployments().get(0).startDate().toString(), "2000-02-01");
-    Assertions.assertEquals(attributesOne.deployments().get(0).endDate().toString(), "2001-01-01");
-    Assertions.assertEquals(attributesOne.deployments().get(0).location(), "QAT");
+        "2000-02-01", attributesOne.deployments().get(0).startDate().toString());
+    Assertions.assertEquals("2001-01-01", attributesOne.deployments().get(0).endDate().toString());
+    Assertions.assertEquals("QAT", attributesOne.deployments().get(0).location());
     Assertions.assertEquals(
         attributesOne.deployments().get(1).startDate().toString(), "2000-03-01");
-    Assertions.assertEquals(attributesOne.deployments().get(1).endDate().toString(), "2003-01-01");
-    Assertions.assertEquals(attributesOne.deployments().get(1).location(), "QAT");
+    Assertions.assertEquals("2003-01-01", attributesOne.deployments().get(1).endDate().toString());
+    Assertions.assertEquals("QAT", attributesOne.deployments().get(1).location());
     Assertions.assertEquals(
-        attributesOne.deployments().get(2).startDate().toString(), "2004-02-01");
-    Assertions.assertEquals(attributesOne.deployments().get(2).endDate().toString(), "2005-01-01");
-    Assertions.assertEquals(attributesOne.deployments().get(2).location(), "AX1");
+        "2004-02-01", attributesOne.deployments().get(2).startDate().toString());
+    Assertions.assertEquals("2005-01-01", attributesOne.deployments().get(2).endDate().toString());
+    Assertions.assertEquals("AX1", attributesOne.deployments().get(2).location());
     Assertions.assertEquals(
-        attributesOne.deployments().get(3).startDate().toString(), "2006-02-01");
-    Assertions.assertEquals(attributesOne.deployments().get(3).endDate().toString(), "2007-01-01");
-    Assertions.assertEquals(attributesOne.deployments().get(3).location(), "AX1");
-    Assertions.assertEquals(attributesTwo.firstName(), "Alfredo");
-    Assertions.assertEquals(attributesTwo.lastName(), "Armstrong");
-    Assertions.assertEquals(attributesTwo.branchOfService().toString(), "Air Force");
-    Assertions.assertEquals(attributesTwo.startDate().toString(), "2002-01-01");
-    Assertions.assertEquals(attributesTwo.endDate().toString(), "2003-02-01");
-    Assertions.assertEquals(attributesTwo.payGrade().toString(), "E05");
+        "2006-02-01", attributesOne.deployments().get(3).startDate().toString());
+    Assertions.assertEquals("2007-01-01", attributesOne.deployments().get(3).endDate().toString());
+    Assertions.assertEquals("AX1", attributesOne.deployments().get(3).location());
+    Assertions.assertEquals("Alfredo", attributesTwo.firstName());
+    Assertions.assertEquals("Armstrong", attributesTwo.lastName());
+    Assertions.assertEquals("Air Force", attributesTwo.branchOfService().toString());
+    Assertions.assertEquals("2002-01-01", attributesTwo.startDate().toString());
+    Assertions.assertEquals("2003-02-01", attributesTwo.endDate().toString());
+    Assertions.assertEquals("E05", attributesTwo.payGrade().toString());
     Assertions.assertEquals(
-        attributesTwo.dischargeStatus(),
-        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE);
-    Assertions.assertEquals(attributesTwo.separationReason(), "SUFFICIENT SERVICE FOR RETIREMENT");
-    Assertions.assertEquals(attributesTwo.deployments().stream().count(), 1);
+        ServiceHistoryResponse.ServiceHistoryAttributes.DischargeStatus.HONORABLE,
+        attributesTwo.dischargeStatus());
+    Assertions.assertEquals("SUFFICIENT SERVICE FOR RETIREMENT", attributesTwo.separationReason());
+    Assertions.assertEquals(1, attributesTwo.deployments().stream().count());
     Assertions.assertEquals(
-        attributesTwo.deployments().get(0).startDate().toString(), "2002-02-01");
-    Assertions.assertEquals(attributesTwo.deployments().get(0).endDate().toString(), "2003-01-01");
-    Assertions.assertEquals(attributesTwo.deployments().get(0).location(), "QAT");
+        "2002-02-01", attributesTwo.deployments().get(0).startDate().toString());
+    Assertions.assertEquals("2003-01-01", attributesTwo.deployments().get(0).endDate().toString());
+    Assertions.assertEquals("QAT", attributesTwo.deployments().get(0).location());
   }
 
   @Test

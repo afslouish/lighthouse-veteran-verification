@@ -1,6 +1,5 @@
 package gov.va.api.lighthouse.veteranverification.service.utils;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -8,7 +7,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 import java.util.UUID;
 
-@SuppressFBWarnings({"WEAK_MESSAGE_DIGEST_SHA1"})
 public class UuidV5 {
   private static final Charset UTF8 = StandardCharsets.UTF_8;
 
@@ -29,22 +27,22 @@ public class UuidV5 {
   private static UUID nameUuidFromNamespaceAndBytes(byte[] namespace, byte[] name) {
     MessageDigest md;
     try {
-      md = MessageDigest.getInstance("SHA-1");
+      md = MessageDigest.getInstance("SHA-256");
     } catch (NoSuchAlgorithmException nsae) {
-      throw new InternalError("SHA-1 not supported");
+      throw new InternalError("SHA-256 not supported");
     }
     md.update(Objects.requireNonNull(namespace, "namespace is null"));
     md.update(Objects.requireNonNull(name, "name is null"));
-    byte[] sha1Bytes = md.digest();
-    sha1Bytes[6] = (byte) (sha1Bytes[6] & 0x0f);
+    byte[] sha256Bytes = md.digest();
+    sha256Bytes[6] = (byte) (sha256Bytes[6] & 0x0f);
     /* clear version        */
-    sha1Bytes[6] = (byte) (sha1Bytes[6] | 0x50);
+    sha256Bytes[6] = (byte) (sha256Bytes[6] | 0x50);
     /* set to version 5     */
-    sha1Bytes[8] = (byte) (sha1Bytes[8] & 0x3f);
+    sha256Bytes[8] = (byte) (sha256Bytes[8] & 0x3f);
     /* clear variant        */
-    sha1Bytes[8] = (byte) (sha1Bytes[8] | 0x80);
+    sha256Bytes[8] = (byte) (sha256Bytes[8] | 0x80);
     /* set to IETF variant  */
-    return fromBytes(sha1Bytes);
+    return fromBytes(sha256Bytes);
   }
 
   /**

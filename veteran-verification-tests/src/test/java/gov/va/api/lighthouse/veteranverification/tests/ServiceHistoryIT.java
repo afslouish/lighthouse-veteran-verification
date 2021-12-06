@@ -58,7 +58,7 @@ public class ServiceHistoryIT {
     ExpectedResponse response = veteranVerificationGetRequest(request, "application/json", 200);
     ServiceHistoryResponse serviceHistory =
         toServiceEpisodesResponse(response.response().getBody().print());
-    assertEquals("e28a2359-48a5-55ce-890c-76b51c749b6b", serviceHistory.data().get(0).id());
+    assertEquals("e0088dcf-eb43-54f4-9169-8e5d9b2edfbf", serviceHistory.data().get(0).id());
     assertEquals("service-history-episodes", serviceHistory.data().get(0).type());
     assertEquals("Wesley", serviceHistory.data().get(0).attributes().firstName());
     assertEquals("Ford", serviceHistory.data().get(0).attributes().lastName());
@@ -86,7 +86,7 @@ public class ServiceHistoryIT {
         serviceHistory.data().get(0).attributes().deployments().get(1).endDate().toString());
     assertEquals("AX1", serviceHistory.data().get(0).attributes().deployments().get(1).location());
 
-    assertEquals("b6267474-08a3-56fc-932f-582cee0bf02c", serviceHistory.data().get(1).id());
+    assertEquals("91d0334e-7122-5bf3-af10-4f2200c0a840", serviceHistory.data().get(1).id());
     assertEquals("service-history-episodes", serviceHistory.data().get(1).type());
     assertEquals("Wesley", serviceHistory.data().get(1).attributes().firstName());
     assertEquals("Ford", serviceHistory.data().get(1).attributes().lastName());
@@ -100,7 +100,7 @@ public class ServiceHistoryIT {
     assertEquals("UNKNOWN", serviceHistory.data().get(1).attributes().separationReason());
     assertEquals(0, serviceHistory.data().get(1).attributes().deployments().size());
 
-    assertEquals("f3d33587-515a-5c2a-922a-0c316acdcb40", serviceHistory.data().get(2).id());
+    assertEquals("0dc8158c-97aa-516e-9af3-fcff910d09ae", serviceHistory.data().get(2).id());
     assertEquals("service-history-episodes", serviceHistory.data().get(2).type());
     assertEquals("Wesley", serviceHistory.data().get(2).attributes().firstName());
     assertEquals("Ford", serviceHistory.data().get(2).attributes().lastName());
@@ -139,7 +139,7 @@ public class ServiceHistoryIT {
     ExpectedResponse response = veteranVerificationGetRequest(request, "application/json", 200);
     ServiceHistoryResponse serviceHistory =
         toServiceEpisodesResponse(response.response().getBody().print());
-    assertEquals("f4bce9c3-0aa1-5080-b6bf-7261914fffd5", serviceHistory.data().get(0).id());
+    assertEquals("45e762ad-89bd-5eac-95e1-2d18c6ea08c4", serviceHistory.data().get(0).id());
     assertEquals("service-history-episodes", serviceHistory.data().get(0).type());
     assertEquals("Herbert", serviceHistory.data().get(0).attributes().firstName());
     assertEquals("Gardner", serviceHistory.data().get(0).attributes().lastName());
