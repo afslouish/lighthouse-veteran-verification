@@ -10,49 +10,23 @@ import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class SystemDefinitions {
-  public static final String CONFIRMED_STATUS_ICN_DEFAULT = "1012667145V762142";
+  public static final String CONFIRMED_STATUS_USER_DEFAULT = "va.api.user+idme.001@gmail.com";
 
-  public static final String V5_STATUS_ICN_DEFAULT = "1012666182V203559";
+  public static final String V5_STATUS_USER_DEFAULT = "va.api.user+idme.008@gmail.com";
 
-  public static final String NO_EMIS_USER_STATUS_ICN_DEFAULT = "1012830453V141481";
+  public static final String NO_EMIS_USER_STATUS_USER_DEFAULT = "va.api.user+idme.012@gmail.com";
 
-  public static final String DISABILITY_RATING_ICN = "1012829620V654328";
+  public static final String DISABILITY_RATING_USER_DEFAULT = "va.api.user+idme.037@gmail.com";
 
-  public static final String SERVICE_HISTORY_ICN = "1012832025V743496";
+  public static final String SERVICE_HISTORY_USER_DEFAULT = "va.api.user+idme.025@gmail.com";
 
-  public static final String SERVICE_HISTORY_ICN_NULL_END_DATE = "1012845631V882122";
+  public static final String NO_EMIS_EPISODES_USER_DEFAULT = "va.api.user+idme.011@gmail.com";
 
-  public static final String NO_MPI_USER_ICN = "1012855585V634865";
-
-  public static final String NO_EMIS_EPISODES_USER = "1012667122V019349";
-
-  public static final String N0_BGS_USER_DISABILITY_RATING_ICN = "1012661611V839382";
-
-  /** Class of ICNs to be used for Veteran Verification ITs. */
-  public static Icns icns() {
-    return Icns.builder()
-        .confirmedStatusIcn(
-            systemPropertyOrDefault("confirmed-status-icn", CONFIRMED_STATUS_ICN_DEFAULT))
-        .v5StatusIcn(systemPropertyOrDefault("v5-status-icn", V5_STATUS_ICN_DEFAULT))
-        .noEmisUserStatusIcn(
-            systemPropertyOrDefault("no-emis-user-status-icn", NO_EMIS_USER_STATUS_ICN_DEFAULT))
-        .disabilityRatingIcn(
-            systemPropertyOrDefault("disability-rating-icn", DISABILITY_RATING_ICN))
-        .serviceHistoryIcn(systemPropertyOrDefault("service-history-icn", SERVICE_HISTORY_ICN))
-        .serviceHistoryIcnNullEndDate(
-            systemPropertyOrDefault(
-                "service-history-icn-null-end-date", SERVICE_HISTORY_ICN_NULL_END_DATE))
-        .noMpiUserIcn(systemPropertyOrDefault("no-mpi-user-icn", NO_MPI_USER_ICN))
-        .noEmisEpisodesUser(systemPropertyOrDefault("no-emis-episodes-user", NO_EMIS_EPISODES_USER))
-        .noBgsUserDisabilityRatingIcn(
-            systemPropertyOrDefault(
-                "no-bgs-user-disability-rating-icn", N0_BGS_USER_DISABILITY_RATING_ICN))
-        .build();
-  }
+  public static final String N0_BGS_USER_DEFAULT = "va.api.user+idme.031@gmail.com";
 
   private static SystemDefinition lab() {
     return SystemDefinition.builder()
-        .icns(icns())
+        .users(users())
         .veteranVerification(
             serviceDefinition(
                 "veteran-verification",
@@ -64,7 +38,7 @@ public class SystemDefinitions {
 
   private static SystemDefinition local() {
     return SystemDefinition.builder()
-        .icns(icns())
+        .users(users())
         .veteranVerification(
             serviceDefinition("veteran-verification", "http://localhost", 8080, "/"))
         .build();
@@ -72,7 +46,7 @@ public class SystemDefinitions {
 
   private static SystemDefinition production() {
     return SystemDefinition.builder()
-        .icns(icns())
+        .users(users())
         .veteranVerification(
             serviceDefinition(
                 "veteran-verification",
@@ -84,13 +58,13 @@ public class SystemDefinitions {
 
   private static SystemDefinition qa() {
     return SystemDefinition.builder()
-        .icns(icns())
+        .users(users())
         .veteranVerification(
             serviceDefinition(
                 "veteran-verification",
                 "https://blue.qa.lighthouse.va.gov",
                 443,
-                "/veteran_verification/"))
+                "/veteran_verification"))
         .build();
   }
 
@@ -104,7 +78,7 @@ public class SystemDefinitions {
 
   private static SystemDefinition staging() {
     return SystemDefinition.builder()
-        .icns(icns())
+        .users(users())
         .veteranVerification(
             serviceDefinition(
                 "veteran-verification",
@@ -116,7 +90,7 @@ public class SystemDefinitions {
 
   private static SystemDefinition stagingLab() {
     return SystemDefinition.builder()
-        .icns(icns())
+        .users(users())
         .veteranVerification(
             serviceDefinition(
                 "veteran-verification",
@@ -144,6 +118,24 @@ public class SystemDefinitions {
         throw new IllegalArgumentException(
             "Unsupported sentinel environment: " + Environment.get());
     }
+  }
+
+  /** Class of user emails to be used for Veteran Verification ITs. */
+  public static Users users() {
+    return Users.builder()
+        .confirmedStatusUser(
+            systemPropertyOrDefault("confirmed-status-user", CONFIRMED_STATUS_USER_DEFAULT))
+        .v5StatusUser(systemPropertyOrDefault("v5-status-user", V5_STATUS_USER_DEFAULT))
+        .noEmisUserStatusUser(
+            systemPropertyOrDefault("no-emis-user-status-user", NO_EMIS_USER_STATUS_USER_DEFAULT))
+        .disabilityRatingUser(
+            systemPropertyOrDefault("disability-rating-user", DISABILITY_RATING_USER_DEFAULT))
+        .serviceHistoryUser(
+            systemPropertyOrDefault("service-history-user", SERVICE_HISTORY_USER_DEFAULT))
+        .noEmisEpisodesUser(
+            systemPropertyOrDefault("no-emis-episodes-user", NO_EMIS_EPISODES_USER_DEFAULT))
+        .noBgsUser(systemPropertyOrDefault("no-bgs-user", N0_BGS_USER_DEFAULT))
+        .build();
   }
 
   private String systemPropertyOrDefault(String property, String defaultValue) {
@@ -178,28 +170,24 @@ public class SystemDefinitions {
   static final class SystemDefinition {
     @NonNull Service veteranVerification;
 
-    @NonNull Icns icns;
+    Users users;
   }
 
   @Data
   @Builder
-  static final class Icns {
-    @NonNull String v5StatusIcn;
+  static final class Users {
+    @NonNull String v5StatusUser;
 
-    @NonNull String noEmisUserStatusIcn;
+    @NonNull String noEmisUserStatusUser;
 
-    @NonNull String confirmedStatusIcn;
+    @NonNull String confirmedStatusUser;
 
-    @NonNull String disabilityRatingIcn;
+    @NonNull String disabilityRatingUser;
 
-    @NonNull String serviceHistoryIcn;
-
-    @NonNull String serviceHistoryIcnNullEndDate;
-
-    @NonNull String noMpiUserIcn;
+    @NonNull String serviceHistoryUser;
 
     @NonNull String noEmisEpisodesUser;
 
-    @NonNull String noBgsUserDisabilityRatingIcn;
+    @NonNull String noBgsUser;
   }
 }

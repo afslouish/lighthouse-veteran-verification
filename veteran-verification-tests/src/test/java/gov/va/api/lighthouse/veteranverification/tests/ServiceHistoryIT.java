@@ -2,14 +2,12 @@ package gov.va.api.lighthouse.veteranverification.tests;
 
 import static gov.va.api.health.sentinel.EnvironmentAssumptions.assumeEnvironmentIn;
 import static gov.va.api.lighthouse.veteranverification.tests.Requestor.veteranVerificationGetRequest;
-import static gov.va.api.lighthouse.veteranverification.tests.SystemDefinitions.systemDefinition;
+import static gov.va.api.lighthouse.veteranverification.tests.TestUtils.toServiceEpisodesResponse;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.PropertyNamingStrategies;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import gov.va.api.health.sentinel.Environment;
 import gov.va.api.health.sentinel.ExpectedResponse;
 import gov.va.api.lighthouse.veteranverification.api.ApiError;
@@ -19,6 +17,14 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class ServiceHistoryIT {
+  public static final String SERVICE_HISTORY_ICN = "1012832025V743496";
+
+  public static final String SERVICE_HISTORY_ICN_NULL_END_DATE = "1012845631V882122";
+
+  public static final String NO_MPI_USER_ICN = "1012855585V634865";
+
+  public static final String NO_EMIS_EPISODES_ICN = "1012667122V019349";
+
   @BeforeAll
   static void assumeEnvironment() {
     // Tests are only ran in environments that are not blocked by the kong gateway (ie Localhost).
@@ -26,25 +32,8 @@ public class ServiceHistoryIT {
   }
 
   @Test
-  public void serviceHistoryEmisSoapFaultError() {
-    String request =
-        String.format("v1/service_history/%s", systemDefinition().icns().noEmisEpisodesUser());
-    ExpectedResponse response = veteranVerificationGetRequest(request, "application/json", 502);
-    ApiError.NoServiceHistoryFoundApiError serviceHistory =
-        response.response().getBody().as(ApiError.NoServiceHistoryFoundApiError.class);
-    assertEquals("Unexpected response body", serviceHistory.errors().get(0).getTitle());
-    assertEquals(
-        "EMIS service responded with something other than the expected array of service "
-            + "history hashes.",
-        serviceHistory.errors().get(0).getDetail());
-    assertEquals("EMIS_HIST502", serviceHistory.errors().get(0).getCode());
-    assertEquals("502", serviceHistory.errors().get(0).getStatus());
-  }
-
-  @Test
   void serviceHistoryHappyJwtPath() {
-    String request =
-        String.format("v1/service_history/%s", systemDefinition().icns().serviceHistoryIcn());
+    String request = String.format("v1/service_history/%s", SERVICE_HISTORY_ICN);
     ExpectedResponse response = veteranVerificationGetRequest(request, "application/jwt", 200);
     String serviceHistory = response.response().asString();
     assertNotNull(serviceHistory);
@@ -53,8 +42,7 @@ public class ServiceHistoryIT {
   @Test
   @SneakyThrows
   void serviceHistoryHappyPath() {
-    String request =
-        String.format("v1/service_history/%s", systemDefinition().icns().serviceHistoryIcn());
+    String request = String.format("v1/service_history/%s", SERVICE_HISTORY_ICN);
     ExpectedResponse response = veteranVerificationGetRequest(request, "application/json", 200);
     ServiceHistoryResponse serviceHistory =
         toServiceEpisodesResponse(response.response().getBody().print());
@@ -117,8 +105,7 @@ public class ServiceHistoryIT {
 
   @Test
   public void serviceHistoryNoMpiResponse() {
-    String request =
-        String.format("v1/service_history/%s", systemDefinition().icns().noMpiUserIcn());
+    String request = String.format("v1/service_history/%s", NO_MPI_USER_ICN);
     ExpectedResponse response = veteranVerificationGetRequest(request, "application/json", 502);
     ApiError.NoServiceHistoryFoundApiError serviceHistory =
         response.response().getBody().as(ApiError.NoServiceHistoryFoundApiError.class);
@@ -132,10 +119,17 @@ public class ServiceHistoryIT {
   }
 
   @Test
+  public void serviceHistoryNotFound() {
+    String request = String.format("v1/service_history/%s", NO_EMIS_EPISODES_ICN);
+    ExpectedResponse response = veteranVerificationGetRequest(request, "application/json", 200);
+    ServiceHistoryResponse serviceHistory =
+        toServiceEpisodesResponse(response.response().getBody().print());
+    assertThat(serviceHistory.data()).isEmpty();
+  }
+
+  @Test
   public void serviceHistoryNullEndDate() {
-    String request =
-        String.format(
-            "v1/service_history/%s", systemDefinition().icns().serviceHistoryIcnNullEndDate());
+    String request = String.format("v1/service_history/%s", SERVICE_HISTORY_ICN_NULL_END_DATE);
     ExpectedResponse response = veteranVerificationGetRequest(request, "application/json", 200);
     ServiceHistoryResponse serviceHistory =
         toServiceEpisodesResponse(response.response().getBody().print());
@@ -153,14 +147,5 @@ public class ServiceHistoryIT {
         "FAILED MEDICAL/PHYSICAL PROCUREMENT STANDARDS",
         serviceHistory.data().get(0).attributes().separationReason());
     assertEquals(0, serviceHistory.data().get(0).attributes().deployments().size());
-  }
-
-  @SneakyThrows
-  private ServiceHistoryResponse toServiceEpisodesResponse(String response) {
-    ObjectMapper objectMapper = new ObjectMapper();
-    objectMapper.registerModule(new JavaTimeModule());
-    objectMapper.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
-
-    return objectMapper.readValue(response, ServiceHistoryResponse.class);
   }
 }

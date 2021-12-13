@@ -174,28 +174,23 @@ public class VeteranServiceHistoryControllerTest {
   }
 
   @Test
-  public void ediPiOrIcnIsNull() {
+  void deploymentsRequestThrowsNoServiceHistoryFound() {
     VeteranServiceHistoryController controller =
         new VeteranServiceHistoryController(mpiClient, emisClient, notary);
-    TestUtils.setMpiMockResponse(mpiClient, "mpi/mpi_profile_not_found_response.xml");
+    TestUtils.setMpiMockResponse(mpiClient, "mpi/mpi_profile_response_body.xml");
+    TestUtils.setDeploymentsResponseException(emisClient, new ServerSOAPFaultException(soapFault));
     Assertions.assertThrows(
-        Exception.class,
+        Exceptions.NoServiceHistoryFoundException.class,
         () -> {
           controller.veteranServiceHistoryResponse("icn");
         });
   }
 
   @Test
-  void emisSoapFaultException() {
+  public void ediPiOrIcnIsNull() {
     VeteranServiceHistoryController controller =
         new VeteranServiceHistoryController(mpiClient, emisClient, notary);
-    EMISserviceEpisodeResponseType serviceEpisodeResponse =
-        TestUtils.createServiceHistoryResponse("emis/service-episodes/ascending.xml");
-    EMISguardReserveServicePeriodsResponseType grasResponse =
-        TestUtils.createGrasResponse("emis/gras/single_title_training_period.xml");
-    TestUtils.setServiceHistoryMockResponse(emisClient, serviceEpisodeResponse);
-    TestUtils.setGrasMockResponse(emisClient, grasResponse);
-    TestUtils.setEpisodesResponseException(emisClient, new ServerSOAPFaultException(soapFault));
+    TestUtils.setMpiMockResponse(mpiClient, "mpi/mpi_profile_not_found_response.xml");
     Assertions.assertThrows(
         Exceptions.NoServiceHistoryFoundException.class,
         () -> {

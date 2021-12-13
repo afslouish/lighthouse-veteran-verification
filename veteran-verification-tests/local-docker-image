@@ -37,31 +37,6 @@ run() {
     -e VV_URL=http://$THIS_MACHINE \
     -e K8S_ENVIRONMENT=${ENV:-local} \
     -e SENTINEL_ENV=${ENV:-local} \
-    -e EDIPI_CONFIRMED_FIRST_NAME="ALFREDO" \
-    -e EDIPI_CONFIRMED_LAST_NAME="ARMSTRONG" \
-    -e EDIPI_CONFIRMED_BIRTH_DATE="1993-06-08" \
-    -e EDIPI_CONFIRMED_SSN="796012476" \
-    -e ICN_CONFIRMED_FIRST_NAME="ARTHUR" \
-    -e ICN_CONFIRMED_LAST_NAME="ROSE" \
-    -e ICN_CONFIRMED_BIRTH_DATE="1954-05-26" \
-    -e ICN_CONFIRMED_SSN="796220828" \
-    -e V5_STATUS_FIRST_NAME="GREG" \
-    -e V5_STATUS_LAST_NAME="ANDERSON" \
-    -e V5_STATUS_BIRTH_DATE="1933-04-05" \
-    -e V5_STATUS_SSN="796121200" \
-    -e NO_EMIS_USER_FIRST_NAME="WILLARD" \
-    -e NO_EMIS_USER_LAST_NAME="RILEY" \
-    -e NO_EMIS_USER_BIRTH_DATE="1959-02-25" \
-    -e NO_EMIS_USER_SSN="796013145" \
-    -e CONFIRMED_STATUS_ICN="1012667145V762142" \
-    -e V5_STATUS_ICN="1012666182V203559" \
-    -e NO_EMIS_USER_STATUS_ICN="1012830453V141481" \
-    -e DISABILITY_RATING_ICN="1012829620V654328" \
-    -e NO_BGS_USER_DISABILITY_RATING_ICN="1012661611V839382" \
-    -e SERVICE_HISTORY_ICN="1012832025V743496" \
-    -e SERVICE_HISTORY_ICN_NULL_END_DATE="1012845631V882122" \
-    -e NO_MPI_USER_ICN="1012855585V634865" \
-    -e NO_EMIS_EPISODES_USER="1012667122V019349" \
     vasdvp/lighthouse-veteran-verification-tests:latest $@
 }
 
@@ -72,12 +47,16 @@ runConfig() {
     Linux) THIS_MACHINE="localhost";;
     *) echo "Add support for your operating system: $(uname)"; exit 1;;
   esac
+
+  # comment for local testing
+  URL=https://dev-api.va.gov/services
+
   docker run \
     --rm \
     --network="host" \
-    -e VV_URL=http://$THIS_MACHINE \
-    -e K8S_ENVIRONMENT=${ENV:-local} \
-    -e SENTINEL_ENV=${ENV:-local} \
+    -e VV_URL=${URL:-http://$THIS_MACHINE} \
+    -e K8S_ENVIRONMENT=${ENV:-qa} \
+    -e SENTINEL_ENV=${ENV:-qa} \
     --env-file ${VV_DU_PATH}/qa.testvars \
     vasdvp/lighthouse-veteran-verification-tests:latest $@
 }

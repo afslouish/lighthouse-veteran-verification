@@ -51,7 +51,7 @@ public class HomeControllerV1Test {
   @Test
   @SneakyThrows
   public void testVeteranVerificationOpenapiPath() {
-    mvc.perform(get("/v1/docs/veteran_verification"))
+    mvc.perform(get("/docs/v1/veteran_verification"))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.openapi", equalTo("3.0.1")));
   }

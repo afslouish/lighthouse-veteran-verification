@@ -273,7 +273,9 @@ public class VeteranServiceHistoryTransformer {
   public ServiceHistoryResponse serviceHistoryTransformer() {
     AbstractList<ServiceHistoryResponse.ServiceHistoryEpisode> episodes = getActiveServicePeriods();
     episodes.addAll(getNonTitle32ReservePeriods());
-    Collections.sort(episodes, Comparator.comparing(episode -> episode.attributes().startDate()));
+    if (!episodes.isEmpty()) {
+      Collections.sort(episodes, Comparator.comparing(episode -> episode.attributes().startDate()));
+    }
     return ServiceHistoryResponse.builder().data(episodes).build();
   }
 }

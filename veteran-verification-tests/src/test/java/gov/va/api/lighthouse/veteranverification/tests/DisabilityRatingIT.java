@@ -2,7 +2,6 @@ package gov.va.api.lighthouse.veteranverification.tests;
 
 import static gov.va.api.health.sentinel.EnvironmentAssumptions.assumeEnvironmentIn;
 import static gov.va.api.lighthouse.veteranverification.tests.Requestor.veteranVerificationGetRequest;
-import static gov.va.api.lighthouse.veteranverification.tests.SystemDefinitions.systemDefinition;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -15,6 +14,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class DisabilityRatingIT {
+  public static final String DISABILITY_RATING_ICN = "1012829620V654328";
+
+  public static final String N0_BGS_USER_ICN = "1012661611V839382";
+
   @BeforeAll
   static void assumeEnvironment() {
     // Tests are only ran in environments that are not blocked by the kong gateway (ie Localhost).
@@ -23,8 +26,7 @@ public class DisabilityRatingIT {
 
   @Test
   void disabilityRatingHappyJwtPath() {
-    String request =
-        String.format("v1/disability_rating/%s", systemDefinition().icns().disabilityRatingIcn());
+    String request = String.format("v1/disability_rating/%s", DISABILITY_RATING_ICN);
     ExpectedResponse response = veteranVerificationGetRequest(request, "application/jwt", 200);
     String disabilityRating = response.response().asString();
     assertNotNull(disabilityRating);
@@ -32,8 +34,7 @@ public class DisabilityRatingIT {
 
   @Test
   void disabilityRatingRecordFound() {
-    String request =
-        String.format("v1/disability_rating/%s", systemDefinition().icns().disabilityRatingIcn());
+    String request = String.format("v1/disability_rating/%s", DISABILITY_RATING_ICN);
     ExpectedResponse response = veteranVerificationGetRequest(request, "application/json", 200);
     response.expectValid(DisabilityRatingResponse.class);
     DisabilityRatingResponse disabilityRatingResponse =
@@ -126,9 +127,7 @@ public class DisabilityRatingIT {
 
   @Test
   void noBgsUser() {
-    String request =
-        String.format(
-            "v1/disability_rating/%s", systemDefinition().icns().noBgsUserDisabilityRatingIcn());
+    String request = String.format("v1/disability_rating/%s", N0_BGS_USER_ICN);
     ExpectedResponse response = veteranVerificationGetRequest(request, "application/json", 500);
     response.expectValid(ApiError.ServerSoapFaultApiError.class);
   }

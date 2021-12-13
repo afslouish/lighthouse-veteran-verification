@@ -29,6 +29,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PUBLIC)
 public class ServiceHistoryResponse {
   @NonNull
+  @JsonInclude(JsonInclude.Include.NON_NULL)
   @ArraySchema(schema = @Schema(implementation = ServiceHistoryEpisode.class))
   public List<ServiceHistoryEpisode> data;
 
@@ -202,7 +203,6 @@ public class ServiceHistoryResponse {
   @NoArgsConstructor
   @AllArgsConstructor
   public static class ServiceHistoryEpisode {
-    @NonNull
     @Schema(
         type = "string",
         description = "Service History Episode ID",
@@ -211,7 +211,6 @@ public class ServiceHistoryResponse {
     String id;
 
     @Schema(example = "service-history-episodes", required = true)
-    @NonNull
     @Builder.Default
     String type = "service-history-episodes";
 

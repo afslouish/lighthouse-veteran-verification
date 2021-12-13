@@ -13,9 +13,10 @@
   <packaging>jar</packaging>
   <properties>
     <docker.imageName>lighthouse-${project.artifactId}</docker.imageName>
-    <mock-emis.version>3.0.1</mock-emis.version>
+    <mock-emis.version>4.0.0</mock-emis.version>
     <mock-mpi.version>3.0.2</mock-mpi.version>
     <mock-bgs.version>3.0.6</mock-bgs.version>
+    <oauth-java-parent.version>0.0.14</oauth-java-parent.version>
   </properties>
   <dependencies>
     <dependency>
@@ -25,11 +26,16 @@
     </dependency>
     <dependency>
       <groupId>gov.va.api.lighthouse</groupId>
+      <artifactId>test-clients</artifactId>
+      <version>${oauth-java-parent.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>gov.va.api.lighthouse</groupId>
       <artifactId>veteran-verification</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>gov.va.api.health</groupId>
+      <groupId>gov.va.api.lighthouse</groupId>
       <artifactId>mock-emis</artifactId>
       <version>${mock-emis.version}</version>
     </dependency>
@@ -119,12 +125,15 @@
             </goals>
             <configuration>
               <name>mock-bgs</name>
-              <healthcheckUrl>http://localhost:8000/actuator/health</healthcheckUrl>
+              <healthcheckUrl>http://localhost:8090/actuator/health</healthcheckUrl>
               <skip>${sentinel.skipLaunch}</skip>
               <processLogFile>${project.build.directory}/mock-bgs.log</processLogFile>
               <waitForInterrupt>false</waitForInterrupt>
               <arguments>
                 <argument>java</argument>
+                <argument>-Xms256m</argument>
+                <argument>-Xmx512m</argument>
+                <argument>-Dserver.port=8090</argument>
                 <argument>-jar</argument>
                 <argument>mock-bgs.jar</argument>
               </arguments>
@@ -156,8 +165,8 @@
                 <argument>-Demis.v1.url=http://localhost:9000/VIERSService/eMIS/v1/VeteranStatusService</argument>
                 <argument>-Demis.v1.wsdl-location=http://localhost:9000/VIERSService/eMIS/v1/VeteranStatusService/eMISVeteranStatusService.wsdl</argument>
                 <argument>-Dbgs.headers.username=unused</argument>
-                <argument>-Dbgs.rating.url=http://localhost:8000/v0/RatingServiceBean/RatingService</argument>
-                <argument>-Dbgs.rating.wsdl=http://localhost:8000/v0/RatingServiceBean/RatingService/ratingRecord.wsdl</argument>
+                <argument>-Dbgs.rating.url=http://localhost:8090/v0/RatingServiceBean/RatingService</argument>
+                <argument>-Dbgs.rating.wsdl=http://localhost:8090/v0/RatingServiceBean/RatingService/ratingRecord.wsdl</argument>
                 <argument>-Djwk-set.current-key-id=fake</argument>
                 <argument>-Djwk-set.current-password=secret</argument>
                 <argument>-Djwk-set.keystore-password=secret</argument>

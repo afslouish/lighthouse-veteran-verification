@@ -27,7 +27,7 @@ public class HomeControllerV1 {
   /** REST endpoint for OpenAPI JSON + redirect. */
   @SneakyThrows
   @GetMapping(
-      value = {"v1/docs/veteran_verification"},
+      value = {"docs/v1/veteran_verification"},
       produces = "application/json")
   @ResponseBody
   public Object veteranVerificationOpenApiJson() {
