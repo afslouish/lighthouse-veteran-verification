@@ -34,7 +34,7 @@ public class VeteranStatusOauthIT {
             createVaOauthRobotConfiguration(systemDefinition().users().confirmedStatusUser()),
             BAD_SCOPES);
     String token = client.requestToken().accessToken();
-    veteranVerificationTokenGetRequest("v1/status", "application/json", 401, token);
+    veteranVerificationTokenGetRequest("v1/status", "application/json", 403, token);
   }
 
   @Test
@@ -61,10 +61,6 @@ public class VeteranStatusOauthIT {
     ExpectedResponse response =
         veteranVerificationTokenGetRequest("v1/status", "application/json", 200, token);
     response.expectValid(VeteranStatusResponse.class);
-    ExpectedResponse jwtResponse =
-        veteranVerificationTokenGetRequest("v1/status", "application/jwt", 200, token);
-    String statusJwt = jwtResponse.response().asString();
-    assertNotNull(statusJwt);
   }
 
   @Test
@@ -76,9 +72,5 @@ public class VeteranStatusOauthIT {
     ExpectedResponse response =
         veteranVerificationTokenGetRequest("v1/status", "application/json", 200, token);
     response.expectValid(VeteranStatusResponse.class);
-    ExpectedResponse jwtResponse =
-        veteranVerificationTokenGetRequest("v1/status", "application/jwt", 200, token);
-    String statusJwt = jwtResponse.response().asString();
-    assertNotNull(statusJwt);
   }
 }

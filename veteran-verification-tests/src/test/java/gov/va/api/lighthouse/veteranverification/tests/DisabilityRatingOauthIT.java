@@ -32,7 +32,7 @@ public class DisabilityRatingOauthIT {
             createVaOauthRobotConfiguration(systemDefinition().users().disabilityRatingUser()),
             BAD_SCOPES);
     String token = client.requestToken().accessToken();
-    veteranVerificationTokenGetRequest("v1/disability_rating", "application/json", 401, token);
+    veteranVerificationTokenGetRequest("v1/disability_rating", "application/json", 403, token);
   }
 
   @Test

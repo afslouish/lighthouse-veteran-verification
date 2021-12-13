@@ -34,7 +34,7 @@ public class ServiceHistoryOauthIT {
             createVaOauthRobotConfiguration(systemDefinition().users().serviceHistoryUser()),
             BAD_SCOPES);
     String token = client.requestToken().accessToken();
-    veteranVerificationTokenGetRequest("v1/service_history", "application/json", 401, token);
+    veteranVerificationTokenGetRequest("v1/service_history", "application/json", 403, token);
   }
 
   @Test
